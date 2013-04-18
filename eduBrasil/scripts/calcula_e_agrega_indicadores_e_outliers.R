@@ -69,7 +69,7 @@ perl.path = "C:/ProgramFiles/strawberry/perl/bin/perl"
 dffinal <- processSelectedIndicatorsData(indicadorFiles, perl.path)
 
 #salva data frame
-write.csv(dffinal, "tabela_com_todos_os_indicadores_selecionados_e_outliers.csv")
+write.csv(dffinal, "tabela_com_todos_os_indicadores_selecionados_e_outliers.csv",row.names=F)
 
 
 
