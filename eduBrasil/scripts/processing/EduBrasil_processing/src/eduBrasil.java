@@ -1,4 +1,7 @@
 import org.gicentre.utils.stat.*;
+
+import com.vividsolutions.jts.io.OutStream;
+
 import java.util.ArrayList;
 import geomerative.*;
 import processing.core.*;
@@ -16,7 +19,7 @@ public class eduBrasil extends PApplet{
 	ListBox l;
 
 	int screenX = 1600;
-	int screenY = 600;
+	int screenY = 800;
 	int x = 10;
 	int y = 80;
 	int w = 250;
@@ -30,19 +33,22 @@ public class eduBrasil extends PApplet{
 	PImage heatMap;
 	BarChart barChart;
 	boolean barChartClicked = false;
-
+	boolean outliers = false;
+	
 	RShape grp;
 	boolean ignoringStyles = true;
 	String[] cityNames;
 
 	ControlFont cf1 = new ControlFont(createFont("Arial",14));
 	ControlFont cf2 = new ControlFont(createFont("Arial",9));
+	PFont font = createFont("Serif",14);
 
 	public void setup(){
 
 		size(screenX,screenY);
 		smooth();
-		background(255);
+		background(color(225,253,255));
+
 		barChart = new BarChart(this);
 		buttonNames[0] = "Despesa na função educação por aluno";
 		buttonNames[1] = "Despesa com pessoal e encargos sociais";
@@ -61,7 +67,8 @@ public class eduBrasil extends PApplet{
 		buttonNames[14] = "Atendimento escolar entre 4 e 17 anos";
 		cityNames = loadStrings("cityNames.txt");
 
-		textSize(20);
+		font = createFont("Serif",14);
+		textFont(font);
 
 		// VERY IMPORTANT: Allways initialize the library before using it
 		RG.init(this);
@@ -72,7 +79,7 @@ public class eduBrasil extends PApplet{
 		grp = RG.loadShape("Paraiba_MesoMicroMunicip.svg");
 
 		grp.centerIn(g, 1, 1, 1);
-		grp.transform(200, 0, screenY+400,screenY+100);
+		grp.transform(30, 0, screenY+200,screenY+200);
 		setListButtons();
 
 	}
@@ -82,15 +89,57 @@ public class eduBrasil extends PApplet{
 		println(theEvent.controller().name()+" = "+theEvent.value());  
 		// uncomment the line below to remove a multilist item when clicked.
 		// theEvent.controller().remove();
+
+		if(theEvent.controller().name().equals("Cidades que se destacam")){
+			updateToOutliersMap();
+		}
+	}
+
+	public void updateToOutliersMap(){
+
+		String[] outliersFile = loadStrings("outliers.txt");
+
+		// Getting info about outliers
+		String[] outInfo = new String[outliersFile.length];
+		
+		for(int j = 0; j < outliersFile.length; j++){
+			//System.out.println();
+			String[] info = outliersFile[7].split(",");
+			
+			//TODO fix bug
+			//outInfo[j] = info[7];
+			outInfo[j] = j+"";
+			System.out.println(outInfo[j]);
+		}
+		
+		for(int i=0;i<grp.children[3].countChildren();i++){	
+			//if(grp.children[3].children[i].contains(p)){
+				//System.out.println(Integer.parseInt(outInfo[i]));
+				//System.out.println(outInfo[i]);
+				if(Integer.parseInt(outInfo[i])<0){
+					fill(Integer.parseInt(outInfo[i])*(-100));
+				}else {
+					fill(Integer.parseInt(outInfo[i])*100);
+				}
+				grp.children[3].children[i].draw();
+			//}			
+		}
+
 	}
 
 	public void draw(){		
 
-		background(255); 
+		background(color(225,253,255));
 		hoverQuery();	
 		if(barChartClicked){
-			barChart.draw(screenX-400,200,400,200);
-		}	
+			barChart.draw(screenX-400,300,400,200);
+		}
+		
+		if(outliers){
+			updateToOutliersMap();
+		}
+		
+		textFont(font);
 	}
 
 	/**
@@ -153,15 +202,12 @@ public class eduBrasil extends PApplet{
 		barChart.setMinValue(0);
 		barChart.setMaxValue(30);
 
-		// Axis appearance
-		PFont font = createFont("Serif",14);
-		textFont(font,14);
-
 		barChart.showValueAxis(true);
-		barChart.setBarGap(2);
+		barChart.setBarGap(20);
 		//barChart.setValueFormat("#%");
-		barChart.setBarLabels(new String[] {city,"Estado","Mesoregião","Outro"});
+		barChart.setBarLabels(new String[] {city,"Estado","Mesorregião","Microrregião"});
 		barChart.showCategoryAxis(true);
+
 	}
 
 	public void setListButtons(){
