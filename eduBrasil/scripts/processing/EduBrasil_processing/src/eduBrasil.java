@@ -31,7 +31,7 @@ public class eduBrasil extends PApplet{
 	BarChart barChart;
 	boolean barChartClicked = false;
 	boolean outliers = false;
-	
+
 	RShape grp;
 	boolean ignoringStyles = true;
 	String[] cityNames;
@@ -47,18 +47,18 @@ public class eduBrasil extends PApplet{
 		background(color(225,253,255));
 
 		barChart = new BarChart(this);
-		buttonNames[0] = "Despesa na função educação por aluno";
+		buttonNames[0] = "Despesa na funcao educaca por aluno";
 		buttonNames[1] = "Despesa com pessoal e encargos sociais";
 		buttonNames[2] = "Taxa de abandono - fundamental";
-		buttonNames[3] = "Taxa de abandono - ensino médio";
-		buttonNames[4] = "Taxa de aprovação - fundamental";
-		buttonNames[5] = "Taxa de aprovação - ensino médio";
-		buttonNames[6] = "IDEB 5º ano fundamental";
-		buttonNames[7] = "IDEB 9º ano fundamental";
-		buttonNames[8] = "Razão aluno por docente";
-		buttonNames[9] = "Índice de eficiência da educação básica";
+		buttonNames[3] = "Taxa de abandono - ensino medio";
+		buttonNames[4] = "Taxa de aprovacao - fundamental";
+		buttonNames[5] = "Taxa de aprovacao - ensino medio";
+		buttonNames[6] = "IDEB 5 ano fundamental";
+		buttonNames[7] = "IDEB 9 ano fundamental";
+		buttonNames[8] = "Razao aluno por docente";
+		buttonNames[9] = "Indice de eficiencia da educacao basica";
 		buttonNames[10] = "Analfabetismo p/ pessoas >= 18 anos";
-		buttonNames[11] = "Atendimento escolar para até 3 anos";
+		buttonNames[11] = "Atendimento escolar para ate 3 anos";
 		buttonNames[12] = "Atendimento escolar entre 11 e 14 anos";
 		buttonNames[13] = "Atendimento escolar entre 15 e 17 anos";
 		buttonNames[14] = "Atendimento escolar entre 4 e 17 anos";
@@ -101,28 +101,24 @@ public class eduBrasil extends PApplet{
 
 		// Getting info about outliers
 		String[] outInfo = new String[outliersFile.length];
-		
+
 		for(int j = 0; j < outliersFile.length; j++){
-			//System.out.println();
-			String[] info = outliersFile[7].split(",");
-			
-			//TODO fix bug
-			//outInfo[j] = info[7];
-			outInfo[j] = j+"";
-			System.out.println(outInfo[j]);
+			String[] info = outliersFile[j].split(",");
+			outInfo[j] = info[7];
 		}
-		
+
 		for(int i=0;i<grp.children[3].countChildren();i++){	
-			//if(grp.children[3].children[i].contains(p)){
-				//System.out.println(Integer.parseInt(outInfo[i]));
-				//System.out.println(outInfo[i]);
-				if(Integer.parseInt(outInfo[i])<0){
-					fill(Integer.parseInt(outInfo[i])*(-100));
-				}else {
-					fill(Integer.parseInt(outInfo[i])*100);
-				}
-				grp.children[3].children[i].draw();
-			//}			
+			
+			if(Integer.parseInt(outInfo[i])<0){
+				fill(Integer.parseInt(outInfo[i])*(-1));
+				
+			}else if(Integer.parseInt(outInfo[i])>0){
+				fill(Integer.parseInt(outInfo[i])*150);
+				
+			}else{
+				fill(color(225,253,255));
+			}
+			grp.children[3].children[i].draw();
 		}
 
 	}
@@ -130,14 +126,15 @@ public class eduBrasil extends PApplet{
 	public void draw(){		
 
 		background(color(225,253,255));
-		
-		if(barChartClicked){
-			barChart.draw(screenX-400,300,400,200);
-		}
-		
+
 		if(outliers){
 			updateToOutliersMap();
 		}
+		
+		if(barChartClicked && !outliers){
+			barChart.draw(screenX-400,300,400,200);
+		}
+		
 		hoverQuery();	
 		textFont(font);
 	}
@@ -161,7 +158,7 @@ public class eduBrasil extends PApplet{
 
 		for(int i=0;i<grp.children[3].countChildren();i++){	
 			if(grp.children[3].children[i].contains(p)){
-				
+
 				if(!outliers){
 					fill(0,100,255,250);
 					grp.children[3].children[i].draw();
@@ -170,7 +167,7 @@ public class eduBrasil extends PApplet{
 					color(225,253,255);
 					grp.children[3].children[i].draw();
 				}
-				
+
 				fill(255);
 				rect(mouseX+10, mouseY-10, cityNames[i].length()*7+30, 20);
 				fill(0);
@@ -212,7 +209,7 @@ public class eduBrasil extends PApplet{
 		barChart.showValueAxis(true);
 		barChart.setBarGap(20);
 		//barChart.setValueFormat("#%");
-		barChart.setBarLabels(new String[] {city,"Estado","Mesorregião","Microrregião"});
+		barChart.setBarLabels(new String[] {city,"Estado","Mesorregi�o","Microrregi�o"});
 		barChart.showCategoryAxis(true);
 
 	}
