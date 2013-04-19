@@ -1,7 +1,4 @@
 import org.gicentre.utils.stat.*;
-
-import com.vividsolutions.jts.io.OutStream;
-
 import java.util.ArrayList;
 import geomerative.*;
 import processing.core.*;
@@ -91,7 +88,10 @@ public class eduBrasil extends PApplet{
 		// theEvent.controller().remove();
 
 		if(theEvent.controller().name().equals("Cidades que se destacam")){
+			outliers = true;
 			updateToOutliersMap();
+		}else if(!theEvent.controller().name().equals("Cidades que se destacam")){
+			outliers = false;
 		}
 	}
 
@@ -130,7 +130,7 @@ public class eduBrasil extends PApplet{
 	public void draw(){		
 
 		background(color(225,253,255));
-		hoverQuery();	
+		
 		if(barChartClicked){
 			barChart.draw(screenX-400,300,400,200);
 		}
@@ -138,7 +138,7 @@ public class eduBrasil extends PApplet{
 		if(outliers){
 			updateToOutliersMap();
 		}
-		
+		hoverQuery();	
 		textFont(font);
 	}
 
@@ -161,11 +161,18 @@ public class eduBrasil extends PApplet{
 
 		for(int i=0;i<grp.children[3].countChildren();i++){	
 			if(grp.children[3].children[i].contains(p)){
-
-				fill(0,100,255,250);
-				grp.children[3].children[i].draw();
+				
+				if(!outliers){
+					fill(0,100,255,250);
+					grp.children[3].children[i].draw();
+				}else{
+					stroke(227,32,32);
+					color(225,253,255);
+					grp.children[3].children[i].draw();
+				}
+				
 				fill(255);
-				rect(mouseX+10, mouseY-10, cityNames[i].length()*5+28, 20);
+				rect(mouseX+10, mouseY-10, cityNames[i].length()*7+30, 20);
 				fill(0);
 				text(cityNames[i],mouseX+12, mouseY+5);
 
