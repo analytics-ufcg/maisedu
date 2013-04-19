@@ -7,12 +7,12 @@ public class eduBrasil extends PApplet{
 
 	private static final long serialVersionUID = 1L;
 
-	ControlP5 cp5,controlP5;
+	ControlP5 controlP5;
 
 	MultiList l2; 		
 	ListBox l;
 
-	int screenWidth = 1600;
+	int screenWidth = 1600;  //deafult=1600
 	int screenHeight = 800;
 	int x = 10;
 	int y = 80;
@@ -22,7 +22,6 @@ public class eduBrasil extends PApplet{
 	// Total number of indicators chosen
 	int nIndicators = 15;
 
-	Button[] indicators = new Button[nIndicators];
 	String[] buttonNames = new String[nIndicators];
 	String[] cityNames;
 	String[] outliersFile;
@@ -33,11 +32,17 @@ public class eduBrasil extends PApplet{
 	BarChart barChart;
 
 	boolean barChartClicked = false;
-	boolean outliers = false;
+	boolean outliers = true;
 	boolean listInfoClicked  = false;
 	boolean ignoringStyles = true;
 
+	String[] indicators;
+	String[] ano1,ano2,ano3,ano4,ano5,ano6;
+	Municipio[] municipios = new Municipio[223];;
+
+	PImage scroll;
 	RShape grp;
+	RShape Municipios;
 
 	ControlFont cf1 = new ControlFont(createFont("Arial",14));
 	ControlFont cf2 = new ControlFont(createFont("Arial",9));
@@ -45,6 +50,7 @@ public class eduBrasil extends PApplet{
 
 	int backgroundColor = color(225,253,255);
 	int outCityClicked = -1;
+	int indicatorClicked = -1;
 
 	public void setup(){
 
@@ -57,15 +63,33 @@ public class eduBrasil extends PApplet{
 		// Reading files
 		cityNames = loadStrings("cityNames.txt");
 		outliersFile = loadStrings("outliers.txt");
+		indicators = loadStrings("tabela_com_todos_os_indicadores_selecionados_e_outliers.csv");
 
 		// Setting Buttons and Map
 		setButtonLabels();
 		setListButtons();
 		setMap();
 		setPosAndNegList();
+		setIndicatorsInfo();
 
 		// Initiating barChart
 		barChart = new BarChart(this);
+	}
+
+	public void setIndicatorsInfo(){
+
+		int m = 0;
+		//o arquivo é formado por 5 linhas de infomacoes de cada cidade
+		//2009 cidade1
+		//2010 cidade1
+		//por isso o for que armazena os indicadores dá o pulo de 5 em 5 linhas
+		for(int index = 1; index < indicators.length; index++){
+			municipios[m] = new Municipio(indicators[index]);
+			municipios[m].dadosPorAno(split(indicators[index],","),(split(indicators[index+1],",")),(split(indicators[index+2],",")),
+					(split(indicators[index+3],",")),(split(indicators[index+4],",")),(split(indicators[index+5],",")));
+			index = index + 5;
+			m++;
+		}
 	}
 
 	public void draw(){		
@@ -96,8 +120,8 @@ public class eduBrasil extends PApplet{
 		fill(0);
 		text("Cidade selecionada: "+cityNames[i],screenWidth-390,320);
 
-		text("Maior que indicadores",screenWidth-390,340);
-		text("Menor que indicadores",screenWidth-250,340);
+		text("Muito Acima da Média",screenWidth-390,340);
+		text("Muito Abaixo da Média",screenWidth-250,340);
 
 		line(screenWidth-258,340, screenWidth-258, 500);
 		line(screenWidth-100,340, screenWidth-400, 340);
@@ -157,6 +181,36 @@ public class eduBrasil extends PApplet{
 		buttonNames[14] = "Atendimento escolar entre 4 e 17 anos";
 	}
 
+	public void updateIndicatorsTo(float e){
+
+		Municipios = grp.children[3];
+
+		float cor = 0;
+		int ind = (int)e+1;
+
+		for(int index = 0; index < Municipios.countChildren(); index++){
+
+			// Treating NA cases
+			if(municipios[index].ano2010[ind].equals("NA")){
+				cor = 255;
+			}else{
+				cor = Float.parseFloat(municipios[index].ano2010[ind]);
+			}
+			//a cor é feita com base na metrica
+			//lembrando que a ordem de cores sao vermelho, azul e verde.
+			//multipliquei por tres pra aumentar a variacao dos tons
+			fill(color(51,cor*3,255));
+
+			Municipios.children[index].draw();
+
+		}
+
+		outliers = false;
+		indicatorClicked = (int) e;		
+
+	}
+
+
 	/**
 	 * Controlling the event of click
 	 * TODO : create redirections to the rest of the buttons (only working for "Cidades que se destacam")
@@ -167,18 +221,14 @@ public class eduBrasil extends PApplet{
 		if (theEvent.isGroup()) {
 			// an event from a group e.g. scrollList
 			println(theEvent.group().value()+" from "+theEvent.group());
-		}
+			updateIndicatorsTo(theEvent.group().value());
+			outliers = false;
 
-		if(theEvent.isGroup() && theEvent.name().equals("myList")){
-			int test = (int)theEvent.group().value();
-			println("test "+test);
-			if(theEvent.controller().name().equals("Cidades que se destacam")){
-				
-			}
 		}else{
 			if(theEvent.controller().name().equals("Cidades que se destacam")){
 				outliers = true;
 				updateToOutliersMap();
+				println(theEvent.controller().name());
 			}
 		}
 	}
@@ -221,17 +271,11 @@ public class eduBrasil extends PApplet{
 		RPoint p = new RPoint(mouseX, mouseY);
 		noFill();
 
-		// Draws each city
-		for(int i=0;i<grp.children[3].countChildren();i++){	
+		stroke(0);
+		if(!outliers){
 			stroke(0);
-			//TODO Be replaced with real color according to heat
-
-			if(!outliers){
-				fill(color(255,i,i));
-			}else{
-
-			}			
-			grp.children[3].children[i].draw();
+			updateIndicatorsTo(indicatorClicked);
+		}else{
 
 		}
 
@@ -240,8 +284,7 @@ public class eduBrasil extends PApplet{
 			if(grp.children[3].children[i].contains(p)){
 
 				if(!outliers){
-					fill(color(255,i,i));
-					stroke(color(0,58,250));
+					stroke(color(255,50,50));
 					grp.children[3].children[i].draw();
 				}else{
 					stroke(227,32,32);
@@ -252,11 +295,10 @@ public class eduBrasil extends PApplet{
 				fill(255,200);
 				rect(mouseX+10, mouseY-10, cityNames[i].length()*7+30, 20);
 				fill(0);
-				text("   "+cityNames[i],mouseX+18, mouseY+5);
+				text(cityNames[i],mouseX+18, mouseY+5);
 
 				if(mousePressed){
 					//TODO Integrate with files
-
 					if(!outliers){
 						barChartClicked = true;
 						createBarChart(cityNames[i],"30","20","10","1");
@@ -337,8 +379,9 @@ public class eduBrasil extends PApplet{
 	@SuppressWarnings("deprecation")
 	public void setListButtons(){
 
-		cp5 = new ControlP5(this);
-		l = cp5.addListBox("indicadores").setPosition(5, 230).setSize(210, 320).setItemHeight(15).setBarHeight(50);
+		controlP5 = new ControlP5(this);
+
+		l = controlP5.addListBox("indicadores").setPosition(5, 230).setSize(210, 320).setItemHeight(15).setBarHeight(50);
 
 		l.captionLabel().toUpperCase(true);		
 		l.captionLabel().set("Escolha de indicadores");
@@ -352,13 +395,11 @@ public class eduBrasil extends PApplet{
 		}
 
 		frameRate(30);
-		controlP5 = new ControlP5(this);
 
 		l2 = controlP5.addMultiList("destaque",5,130,210,50);
-		
+
 		// Creating buttons for multilist
-		MultiListButton b = null;				
-		b = l2.add("Cidades que se destacam",1);
+		MultiListButton b = l2.add("Cidades que se destacam",1);
 		b.captionLabel().setFont(cf1);
 	}
 }
