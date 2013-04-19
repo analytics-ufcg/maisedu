@@ -1,5 +1,4 @@
 import org.gicentre.utils.stat.*;
-import java.util.ArrayList;
 import geomerative.*;
 import processing.core.*;
 import controlP5.*;
@@ -7,46 +6,100 @@ import controlP5.*;
 public class eduBrasil extends PApplet{
 
 	private static final long serialVersionUID = 1L;
-	ArrayList<PVector>coords;    // Projected GPS coordinates.
-	PImage backgroundMap;        // OpenStreetMap.
-	PVector tlCorner,brCorner;   // Corners of map in WebMercator coordinates.
+	
 	ControlP5 controlP5,cp5;
-	int cnt = 0;
-	MultiList l2;
+
+	MultiList l2; 		
 	ListBox l;
 
-	int screenX = 1600;
-	int screenY = 800;
+	int screenWidth = 1600;
+	int screenHeight = 800;
 	int x = 10;
 	int y = 80;
 	int w = 250;
 	int h = 30;
 
+	// Total number of indicators chosen
 	int nIndicators = 15;
 
 	Button[] indicators = new Button[nIndicators];
 	String[] buttonNames = new String[nIndicators];
-
+	String[] cityNames;
+	String[] outliersFile;
+	
 	PImage heatMap;
 	BarChart barChart;
+
 	boolean barChartClicked = false;
 	boolean outliers = false;
+	boolean ignoringStyles = true;
 
 	RShape grp;
-	boolean ignoringStyles = true;
-	String[] cityNames;
 
 	ControlFont cf1 = new ControlFont(createFont("Arial",14));
 	ControlFont cf2 = new ControlFont(createFont("Arial",9));
 	PFont font = createFont("Serif",14);
 
+	int backgroundColor = color(225,253,255);
+	
 	public void setup(){
 
-		size(screenX,screenY);
+		// Setting graphical info
+		size(screenWidth,screenHeight);
 		smooth();
-		background(color(225,253,255));
+		background(backgroundColor);
+		textFont(font);
 
+		// Reading files
+		cityNames = loadStrings("cityNames.txt");
+		outliersFile = loadStrings("outliers.txt");
+
+		// Setting Buttons and Map
+		setButtonLabels();
+		setListButtons();
+		setMap();
+		
+		// Initiating barChart
 		barChart = new BarChart(this);
+	}
+	
+	public void draw(){		
+
+		background(backgroundColor);
+
+		if(outliers){
+			updateToOutliersMap();
+		}
+
+		if(barChartClicked && !outliers){
+			barChart.draw(screenWidth-400,300,400,200);
+		}
+
+		hoverQuery();
+	}
+
+	/**
+	 * Map settings and creation
+	 */
+	public void setMap(){
+		
+		// VERY IMPORTANT: Allways initialize the library before using it
+		RG.init(this);
+		RG.ignoreStyles(ignoringStyles);
+		RG.setPolygonizer(RG.ADAPTATIVE);
+
+		// Loading the shape of Paraiba 
+		grp = RG.loadShape("Paraiba_MesoMicroMunicip.svg");
+
+		// Position and scale
+		grp.centerIn(g, 1, 1, 1);
+		grp.transform(30, 0, screenHeight+200,screenHeight+200);
+	}
+
+	/**
+	 * Setting the button labels
+	 */
+	public void setButtonLabels(){
 		buttonNames[0] = "Despesa na funcao educaca por aluno";
 		buttonNames[1] = "Despesa com pessoal e encargos sociais";
 		buttonNames[2] = "Taxa de abandono - fundamental";
@@ -62,26 +115,13 @@ public class eduBrasil extends PApplet{
 		buttonNames[12] = "Atendimento escolar entre 11 e 14 anos";
 		buttonNames[13] = "Atendimento escolar entre 15 e 17 anos";
 		buttonNames[14] = "Atendimento escolar entre 4 e 17 anos";
-		cityNames = loadStrings("cityNames.txt");
-
-		font = createFont("Serif",14);
-		textFont(font);
-
-		// VERY IMPORTANT: Allways initialize the library before using it
-		RG.init(this);
-		RG.ignoreStyles(ignoringStyles);
-		RG.setPolygonizer(RG.ADAPTATIVE);
-
-		// Loading the shape of Paraiba 
-		grp = RG.loadShape("Paraiba_MesoMicroMunicip.svg");
-
-		grp.centerIn(g, 1, 1, 1);
-		grp.transform(30, 0, screenY+200,screenY+200);
-		setListButtons();
-
 	}
-
-
+	
+	/**
+	 * Controlling the event of click
+	 * TODO : create redirections to the rest of the buttons (only working for "Cidades que se destacam")
+	 */
+	@SuppressWarnings("deprecation")
 	public void controlEvent(ControlEvent theEvent) {
 		println(theEvent.controller().name()+" = "+theEvent.value());  
 		// uncomment the line below to remove a multilist item when clicked.
@@ -90,14 +130,13 @@ public class eduBrasil extends PApplet{
 		if(theEvent.controller().name().equals("Cidades que se destacam")){
 			outliers = true;
 			updateToOutliersMap();
-		}else if(!theEvent.controller().name().equals("Cidades que se destacam")){
-			outliers = false;
 		}
 	}
 
+	/**
+	 * Changes the map to the outliers Map
+	 */
 	public void updateToOutliersMap(){
-
-		String[] outliersFile = loadStrings("outliers.txt");
 
 		// Getting info about outliers
 		String[] outInfo = new String[outliersFile.length];
@@ -107,55 +146,39 @@ public class eduBrasil extends PApplet{
 			outInfo[j] = info[7];
 		}
 
+		// Refills the cities according to the outInfo values
 		for(int i=0;i<grp.children[3].countChildren();i++){	
-			
+
 			if(Integer.parseInt(outInfo[i])<0){
 				fill(Integer.parseInt(outInfo[i])*(-1));
-				
+
 			}else if(Integer.parseInt(outInfo[i])>0){
 				fill(Integer.parseInt(outInfo[i])*150);
-				
+
 			}else{
-				fill(color(225,253,255));
+				fill(backgroundColor);
 			}
 			grp.children[3].children[i].draw();
 		}
 
 	}
 
-	public void draw(){		
-
-		background(color(225,253,255));
-
-		if(outliers){
-			updateToOutliersMap();
-		}
-		
-		if(barChartClicked && !outliers){
-			barChart.draw(screenX-400,300,400,200);
-		}
-		
-		hoverQuery();	
-		textFont(font);
-	}
-
 	/**
-	 * 
-	 * @param x1
-	 * @param y1
-	 * @param k1
+	 * Changes the colors of the cities where the mouse is over and if clicked updates bar chart
 	 */
 	public void hoverQuery() {
 
 		RPoint p = new RPoint(mouseX, mouseY);
 		noFill();
 
+		// Draws each city
 		for(int i=0;i<grp.children[3].countChildren();i++){	
 			stroke(0);
 			grp.children[3].children[i].draw();
 
 		}
 
+		// Sees if the mouse (p) is over a city 
 		for(int i=0;i<grp.children[3].countChildren();i++){	
 			if(grp.children[3].children[i].contains(p)){
 
@@ -164,7 +187,7 @@ public class eduBrasil extends PApplet{
 					grp.children[3].children[i].draw();
 				}else{
 					stroke(227,32,32);
-					color(225,253,255);
+					fill(backgroundColor);
 					grp.children[3].children[i].draw();
 				}
 
@@ -174,7 +197,7 @@ public class eduBrasil extends PApplet{
 				text(cityNames[i],mouseX+12, mouseY+5);
 
 				if(mousePressed){
-					//TODO Adaptar aos arquivos já criados	
+					//TODO Integrate with files
 					barChartClicked = true;
 					createBarChart(cityNames[i],"30","20","10","1");
 				}				
@@ -214,6 +237,10 @@ public class eduBrasil extends PApplet{
 
 	}
 
+	/**
+	 * First settings of the List buttons
+	 */
+	@SuppressWarnings("deprecation")
 	public void setListButtons(){
 
 		cp5 = new ControlP5(this);
@@ -227,7 +254,7 @@ public class eduBrasil extends PApplet{
 		l.captionLabel().setFont(cf1);
 
 		for (int i=0;i<nIndicators;i++) {
-			ListBoxItem lbi = l.addItem(buttonNames[i], i);
+			l.addItem(buttonNames[i], i);
 		}
 
 		frameRate(30);
@@ -236,7 +263,7 @@ public class eduBrasil extends PApplet{
 		l2 = controlP5.addMultiList("myList",5,130,210,50);
 
 		// Creating buttons for multilist
-		MultiListButton b,c = null;				
+		MultiListButton b = null;				
 		b = l2.add("Cidades que se destacam",1);
 		b.captionLabel().setFont(cf1);
 	}
