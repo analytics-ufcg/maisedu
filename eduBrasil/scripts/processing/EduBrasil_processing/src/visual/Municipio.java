@@ -1,3 +1,4 @@
+package visual;
 import processing.core.PApplet;
 
 //objeto do tipo municipio que contem todas as informaçoes disponiveis deste

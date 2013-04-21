@@ -1,3 +1,4 @@
+package visual;
 import org.gicentre.utils.stat.*;
 import geomerative.*;
 import processing.core.*;
@@ -12,7 +13,7 @@ public class eduBrasil extends PApplet{
 	MultiList l2; 		
 	ListBox l;
 
-	int screenWidth = 1600;  //deafult=1600
+	int screenWidth = 1600;  
 	int screenHeight = 800;
 	int x = 10;
 	int y = 80;
@@ -281,11 +282,20 @@ public class eduBrasil extends PApplet{
 
 		// Sees if the mouse (p) is over a city 
 		for(int i=0;i<grp.children[3].countChildren();i++){	
+			
 			if(grp.children[3].children[i].contains(p)){
-
+				float cor = 0;
 				if(!outliers){
 					stroke(color(255,50,50));
-					grp.children[3].children[i].draw();
+					
+					if(municipios[i].ano2010[indicatorClicked+1].equals("NA")){
+						cor = 255;
+					}else{
+						cor = Float.parseFloat(municipios[i].ano2010[indicatorClicked+1]);
+					}
+					fill(color(51,cor*3,255));
+
+					Municipios.children[i].draw();
 				}else{
 					stroke(227,32,32);
 					grp.children[3].children[i].draw();

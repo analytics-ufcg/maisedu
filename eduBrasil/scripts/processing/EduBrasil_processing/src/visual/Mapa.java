@@ -1,3 +1,4 @@
+package visual;
 import geomerative.*;
 import processing.core.*;
 
