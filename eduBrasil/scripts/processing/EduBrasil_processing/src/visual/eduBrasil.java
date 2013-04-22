@@ -38,6 +38,7 @@ public class eduBrasil extends PApplet{
 	boolean ignoringStyles = true;
 
 	String[] indicators;
+	String[] ind_329, ind_62, ind_89, ind_90, ind_333, ind_73, ind_74, ind_80, ind_81, ind_176, ind_177, ind_202, ind_184, ind_7, ind_201; 
 	String[] ano1,ano2,ano3,ano4,ano5,ano6;
 	Municipio[] municipios = new Municipio[223];;
 
@@ -65,6 +66,23 @@ public class eduBrasil extends PApplet{
 		cityNames = loadStrings("cityNames.txt");
 		outliersFile = loadStrings("outliers.txt");
 		indicators = loadStrings("tabela_com_todos_os_indicadores_selecionados_e_outliers.csv");
+
+		ind_329 =loadStrings("ind_329.csv");
+		ind_62 = loadStrings("ind_62.csv");
+		ind_89 =loadStrings("ind_89.csv");
+		ind_90 = loadStrings("ind_90.csv");
+		ind_333 = loadStrings("ind_333.csv");
+		ind_73 = loadStrings("ind_73.csv");
+		ind_74 = loadStrings("ind_74.csv");
+		ind_80 = loadStrings("ind_80.csv");
+		ind_81 = loadStrings("ind_81.csv");
+		ind_176 = loadStrings("ind_176.csv");
+		ind_177 = loadStrings("ind_177.csv");
+		ind_202 = loadStrings("ind_202.csv");
+		ind_184 = loadStrings("ind_184.csv");
+		ind_7 =loadStrings("ind_7.csv");
+		ind_201 = loadStrings("ind_201.csv");
+
 
 		// Setting Buttons and Map
 		setButtonLabels();
@@ -137,8 +155,8 @@ public class eduBrasil extends PApplet{
 		// Setting positive and negative lists
 		for(int j = 0; j < outliersFile.length; j++){
 			String[] info = outliersFile[j].split(",");
-			posList[j] = info[8];
-			negList[j] = info[9];
+			posList[j] = info[2];
+			negList[j] = info[3];
 		}
 	}
 
@@ -165,21 +183,21 @@ public class eduBrasil extends PApplet{
 	 * Setting the button labels
 	 */
 	public void setButtonLabels(){
-		buttonNames[0] = "Despesa na funcao educaca por aluno";
+		buttonNames[0] = "Analfabestimo pessoas com 18 ou mais";
 		buttonNames[1] = "Despesa com pessoal e encargos sociais";
-		buttonNames[2] = "Taxa de abandono - fundamental";
-		buttonNames[3] = "Taxa de abandono - ensino medio";
-		buttonNames[4] = "Taxa de aprovacao - fundamental";
-		buttonNames[5] = "Taxa de aprovacao - ensino medio";
-		buttonNames[6] = "IDEB 5 ano fundamental";
-		buttonNames[7] = "IDEB 9 ano fundamental";
-		buttonNames[8] = "Razao aluno por docente";
-		buttonNames[9] = "Indice de eficiencia da educacao basica";
-		buttonNames[10] = "Analfabetismo p/ pessoas >= 18 anos";
-		buttonNames[11] = "Atendimento escolar para ate 3 anos";
-		buttonNames[12] = "Atendimento escolar entre 11 e 14 anos";
-		buttonNames[13] = "Atendimento escolar entre 15 e 17 anos";
-		buttonNames[14] = "Atendimento escolar entre 4 e 17 anos";
+		buttonNames[2] = "IDEB - 5º ano do ensino fundamental";
+		buttonNames[3] = "IDEB - 9º ano do ensino fundamental";
+		buttonNames[4] = "Atendimento escolar p/ entre 4 e 17 anos de idade";
+		buttonNames[5] = "Abandono total - ensino fundamental";
+		buttonNames[6] = "Abandono - ensino médio";
+		buttonNames[7] = "Aprovação total - ensino fundamental";
+		buttonNames[8] = "Aprovação - ensino médio";
+		buttonNames[9] = "Docentes com formação superior";
+		buttonNames[10] = "Docentes temporários e de contratos indefinidos";
+		buttonNames[11] = "Índice de precariedade de infraestrutura";
+		buttonNames[12] = "Razão aluno por docente";
+		buttonNames[13] = "Despesa corrente por aluno";
+		buttonNames[14] = "Índice de eficiência da educação básica";
 	}
 
 	public void updateIndicatorsTo(float e){
@@ -192,15 +210,15 @@ public class eduBrasil extends PApplet{
 		for(int index = 0; index < Municipios.countChildren(); index++){
 
 			// Treating NA cases
-			if(municipios[index].ano2010[ind].equals("NA")){
+			if(municipios[index].ano2011[ind].equals("NA")){
 				cor = 255;
 			}else{
-				cor = Float.parseFloat(municipios[index].ano2010[ind]);
+				cor = Float.parseFloat(municipios[index].ano2011[ind]);
 			}
 			//a cor é feita com base na metrica
 			//lembrando que a ordem de cores sao vermelho, azul e verde.
 			//multipliquei por tres pra aumentar a variacao dos tons
-			fill(color(51,cor*3,255));
+			fill(color(255,cor*3,0));
 
 			Municipios.children[index].draw();
 
@@ -244,21 +262,21 @@ public class eduBrasil extends PApplet{
 
 		for(int j = 0; j < outliersFile.length; j++){
 			String[] info = outliersFile[j].split(",");
-			outInfo[j] = info[7];
+			outInfo[j] = info[1];
 		}
 
 		// Refills the cities according to the outInfo values
 		for(int i=0;i<grp.children[3].countChildren();i++){	
 
-			if(Integer.parseInt(outInfo[i])<0){
-				fill(Integer.parseInt(outInfo[i])*(-1));
-
-			}else if(Integer.parseInt(outInfo[i])>0){
-				fill(Integer.parseInt(outInfo[i])*150);
-
-			}else{
+			if(Integer.parseInt(outInfo[i])==0){
 				fill(255);
+
+			}else if(Integer.parseInt(outInfo[i])==1){
+				fill(120);
+			}else{
+				fill(0);
 			}
+			
 			grp.children[3].children[i].draw();
 		}
 
@@ -282,18 +300,18 @@ public class eduBrasil extends PApplet{
 
 		// Sees if the mouse (p) is over a city 
 		for(int i=0;i<grp.children[3].countChildren();i++){	
-			
+
 			if(grp.children[3].children[i].contains(p)){
 				float cor = 0;
 				if(!outliers){
 					stroke(color(255,50,50));
-					
-					if(municipios[i].ano2010[indicatorClicked+1].equals("NA")){
+
+					if(municipios[i].ano2011[indicatorClicked+1].equals("NA")){
 						cor = 255;
 					}else{
-						cor = Float.parseFloat(municipios[i].ano2010[indicatorClicked+1]);
+						cor = Float.parseFloat(municipios[i].ano2011[indicatorClicked+1]);
 					}
-					fill(color(51,cor*3,255));
+					fill(color(255,cor*3,0));
 
 					Municipios.children[i].draw();
 				}else{
@@ -311,7 +329,13 @@ public class eduBrasil extends PApplet{
 					//TODO Integrate with files
 					if(!outliers){
 						barChartClicked = true;
-						createBarChart(cityNames[i],"30","20","10","1");
+						//
+						//String[] mediaEstado = ind_62[i].split(",");
+						//System.out.println(mediaEstado[4]);
+						
+						//String[] mediaMicro = ind_62[i].split(",");
+						//System.out.println(municipios[i].ano2011[1]);
+						//createBarChart(cityNames[i],municipios[i].ano2011[1],mediaEstado[4],mediaMicro[5]);
 
 					}else{
 						listInfoClicked = true;
@@ -360,16 +384,15 @@ public class eduBrasil extends PApplet{
 	 * @param d3
 	 * @param d4
 	 */
-	public void createBarChart(String city, String d1, String d2, String d3, String d4){
+	public void createBarChart(String city, String d1, String d2, String d3){
 
 		Float meanClicked = Float.parseFloat(d1);
 		Float meanState = Float.parseFloat(d2);
 		Float meanRegion = Float.parseFloat(d3);
-		Float meanWhat = Float.parseFloat(d4);
 		smooth();
 
 		//barChart = new BarChart(this);
-		barChart.setData(new float[] {meanClicked, meanState, meanRegion, meanWhat});
+		barChart.setData(new float[] {meanClicked, meanState, meanRegion});
 
 		// Scaling
 		barChart.setMinValue(0);
@@ -378,7 +401,7 @@ public class eduBrasil extends PApplet{
 		barChart.showValueAxis(true);
 		barChart.setBarGap(20);
 		//barChart.setValueFormat("#%");
-		barChart.setBarLabels(new String[] {city,"Estado","MesorregiÃ£o","MicrorregiÃ£o"});
+		barChart.setBarLabels(new String[] {city,"Estado","Microrregiao"});
 		barChart.showCategoryAxis(true);
 
 	}
