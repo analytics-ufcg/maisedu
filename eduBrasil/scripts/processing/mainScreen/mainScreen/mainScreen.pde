@@ -1,9 +1,20 @@
 import controlP5.*;
+import java.io.*;
 ControlP5 cp5;
  
 int myColorBackground = color(0,0,0);
+
+
+
  
 void setup() {
+  try{
+    Runtime r = Runtime.getRuntime();
+    Process p = r.exec("C:/Users/Rodolfo/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/mainScreen/mainScreen.pde");
+  }catch(IOException e){
+    System.out.println("IOException");
+  }
+  
   size(800, 640);
   cp5 = new ControlP5(this);
  
