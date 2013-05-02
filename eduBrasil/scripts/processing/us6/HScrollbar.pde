@@ -7,23 +7,24 @@ class Scrollbar {
   boolean over;           // is the mouse over the slider?
   boolean locked;
   float ratio;
+  int max;
 
-  Scrollbar (int xp, int yp, int sw, int sh, int l) {
+  Scrollbar (float xp, float yp, int sw, int sh, int l) {
     swidth = sw;
     sheight = sh;
     int widthtoheight = sw - sh;
     ratio = (float)sw / (float)widthtoheight;
     xpos = xp;
     ypos = yp-sheight/2;
-    spos = ypos;// + swidth/2 - sheight/2;
+    spos = xpos;// + swidth - sheight;//xpos + swidth/2 - sheight/2;
     newspos = spos;
-    sposMin = ypos;
-    sposMax = ypos + swidth - sheight;
+    sposMin = xpos;
+    sposMax = xpos + swidth - sheight;
     loose = l;
+
   }
 
   void update() {
-     
     if (overEvent()) {
       over = true;
     } else {
@@ -31,15 +32,13 @@ class Scrollbar {
     }
     if (mousePressed && over) {
       locked = true;
-     // newspos = constrain(mouseY, sposMin, sposMax);
     }
     if (!mousePressed) {
       locked = false;
     }
     if (locked) {
-      newspos = constrain(mouseY, sposMin, sposMax);
-    //  println(newspos);
-      
+      //newspos = constrain(mouseX-sheight/2, sposMin, sposMax);
+      newspos = constrain(mouseX, sposMin, sposMax);
     }
     if (abs(newspos - spos) > 1) {
       spos = spos + (newspos-spos)/loose;
@@ -61,15 +60,22 @@ class Scrollbar {
 
   void display() {
     noStroke();
-    fill(230);
-    rect(xpos, ypos, sheight, swidth);
-    fill(170);
-    rect(xpos, spos, sheight, sheight);
+    fill(204);
+    rect(xpos, ypos, swidth, sheight);
+    if (over || locked) {
+      fill(0, 0, 0);
+    } else {
+      fill(102, 102, 102);
+    }
+    rect(spos, ypos, sheight, sheight);
   }
 
   float getPos() {
     // Convert spos to be values between
     // 0 and the total width of the scrollbar
     return spos * ratio;
+  }
+  
+  void setMax(int max){
   }
 }
