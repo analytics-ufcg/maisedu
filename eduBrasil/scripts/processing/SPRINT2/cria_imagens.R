@@ -11,8 +11,8 @@ options(stringsAsFactors = FALSE)
 #desvios = read.csv("C:/Users/Rodolfo/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/mainScreen/mainScreen/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv",fileEncoding="latin1")
 #regioes = read.csv("C:/Users/Rodolfo/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/mainScreen/mainScreen/medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv",fileEncoding="latin1")
 
-desvios = read.csv("tabela_com_todos_os_indicadores_selecionados_e_desvios.csv",fileEncoding="latin1")
-regioes = read.csv("medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv",fileEncoding="latin1")
+desvios = read.csv("/home/isa/sketchbook/us6/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv",fileEncoding="latin1")
+regioes = read.csv("/home/isa/sketchbook/us6/medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv",fileEncoding="latin1")
 
 
 #codigo = "Cabedelo"
