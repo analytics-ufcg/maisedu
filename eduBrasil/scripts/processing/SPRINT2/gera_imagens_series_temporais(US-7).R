@@ -22,12 +22,15 @@ retornaMaiorDesvioIndicar = function(tabela.cidade, numero.indicador) {
 
 
 #Cria uma imagem de uma serie temporal, recebendo uma cidade e um indicador como parametros
-criaImagemSerieTemporal = function(nome.cidade, numero.indicador){
+criaImagemSerieTemporal = function(nome.cidade, numero.indicador, dicionario){
   path = "C:/Users/Iara/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/SPRINT2/graphs/"
   paraiba = regioes[regioes$REGIAO=="Paraíba",]
   cidade = desvios[desvios$NOME_MUNICIPIO==nome.cidade,]
   indicador.desvio = 10 + (2*numero.indicador - 1)
   indicador.regiao = 3 + numero.indicador
+  
+  nome.indicador = dicionario$indicador[numero.indicador]
+  
   desvio = retornaMaiorDesvioIndicar(cidade, indicador.desvio)
   indicador = colnames(cidade)[indicador.desvio]
   
@@ -42,11 +45,20 @@ criaImagemSerieTemporal = function(nome.cidade, numero.indicador){
       geom_line(aes(group=REGIAO)) +
       geom_point(size=3) +
       theme_bw() +
-      theme(legend.position="none")   
+      theme(legend.position="none")  +
+      labs(title = nome.indicador) 
   png(paste(path,nome.cidade,"_SERIE","_",indicador,"_",desvio,".png", sep=""),width = 382, height = 291) 
   print(p)
   dev.off()
 }
+
+#dicionario de nomes dos indicadores
+dicionario = data.frame(key = c("INDICADOR_62", "INDICADOR_89", "INDICADOR_90", "INDICADOR_329", "INDICADOR_333", "INDICADOR_73", "INDICADOR_74", "INDICADOR_80", "INDICADOR_81", 
+                                "INDICADOR_176", "INDICADOR_177", "INDICADOR_202", "INDICADOR_184", "INDICADOR_7", "INDICADOR_201"), 
+                        indicador = c("Part. despesa e encargos educação(%)", "IDEB - 5º ano do ensino fundamental", "IDEB - 9º ano do ensino fundamental", "Taxa de analfabetismo",
+                                      "Taxa de atendimento escolar", "Taxa abandono total - fundamental(%)", "Taxa de abandono - ensino médio(%)", "Taxa aprovação total - fundamental(%)",
+                                      "Taxa de aprovação - ensino médio (%)", "Percentual docentes formação superior(%)", "Percentual de docentes temporários", "Índice precariedade infraestrutura",
+                                      "Razão aluno por docente", "Despesa educação aluno", "Índice eficiência educação básica"))
 
 #Leitura de arquivos
 desvios = read.csv("C:/Users/Iara/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/SPRINT2/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv",fileEncoding="latin1")
@@ -58,6 +70,6 @@ nome.cidade = paste(args,collapse=" ")
 
 #gera imagens para todos os indicadores
 for(indicador in 1:15) {
-  criaImagemSerieTemporal(nome.cidade, indicador)
+  criaImagemSerieTemporal(nome.cidade, indicador, dicionario)
 }
 
