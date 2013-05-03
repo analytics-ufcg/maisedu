@@ -1,21 +1,45 @@
 import controlP5.*;
 import java.io.*;
+
 ControlP5 cp5;
- 
+
+Textfield stateTextInput;
+Textfield stateTextSuggestion;
+
 int myColorBackground = color(0,0,0);
 
-
 DropdownList droplist;
+
 void setup() {
   
-  size(800, 640);
-  cp5 = new ControlP5(this);
-  //PFont font = new PFont("Arial-Black-48");
-  //textFont(font, 13);
+  size(800, 600);
   
+  cp5 = new ControlP5(this);
+  cp5.setFont(createFont("Times New Roman",14));
+  
+  
+//  stateTextInput = cp5.addTextfield("stateTextInput");
+//  stateTextInput.setAutoClear(false);
+//  stateTextSuggestion = cp5.addListBox(droplist)
+//  .setPosition(0,0)
+//  .setSize(260, 200)
+//  ;
+//  stateTextSuggestion.captionLabel().set("");
+ 
   // add a dropdownlist at position (50,100)
   droplist = cp5.addDropdownList("Escolha sua cidade:").setPosition(50, 100);
-  
+ 
+  //dropdown layout 
+  droplist.setSize(260, 200);
+  droplist.setScrollbarWidth(10);
+  droplist.setItemHeight(20);
+  droplist.setBackgroundColor(color(0));
+  droplist.setItemHeight(15);
+  droplist.setBarHeight(20);
+  droplist.setColorActive(color(255,128));
+  droplist.setColorBackground(color(200));
+  droplist.setColorLabel(color(0));
+ 
   // add items to the dropdownlist
   droplist.addItem("Água Branca ", 0);
   droplist.addItem("Aguiar", 1);
@@ -252,6 +276,13 @@ void draw() {
   // controlp5 autodraw is on by default (if you use the default JAVA2D renderer)
   // this means the gui is automatically drawn at the end
 }
+
+//method to search for autocomplete research
+void keyPressed(){
+      stateTextInput.submit();
+}
+ 
+
 
 void selectedCity(String cidade){
   println(cidade);
