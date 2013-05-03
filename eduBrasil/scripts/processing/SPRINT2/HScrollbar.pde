@@ -75,7 +75,4 @@ class Scrollbar {
     // 0 and the total width of the scrollbar
     return spos * ratio;
   }
-  
-  void setMax(int max){
-  }
 }

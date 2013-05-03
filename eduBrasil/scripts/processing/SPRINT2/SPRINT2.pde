@@ -3,7 +3,7 @@ import controlP5.*;
 import java.io.*;
 
 
-PImage indicador;
+PImage indicador, voltar;
 Scrollbar hs1;
 String[] merecem_atencao;
 ArrayList indicadores_normais, indicadores_merecem_atencao;
@@ -11,6 +11,7 @@ boolean update_layout = false;
 boolean plot_indicador = false;
 int id_indicador = 0;
 PFont font;
+String nome_cidade;
 ControlP5 cp5;
 DropdownList droplist;
 
@@ -19,31 +20,41 @@ void setup(){
   font = createFont("Georgia",18);
   textFont(font);
   hs1 = new Scrollbar(40, 452,800, 16, 60);
-  read_files();
   setDropDown();
+  indicadores_merecem_atencao = new ArrayList();
+  voltar = loadImage("voltar.png");
 }
 
 void draw(){
   background(255);
+  //noLoop();
 
   hs1.update();
   hs1.display();
-  
-  //plot_indicadores();    
+     
   update();
-  lista_indicadores();
   
   fill(0);
   text("Indicadores que merecem atenção", 300,90);
   
   //tamanho/posicao definido de cada nome do indicador:
   //rect(870,105,125+(i*22),20);
-   
+ 
+  
+  if(indicadores_merecem_atencao.size()>0){
+    plot_indicadores(); 
+    update(); 
+    lista_indicadores();
+  }   
+  
   fill(255);
   if(update_layout) rect(40,60,800,400);
   update_indicadores();
+    
+}
 
-  
+void mouseMoved() {
+  //loop();
 }
 
 void update(){
@@ -62,8 +73,17 @@ void update(){
 void update_indicadores(){
   if(plot_indicador && id_indicador < indicadores_normais.size()){
         update_layout = true;
-        indicador = loadImage("graphs/" + indicadores_normais.get(id_indicador));
-        image(indicador,250,130);
+        if((indicadores_normais.get(id_indicador).toString()).contains("SERIE")){
+          indicador = loadImage("C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\graphs\\" + indicadores_normais.get(id_indicador));
+        //text(indicadores_normais.get(id_indicador));
+          image(indicador,450,130);
+          image(voltar, 1050,420);
+        }else{
+          indicador = loadImage("C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\graphs\\" + indicadores_normais.get(id_indicador));
+          //text(indicadores_normais.get(id_indicador));
+          image(indicador,250,130);
+          image(voltar, 1050,420);
+        }
   }
 }
 
@@ -77,6 +97,7 @@ boolean overRect(int x, int y, int width, int height) {
 }
 
 void mousePressed() {
+  //loop();
   if (overRect(870,105,125,20)) {
       plot_indicador = true;
       id_indicador = 0;
@@ -123,27 +144,33 @@ void mousePressed() {
       plot_indicador = true;
       id_indicador = 14;
   }
+   if(overRect(1050,420,1150,458)){
+    plot_indicador = false;
+    update();
+  }
 }
 
 void read_files(){
   //substituir depois pelo caminho no servidor para a pasta com as miniaturas
   //o windows usa duas barras
   String nome;
-  File folder = new File(dataPath("/home/isa/sketchbook/us6/graphs/"));
+  String[] temp;
+  File folder = new File(dataPath("C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\graphs\\"));
   File[] indicadores = folder.listFiles(); 
   indicadores_normais = new ArrayList();
   indicadores_merecem_atencao = new ArrayList();
-  
-  println(folder.listFiles());
-  
+    
   for(int i = 0; i < indicadores.length; i++){
     nome = indicadores[i].getName();
-    if(nome.toLowerCase().contains("-4")){
-      indicadores_merecem_atencao.add(nome);
+    temp = split(nome, "_");
+    if(nome.toLowerCase().contains("-1")){
+       if(temp[0].equals(nome_cidade))indicadores_merecem_atencao.add(nome);
     }else{
-      indicadores_normais.add(nome);
+      if(temp[0].equals(nome_cidade))indicadores_normais.add(nome);
     }
+    
   }
+  lista_indicadores();
 }
 
 void lista_indicadores(){
@@ -157,9 +184,10 @@ void lista_indicadores(){
   
   for(int i = 0; i < indicadores_normais.size(); i++){
     nome = indicadores_normais.get(i).toString();
-    temp = split(nome, "_");
-    text((temp[1] + " " + temp[2]), 880,120 + (i*22));
-    text((temp[1] + " " + temp[2]), 880,590 + (i*22));
+    if(!(indicadores_normais.get(i).toString()).contains("SERIE")){
+      temp = split(nome, "_");
+      text(getNomeIndicador(Integer.parseInt(temp[2])), 880,120 + (i*22));
+    }
   }
 }
 
@@ -168,19 +196,44 @@ void plot_indicadores(){
   String nome;
 
   for(int i = 0; i < indicadores_merecem_atencao.size(); i++){
-    indicador = loadImage("attention/" + indicadores_merecem_atencao.get(i));
-    image(indicador,((i*400) - imgPos*1.5) - 770, 130);
+    if(!(indicadores_merecem_atencao.get(i).toString()).contains("SERIE")){
+      indicador = loadImage("C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\graphs\\" + indicadores_merecem_atencao.get(i));
+      image(indicador,((i*400) - imgPos*1.5) - 770, 130);
+    }
+  }
+  
+  int j = 0;
+  
+  for(int i = 0; i < indicadores_merecem_atencao.size(); i++){
+    if((indicadores_merecem_atencao.get(i).toString()).contains("SERIE")){
+      indicador = loadImage("C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\graphs\\" + indicadores_merecem_atencao.get(i));
+      image(indicador, ((j*400) - imgPos*1.5) - 770, 580);      
+      j++;
+    }
+    
   }
 }
 
 void setDropDown(){
  cp5 = new ControlP5(this);
  
-  font = createFont("Arial",14);
-  textFont(font);
+  //font = createFont("Arial",14);
+  cp5.setFont(createFont("Times New Roman",14));
+
   
   // add a dropdownlist at position (50,100)
-  droplist = cp5.addDropdownList("Escolha sua cidade:").setPosition(50, 100);
+  droplist = cp5.addDropdownList("Escolha sua cidade:").setPosition(40, 50);
+  
+  //
+  droplist.setSize(260,200);
+  droplist.setScrollbarWidth(10);
+  droplist.setItemHeight(20);
+  droplist.setBackgroundColor(color(0));
+  droplist.setItemHeight(20);
+  droplist.setBarHeight(20);
+  droplist.setColorActive(color(255,128));
+  droplist.setColorBackground(color(200));
+  droplist.setColorLabel(color(0));
   
   // add items to the dropdownlist
   droplist.addItem("Água Branca ", 0);
@@ -410,13 +463,15 @@ void setDropDown(){
     
 }
 
-void selectedCity(String cidade){
-  println(cidade);
-try{  
+ 
+  
+void geraIndicadoresOutlier(String cidade) {
+  try{  
 
     //String path = "\"C:\\Program Files\\R\\R-2.15.0\\bin\\Rscript.exe\" " + "C:\\Users\\Rodolfo\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\mainScreen\\mainScreen\\cria_imagens.R" + " " + cidade;
-    String path = "/usr/bin/Rscript " + "/home/isa/sketchbook/us6/cria_imagens.R" + " " + cidade;
+    //String path = "/usr/bin/Rscript " + "/home/isa/sketchbook/us6/cria_imagens.R" + " " + cidade;
     //System.setProperty("user.dir", "/home/isa/sketchbook/us6");
+    String path = "\"C:\\Program Files\\R\\R-3.0.0\\bin\\x64\\Rscript.exe\" " + "C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\cria_imagens.R" + " " + cidade;
     
     println(path);
     println(new File(".").getAbsolutePath());
@@ -424,7 +479,22 @@ try{
     Process pr=r.exec(path);
     pr.waitFor();
     println(pr.exitValue());
-  }catch(Exception e){
+    }catch(Exception e){
+    System.out.println(e.getMessage());
+  }
+}
+
+void geraIndicadoresTempo(String cidade) {
+  try {
+    
+    String path2 = "\"C:\\Program Files\\R\\R-3.0.0\\bin\\x64\\Rscript.exe\" " + "C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\gera_imagens_series_temporais(US-7).R" + " " + cidade; 
+    println(path2);
+    println(new File(".").getAbsolutePath());
+    Runtime r2 = Runtime.getRuntime();
+    Process pr2=r2.exec(path2);
+    pr2.waitFor();
+    println(pr2.exitValue());
+    }catch(Exception e){
     System.out.println(e.getMessage());
   }
 }
@@ -433,14 +503,79 @@ try{
 void controlEvent(ControlEvent theEvent) {
   if (theEvent.isGroup()) {
     println("Peguei");
+
     println(theEvent.getGroup() + " => " + theEvent.getGroup().getValue());
     int index = (int)theEvent.getGroup().getValue();
     println(index);
     println(droplist.getItem(index));
     ListBoxItem cidade = droplist.getItem(index);
     println("Pequei" + " => " + cidade.getName());
-    selectedCity(cidade.getName());
-   
+    nome_cidade = cidade.getName();
+    
+    if(!existeArquivoDaCidade(nome_cidade)){
+       geraIndicadoresOutlier(nome_cidade);
+       geraIndicadoresTempo(nome_cidade);
+    }   
+    read_files();    
   }
 }
 
+private boolean existeArquivoDaCidade(String cidade){
+  
+  String nome;
+  
+  File folder = new File(dataPath("C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\graphs\\"));
+  File[] indicadores = folder.listFiles(); 
+  String[] temp;
+  
+  for(int i = 0; i < indicadores.length; i++){
+    nome = indicadores[i].getName();
+    println(nome); 
+    temp = split(nome, "_");
+    if(cidade.equals(temp[0])){
+      println("Já existe arquivo!");
+       return true;  
+    }
+  }
+  return false;  
+}
+
+
+public String getNomeIndicador(int indicador){
+  
+  switch (indicador) {
+            case 329:
+                return("Analfabestimo pessoas com 18 ou mais");
+            case 62:
+                return("Despesa com pessoal e encargos sociais");
+            case 89:
+                return("IDEB - 5º ano do ensino fundamental");
+            case 90:
+                return("IDEB - 9º ano do ensino fundamental");
+            case 333:
+                return("Atendimento escolar p/ entre 4 e 17 anos de idade");
+            case 73:
+                return("Abandono total - ensino fundamental");
+            case 74:
+                return("Abandono - ensino médio");
+            case 80:
+                return("Aprovação total - ensino fundamental");
+            case 81:
+                return("Aprovação - ensino médio");
+            case 176:
+                return("Docentes com formação superior");
+            case 177:
+                return("Docentes temporários e de contratos indefinidos");
+             case 202:
+                return("Índice de precariedade de infraestrutura");
+            case 184:
+                return("Razão aluno por docente");
+            case 7:
+                return("Despesa corrente por aluno");
+            case 201:
+                return("Índice de eficiência da educação básica");
+            default:
+                 return("Deu erro, moral!");
+  }
+
+} 

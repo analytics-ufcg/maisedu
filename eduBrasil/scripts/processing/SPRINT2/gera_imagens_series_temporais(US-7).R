@@ -23,7 +23,7 @@ retornaMaiorDesvioIndicar = function(tabela.cidade, numero.indicador) {
 
 #Cria uma imagem de uma serie temporal, recebendo uma cidade e um indicador como parametros
 criaImagemSerieTemporal = function(nome.cidade, numero.indicador){
-  path = "C:/Users/Henrique/Desktop/eduBrasil/scripts/processing/SPRINT2/graphs/"
+  path = "C:/Users/Iara/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/SPRINT2/graphs/"
   paraiba = regioes[regioes$REGIAO=="Paraíba",]
   cidade = desvios[desvios$NOME_MUNICIPIO==nome.cidade,]
   indicador.desvio = 10 + (2*numero.indicador - 1)
@@ -49,8 +49,8 @@ criaImagemSerieTemporal = function(nome.cidade, numero.indicador){
 }
 
 #Leitura de arquivos
-desvios = read.csv("C:/Users/Henrique/Desktop/eduBrasil/scripts/processing/SPRINT2/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv",fileEncoding="latin1")
-regioes = read.csv("C:/Users/Henrique/Desktop/eduBrasil/scripts/processing/SPRINT2/medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv",fileEncoding="latin1")
+desvios = read.csv("C:/Users/Iara/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/SPRINT2/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv",fileEncoding="latin1")
+regioes = read.csv("C:/Users/Iara/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/SPRINT2/medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv",fileEncoding="latin1")
 
 #recebe nome da cidade da linha de comando
 #nome.cidade = "Campina Grande"
