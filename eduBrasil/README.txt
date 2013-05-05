@@ -2,27 +2,42 @@ Repositorio no github: https://github.com/analyticsUfcg/eduBrasil
 Diretorio dos arquivos da parte de processing: 
 eduBrasil/eduBrasil/scripts/processing/SPRINT2/
 
-Para abrir o projeto com o Eclipse È necess·rio:
+Res: 1250x1000
 
+Pr√©-requisitos: ter instalado R e Processing.
 
-1. Importar o projeto do diretÛrio do processing
+Para abrir o projeto com o Eclipse √© necess√°rio:
+
+1. Importar o projeto do diret√≥rio do processing
+
 2. Adicionar external JARs:
 				controlP5
 				processing core
 				geomerative
-3. No arquivo "SPRINT2.pde" deve-se substituir o path para o endereÁo do "Rscript.exe" e reorganizar o path para acessar o scrit de criar imagens ("cria_imagens.R").
+3. No diretorio eduBrasil/eduBrasil/scripts/processing/SPRINT2/
+o arquivo "SPRINT2.pde" deve ter substituido as variaveis "path" e "path2" para o endere√ßo do "Rscript.exe"
+e nas mesmas variaveis reorganizar o path para acessar o script de criar imagens 
+("cria_imagens.R" e "gera_imagens_series_temporais(US-7).R"), criar a pasta "graph" na pasta SPRINT2.
 
-Res: 1250x1000
+4. Modificar endere√ßo das variaveis "folder", "indicador", "indicador2" para o endere√ßo da pasta SPRINT2/graphs.
 
-Para abrir o projeto com o Processing È necess·rio:
+5. Rodar script "SPRINT2.pde".
 
-PrÈ-requisitos: ter instalado R e Processing.
+
+
+Para abrir o projeto com o Processing √© necess√°rio:
 
 1. Acessar o repositorio.
-2. Baixar o projeto eduBrasil.
-3. No diretorio eduBrasil/eduBrasil/scripts/processing/SPRINT2/
-o arquivo "SPRINT2.pde" deve ter substituido o path para o endereÁo do "Rscript.exe", reorganizar o path para acessar o script de criar imagens ("cria_imagens.R" e "gera_imagens_series_temporais(US-7).R"), criar a pasta "graph" na pasta eduBrasil/eduBrasil/scripts/processing/SPRINT2/.
-4. Rodar script "SPRINT2.pde".
 
+2. Baixar o projeto eduBrasil.
+
+3. No diretorio eduBrasil/eduBrasil/scripts/processing/SPRINT2/
+o arquivo "SPRINT2.pde" deve ter substituido as variaveis "path" e "path2" para o endere√ßo do "Rscript.exe" 
+e nas mesmas variaveis reorganizar o path para acessar o script de criar imagens 
+("cria_imagens.R" e "gera_imagens_series_temporais(US-7).R"), criar a pasta "graph" na pasta SPRINT2.
+
+4. Modificar endere√ßo das variaveis "folder", "indicador", "indicador2" para o endere√ßo da pasta SPRINT2/graphs.
+
+5. Rodar script "SPRINT2.pde".
 
 
