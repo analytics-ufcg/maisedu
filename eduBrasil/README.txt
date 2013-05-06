@@ -21,7 +21,9 @@ e nas mesmas variaveis reorganizar o path para acessar o script de criar imagens
 
 4. Modificar endereço das variaveis "folder", "indicador", "indicador2" para o endereço da pasta SPRINT2/graphs.
 
-5. Rodar script "SPRINT2.pde".
+5. Modificar o trecho de codigo a seguir com o diretorio da pasta "graphs". System.setProperty("user.dir", endereço de graphs);
+
+6. Rodar script "SPRINT2.pde".
 
 
 
@@ -38,6 +40,8 @@ e nas mesmas variaveis reorganizar o path para acessar o script de criar imagens
 
 4. Modificar endereço das variaveis "folder", "indicador", "indicador2" para o endereço da pasta SPRINT2/graphs.
 
-5. Rodar script "SPRINT2.pde".
+5. Modificar o trecho de codigo a seguir com o diretorio da pasta "graphs". System.setProperty("user.dir", endereço de graphs);
+
+6. Rodar script "SPRINT2.pde".
 
 
