@@ -14,6 +14,7 @@ Para abrir o projeto com o Eclipse é necessário:
 				controlP5
 				processing core
 				geomerative
+                                ggplot2 
 3. No diretorio eduBrasil/eduBrasil/scripts/processing/SPRINT2/
 o arquivo "SPRINT2.pde" deve ter substituido as variaveis "path" e "path2" para o endereço do "Rscript.exe"
 e nas mesmas variaveis reorganizar o path para acessar o script de criar imagens 
@@ -23,11 +24,19 @@ e nas mesmas variaveis reorganizar o path para acessar o script de criar imagens
 
 5. Modificar o trecho de codigo a seguir com o diretorio da pasta "graphs". System.setProperty("user.dir", endereço de graphs);
 
-6. Rodar script "SPRINT2.pde".
+6. Modificar endereços nos scripts "gera_imagens_series_temporais(US-7).R" e "cria_imagens.R" apontando os arquivos em seus diretorios.
+
+7. Rodar script "SPRINT2.pde".
 
 
 
 Para abrir o projeto com o Processing é necessário:
+
+Pré-requisitos:
+libs:     
+                                controlP5
+				geomerative
+                                ggplot2 
 
 1. Acessar o repositorio.
 
@@ -42,6 +51,8 @@ e nas mesmas variaveis reorganizar o path para acessar o script de criar imagens
 
 5. Modificar o trecho de codigo a seguir com o diretorio da pasta "graphs". System.setProperty("user.dir", endereço de graphs);
 
-6. Rodar script "SPRINT2.pde".
+6. Modificar endereços nos scripts "gera_imagens_series_temporais(US-7).R" e "cria_imagens.R" apontando os arquivos em seus diretorios.
+
+7. Rodar script "SPRINT2.pde".
 
 
