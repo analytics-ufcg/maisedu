@@ -60,7 +60,7 @@ class Scrollbar {
 
   void display() {
     noStroke();
-    fill(204);
+    fill(230);
     rect(xpos, ypos, swidth, sheight);
     if (over || locked) {
       fill(0, 0, 0);

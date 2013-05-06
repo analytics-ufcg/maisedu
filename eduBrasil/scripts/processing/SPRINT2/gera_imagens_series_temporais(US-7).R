@@ -23,8 +23,9 @@ retornaMaiorDesvioIndicar = function(tabela.cidade, numero.indicador) {
 
 #Cria uma imagem de uma serie temporal, recebendo uma cidade e um indicador como parametros
 criaImagemSerieTemporal = function(nome.cidade, numero.indicador, dicionario){
-  path = "C:/Users/Iara/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/SPRINT2/graphs/"
-  paraiba = regioes[regioes$REGIAO=="Paraíba",]
+  #path = "C:/Users/Iara/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/SPRINT2/graphs/"
+  path = "/home/iara/processing-2.0b3/sketchbook/SPRINT2/graphs/"
+  paraiba = regioes[regioes$REGIAO=="Para?ba",]
   cidade = desvios[desvios$NOME_MUNICIPIO==nome.cidade,]
   indicador.desvio = 10 + (2*numero.indicador - 1)
   indicador.regiao = 3 + numero.indicador
@@ -55,14 +56,20 @@ criaImagemSerieTemporal = function(nome.cidade, numero.indicador, dicionario){
 #dicionario de nomes dos indicadores
 dicionario = data.frame(key = c("INDICADOR_62", "INDICADOR_89", "INDICADOR_90", "INDICADOR_329", "INDICADOR_333", "INDICADOR_73", "INDICADOR_74", "INDICADOR_80", "INDICADOR_81", 
                                 "INDICADOR_176", "INDICADOR_177", "INDICADOR_202", "INDICADOR_184", "INDICADOR_7", "INDICADOR_201"), 
-                        indicador = c("Part. despesa e encargos educação(%)", "IDEB - 5º ano do ensino fundamental", "IDEB - 9º ano do ensino fundamental", "Taxa de analfabetismo",
-                                      "Taxa de atendimento escolar", "Taxa abandono total - fundamental(%)", "Taxa de abandono - ensino médio(%)", "Taxa aprovação total - fundamental(%)",
-                                      "Taxa de aprovação - ensino médio (%)", "Percentual docentes formação superior(%)", "Percentual de docentes temporários", "Índice precariedade infraestrutura",
-                                      "Razão aluno por docente", "Despesa educação aluno", "Índice eficiência educação básica"))
+                        indicador = c("Part. despesa e encargos educa??o(%)", "IDEB - 5? ano do ensino fundamental", "IDEB - 9? ano do ensino fundamental", "Taxa de analfabetismo",
+                                      "Taxa de atendimento escolar", "Taxa abandono total - fundamental(%)", "Taxa de abandono - ensino m?dio(%)", "Taxa aprova??o total - fundamental(%)",
+                                      "Taxa de aprova??o - ensino m?dio (%)", "Percentual docentes forma??o superior(%)", "Percentual de docentes tempor?rios", "?ndice precariedade infraestrutura",
+                                      "Raz?o aluno por docente", "Despesa educa??o aluno", "?ndice efici?ncia educa??o b?sica"))
 
 #Leitura de arquivos
-desvios = read.csv("C:/Users/Iara/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/SPRINT2/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv",fileEncoding="latin1")
-regioes = read.csv("C:/Users/Iara/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/SPRINT2/medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv",fileEncoding="latin1")
+#formato de arquivo no windows
+#desvios = read.csv("C:/Users/Iara/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/SPRINT2/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv",fileEncoding="latin1")
+#regioes = read.csv("C:/Users/Iara/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/SPRINT2/medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv",fileEncoding="latin1")
+
+#formato no linux - /home/iara/processing-2.0b3/sketchbook/SPRINT2/
+desvios = read.csv("/home/iara/processing-2.0b3/sketchbook/SPRINT2/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv",fileEncoding="latin1")
+regioes = read.csv("/home/iara/processing-2.0b3/sketchbook/SPRINT2/medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv",fileEncoding="latin1")
+
 
 #recebe nome da cidade da linha de comando
 #nome.cidade = "Campina Grande"

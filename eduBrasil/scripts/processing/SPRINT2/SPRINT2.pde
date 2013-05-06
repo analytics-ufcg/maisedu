@@ -3,70 +3,103 @@ import controlP5.*;
 import java.io.*;
 
 
-PImage indicador,indicador2, voltar;
+PImage indicador,voltar;
 Scrollbar hs1,hs2;
-String[] merecem_atencao;
+float imgPos,imgPos2;
+String[] merecem_atencao,temp;
 ArrayList indicadores_normais, indicadores_merecem_atencao,indicadores_normais_temporal, indicadores_merecem_atencao_temporal;
 boolean update_layout = false;
+boolean update_layout_temporal = false;
 boolean plot_indicador = false;
-boolean redraw = true;
+boolean plot_indicador_temporal = false;
 int id_indicador = 0;
+int id_indicador_temporal = 0;
 PFont font;
-String nome_cidade;
+String nome_cidade, Path;
 ControlP5 cp5;
 DropdownList droplist;
 String nome;
-String[] temp;
 File folder;
 File[] indicadores;
 
 void setup(){
-  size(1250,1000);
-  
-  
-  font = createFont("Georgia",18);
+  size(1400,800);
+
+  font = createFont("Times New Roman",14);
   textFont(font);
-  hs1 = new Scrollbar(40, 452,800, 16, 10);
-  hs2 = new Scrollbar(40, 922,800, 16, 10);
+  hs1 = new Scrollbar(43, 396,820, 16, 10);
+  hs2 = new Scrollbar(43, 770,820, 16, 10);
   setDropDown();
   indicadores_merecem_atencao = new ArrayList();
   indicadores_merecem_atencao_temporal = new ArrayList();
   indicadores_normais_temporal = new ArrayList();
   voltar = loadImage("voltar.png");
   
-  folder = new File(dataPath("C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\graphs\\"));
+  Path = "/home/iara/processing-2.0b3/sketchbook/SPRINT2/graphs/";
+  folder = new File(dataPath(Path));
   indicadores = folder.listFiles(); 
   indicadores_normais = new ArrayList();
   indicadores_merecem_atencao = new ArrayList();
+  indicadores_normais_temporal = new ArrayList();
+  indicadores_merecem_atencao_temporal = new ArrayList();
     
 }
 
 void draw(){
   background(255);
   noLoop();
-
-  hs1.update();
-  hs1.display();
-  hs2.update();
-  hs2.display();
      
   update();
-  
   fill(0);
-  text("Indicadores que merecem atenção", 300,90);
 
   if(indicadores_merecem_atencao.size()>0){
+    hs1.update();
+    hs1.display();
+    noLoop();
     plot_indicadores(); 
     update(); 
     lista_indicadores();
-  }   
+    line(860, 60,860, 403);
+  }else{
+    if(nome_cidade!=null){
+      lista_indicadores();
+      line(860, 60,860, 403);
+    }else{
+      text("Escolha a cidade que deseja ter informações",250,230);
+    }
+  }
+  
+  
+  
+  if(indicadores_merecem_atencao_temporal.size()>0){
+    hs2.update();
+    hs2.display();
+    noLoop();
+    plot_indicadores_temporal();
+    update_grid2();
+    lista_indicadores_temporal();
+  }else{
+    if(nome_cidade!=null){
+      lista_indicadores_temporal();
+      line(860, 60,860, 403);
+    }else{
+      text("Escolha a cidade que deseja ter informações",250,630);
+    }
+  }
+    
   
   fill(255);
   if(update_layout){
-    rect(40,60,800,400);
-    rect(40,530,1155,400);
+    noStroke();
+    rect(43,64,815,341);
+  }
+  if(update_layout_temporal){
+    noStroke();
+    rect(43,435,815,343);
   }
   update_indicadores();
+  update_indicadores_temporal();
+
 }
 
 void mouseMoved() {
@@ -80,119 +113,53 @@ void mouseDragged() {
 void update(){
   noStroke();
   fill(255);
-  rect(840,60,800,400);
-  rect(840,530,800,400);
-  rect(0,60,40,1000);
+  rect(860,60,800,350);
+  rect(0,60,40,800);
   stroke(230);
   strokeWeight(4);
   noFill();
-  rect(40,60,1155,400);
-  rect(40,530,1155,400);
-
+  rect(40,56,1310,350);
+  rect(40,430,1310,350);
+  fill(230);
+  line(860, 60,860, 403);
+  line(860, 430,860, 777);
 }
 
 void update_indicadores(){
   if(plot_indicador && id_indicador < indicadores_normais.size()){
         update_layout = true;
-        
-       // if((indicadores_normais.get(id_indicador + (indicadores_normais.size()/2)).toString()).contains("SERIE")){
-          indicador = loadImage("C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\graphs\\" + indicadores_normais.get(id_indicador + (indicadores_normais.size()/2)));
-        //text(indicadores_normais.get(id_indicador));
-       
-          image(indicador,250,600);
-       // }else{
-          indicador2 = loadImage("C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\graphs\\" + indicadores_normais.get(id_indicador));
-          //text(indicadores_normais.get(id_indicador));
-          image(indicador2,250,130);
-          image(voltar, 1050,420);
-      //  }
+        indicador = loadImage("/home/iara/processing-2.0b3/sketchbook/SPRINT2/graphs/" + indicadores_normais.get(id_indicador));
+        image(indicador,250,100);
+        g.removeCache(indicador);
+        image(voltar, 1250,350);
   }else if(!plot_indicador){
      if(indicadores_merecem_atencao.size()>0){
       plot_indicadores(); 
       update(); 
       lista_indicadores();
-
       hs1.update();
       hs1.display();
-      hs2.update();
-      hs2.display();
-     }
+     }else{
+      if(nome_cidade!=null){
+        fill(0);
+        font = createFont("Times New Roman",14);
+        textFont(font);
+        text("Indicadores que merecem atenção", 300,90);
+        text("A cidade " + nome_cidade + " não possui indicadores que merecem atenção", 200,230);
+        lista_indicadores();
+        line(860, 60,860, 403);
+      }
+    }
   }
-}
-
-boolean overRect(int x, int y, int width, int height) {
-  if (mouseX >= x && mouseX <= x+width && 
-      mouseY >= y && mouseY <= y+height) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-void mousePressed() {
-  loop();
-  if (overRect(870,105,125,20)) {
-      plot_indicador = true;
-      id_indicador = 0;
-  }else if (overRect(870,126,125,20)){
-      plot_indicador = true;
-      id_indicador = 1;
-  }else if (overRect(870,150,125,20)){
-      plot_indicador = true;
-      id_indicador = 2;
-  }else if (overRect(870,170,125,20)){
-      plot_indicador = true;
-      id_indicador = 3;
-  }else if (overRect(870,193,125,20)){
-      plot_indicador = true;
-      id_indicador = 4;
-  }else if (overRect(870,216,125,20)){
-      plot_indicador = true;
-      id_indicador = 5;
-  }else if (overRect(870,236,125,20)){
-      plot_indicador = true;
-      id_indicador = 6;
-  }else if (overRect(870,258,125,20)){
-      plot_indicador = true;
-      id_indicador = 7;
-  }else if (overRect(870,280,125,20)){
-      plot_indicador = true;
-      id_indicador = 8;
-  }else if (overRect(870,304,125,20)){
-      plot_indicador = true;
-      id_indicador = 9;
-  }else if (overRect(870,324,125,20)){
-      plot_indicador = true;
-      id_indicador = 10;
-  }else if (overRect(870,347,125,20)){
-      plot_indicador = true;
-      id_indicador = 11;
-  }else if (overRect(870,367,125,20)){
-      plot_indicador = true;
-      id_indicador = 12;
-  }else if (overRect(870,390,125,20)){
-      plot_indicador = true;
-      id_indicador = 13;
-  }else if (overRect(870,410,125,20)){
-      plot_indicador = true;
-      id_indicador = 14;
-  }
-   if(overRect(1050,420,1150,458)){
-    plot_indicador = false;
-   }
 }
 
 void read_files(){
-  //substituir depois pelo caminho no servidor para a pasta com as miniaturas
-  //o windows usa duas barras
-  
   for(int i = 0; i < indicadores.length; i++){
     nome = indicadores[i].getName();
     temp = split(nome, "_");
-    //TODO: mudar pra -4
-    if(nome.toLowerCase().contains("-1")){
+    if(nome.contains("-4")){
        if(temp[0].equals(nome_cidade)){
-         if(nome.contains("SERIES")){
+         if(nome.contains("SERIE")){
              indicadores_merecem_atencao_temporal.add(nome);
          }else{
              indicadores_merecem_atencao.add(nome);
@@ -200,64 +167,134 @@ void read_files(){
        }
     }else{
       if(temp[0].equals(nome_cidade)){
-         if(nome.contains("SERIES")){
+         if(nome.contains("SERIE")){
            indicadores_normais_temporal.add(nome);
          }else{
            indicadores_normais.add(nome);
          }
       }
-    }
-    
+    } 
   }
-  
-  //lista_indicadores();
 }
 
 void lista_indicadores(){
-  font = createFont("Georgia",14);
+  font = createFont("Times New Roman",14);
   textFont(font);
   fill(0);
-  text("Indicadores", 945,90);
+  text("Indicadores normais", 1010,80);
+  text("Indicadores normais ao longo do tempo", 960,460);
+  font = createFont("Times New Roman",12);
+  textFont(font);
   String nome;
   String[] temp;
   
   for(int i = 0; i < indicadores_normais.size(); i++){
     nome = indicadores_normais.get(i).toString();
-    if(!(indicadores_normais.get(i).toString()).contains("SERIE")){
-      temp = split(nome, "_");
-      text(getNomeIndicador(Integer.parseInt(temp[2])), 880,120 + (i*22));
-    }
+    temp = split(nome, "_");
+    text(getNomeIndicador(Integer.parseInt(temp[2])), 880,105 + (i*20));
   }
   
-  //println(indicadores_normais_temporal);
-//  for(int i = 0; i < indicadores_normais_temporal.size(); i++){
-  //  nome = indicadores_normais_temporal.get(i).toString();
-  //    temp = split(nome, "_");
-  //    text(getNomeIndicador(Integer.parseInt(temp[2])), 880,120 + (i*22));
- // }
+  noStroke();
+  fill(3,55,255);//estado
+  rect(870,390,12,12);
+  fill(255,5,26);//mesorregiao
+  rect(940,390,12,12);
+  fill(72,232,5);//microregiao
+  rect(1040,390,12,12);
+  fill(0);
+  font = createFont("Times New Roman",12);
+  textFont(font);
+  text("Paraíba",885,400);
+  text("Mesorregião",955,400);
+  text("Microrregião",1055,400);
 }
 
 void plot_indicadores(){
-  float imgPos = hs1.getPos() - width/2;
-  float imgPos2 = hs2.getPos() - width/2;
-  String nome;
+  font = createFont("Times New Roman",14);
+  textFont(font);
+  fill(0);
+  text("Indicadores que merecem atenção", 300,90);
+  imgPos = hs1.getPos() - width/2;
 
-  for(int i = 0; i < indicadores_merecem_atencao.size(); i++){
-    if(!(indicadores_merecem_atencao.get(i).toString()).contains("SERIE")){
-      indicador = loadImage("C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\graphs\\" + indicadores_merecem_atencao.get(i));
-      image(indicador,((i*400) - imgPos*1.5) - 770, 130);
-    }
-  }
   
   for(int i = 0; i < indicadores_merecem_atencao.size(); i++){
-    if((indicadores_merecem_atencao.get(i).toString()).contains("SERIE")){
-      indicador = loadImage("C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\graphs\\" + indicadores_merecem_atencao.get(i));
-      image(indicador, ((i*400) - imgPos2*1.5) - 2400, 580);      
-
-    }
-    
+      indicador = loadImage("/home/iara/processing-2.0b3/sketchbook/SPRINT2/graphs/" + indicadores_merecem_atencao.get(i));
+      image(indicador,((i*400) - imgPos*1.5) - 920, 100);
+      g.removeCache(indicador);
   }
 }
+
+void lista_indicadores_temporal(){
+  textFont(createFont("Times New Roman",12));
+  fill(0);
+  String nome;
+  String[] temp;
+  
+  for(int i = 0; i < indicadores_normais_temporal.size(); i++){
+    nome = indicadores_normais_temporal.get(i).toString();
+      temp = split(nome, "_");
+      text(getNomeIndicador(Integer.parseInt(temp[3])), 880,482 + (i*20));
+  }
+  //adicionar legenda dos graficos de henrique
+}
+
+void plot_indicadores_temporal(){
+  textFont(createFont("Times New Roman",14));
+  fill(0);
+  text("Indicadores que merecem atenção ao longo do tempo", 250,465);
+  imgPos2 = hs2.getPos() - width/2;
+
+  for(int i = 0; i < indicadores_merecem_atencao_temporal.size(); i++){
+      indicador = loadImage("/home/iara/processing-2.0b3/sketchbook/SPRINT2/graphs/" + indicadores_merecem_atencao_temporal.get(i));
+      image(indicador, ((i * 400) - imgPos2*1.5) - 920, 470);   
+      g.removeCache(indicador);   
+  }
+}
+
+void update_indicadores_temporal(){
+  if(plot_indicador_temporal && id_indicador_temporal < indicadores_normais_temporal.size()){
+       update_layout_temporal = true;
+       indicador = loadImage("/home/iara/processing-2.0b3/sketchbook/SPRINT2/graphs/" + indicadores_normais_temporal.get(id_indicador_temporal));
+       image(indicador,250,455);
+       g.removeCache(indicador);
+       image(voltar, 1250,725);
+  }else if(!plot_indicador_temporal){
+    if(indicadores_merecem_atencao_temporal.size()>0){
+      plot_indicadores_temporal();
+      update_grid2();
+      lista_indicadores_temporal();
+      hs2.update();
+      hs2.display();
+    }else{
+      if(nome_cidade!=null){
+        lista_indicadores_temporal();
+        fill(0);
+        font = createFont("Times New Roman",14);
+        textFont(font);
+        text("Indicadores que merecem atenção ao longo do tempo", 200,450);
+        text("A cidade " + nome_cidade + " não possui indicadores que merecem atenção ao longo do tempo", 120,600);
+        line(860, 60,860, 403);
+      }
+    }
+  }
+}
+
+
+void update_grid2(){
+  noStroke();
+  fill(255);
+  rect(0,60,40,800);
+  rect(862,430,800,800);
+  stroke(230);
+  strokeWeight(4);
+  noFill();
+  rect(40,56,1310,350);
+  rect(40,430,1310,350);
+  fill(230);
+  line(860, 60,860, 403);
+  line(860, 430,860, 777);
+}
+
 
 void setDropDown(){
  cp5 = new ControlP5(this);
@@ -506,16 +543,14 @@ void setDropDown(){
   droplist.addItem("Zabelê", 223);
     
 }
-
- 
   
 void geraIndicadoresOutlier(String cidade) {
   try{  
 
     //String path = "\"C:\\Program Files\\R\\R-2.15.0\\bin\\Rscript.exe\" " + "C:\\Users\\Rodolfo\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\mainScreen\\mainScreen\\cria_imagens.R" + " " + cidade;
-    //String path = "/usr/bin/Rscript " + "/home/isa/sketchbook/us6/cria_imagens.R" + " " + cidade;
-    //System.setProperty("user.dir", "/home/isa/sketchbook/us6");
-    String path = "\"C:\\Program Files\\R\\R-3.0.0\\bin\\x64\\Rscript.exe\" " + "C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\cria_imagens.R" + " " + cidade;
+    String path = "/usr/bin/Rscript " + "/home/iara/processing-2.0b3/sketchbook/SPRINT2/cria_imagens.R" + " " + cidade;
+    System.setProperty("user.dir", "/home/iara/processing-2.0b3/sketchbook/SPRINT2");
+    //String path = "\"C:\\Program Files\\R\\R-3.0.0\\bin\\x64\\Rscript.exe\" " + "C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\cria_imagens.R" + " " + cidade;
     
     println(path);
     println(new File(".").getAbsolutePath());
@@ -531,7 +566,9 @@ void geraIndicadoresOutlier(String cidade) {
 void geraIndicadoresTempo(String cidade) {
   try {
     
-    String path2 = "\"C:\\Program Files\\R\\R-3.0.0\\bin\\x64\\Rscript.exe\" " + "C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\gera_imagens_series_temporais(US-7).R" + " " + cidade; 
+   // String path2 = "\"C:\\Program Files\\R\\R-3.0.0\\bin\\x64\\Rscript.exe\" " + "C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\gera_imagens_series_temporais(US-7).R" + " " + cidade; 
+    String path2 = "/usr/bin/Rscript " + "/home/iara/processing-2.0b3/sketchbook/SPRINT2/gera_imagens_series_temporais(US-7).R" + " " + cidade;
+    System.setProperty("user.dir", "/home/iara/processing-2.0b3/sketchbook/SPRINT2");
     println(path2);
     println(new File(".").getAbsolutePath());
     Runtime r2 = Runtime.getRuntime();
@@ -568,13 +605,14 @@ private boolean existeArquivoDaCidade(String cidade){
   
   String nome;
   
-  File folder = new File(dataPath("C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\graphs\\"));
+ // File folder = new File(dataPath("C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\graphs\\"));
+ 
+ File folder = new File(dataPath("/home/iara/processing-2.0b3/sketchbook/SPRINT2/graphs"));
   File[] indicadores = folder.listFiles(); 
   String[] temp;
   
   for(int i = 0; i < indicadores.length; i++){
     nome = indicadores[i].getName();
-    println(nome); 
     temp = split(nome, "_");
     if(cidade.equals(temp[0])){
       println("Já existe arquivo!");
@@ -623,3 +661,115 @@ public String getNomeIndicador(int indicador){
   }
 
 } 
+
+
+boolean overRect(int x, int y, int width, int height) {
+  if (mouseX >= x && mouseX <= x+width && 
+      mouseY >= y && mouseY <= y+height) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+void mousePressed() {
+  loop();
+  
+  if (overRect(870,90,250,20)) {
+      plot_indicador = true;
+      id_indicador = 0;
+  }else if (overRect(870,110,250,20)){
+      plot_indicador = true;
+      id_indicador = 1;
+  }else if (overRect(870,130,250,20)){
+      plot_indicador = true;
+      id_indicador = 2;
+  }else if (overRect(870,150,250,20)){
+      plot_indicador = true;
+      id_indicador = 3;
+  }else if (overRect(870,170,300,20)){
+      plot_indicador = true;
+      id_indicador = 4;
+  }else if (overRect(870,190,250,20)){
+      plot_indicador = true;
+      id_indicador = 5;
+  }else if (overRect(870,210,250,20)){
+      plot_indicador = true;
+      id_indicador = 6;
+  }else if (overRect(870,230,250,20)){
+      plot_indicador = true;
+      id_indicador = 7;
+  }else if (overRect(870,250,250,20)){
+      plot_indicador = true;
+      id_indicador = 8;
+  }else if (overRect(870,270,250,20)){
+      plot_indicador = true;
+      id_indicador = 9;
+  }else if (overRect(870,290,250,20)){
+      plot_indicador = true;
+      id_indicador = 10;
+  }else if (overRect(870,310,250,20)){
+      plot_indicador = true;
+      id_indicador = 11;
+  }else if (overRect(870,330,250,20)){
+      plot_indicador = true;
+      id_indicador = 12;
+  }else if (overRect(870,350,250,20)){
+      plot_indicador = true;
+      id_indicador = 13;
+  }else if (overRect(870,370,250,20)){
+      plot_indicador = true;
+      id_indicador = 14;
+  }else if(overRect(875,468,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 0;
+  }else if(overRect(875,488,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 1;
+  }else if(overRect(875,508,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 2;
+  }else if(overRect(875,528,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 3;
+  }else if(overRect(875,548,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 4;
+  }else if(overRect(875,568,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 5;
+  }else if(overRect(875,588,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 6;
+  }else if(overRect(875,608,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 7;
+  }else if(overRect(875,628,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 8;
+  }else if(overRect(875,648,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 9;
+  }else if(overRect(875,668,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 10;
+  }else if(overRect(875,688,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 11;
+  }else if(overRect(875,708,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 12;
+  }else if(overRect(875,728,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 13;
+  }else if(overRect(875,748,250,20)){
+      plot_indicador_temporal = true;
+      id_indicador_temporal = 14;
+  }
+   if(overRect(1250,350,85,40)){
+    plot_indicador = false;
+   }
+   if(overRect(1250,725,80,35)){
+    plot_indicador_temporal = false;
+   }
+}
