@@ -13,8 +13,8 @@ options(stringsAsFactors = FALSE)
 
                     
 #leitura de arquivos - formato linux
-desvios = read.csv("/home/iara/processing-2.0b3/sketchbook/SPRINT2/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv",fileEncoding="latin1")
-regioes = read.csv("/home/iara/processing-2.0b3/sketchbook/SPRINT2/medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv",fileEncoding="latin1")
+desvios = read.csv("C:/Users/Henrique/Desktop/eduBrasil/eduBrasil/scripts/processing/SPRINT2/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv",fileEncoding="latin1")
+regioes = read.csv("C:/Users/Henrique/Desktop/eduBrasil/eduBrasil/scripts/processing/SPRINT2/medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv",fileEncoding="latin1")
 
 
 #codigo = "Cabedelo"
@@ -27,7 +27,7 @@ linha = desvios[desvios$NOME_MUNICIPIO==codigo & desvios$ANO==ano,]
 criaImagem = function(valor,indicador,codigo,dp){
 
 	#path = "C:/Users/Iara/Documents/GitHub/eduBrasil/eduBrasil/scripts/processing/SPRINT2/graphs/"
-	path = "/home/iara/processing-2.0b3/sketchbook/SPRINT2/graphs/"
+	path = "C:/Users/Henrique/Desktop/eduBrasil/eduBrasil/scripts/processing/SPRINT2/graphs/"
 
 	desv = dp
 

@@ -35,7 +35,7 @@ void setup(){
   indicadores_normais_temporal = new ArrayList();
   voltar = loadImage("voltar.png");
   
-  Path = "/home/iara/processing-2.0b3/sketchbook/SPRINT2/graphs/";
+  Path = "C:/Users/Henrique/Desktop/eduBrasil/eduBrasil/scripts/processing/SPRINT2/graphs/";
   folder = new File(dataPath(Path));
   indicadores = folder.listFiles(); 
   indicadores_normais = new ArrayList();
@@ -128,7 +128,7 @@ void update(){
 void update_indicadores(){
   if(plot_indicador && id_indicador < indicadores_normais.size()){
         update_layout = true;
-        indicador = loadImage("/home/iara/processing-2.0b3/sketchbook/SPRINT2/graphs/" + indicadores_normais.get(id_indicador));
+        indicador = loadImage("C:/Users/Henrique/Desktop/eduBrasil/eduBrasil/scripts/processing/SPRINT2/graphs/" + indicadores_normais.get(id_indicador));
         image(indicador,250,100);
         g.removeCache(indicador);
         image(voltar, 1250,350);
@@ -218,7 +218,7 @@ void plot_indicadores(){
 
   
   for(int i = 0; i < indicadores_merecem_atencao.size(); i++){
-      indicador = loadImage("/home/iara/processing-2.0b3/sketchbook/SPRINT2/graphs/" + indicadores_merecem_atencao.get(i));
+      indicador = loadImage("C:/Users/Henrique/Desktop/eduBrasil/eduBrasil/scripts/processing/SPRINT2/graphs/" + indicadores_merecem_atencao.get(i));
       image(indicador,((i*400) - imgPos*1.5) - 920, 100);
       g.removeCache(indicador);
   }
@@ -245,7 +245,7 @@ void plot_indicadores_temporal(){
   imgPos2 = hs2.getPos() - width/2;
 
   for(int i = 0; i < indicadores_merecem_atencao_temporal.size(); i++){
-      indicador = loadImage("/home/iara/processing-2.0b3/sketchbook/SPRINT2/graphs/" + indicadores_merecem_atencao_temporal.get(i));
+      indicador = loadImage("C:/Users/Henrique/Desktop/eduBrasil/eduBrasil/scripts/processing/SPRINT2/graphs/" + indicadores_merecem_atencao_temporal.get(i));
       image(indicador, ((i * 400) - imgPos2*1.5) - 920, 470);   
       g.removeCache(indicador);   
   }
@@ -254,7 +254,7 @@ void plot_indicadores_temporal(){
 void update_indicadores_temporal(){
   if(plot_indicador_temporal && id_indicador_temporal < indicadores_normais_temporal.size()){
        update_layout_temporal = true;
-       indicador = loadImage("/home/iara/processing-2.0b3/sketchbook/SPRINT2/graphs/" + indicadores_normais_temporal.get(id_indicador_temporal));
+       indicador = loadImage("C:/Users/Henrique/Desktop/eduBrasil/eduBrasil/scripts/processing/SPRINT2/graphs/" + indicadores_normais_temporal.get(id_indicador_temporal));
        image(indicador,250,455);
        g.removeCache(indicador);
        image(voltar, 1250,725);
@@ -548,8 +548,8 @@ void geraIndicadoresOutlier(String cidade) {
   try{  
 
     //String path = "\"C:\\Program Files\\R\\R-2.15.0\\bin\\Rscript.exe\" " + "C:\\Users\\Rodolfo\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\mainScreen\\mainScreen\\cria_imagens.R" + " " + cidade;
-    String path = "/usr/bin/Rscript " + "/home/iara/processing-2.0b3/sketchbook/SPRINT2/cria_imagens.R" + " " + cidade;
-    System.setProperty("user.dir", "/home/iara/processing-2.0b3/sketchbook/SPRINT2");
+    String path = "Rscript " + "C:/Users/Henrique/Desktop/eduBrasil/eduBrasil/scripts/processing/SPRINT2/cria_imagens.R" + " " + cidade;
+    System.setProperty("user.dir", "C:/Users/Henrique/Desktop/eduBrasil/eduBrasil/scripts/processing/SPRINT2/");
     //String path = "\"C:\\Program Files\\R\\R-3.0.0\\bin\\x64\\Rscript.exe\" " + "C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\cria_imagens.R" + " " + cidade;
     
     println(path);
@@ -567,8 +567,8 @@ void geraIndicadoresTempo(String cidade) {
   try {
     
    // String path2 = "\"C:\\Program Files\\R\\R-3.0.0\\bin\\x64\\Rscript.exe\" " + "C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\gera_imagens_series_temporais(US-7).R" + " " + cidade; 
-    String path2 = "/usr/bin/Rscript " + "/home/iara/processing-2.0b3/sketchbook/SPRINT2/gera_imagens_series_temporais(US-7).R" + " " + cidade;
-    System.setProperty("user.dir", "/home/iara/processing-2.0b3/sketchbook/SPRINT2");
+    String path2 = "Rscript " + "C:/Users/Henrique/Desktop/eduBrasil/eduBrasil/scripts/processing/SPRINT2/gera_imagens_series_temporais(US-7).R" + " " + cidade;
+    System.setProperty("user.dir", "C:/Users/Henrique/Desktop/eduBrasil/eduBrasil/scripts/processing/SPRINT2");
     println(path2);
     println(new File(".").getAbsolutePath());
     Runtime r2 = Runtime.getRuntime();
@@ -607,7 +607,7 @@ private boolean existeArquivoDaCidade(String cidade){
   
  // File folder = new File(dataPath("C:\\Users\\Iara\\Documents\\GitHub\\eduBrasil\\eduBrasil\\scripts\\processing\\SPRINT2\\graphs\\"));
  
- File folder = new File(dataPath("/home/iara/processing-2.0b3/sketchbook/SPRINT2/graphs"));
+ File folder = new File(dataPath("C:/Users/Henrique/Desktop/eduBrasil/eduBrasil/scripts/processing/SPRINT2/graphs/"));
   File[] indicadores = folder.listFiles(); 
   String[] temp;
   
