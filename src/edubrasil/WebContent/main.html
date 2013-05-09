@@ -1,35 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
+<title>D3 Page Template</title>
 
+<script type="text/javascript" src="javascript/d3.v3.js"></script>
+<script type="text/javascript" src="javascript/indicador.js"></script>
+<script type="text/javascript" src="javascript/series.js"></script>
 
+<link href="css/edubrasil_main.css" rel="stylesheet" type="text/css" />
 
 </head>
-<body>
+<body onload="plotIndicadores();plotSeries();">
 
-<table width="500" border="0">
-<tr>
-<td colspan="2" style="background-color:#FFA500;">
-<h1>Main Title of Web Page</h1>
-</td>
-</tr>
+	
+	<div id="container">
 
-<tr>
-<td style="background-color:#FFD700;width:100px;">
-<b>Menu</b><br>
-HTML<br>
-CSS<br>
-JavaScript
-</td>
-<td style="background-color:#eeeeee;height:200px;width:400px;">
-Content goes here</td>
-</tr>
+		<div id="tooltip" class="hidden">
+			<p>
+				<strong>Important Label Heading</strong>
+			</p>
+			<p>
+				<span id="value">100</span>%
+			</p>
+		</div>
 
-<tr>
-<td colspan="2" style="background-color:#FFA500;text-align:center;">
-Copyright © W3Schools.com</td>
-</tr>
-</table>
+		<div id="header" class="header">
+			<h1>Main Title of Web Page</h1>
+		</div>
+		<div id="menu" class="header menu">
+
+			<b>Bota o drop down aqui</b>
+		</div>
+
+		<div id="mainContent">
+
+			<div id="upper">
+				<div id="div_indicador"	style="height: 300px; width: 80%; float: left;"></div>
+				<div id="div_indicador_options"
+					style="background-color: #EEEEEE; height: 300px; width: 20%; float: right;">
+					
+					</div>
+			</div>
+
+			<div id="lower">
+				<div id="div_series"
+					style="background-color: #EEEEEE; height: 300px; width: 80%; float: left;"></div>
+				<div id="div_series_options"
+					style="background-color: #EEEEEE; height: 300px; width: 20%; float: right;">
+					Content goes here</div>
+			</div>
+
+			<div id="footer"
+				style="background-color: #FFA500; clear: both; text-align: center;">
+				Copyright Â© W3Schools.com</div>
+		</div>
+
+	</div>
+
 
 </body>
 </html>
