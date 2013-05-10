@@ -76,4 +76,14 @@ function plotSeries() {
 		});
 
 	};
+
+	var ind_names = ["a", "b"];
+
+	var div_buttons = d3.select("#div_series_options");
+
+	//fix me organizar botao com indicador
+	div_buttons.selectAll("button").data(ind_names).enter().append("button").attr("value","Sort!").text(ind_names + " sort!").on("click", function() {
+		sortBars();
+	});
 }
+

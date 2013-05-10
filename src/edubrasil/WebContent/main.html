@@ -13,7 +13,7 @@
 </head>
 <body onload="plotIndicadores();plotSeries();">
 
-	
+
 	<div id="container">
 
 		<div id="tooltip" class="hidden">
@@ -26,21 +26,30 @@
 		</div>
 
 		<div id="header" class="header">
-			<h1>Main Title of Web Page</h1>
+			<h1>EduBrasil</h1>
 		</div>
 		<div id="menu" class="header menu">
 
-			<b>Bota o drop down aqui</b>
+			<b>Selecione sua cidade: <select id="myList" onchange="cities()";>
+					<option></option>
+					<option>cidade1</option>
+					<option>cidade2</option>
+					<option>cidade3</option>
+					<option>cidade4</option>
+
+			</select>
+			</b>
 		</div>
 
 		<div id="mainContent">
 
 			<div id="upper">
-				<div id="div_indicador"	style="height: 300px; width: 80%; float: left;"></div>
+				<div id="div_indicador"
+					style="height: 300px; width: 80%; float: left;"></div>
 				<div id="div_indicador_options"
 					style="background-color: #EEEEEE; height: 300px; width: 20%; float: right;">
-					
-					</div>
+
+				</div>
 			</div>
 
 			<div id="lower">
@@ -48,12 +57,12 @@
 					style="background-color: #EEEEEE; height: 300px; width: 80%; float: left;"></div>
 				<div id="div_series_options"
 					style="background-color: #EEEEEE; height: 300px; width: 20%; float: right;">
-					Content goes here</div>
+				</div>
 			</div>
 
 			<div id="footer"
-				style="background-color: #FFA500; clear: both; text-align: center;">
-				Copyright © W3Schools.com</div>
+				style="background-color: #66CCCC; clear: both; text-align: center;">
+				Copyright © EduBrasil</div>
 		</div>
 
 	</div>

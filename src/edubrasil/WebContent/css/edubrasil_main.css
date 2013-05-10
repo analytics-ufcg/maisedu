@@ -6,10 +6,12 @@
 }
 
 .header {
-	background-color: #FFA500
+	background-color: #66CCCC;
+	text-align: center;
 }
 
 .menu {
+	text-align: left;
 	height: 30px
 }
 

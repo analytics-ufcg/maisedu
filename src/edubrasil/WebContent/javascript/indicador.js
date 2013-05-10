@@ -78,10 +78,11 @@ function plotIndicadores() {
 	};
 	
 	var ind_names = ["a", "b"];
-	
+
 	var div_buttons = d3.select("#div_indicador_options");
 	
-	div_buttons.selectAll("button").data(ind_names).enter().append("button").attr("value","Sort!").on("click", function() {
+	//fix me organizar botao com indicador
+	div_buttons.selectAll("button").data(ind_names).enter().append("button").text(ind_names).attr("value","Sort!").on("click", function() {
 		sortBars();
 	});
 
