@@ -3,11 +3,16 @@
 #container {
 	width: auto;
 	padding: 0 0;
+	text-align: center;
 }
 
 .header {
 	background-color: #66CCCC;
 	text-align: center;
+}
+
+.rightmenuup {
+	width: 300px;
 }
 
 .menu {

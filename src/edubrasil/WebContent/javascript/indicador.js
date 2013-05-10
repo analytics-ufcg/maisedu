@@ -94,14 +94,21 @@ function plotIndicadores(cidade) {
 		var div_buttons = d3.select("#div_indicador_options");
 		
 		
-		div_buttons.selectAll("input").data(ind_names).enter().append("input").attr("type","button").attr("class","button").attr("value", function (d){return d;});
-		
-		div_buttons.selectAll("input").style("color", "black");
-		div_buttons.selectAll("input").style("background-color", "red");
+		div_buttons.selectAll("input")
+		.data(ind_names)
+		.enter()
+		.append("input")
+		.attr("type","button")
+		.attr("class","button rightmenuup")
+		.attr("value", function (d){return d;})
+		.attr("id", function (d, i){return "indicador_button_" + i;})
+		.style("color", "black")
+		.style("background-color", "red");
 		
 		div_buttons.on("click", function() {
 			sortBars();
 		});
+		
 	}else{
 		d3.select("svg").remove();
 	}
