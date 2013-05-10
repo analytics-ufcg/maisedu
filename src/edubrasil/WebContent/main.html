@@ -11,7 +11,7 @@
 <link href="css/edubrasil_main.css" rel="stylesheet" type="text/css" />
 
 </head>
-<body onload="plotIndicadores();plotSeries();">
+<body onload="">
 
 
 	<div id="container">
@@ -30,7 +30,7 @@
 		</div>
 		<div id="menu" class="header menu">
 
-			<b>Selecione sua cidade: <select id="myList" onchange="cities()";>
+			<b>Selecione sua cidade: <select id="myList" onchange="getMenuOption(this)";>
 					<option></option>
 					  <option>Água Branca</option>
 					  <option>Aguiar</option>
@@ -274,9 +274,9 @@
 			<div id="lower">
 				<div id="div_series"
 					style="background-color: #EEEEEE; height: 300px; width: 80%; float: left;"></div>
-				<div id="div_series_options"
+				<!-- <div id="div_series_options"
 					style="background-color: #EEEEEE; height: 300px; width: 20%; float: right;">
-				</div>
+				</div>//-->
 			</div>
 
 			<div id="footer"
