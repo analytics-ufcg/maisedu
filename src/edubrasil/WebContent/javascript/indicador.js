@@ -1,10 +1,18 @@
 var dataset = [];
 var rawdata = [];
+var dicionario = [];
 
 function getMenuOption(sel) {
     var value = sel.options[sel.selectedIndex].value;
-	rawdata = dataset.filter(function(i){return i.NOME_MUNICIPIO == value;})
-	
+	rawdata = dataset.filter(function(i){return i.NOME_MUNICIPIO == value;})	
+	d3.selectAll(".rightmenuup")
+	.data(dicionario)
+	.transition().delay(function(d, i) {
+				return i * 50;
+			}).duration(1000)
+	.style("background-color", function(d) {
+		return getButtonColor(d.desvio);
+	});
 	
    // plotIndicadores("");
    // plotSeries(""); 
@@ -12,6 +20,7 @@ function getMenuOption(sel) {
    // plotIndicadores(value);   
     
 };
+
 
 var parseDate = d3.time.format("%Y").parse;	
 
@@ -24,14 +33,19 @@ function loadData() {
 			});
 			dataset = data;
 			
-			myList = d3.selectAll("#myList");
+			var myList = d3.selectAll("#myList");
 			myList.selectAll("option").data(dataset).enter().append("option")
 			.attr("value",function(d){return d.NOME_MUNICIPIO;})
 			.attr("label",function(d){return d.NOME_MUNICIPIO;})
-			
+		
 		});
-		d3.csv("data/dicionario.csv" , function (data){			
-			
+		loadUpButtons();
+};
+
+
+function loadUpButtons() {
+	d3.csv("data/dicionario.csv" , function (data){
+		dicionario = data;
 		var div_buttons = d3.select("#div_indicador_options");	
 		
 		div_buttons.selectAll("input")
@@ -43,12 +57,45 @@ function loadData() {
 		.attr("value", function (d){return d.name;})
 		.attr("id", function (d, i){return d.id;})
 		.style("color", "black")
-		.style("background-color", "red")
+		.style("background-color", "gray")
 		.on("click", function(d) {
 			plotIndicadores(d.id);
-		});			
-		});
-};
+		});	
+	});
+}
+
+function getRecentValueIndicadorDesvio(colunaDesvio) {
+	var maxYear = rawdata.filter(function(d){return d[colunaDesvio] != "NA";}).map(function(d){return parseInt(d.ANO)});
+	if (maxYear.length == 0) {
+		return "NA";
+	}
+	else {
+		maxYear = d3.max(maxYear);
+		var currentYearData = rawdata.filter(function(d){return d.ANO == maxYear;})[0];
+		return currentYearData[colunaDesvio];
+	}
+}
+
+
+function getButtonColor(colunaDesvio) {
+	valor = getRecentValueIndicadorDesvio(colunaDesvio);
+	if (valor == "NA" ) {
+		return "gray";
+	}
+	else if (parseFloat(valor) == -2) {
+		return "#F87431";
+	}
+	else if (parseFloat(valor) == -3) {
+		return "#F76541";
+	}
+	else if (parseFloat(valor) == -3) {
+		return "#FF0000";
+	}
+	else {
+		return "red";
+	}
+}
+
 
 function plotIndicadores(indicador) {
 // e se todos forem NAs?
@@ -63,7 +110,7 @@ function plotIndicadores(indicador) {
 		
 		var currentYearData = rawdata.filter(function(d){return d.ANO == maxYear;})[0];
 		
-		var subset = [10, currentYearData[indicador]];
+		var subset = [10, parseFloat(currentYearData[indicador])];
 		
 		var xScale = d3.scale.ordinal().domain(d3.range(subset.length))
 		.rangeRoundBands([ 0, w ], 0.05);
