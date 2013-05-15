@@ -2,8 +2,11 @@ var dataset = [];
 var rawdata = [];
 var dicionario = [];
 
-function getMenuOption(sel) {
-    var value = sel.options[sel.selectedIndex].value;
+
+//Recebe uma cidade e pinta os botoes
+function getMenuOption(selection) {
+    var value = selection.options[selection.selectedIndex].value;
+	plotSeries(value);
 	rawdata = dataset.filter(function(i){return i.NOME_MUNICIPIO == value;})	
 	d3.selectAll(".rightmenuup")
 	.data(dicionario)
@@ -22,10 +25,7 @@ function getMenuOption(sel) {
 };
 
 
-var parseDate = d3.time.format("%Y").parse;	
-
-
-
+//Carrega arquivo inicial e os botoes
 function loadData() {
 		d3.csv("data/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv" , function (data){
 			data.forEach(function(d){
@@ -40,9 +40,11 @@ function loadData() {
 		
 		});
 		loadUpButtons();
+		loadDownButtons();
 };
 
 
+//Carrega os botoes da parte de cima
 function loadUpButtons() {
 	d3.csv("data/dicionario.csv" , function (data){
 		dicionario = data;
@@ -64,7 +66,30 @@ function loadUpButtons() {
 	});
 }
 
-function getRecentValueIndicadorDesvio(colunaDesvio) {
+//Carrega os botoes da parte de cima
+function loadDownButtons() {
+	d3.csv("data/dicionario.csv" , function (data){
+		dicionario = data;
+		var div_buttons = d3.select("#div_series_options");	
+		
+		div_buttons.selectAll("input")
+		.data(data)
+		.enter()
+		.append("input")
+		.attr("type","button")
+		.attr("class","button rightmenudown")
+		.attr("value", function (d){return d.name;})
+		.attr("id", function (d, i){return d.id;})
+		.style("color", "black")
+		.style("background-color", "gray")
+		.on("click", function(d) {
+			plotIndicadores(d.id);
+		});	
+	});
+}
+
+//Pode retornar NA se não houver nenhum ano disponivel para o Indicador
+function getRecentValueIndicadorColuna(colunaDesvio) {
 	var maxYear = rawdata.filter(function(d){return d[colunaDesvio] != "NA";}).map(function(d){return parseInt(d.ANO)});
 	if (maxYear.length == 0) {
 		return "NA";
@@ -77,26 +102,31 @@ function getRecentValueIndicadorDesvio(colunaDesvio) {
 }
 
 
+//Retorna a cor do Botao
 function getButtonColor(colunaDesvio) {
-	valor = getRecentValueIndicadorDesvio(colunaDesvio);
+	valor = getRecentValueIndicadorColuna(colunaDesvio);
 	if (valor == "NA" ) {
 		return "gray";
 	}
 	else if (parseFloat(valor) == -2) {
-		return "#F87431";
+		return "#FFCC00";
 	}
 	else if (parseFloat(valor) == -3) {
-		return "#F76541";
+		return "#FF6600";
 	}
-	else if (parseFloat(valor) == -3) {
+	else if (parseFloat(valor) <= -4) {
 		return "#FF0000";
 	}
+	else if (parseFloat(valor) >= 3) {
+		return "green";
+	}
 	else {
-		return "red";
+		return "";
 	}
 }
 
 
+//Plota grafico
 function plotIndicadores(indicador) {
 // e se todos forem NAs?
 // 
