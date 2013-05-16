@@ -26,23 +26,36 @@ function getMenuOption(selection) {
 };
 
 
+Array.prototype.unique = function() {
+    var o = {}, i, l = this.length, r = [];
+    for(i=0; i<l;i+=1) o[this[i]] = this[i];
+    for(i in o) r.push(o[i]);
+    return r;
+};
+
+
+
 //Carrega arquivo inicial e os botoes
 function loadData() {
 		d3.csv("data/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv" , function (data){
-			data.forEach(function(d){
-				//d.ANO = parseDate(d.ANO);
-			});
+			
 			dataset = data;
 			
+			var cities = data.map(function(d){return d.NOME_MUNICIPIO;}).unique();
+				
+			
 			var myList = d3.selectAll("#myList");
-			myList.selectAll("option").data(dataset).enter().append("option")
-			.attr("value",function(d){return d.NOME_MUNICIPIO;})
-			.attr("label",function(d){return d.NOME_MUNICIPIO;})
+			myList.selectAll("option").data(cities).enter().append("option")
+			.attr("value",function(d){return d;})
+			.attr("label",function(d){return d;})
 		
 		});
 		loadUpButtons();
 		loadDownButtons();
 };
+
+
+
 
 
 //Carrega os botoes da parte de cima
