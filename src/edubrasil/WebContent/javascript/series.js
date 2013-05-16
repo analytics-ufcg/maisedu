@@ -35,11 +35,11 @@ function plotSeries(cidade,indicador) {
 		d3.csv("data/medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv" , function (data){
 			data.forEach(function(d){
 				d.ANO = parseDate(d.ANO);
-				if((d.REGIAO == "Para�ba" | d.REGIAO == micro | d.REGIAO == meso) & d[indicador] != "NA"){
+				if((d.REGIAO == "Paraíba" | d.REGIAO == micro | d.REGIAO == meso) & d[indicador] != "NA"){
 					val_y.push(d[indicador]);
 				}
 			});
-			dados_estado = data.filter(function(i){return i.REGIAO == "Para�ba" & i[indicador] != "NA";});
+			dados_estado = data.filter(function(i){return i.REGIAO == "Paraíba" & i[indicador] != "NA";});
 			dados_micro = data.filter(function(i){return i.REGIAO == micro & i[indicador] != "NA";});
 			dados_meso = data.filter(function(i){return i.REGIAO == meso & i[indicador] != "NA";});//
 

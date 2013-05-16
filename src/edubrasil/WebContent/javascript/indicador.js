@@ -37,21 +37,27 @@ Array.prototype.unique = function() {
 
 //Carrega arquivo inicial e os botoes
 function loadData() {
-		d3.csv("data/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv" , function (data){
-			
-			dataset = data;
-			
-			var cities = data.map(function(d){return d.NOME_MUNICIPIO;}).unique();
-				
-			
-			var myList = d3.selectAll("#myList");
-			myList.selectAll("option").data(cities).enter().append("option")
-			.attr("value",function(d){return d;})
-			.attr("label",function(d){return d;})
+	d3.csv("data/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv" , function (data){
 		
-		});
-		loadUpButtons();
-		loadDownButtons();
+		dataset = data;
+		
+		//compara unicode characters
+		function sortComparer(a,b){
+			return a.localeCompare(b);
+		};
+		
+		var cities = data.map(function(d){return d.NOME_MUNICIPIO;}).unique().sort(sortComparer);
+		//adiciona um vazio dentro do array
+		cities.unshift("");
+		
+		var myList = d3.selectAll("#myList");
+		
+		myList.selectAll("option").data(cities).enter().append("option")
+		.attr("value",function(d){return d;})
+		.attr("label",function(d){return d;});
+	
+	});
+	loadUpButtons();
 };
 
 
@@ -76,31 +82,11 @@ function loadUpButtons() {
 		.style("background-color", "gray")
 		.on("click", function(d) {
 			plotIndicadores(d.id);
-		});	
-	});
-}
-
-//Carrega os botoes da parte de cima
-function loadDownButtons() {
-	d3.csv("data/dicionario.csv" , function (data){
-		dicionario = data;
-		var div_buttons = d3.select("#div_series_options");	
-		
-		div_buttons.selectAll("input")
-		.data(data)
-		.enter()
-		.append("input")
-		.attr("type","button")
-		.attr("class","button rightmenudown")
-		.attr("value", function (d){return d.name;})
-		.attr("id", function (d, i){return d.id;})
-		.style("color", "black")
-		.style("background-color", "gray")
-		.on("click", function(d) {
 			plotSeries(cidade,d.id);
 		});	
 	});
 }
+
 
 //Pode retornar NA se não houver nenhum ano disponivel para o Indicador
 function getRecentValueIndicadorColuna(colunaDesvio) {
@@ -135,7 +121,7 @@ function getButtonColor(colunaDesvio) {
 		return "green";
 	}
 	else {
-		return "";
+		return "#E0E0E0";
 	}
 }
 
