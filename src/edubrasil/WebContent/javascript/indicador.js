@@ -1,13 +1,14 @@
 var dataset = [];
 var rawdata = [];
 var dicionario = [];
+var cidade = "";
 
 
 //Recebe uma cidade e pinta os botoes
 function getMenuOption(selection) {
-    var value = selection.options[selection.selectedIndex].value;
-	plotSeries(value);
-	rawdata = dataset.filter(function(i){return i.NOME_MUNICIPIO == value;})	
+    cidade = selection.options[selection.selectedIndex].value;
+	plotSeries(cidade);
+	rawdata = dataset.filter(function(i){return i.NOME_MUNICIPIO == cidade;})	
 	d3.selectAll(".rightmenuup")
 	.data(dicionario)
 	.transition().delay(function(d, i) {
@@ -83,7 +84,7 @@ function loadDownButtons() {
 		.style("color", "black")
 		.style("background-color", "gray")
 		.on("click", function(d) {
-			plotIndicadores(d.id);
+			plotSeries(cidade,d.id);
 		});	
 	});
 }

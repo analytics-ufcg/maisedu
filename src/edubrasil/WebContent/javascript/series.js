@@ -5,8 +5,6 @@ var dados_cidade = [];
 var dados_estado = [];
 var dados_micro = [];
 var dados_meso = [];
-var cidade = 'Água Branca';
-var indicador = "INDICADOR_62";
 var val_y;
 var micro = "";
 var meso = "";
@@ -18,38 +16,43 @@ var meso = "";
 
 var parseDate = d3.time.format("%Y").parse;	
 
-function plotSeries(value) {
+function plotSeries(cidade,indicador) {
+
+	if((cidade != "") && (indicador != null)){
 		val_y = new Array();
-		cidade = value;
 			d3.csv("data/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv" , function (data){
 			data.forEach(function(d){
 				d.ANO = parseDate(d.ANO);
-				if(d.NOME_MUNICIPIO == cidade & d.INDICADOR_62 != "NA"){
-					val_y.push(d.INDICADOR_62);
+				if(d.NOME_MUNICIPIO == cidade & d[indicador] != "NA"){
+					d[indicador] = parseFloat(d[indicador]);
+					val_y.push(d[indicador]);
+					
 					meso = d.NOME_MESO;
 					micro = d.NOME_MICRO;
 				}
 			});
-			dados_cidade = data.filter(function(i){return i.NOME_MUNICIPIO == cidade & i.INDICADOR_62 != "NA";});
-			
+			dados_cidade = data.filter(function(i){return i.NOME_MUNICIPIO == cidade & i[indicador] != "NA";});
+			console.log('2');
 		});
 		
 		d3.csv("data/medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv" , function (data){
 			data.forEach(function(d){
 				d.ANO = parseDate(d.ANO);
-				if((d.REGIAO == "Para�ba" | d.REGIAO == micro | d.REGIAO == meso) & d.INDICADOR_62 != "NA"){
-					val_y.push(d.INDICADOR_62);
+				if((d.REGIAO == "Para�ba" | d.REGIAO == micro | d.REGIAO == meso) & d[indicador] != "NA"){
+					val_y.push(d[indicador]);
 				}
 			});
-			dados_estado = data.filter(function(i){return i.REGIAO == "Para�ba" & i.INDICADOR_62 != "NA";});
-			dados_micro = data.filter(function(i){return i.REGIAO == micro & i.INDICADOR_62 != "NA";});
-			dados_meso = data.filter(function(i){return i.REGIAO == meso & i.INDICADOR_62 != "NA";});//
+			dados_estado = data.filter(function(i){return i.REGIAO == "Para�ba" & i[indicador] != "NA";});
+			dados_micro = data.filter(function(i){return i.REGIAO == micro & i[indicador] != "NA";});
+			dados_meso = data.filter(function(i){return i.REGIAO == meso & i[indicador] != "NA";});//
 
-			plotGraph();
+			plotGraph(indicador);
 		});
+		console.log(indicador);
+	};
 };
 
-function plotGraph(){//(nome_indicador){
+function plotGraph(indicador){//(nome_indicador){
 
 	if(dados_cidade.length != 0){
 		var margin = {top: 30, right: 120, bottom: 40, left: 60},
@@ -77,7 +80,7 @@ function plotGraph(){//(nome_indicador){
 			var xAxis = d3.svg.axis()
 				.scale(x)
 				.orient("bottom")
-				.ticks(rawdata.length);
+				.ticks(dados_cidade.length);
 				
 			var yAxis = d3.svg.axis()
 				.scale(y)
@@ -85,11 +88,11 @@ function plotGraph(){//(nome_indicador){
 
 			var line = d3.svg.line()
 				.x(function(d) { return x(d.ANO); })
-				.y(function(d) { return y(d.INDICADOR_62); });
-				
+				.y(function(d) { 
+					console.log(d[indicador]);
+					return y(parseFloat(d[indicador]));
+				});
 
-
-			
 			x.domain(d3.extent(dados_cidade, function(d) { return d.ANO; }));
 			y.domain([d3.min(val_y),d3.max(val_y)]);
 			
@@ -105,8 +108,7 @@ function plotGraph(){//(nome_indicador){
 			  .attr("transform", "rotate(-90)")
 			  .attr("y", 5)
 			  .attr("dy", ".71em")
-			  .style("text-anchor", "end")
-			  .text("Valor Indicador 62");
+			  .style("text-anchor", "end");
 
 			//plotando as linhas  
 			svg.append("path")
@@ -139,7 +141,7 @@ function plotGraph(){//(nome_indicador){
 				.enter().append("circle")
 				.style('fill', "blue")
 				.attr('cx', function(d) { return x(d.ANO) })
-				.attr('cy', function(d) { return y(d.INDICADOR_62) })
+				.attr('cy', function(d) { return y(d[indicador]) })
 				.attr('r', 4);
 			
 			svg.selectAll('.dot')
@@ -148,7 +150,7 @@ function plotGraph(){//(nome_indicador){
 				.enter().append("circle")
 				.style('fill', "red")
 				.attr('cx', function(d) { return x(d.ANO) })
-				.attr('cy', function(d) { return y(d.INDICADOR_62) })
+				.attr('cy', function(d) { return y(d[indicador]) })
 				.attr('r', 4);
 			
 			svg.selectAll('.dot')
@@ -157,7 +159,7 @@ function plotGraph(){//(nome_indicador){
 				.enter().append("circle")
 				.style('fill', "orange")
 				.attr('cx', function(d) { return x(d.ANO) })
-				.attr('cy', function(d) { return y(d.INDICADOR_62) })
+				.attr('cy', function(d) { return y(d[indicador]) })
 				.attr('r', 4);		
 			
 			svg.selectAll('.dot')
@@ -166,7 +168,7 @@ function plotGraph(){//(nome_indicador){
 				.enter().append("circle")
 				.style('fill', "green")
 				.attr('cx', function(d) { return x(d.ANO) })
-				.attr('cy', function(d) { return y(d.INDICADOR_62) })
+				.attr('cy', function(d) { return y(d[indicador]) })
 				.attr('r', 4);	
 		
 			//legenda do grafico
