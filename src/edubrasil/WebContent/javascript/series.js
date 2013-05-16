@@ -24,15 +24,12 @@ function plotSeries(cidade,indicador) {
 			data.forEach(function(d){
 				d.ANO = parseDate(d.ANO);
 				if(d.NOME_MUNICIPIO == cidade & d[indicador] != "NA"){
-					d[indicador] = parseFloat(d[indicador]);
 					val_y.push(d[indicador]);
-					
 					meso = d.NOME_MESO;
 					micro = d.NOME_MICRO;
 				}
 			});
 			dados_cidade = data.filter(function(i){return i.NOME_MUNICIPIO == cidade & i[indicador] != "NA";});
-			console.log('2');
 		});
 		
 		d3.csv("data/medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv" , function (data){
@@ -48,7 +45,6 @@ function plotSeries(cidade,indicador) {
 
 			plotGraph(indicador);
 		});
-		console.log(indicador);
 	};
 };
 
@@ -56,165 +52,163 @@ function plotGraph(indicador){//(nome_indicador){
 
 	if(dados_cidade.length != 0){
 		var margin = {top: 30, right: 120, bottom: 40, left: 60},
-			width = 600 - margin.left - margin.right,
-			height = 300 - margin.top - margin.bottom;
+			width = 800 - margin.left - margin.right,
+			height = 400 - margin.top - margin.bottom;
 		
 		var svg = d3.select("#div_series").select("svg");
-		
-		
-		if (svg[0][0] == null){
-		
-			svg = d3.select("#div_series").append("svg")
-				.attr("width", width + margin.left + margin.right)
-				.attr("height", height + margin.top + margin.bottom)
-				.append("g")
-				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-			
-			
-			var x = d3.time.scale()
-				.range([0, width]);
 
-			var y = d3.scale.linear()
-				.range([height, 0]);
-
-			var xAxis = d3.svg.axis()
-				.scale(x)
-				.orient("bottom")
-				.ticks(dados_cidade.length);
-				
-			var yAxis = d3.svg.axis()
-				.scale(y)
-				.orient("left");
-
-			var line = d3.svg.line()
-				.x(function(d) { return x(d.ANO); })
-				.y(function(d) { 
-					console.log(d[indicador]);
-					return y(parseFloat(d[indicador]));
-				});
-
-			x.domain(d3.extent(dados_cidade, function(d) { return d.ANO; }));
-			y.domain([d3.min(val_y),d3.max(val_y)]);
-			
-			svg.append("g")
-			  .attr("class", "x axis")
-			  .attr("transform", "translate(0," + height + ")")
-			  .call(xAxis);
-
-			svg.append("g")
-			  .attr("class", "y axis")
-			  .call(yAxis)
-			  .append("text")
-			  .attr("transform", "rotate(-90)")
-			  .attr("y", 5)
-			  .attr("dy", ".71em")
-			  .style("text-anchor", "end");
-
-			//plotando as linhas  
-			svg.append("path")
-			  .datum(dados_cidade) //municipio
-			  .attr("class", "line")
-			  .attr("d", line);
-			  
-			svg.append("path")
-			  .datum(dados_estado) //estado
-			  .attr("class", "line")
-			  .attr("d", line)
-			  .style("stroke","red");
-			
-			svg.append("path")
-			  .datum(dados_micro) //microrregiao
-			  .attr("class", "line")
-			  .attr("d", line)
-			  .style("stroke","orange");
-			  
-			svg.append("path")
-			  .datum(dados_meso) //mesorregiao
-			  .attr("class", "line")
-			  .attr("d", line)
-			  .style("stroke","green");
-			
-			//plotando os pontos
-			svg.selectAll('.dot')
-				.data(dados_cidade)//municipio
-				.attr('class', 'data-point')
-				.enter().append("circle")
-				.style('fill', "blue")
-				.attr('cx', function(d) { return x(d.ANO) })
-				.attr('cy', function(d) { return y(d[indicador]) })
-				.attr('r', 4);
-			
-			svg.selectAll('.dot')
-				.data(dados_estado)//estado
-				.attr('class', 'data-point')
-				.enter().append("circle")
-				.style('fill', "red")
-				.attr('cx', function(d) { return x(d.ANO) })
-				.attr('cy', function(d) { return y(d[indicador]) })
-				.attr('r', 4);
-			
-			svg.selectAll('.dot')
-				.data(dados_micro)//micro
-				.attr('class', 'data-point')
-				.enter().append("circle")
-				.style('fill', "orange")
-				.attr('cx', function(d) { return x(d.ANO) })
-				.attr('cy', function(d) { return y(d[indicador]) })
-				.attr('r', 4);		
-			
-			svg.selectAll('.dot')
-				.data(dados_meso)//meso
-				.attr('class', 'data-point')
-				.enter().append("circle")
-				.style('fill', "green")
-				.attr('cx', function(d) { return x(d.ANO) })
-				.attr('cy', function(d) { return y(d[indicador]) })
-				.attr('r', 4);	
-		
-			//legenda do grafico
-			
-			svg.append("circle")
-				.style("fill", "red")
-				.attr("r", 4)
-				.attr("cx", 445)
-				.attr("cy", 235);
-				
-			svg.append("circle")
-				.style("fill", "blue")
-				.attr("r", 4)
-				.attr("cx", 445)
-				.attr("cy", 220);
-			
-			svg.append("circle")
-				.style("fill", "orange")
-				.attr("r", 4)
-				.attr("cx", 445)
-				.attr("cy", 250);
-				
-			svg.append("circle")
-				.style("fill", "green")
-				.attr("r", 4)
-				.attr("cx", 445)
-				.attr("cy", 265);
-			
-			svg.append("text")
-				.attr("x", 450)
-				.attr("y", 222)
-				.text(cidade);
-			svg.append("text")
-				.attr("x", 450)
-				.attr("y", 238)
-				.text("Paraíba");
-			svg.append("text")
-				.attr("x", 450)
-				.attr("y", 252)
-				.text(micro);
-			svg.append("text")
-				.attr("x", 450)
-				.attr("y", 268)
-				.text(meso);
-		
+		if (svg[0][0] != null){
+			svg.style("hidden","none")
+				.transition();
+			svg.remove();
 		}
+		
+		svg = d3.select("#div_series").append("svg")
+			.attr("width", width + margin.left + margin.right)
+			.attr("height", height + margin.top + margin.bottom)
+			.append("g")
+			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+		
+		
+		var x = d3.time.scale()
+			.range([0, width]);
+
+		var y = d3.scale.linear()
+			.range([height, 0]);
+
+		var xAxis = d3.svg.axis()
+			.scale(x)
+			.orient("bottom")
+			.ticks(6);
+			
+		var yAxis = d3.svg.axis()
+			.scale(y)
+			.orient("left");
+
+		var line = d3.svg.line()
+			.x(function(d) { return x(d.ANO); })
+			.y(function(d) { return y(parseFloat(d[indicador]));});
+
+		x.domain(d3.extent(dados_estado, function(d) { return d.ANO; }));
+		y.domain([d3.min(val_y),d3.max(val_y)]);
+		
+		svg.append("g")
+		  .attr("class", "x axis")
+		  .attr("transform", "translate(0," + height + ")")
+		  .call(xAxis);
+
+		svg.append("g")
+		  .attr("class", "y axis")
+		  .call(yAxis)
+		  .append("text")
+		  .attr("transform", "rotate(-90)")
+		  .attr("y", 7)
+		  .attr("dy", ".90em")
+		  .style("text-anchor", "end");
+
+		//plotando as linhas  
+		svg.append("path")
+		  .datum(dados_cidade) //municipio
+		  .attr("class", "line")
+		  .attr("d", line);
+		  
+		svg.append("path")
+		  .datum(dados_estado) //estado
+		  .attr("class", "line")
+		  .attr("d", line)
+		  .style("stroke","red");
+		
+		svg.append("path")
+		  .datum(dados_micro) //microrregiao
+		  .attr("class", "line")
+		  .attr("d", line)
+		  .style("stroke","orange");
+		  
+		svg.append("path")
+		  .datum(dados_meso) //mesorregiao
+		  .attr("class", "line")
+		  .attr("d", line)
+		  .style("stroke","green");
+		
+		//plotando os pontos
+		svg.selectAll('.dot')
+			.data(dados_cidade)//municipio
+			.attr('class', 'data-point')
+			.enter().append("circle")
+			.style('fill', "blue")
+			.attr('cx', function(d) { return x(d.ANO) })
+			.attr('cy', function(d) { return y(d[indicador]) })
+			.attr('r', 4);
+		
+		svg.selectAll('.dot')
+			.data(dados_estado)//estado
+			.attr('class', 'data-point')
+			.enter().append("circle")
+			.style('fill', "red")
+			.attr('cx', function(d) { return x(d.ANO) })
+			.attr('cy', function(d) { return y(d[indicador]) })
+			.attr('r', 4);
+		
+		svg.selectAll('.dot')
+			.data(dados_micro)//micro
+			.attr('class', 'data-point')
+			.enter().append("circle")
+			.style('fill', "orange")
+			.attr('cx', function(d) { return x(d.ANO) })
+			.attr('cy', function(d) { return y(d[indicador]) })
+			.attr('r', 4);		
+		
+		svg.selectAll('.dot')
+			.data(dados_meso)//meso
+			.attr('class', 'data-point')
+			.enter().append("circle")
+			.style('fill', "green")
+			.attr('cx', function(d) { return x(d.ANO) })
+			.attr('cy', function(d) { return y(d[indicador]) })
+			.attr('r', 4);	
+	
+		//legenda do grafico
+		
+		svg.append("circle")
+			.style("fill", "blue")
+			.attr("r", 4)
+			.attr("cx", 645)
+			.attr("cy", 300);
+		
+		svg.append("circle")
+			.style("fill", "red")
+			.attr("r", 4)
+			.attr("cx", 645)
+			.attr("cy", 315);
+			
+		svg.append("circle")
+			.style("fill", "orange")
+			.attr("r", 4)
+			.attr("cx", 645)
+			.attr("cy", 330);
+			
+		svg.append("circle")
+			.style("fill", "green")
+			.attr("r", 4)
+			.attr("cx", 645)
+			.attr("cy", 345);
+		
+		svg.append("text")
+			.attr("x", 650)
+			.attr("y", 302)
+			.text(cidade);
+		svg.append("text")
+			.attr("x", 650)
+			.attr("y", 317)
+			.text("Paraíba");
+		svg.append("text")
+			.attr("x", 650)
+			.attr("y", 332)
+			.text(micro);
+		svg.append("text")
+			.attr("x", 650)
+			.attr("y", 347)
+			.text(meso);
 		
 	}
 }
