@@ -8,14 +8,27 @@ function getMenuOption(selection) {
     cidade = selection.options[selection.selectedIndex].value;
 	plotSeries(cidade);
 	rawdata = dataset.filter(function(i){return i.NOME_MUNICIPIO == cidade;})	
+	
+	dicionario.sort(function (a, b) {
+    			return getDesvio(a.desvio) - getDesvio(b.desvio);
+	});
 	d3.selectAll(".rightmenuup")
 	.data(dicionario)
+	.attr("type","button")
+	.attr("class","button rightmenuup")
+	.attr("value", function (d){return d.name;})
+	.attr("id", function (d, i){return d.id;})
+	.style("color", "black")
 	.transition().delay(function(d, i) {
-				return i * 50;
-			}).duration(1000)
+		return i * 50;
+	}).duration(1000)
 	.style("background-color", function(d) {
 		return getButtonColor(d.desvio);
-	});
+	}).on("click", function(d) {
+		//plotNome(d.name); TODO
+		plotIndicadores(d.id);
+		plotSeries(cidade,d.id);
+	});	
 	
    // plotIndicadores("");
    // plotSeries(""); 
@@ -30,6 +43,17 @@ Array.prototype.unique = function() {
     for(i in o) r.push(o[i]);
     return r;
 };
+
+//Retorna o valor do desvio
+function getDesvio(colunaDesvio) {
+	valor = getRecentValueIndicadorColuna(colunaDesvio);
+	if (valor == "NA" ) {
+		return 0;
+	}else{
+		return parseFloat(valor);
+	}
+}
+
 
 //Carrega arquivo inicial e os botoes
 function loadData() {
@@ -55,6 +79,7 @@ function loadData() {
 	});
 	loadUpButtons();
 };
+
 
 //Carrega os botoes da parte de cima
 function loadUpButtons() {
@@ -254,5 +279,4 @@ function plotIndicadores(indicador) {
 	}
 	
 };
-
 
