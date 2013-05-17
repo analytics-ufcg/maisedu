@@ -3,7 +3,6 @@ var rawdata = [];
 var dicionario = [];
 var cidade = "";
 
-
 //Recebe uma cidade e pinta os botoes
 function getMenuOption(selection) {
     cidade = selection.options[selection.selectedIndex].value;
@@ -25,15 +24,12 @@ function getMenuOption(selection) {
     
 };
 
-
 Array.prototype.unique = function() {
     var o = {}, i, l = this.length, r = [];
     for(i=0; i<l;i+=1) o[this[i]] = this[i];
     for(i in o) r.push(o[i]);
     return r;
 };
-
-
 
 //Carrega arquivo inicial e os botoes
 function loadData() {
@@ -60,10 +56,6 @@ function loadData() {
 	loadUpButtons();
 };
 
-
-
-
-
 //Carrega os botoes da parte de cima
 function loadUpButtons() {
 	d3.csv("data/dicionario.csv" , function (data){
@@ -87,7 +79,6 @@ function loadUpButtons() {
 	});
 }
 
-
 //Pode retornar NA se não houver nenhum ano disponivel para o Indicador
 function getRecentValueIndicadorColuna(colunaDesvio) {
 	var maxYear = rawdata.filter(function(d){return d[colunaDesvio] != "NA";}).map(function(d){return parseInt(d.ANO)});
@@ -100,7 +91,6 @@ function getRecentValueIndicadorColuna(colunaDesvio) {
 		return currentYearData[colunaDesvio];
 	}
 }
-
 
 //Retorna a cor do Botao
 function getButtonColor(colunaDesvio) {
@@ -125,106 +115,140 @@ function getButtonColor(colunaDesvio) {
 	}
 }
 
-
 //Plota grafico
 function plotIndicadores(indicador) {
 // e se todos forem NAs?
-// 
-
+	
 	//Width and height
-	var w = 600;
-	var h = 250;
+	var w = 800;
+	var h = 350;
 	
 	if(rawdata.length != 0){
+		
+		var max_estado, min_estado, max_meso, min_meso,max_micro, min_micro;
+	
 		var maxYear = d3.max(rawdata.filter(function(d){return d[indicador] != "NA";}).map(function(d){return parseInt(d.ANO)}));
-		
 		var currentYearData = rawdata.filter(function(d){return d.ANO == maxYear;})[0];
-		
 		var subset = [10, parseFloat(currentYearData[indicador])];
+
+		var margin = {top: 30, right: 120, bottom: 40, left: 60},
+			width = w - margin.left - margin.right,
+			height = h - margin.top - margin.bottom;
 		
-		var xScale = d3.scale.ordinal().domain(d3.range(subset.length))
-		.rangeRoundBands([ 0, w ], 0.05);
-	
-		var yScale = d3.scale.linear().domain([ 0, d3.max(subset) ])
-		.range([ 0, h ]);
-	
 		//Create SVG element
 		var svg = d3.select("#div_indicador").select("svg");
 		
+		//create line element
+		var line = d3.svg.line()
+			.x(function(d) { return d.x})
+			.y(function(d) { return d.y});
+	
+		var estado = dataset.filter(function(d){return d[indicador] != "NA" & d.ANO == currentYearData.ANO;});
+			
+		var meso = dataset.filter(function(d){return d[indicador] != "NA" & d.NOME_MESO == currentYearData.NOME_MESO & d.ANO == currentYearData.ANO;});
+		
+		var micro = dataset.filter(function(d){return d[indicador] != "NA" & d.NOME_MICRO == currentYearData.NOME_MICRO & d.ANO == currentYearData.ANO;});
+		
+		//pegando valores unicos
+		max_estado = d3.max(estado, function(d){return parseFloat(d[indicador])});
+		min_estado = d3.min(estado, function(d){return parseFloat(d[indicador])});
+		max_meso = d3.max(meso, function(d){return parseFloat(d[indicador])});
+		min_meso = d3.min(meso, function(d){return parseFloat(d[indicador])});
+		max_micro = d3.max(micro, function(d){return parseFloat(d[indicador])});
+		min_micro = d3.min(micro, function(d){return parseFloat(d[indicador])});
+		
+		
+		var linedata = [{'x' : min_estado , 'y' : 100}, {'x': (width) - max_estado, 'y' : 100}];
+					
+		var line_meso =[{'x' : min_meso , 'y' : 185}, {'x': (width) - min_meso, 'y' : 185}];
+		
+		var line_micro = [{'x' : min_micro , 'y' : 270}, {'x': (width) - min_micro, 'y' : 270}];
+		
+		var color = d3.interpolateLab(d3.rgb(255,0,0), d3.rgb(255,255,0));
+	
 		if (svg[0][0] == null){
-			//cria novas barras
+			//filtrando as tabelas de acordo com os dados
 			
 			var svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", h);
 			
-			svg.selectAll("rect").data(subset).enter().append("rect").attr(
-			"x", function(d, i) {
-				return xScale(i);
-			}).attr("y", function(d) {
-				return h - yScale(d);
-			}).attr("width", xScale.rangeBand()).attr("height", function(d) {
-				return yScale(d);
-			}).attr("fill", function(d) {
-				return "rgb(0, 0, " + (d * 20) + ")";
-			}).on(
-					"mouseover",
-					function(d) {
-
-						//Get this bar's x/y values, then augment for the tooltip
-						var xPosition = parseFloat(d3.select(this).attr("x"))
-						+ xScale.rangeBand() / 2;
-						var yPosition = parseFloat(d3.select(this).attr("y"))
-						/ 2 + h / 2;
-
-						//Update the tooltip position and value
-						d3.select("#tooltip").style("left", xPosition + "px")
-						.style("top", yPosition + "px")
-						.select("#value").text(d);
-
-						//Show the tooltip
-						d3.select("#tooltip").classed("hidden", false);
-
-					}).on("mouseout", function() {
-
-						//Hide the tooltip
-						d3.select("#tooltip").classed("hidden", true);
-
-					}).on("click", function() {
-						//sortBars();
-					});
+			var path = svg.append("path")
+				.transition().delay(50)
+				.attr("class", "line_estado")
+				.attr("d", line(linedata))
+				.style("stroke","red")
+				.style("stroke-width", 5);
 			
+			svg.append("path")
+				.transition().delay(50)
+				.attr("class", "line")
+				.attr("d", line(line_meso))
+				.style("stroke","orange")
+				.style("stroke-width", 5);
+			
+			svg.append("path")
+				.transition().delay(50)
+				.attr("class", "line")
+				.attr("d", line(line_micro))
+				.style("stroke","green")
+				.style("stroke-width", 5);
+
 		}else{
+			svg.selectAll("path")
+				.transition().delay(50)
+				.remove();
+				
+			svg.append("path")
+				.transition().delay(50)
+				.attr("class", "line_estado")
+				.attr("d", line(linedata))
+				.style("stroke","red")
+				.style("stroke-width", 5);
 			
-			var bars = d3.select("#div_indicador").select("svg").selectAll("rect")
-			.data(subset)
-			.transition()
-			.attr("y", function(d) {
-				return h - yScale(d);
-			});
+			svg.append("path")
+				.transition().delay(50)
+				.attr("class", "line")
+				.attr("d", line(line_meso))
+				.style("stroke","orange")
+				.style("stroke-width", 5);
+
+			svg.append("path")
+				.transition().delay(50)
+				.attr("class", "line")
+				.attr("d", line(line_micro))
+				.style("stroke","green")
+				.style("stroke-width", 5);
+			
+			// var bars = d3.select("#div_indicador").select("svg").selectAll("rect")
+			// .data(subset)
+			// .transition()
+			// .attr("y", function(d) {
+				// return h - yScale(d);
+			// });
 		}
 	
 		
 		//Define sort order flag
-		var sortOrder = false;
+		// var sortOrder = false;
 	
-		//Define sort function
-		var sortBars = function() {
+		// //Define sort function
+		// var sortBars = function() {
 	
-			//Flip value of sortOrder
-			sortOrder = !sortOrder;
+			// //Flip value of sortOrder
+			// sortOrder = !sortOrder;
 	
-			svgBar.selectAll("rect").sort(function(a, b) {
-				if (sortOrder) {
-					return d3.ascending(a, b);
-				} else {
-					return d3.descending(a, b);
-				}
-			}).transition().delay(function(d, i) {
-				return i * 50;
-			}).duration(1000).attr("x", function(d, i) {
-				return xScale(i);
-			});
+			// svgBar.selectAll("rect").sort(function(a, b) {
+				// if (sortOrder) {
+					// return d3.ascending(a, b);
+				// } else {
+					// return d3.descending(a, b);
+				// }
+			// }).transition().delay(function(d, i) {
+				// return i * 50;
+			// }).duration(1000).attr("x", function(d, i) {
+				// return xScale(i);
+			// });
 	
-		};		
+		// };		
 	}else{
 		d3.select("svg").remove();
 	}
