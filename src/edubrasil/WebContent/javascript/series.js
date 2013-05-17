@@ -137,7 +137,24 @@ function plotGraph(indicador){//(nome_indicador){
 			.style('fill', "blue")
 			.attr('cx', function(d) { return x(d.ANO) })
 			.attr('cy', function(d) { return y(d[indicador]) })
-			.attr('r', 4);
+			.attr('r', 4)
+			.on("mouseover", function(d) {
+
+				//Get the values for tooltip position
+				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
+				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
+
+				//Update the tooltip position and value
+				d3.select("#tooltip").style("left", xPosition + "px")
+				.style("top", yPosition + "px")
+				.select("#value").text(d[indicador]);
+
+				//Show the tooltip
+				d3.select("#tooltip").classed("hidden", false);})
+
+			.on("mouseout", function() {//Hide the tooltip
+					d3.select("#tooltip").classed("hidden", true);
+			});
 		
 		svg.selectAll('.dot')
 			.data(dados_estado)//estado
@@ -146,7 +163,25 @@ function plotGraph(indicador){//(nome_indicador){
 			.style('fill', "red")
 			.attr('cx', function(d) { return x(d.ANO) })
 			.attr('cy', function(d) { return y(d[indicador]) })
-			.attr('r', 4);
+			.attr('r', 4)
+			.on("mouseover", function(d) {
+
+				//Get the values for tooltip position
+				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
+				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
+
+				//Update the tooltip position and value
+				d3.select("#tooltip").style("left", xPosition + "px")
+				.style("top", yPosition + "px")
+				.select("#value").text(d[indicador]);
+
+				//Show the tooltip
+				d3.select("#tooltip").classed("hidden", false);})
+
+			.on("mouseout", function() {//Hide the tooltip
+					d3.select("#tooltip").classed("hidden", true);
+			});
+
 		
 		svg.selectAll('.dot')
 			.data(dados_micro)//micro
@@ -155,7 +190,24 @@ function plotGraph(indicador){//(nome_indicador){
 			.style('fill', "orange")
 			.attr('cx', function(d) { return x(d.ANO) })
 			.attr('cy', function(d) { return y(d[indicador]) })
-			.attr('r', 4);		
+			.attr('r', 4)
+			.on("mouseover", function(d) {
+
+				//Get the values for tooltip position
+				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
+				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450;
+
+				//Update the tooltip position and value
+				d3.select("#tooltip").style("left", xPosition + "px")
+				.style("top", yPosition + "px")
+				.select("#value").text(d[indicador]);
+
+				//Show the tooltip
+				d3.select("#tooltip").classed("hidden", false);})
+
+			.on("mouseout", function() {//Hide the tooltip
+					d3.select("#tooltip").classed("hidden", true);
+			});		
 		
 		svg.selectAll('.dot')
 			.data(dados_meso)//meso
@@ -164,7 +216,24 @@ function plotGraph(indicador){//(nome_indicador){
 			.style('fill', "green")
 			.attr('cx', function(d) { return x(d.ANO) })
 			.attr('cy', function(d) { return y(d[indicador]) })
-			.attr('r', 4);	
+			.attr('r', 4)
+			.on("mouseover", function(d) {
+
+				//Get the values for tooltip position
+				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
+				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
+
+				//Update the tooltip position and value
+				d3.select("#tooltip").style("left", xPosition + "px")
+				.style("top", yPosition + "px")
+				.select("#value").text(d[indicador]);
+
+				//Show the tooltip
+				d3.select("#tooltip").classed("hidden", false);})
+
+			.on("mouseout", function() {//Hide the tooltip
+					d3.select("#tooltip").classed("hidden", true);
+			});	
 	
 		//legenda do grafico
 		
