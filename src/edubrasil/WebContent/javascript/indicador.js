@@ -12,19 +12,17 @@ function getMenuOption(selection) {
 	dicionario.sort(function (a, b) {
     			return getDesvio(a.desvio) - getDesvio(b.desvio);
 	});
-	d3.selectAll(".rightmenuup")
+	d3.selectAll(".indicador")
 	.data(dicionario)
-	.attr("type","button")
-	.attr("class","button rightmenuup")
+	.attr("class", function(d) {
+          return "indicador " + getButtonColor(d.desvio);
+    })
 	.attr("value", function (d){return d.name;})
 	.attr("id", function (d, i){return d.id;})
-	.style("color", "black")
 	.transition().delay(function(d, i) {
 		return i * 50;
 	}).duration(1000)
-	.style("background-color", function(d) {
-		return getButtonColor(d.desvio);
-	}).on("click", function(d) {
+    .on("click", function(d) {
 		//plotNome(d.name); TODO
 		plotIndicadores(d.id);
 		plotSeries(cidade,d.id);
@@ -48,7 +46,7 @@ Array.prototype.unique = function() {
 function getDesvio(colunaDesvio) {
 	valor = getRecentValueIndicadorColuna(colunaDesvio);
 	if (valor == "NA" ) {
-		return 0;
+		return 10;
 	}else{
 		return parseFloat(valor);
 	}
@@ -92,11 +90,9 @@ function loadUpButtons() {
 		.enter()
 		.append("input")
 		.attr("type","button")
-		.attr("class","button rightmenuup")
 		.attr("value", function (d){return d.name;})
 		.attr("id", function (d, i){return d.id;})
-		.style("color", "black")
-		.style("background-color", "gray")
+        .attr("class", "indicador indicador_cinza")
 		.on("click", function(d) {
 			plotIndicadores(d.id);
 			plotSeries(cidade,d.id);
@@ -121,22 +117,28 @@ function getRecentValueIndicadorColuna(colunaDesvio) {
 function getButtonColor(colunaDesvio) {
 	valor = getRecentValueIndicadorColuna(colunaDesvio);
 	if (valor == "NA" ) {
-		return "gray";
+        return "indicador_cinza";
+//		return "gray";
 	}
 	else if (parseFloat(valor) == -2) {
-		return "#FFCC00";
+        return "indicador_amarelo";
+        //return "#FFCC00";
 	}
 	else if (parseFloat(valor) == -3) {
-		return "#FF6600";
+		return "indicador_laranja";
+        //return "#FF6600";
 	}
 	else if (parseFloat(valor) <= -4) {
-		return "#FF0000";
+		return "indicador_vermelho";
+        //return "#FF0000";
 	}
 	else if (parseFloat(valor) >= 3) {
-		return "green";
+        return "indicador_verde";
+//		return "green";
 	}
 	else {
-		return "#E0E0E0";
+        return "indicador_branco";
+		//return "#E0E0E0";
 	}
 }
 
