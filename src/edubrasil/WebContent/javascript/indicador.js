@@ -164,6 +164,12 @@ function plotIndicadores(indicador) {
 		
 		//Create SVG element
 		var svg = d3.select("#div_indicador").select("svg");
+
+		var x = d3.time.scale()
+			.range([0, width]);
+
+		var y = d3.scale.linear()
+			.range([height, 0]);
 		
 		//create line element
 		var line = d3.svg.line()
@@ -184,39 +190,61 @@ function plotIndicadores(indicador) {
 		max_micro = d3.max(micro, function(d){return parseFloat(d[indicador])});
 		min_micro = d3.min(micro, function(d){return parseFloat(d[indicador])});
 		
-		
 		var linedata = [{'x' : min_estado , 'y' : 100}, {'x': (width) - max_estado, 'y' : 100}];
 					
 		var line_meso =[{'x' : min_meso , 'y' : 185}, {'x': (width) - min_meso, 'y' : 185}];
 		
 		var line_micro = [{'x' : min_micro , 'y' : 270}, {'x': (width) - min_micro, 'y' : 270}];
 		
-		var color = d3.interpolateLab(d3.rgb(255,0,0), d3.rgb(255,255,0));
-	
 		if (svg[0][0] == null){
 			//filtrando as tabelas de acordo com os dados
-			
 			var svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", h);
-			
-			var path = svg.append("path")
-				.transition().delay(50)
-				.attr("class", "line_estado")
-				.attr("d", line(linedata))
-				.style("stroke","red")
-				.style("stroke-width", 5);
+
+			x.domain([min_estado,width]);
+			y.domain([0,height]);
+
+				
+		    svg.append("linearGradient")
+			  .attr("id", "temperature-gradient")
+			  .attr("gradientUnits", "userSpaceOnUse")
+			  .attr("x1", x(min_estado)).attr("y1", y(100))
+			  .attr("x2", x((width) - max_estado)).attr("y2", y(100))
+			.selectAll("stop")
+			  .data([
+				{offset: "0%", color: "red"},
+			//	{offset: "25%", color: "orange"},
+				{offset: "60%", color: "yellow"},
+				{offset: "100%", color: "green"}
+			  ])
+			.enter().append("stop")
+			  .attr("offset", function(d) { return d.offset; })
+			  .attr("stop-color", function(d) { return d.color; });
+
+		    svg.append("path")
+			  .datum(linedata)
+			  .transition().delay(50)
+			  .attr("class", "line")
+			  .attr("d", line)
+			  .style("stroke-width", 5);
+		
+			// var path = svg.append("path")
+				// .transition().delay(50)
+				// .attr("class", "line_estado")
+				// .attr("d", line(linedata))
+				// .style("stroke-width", 5);
 			
 			svg.append("path")
 				.transition().delay(50)
 				.attr("class", "line")
 				.attr("d", line(line_meso))
-				.style("stroke","orange")
+				.style("stroke","grey")
 				.style("stroke-width", 5);
 			
 			svg.append("path")
 				.transition().delay(50)
 				.attr("class", "line")
 				.attr("d", line(line_micro))
-				.style("stroke","green")
+				.style("stroke","grey")
 				.style("stroke-width", 5);
 
 		}else{
@@ -225,24 +253,24 @@ function plotIndicadores(indicador) {
 				.remove();
 				
 			svg.append("path")
-				.transition().delay(50)
-				.attr("class", "line_estado")
-				.attr("d", line(linedata))
-				.style("stroke","red")
-				.style("stroke-width", 5);
+				  .datum(linedata)
+				  .transition().delay(50)
+				  .attr("class", "line")
+				  .attr("d", line)
+				  .style("stroke-width", 5);
 			
 			svg.append("path")
 				.transition().delay(50)
 				.attr("class", "line")
 				.attr("d", line(line_meso))
-				.style("stroke","orange")
+				.style("stroke","grey")
 				.style("stroke-width", 5);
 
 			svg.append("path")
 				.transition().delay(50)
 				.attr("class", "line")
 				.attr("d", line(line_micro))
-				.style("stroke","green")
+				.style("stroke","grey")
 				.style("stroke-width", 5);
 			
 			// var bars = d3.select("#div_indicador").select("svg").selectAll("rect")
