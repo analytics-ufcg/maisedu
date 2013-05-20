@@ -109,7 +109,8 @@ function plotGraph(indicador){//(nome_indicador){
 		svg.append("path")
 		  .datum(dados_cidade) //municipio
 		  .attr("class", "line")
-		  .attr("d", line);
+		  .attr("d", line)
+		  .style("stroke","blue");
 		  
 		svg.append("path")
 		  .datum(dados_estado) //estado

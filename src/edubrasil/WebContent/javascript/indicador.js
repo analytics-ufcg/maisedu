@@ -190,11 +190,21 @@ function plotIndicadores(indicador) {
 		max_micro = d3.max(micro, function(d){return parseFloat(d[indicador])});
 		min_micro = d3.min(micro, function(d){return parseFloat(d[indicador])});
 		
-		var linedata = [{'x' : min_estado , 'y' : 100}, {'x': (width) - max_estado, 'y' : 100}];
-					
-		var line_meso =[{'x' : min_meso , 'y' : 185}, {'x': (width) - min_meso, 'y' : 185}];
+		if(max_estado > 1000 | max_meso > 1000 | max_micro > 1000){
+			max_estado = (max_estado/100);
+			min_estado = (min_estado/100);
+			max_meso = (max_meso/100);
+			min_meso = (min_meso/100);	
+			max_micro = (max_micro/100);
+			min_micro = (min_micro/100);				
+		}
+
 		
-		var line_micro = [{'x' : min_micro , 'y' : 270}, {'x': (width) - min_micro, 'y' : 270}];
+		var linedata = [{'x' : min_estado , 'y' : 100}, {'x': 600 + max_estado, 'y' : 100}];
+					
+		var line_meso =[{'x' : min_meso , 'y' : 185}, {'x': 600 + max_meso, 'y' : 185}];
+		
+		var line_micro = [{'x' : min_micro , 'y' : 270}, {'x': 600 + max_micro, 'y' : 270}];
 		
 		if (svg[0][0] == null){
 			//filtrando as tabelas de acordo com os dados
@@ -211,10 +221,10 @@ function plotIndicadores(indicador) {
 			  .attr("x2", x((width) - max_estado)).attr("y2", y(100))
 			.selectAll("stop")
 			  .data([
-				{offset: "0%", color: "red"},
+				{offset: "0%", color: d3.rgb(228,104,93)},
 			//	{offset: "25%", color: "orange"},
-				{offset: "60%", color: "yellow"},
-				{offset: "100%", color: "green"}
+				{offset: "60%", color: d3.rgb(255,236,100)},
+				{offset: "100%", color: d3.rgb(116,173,90)}
 			  ])
 			.enter().append("stop")
 			  .attr("offset", function(d) { return d.offset; })
