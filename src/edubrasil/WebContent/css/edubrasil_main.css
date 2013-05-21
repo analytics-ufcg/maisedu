@@ -28,6 +28,15 @@ html,body {
 	height: 70px;
 }
 
+#indicador_titulo {
+	background-color: black;
+	padding: 0;
+	margin: 0px;
+	color: #DCDCDC;
+	font-size: 3.75em;
+	height: 70px;
+}
+
 #menu {
 	background-color: black;
 	padding: 0 0;

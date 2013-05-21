@@ -20,19 +20,15 @@ function getMenuOption(selection) {
 	});
 	d3.selectAll(".indicador")
 	.data(dicionario)
+	.transition()
+	.delay(function(d, i) {
+		return i * 50;
+	})//.duration(1000)
 	.attr("class", function(d) {
           return "indicador " + getButtonColor(d.desvio);
     })
 	.attr("value", function (d){return d.name;})
-	.attr("id", function (d, i){return d.id;})
-	.transition().delay(function(d, i) {
-		return i * 50;
-	}).duration(1000)
-    .on("click", function(d) {
-		//plotNome(d.name); TODO
-		plotIndicadores(d.id);
-		plotSeries(cidade,d.id);
-	});	
+	.attr("id", function (d, i){return d.id;});	
 	
    // plotIndicadores("");
    // plotSeries(""); 
@@ -40,6 +36,12 @@ function getMenuOption(selection) {
    // plotIndicadores(value);   
     
 };
+
+function plotNome(indicador){
+	d3.selectAll("svg")
+	.enter()
+	.text(indicador.name);
+}
 
 function cleanContainers(){
 	d3.selectAll("svg")
@@ -107,13 +109,17 @@ function loadUpButtons() {
 		.on("click", function(d) {
 			plotIndicadores(d.id);
 			plotSeries(cidade,d.id);
-		});	
+		});
 	});
+	d3.select("#indicador_titulo")
+	.append(p)
+	.text("Selecione Uma Cidade");
+	
 }
 
 //Pode retornar NA se não houver nenhum ano disponivel para o Indicador
 function getRecentValueIndicadorColuna(colunaDesvio) {
-	var maxYear = rawdata.filter(function(d){return d[colunaDesvio] != "NA";}).map(function(d){return parseInt(d.ANO)});
+	var maxYear = rawdata.filter(function(d){return d[colunaDesvio] != "NA";}).map(function(d){return parseInt(d.ANO);});
 	if (maxYear.length == 0) {
 		return "NA";
 	}
