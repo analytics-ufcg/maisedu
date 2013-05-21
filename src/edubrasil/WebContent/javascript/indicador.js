@@ -8,6 +8,9 @@ var h = 350;
 
 //Recebe uma cidade e pinta os botoes
 function getMenuOption(selection) {
+	//limpa containers
+	cleanContainers();
+	
     cidade = selection.options[selection.selectedIndex].value;
 	plotSeries(cidade);
 	rawdata = dataset.filter(function(i){return i.NOME_MUNICIPIO == cidade;})	
@@ -37,6 +40,11 @@ function getMenuOption(selection) {
    // plotIndicadores(value);   
     
 };
+
+function cleanContainers(){
+	d3.selectAll("svg")
+    .remove();
+}
 
 Array.prototype.unique = function() {
     var o = {}, i, l = this.length, r = [];
