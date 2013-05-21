@@ -2,6 +2,9 @@ var dataset = [];
 var rawdata = [];
 var dicionario = [];
 var cidade = "";
+var duration = 1000;
+var w = 800;
+var h = 350;
 
 //Recebe uma cidade e pinta os botoes
 function getMenuOption(selection) {
@@ -147,34 +150,19 @@ function plotIndicadores(indicador) {
 // e se todos forem NAs?
 	
 	//Width and height
-	var w = 800;
-	var h = 350;
+	
 	
 	if(rawdata.length != 0){
 		
-		var max_estado, min_estado, max_meso, min_meso,max_micro, min_micro;
-	
+		
 		var maxYear = d3.max(rawdata.filter(function(d){return d[indicador] != "NA";}).map(function(d){return parseInt(d.ANO)}));
 		var currentYearData = rawdata.filter(function(d){return d.ANO == maxYear;})[0];
 		var subset = [10, parseFloat(currentYearData[indicador])];
-
-		var margin = {top: 30, right: 120, bottom: 40, left: 60},
-			width = w - margin.left - margin.right,
-			height = h - margin.top - margin.bottom;
 		
 		//Create SVG element
 		var svg = d3.select("#div_indicador").select("svg");
-
-		var x = d3.time.scale()
-			.range([0, width]);
-
-		var y = d3.scale.linear()
-			.range([height, 0]);
+	
 		
-		//create line element
-		var line = d3.svg.line()
-			.x(function(d) { return d.x})
-			.y(function(d) { return d.y});
 	
 		var estado = dataset.filter(function(d){return d[indicador] != "NA" & d.ANO == currentYearData.ANO;});
 			
@@ -182,141 +170,172 @@ function plotIndicadores(indicador) {
 		
 		var micro = dataset.filter(function(d){return d[indicador] != "NA" & d.NOME_MICRO == currentYearData.NOME_MICRO & d.ANO == currentYearData.ANO;});
 		
-		//pegando valores unicos
-		max_estado = d3.max(estado, function(d){return parseFloat(d[indicador])});
-		min_estado = d3.min(estado, function(d){return parseFloat(d[indicador])});
-		max_meso = d3.max(meso, function(d){return parseFloat(d[indicador])});
-		min_meso = d3.min(meso, function(d){return parseFloat(d[indicador])});
-		max_micro = d3.max(micro, function(d){return parseFloat(d[indicador])});
-		min_micro = d3.min(micro, function(d){return parseFloat(d[indicador])});
-		
-		if(max_estado > 1000 | max_meso > 1000 | max_micro > 1000){
-			max_estado = (max_estado/100);
-			min_estado = (min_estado/100);
-			max_meso = (max_meso/100);
-			min_meso = (min_meso/100);	
-			max_micro = (max_micro/100);
-			min_micro = (min_micro/100);				
-		}
-
-		
-		var linedata = [{'x' : min_estado , 'y' : 100}, {'x': 600 + max_estado, 'y' : 100}];
+		var line_estado = [{'x' : d3.min(estado,function(d){return parseFloat(d[indicador])}) , 'y' : 100},
+						   {'x':(d3.max(estado,function(d){return parseFloat(d[indicador])})), 'y' : 100}];
 					
-		var line_meso =[{'x' : min_meso , 'y' : 185}, {'x': 600 + max_meso, 'y' : 185}];
+		var line_meso =[{'x' : d3.min(meso,function(d){return parseFloat(d[indicador])}) , 'y' : 185}, 
+						{'x': (d3.max(meso,function(d){return parseFloat(d[indicador])})), 'y' : 185}];
 		
-		var line_micro = [{'x' : min_micro , 'y' : 270}, {'x': 600 + max_micro, 'y' : 270}];
+		var line_micro = [{'x' :d3.min(micro,function(d){return parseFloat(d[indicador])}) , 'y' : 270},
+						  {'x': (d3.max(micro,function(d){return parseFloat(d[indicador])})), 'y' : 270}];
 		
-		if (svg[0][0] == null){
-			//filtrando as tabelas de acordo com os dados
-			var svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", h);
-
-			x.domain([min_estado,width]);
-			y.domain([0,height]);
-
-				
-		    svg.append("linearGradient")
-			  .attr("id", "temperature-gradient")
-			  .attr("gradientUnits", "userSpaceOnUse")
-			  .attr("x1", x(min_estado)).attr("y1", y(100))
-			  .attr("x2", x((width) - max_estado)).attr("y2", y(100))
-			.selectAll("stop")
-			  .data([
-				{offset: "0%", color: d3.rgb(228,104,93)},
-			//	{offset: "25%", color: "orange"},
-				{offset: "60%", color: d3.rgb(255,236,100)},
-				{offset: "100%", color: d3.rgb(116,173,90)}
-			  ])
-			.enter().append("stop")
-			  .attr("offset", function(d) { return d.offset; })
-			  .attr("stop-color", function(d) { return d.color; });
-
-		    svg.append("path")
-			  .datum(linedata)
-			  .transition().delay(50)
-			  .attr("class", "line")
-			  .attr("d", line)
-			  .style("stroke-width", 5);
+		if(indicador == "INDICADOR_7"){
+			line_estado = [{'x' : d3.min(estado,function(d){return parseFloat(d[indicador])/100}) , 'y' : 100},
+						   {'x':(d3.max(estado,function(d){return parseFloat(d[indicador])/100})), 'y' : 100}];
+					
+			line_meso =[{'x' : d3.min(meso,function(d){return parseFloat(d[indicador])/100}) , 'y' : 185}, 
+						{'x': (d3.max(meso,function(d){return parseFloat(d[indicador])/100})), 'y' : 185}];
 		
-			// var path = svg.append("path")
-				// .transition().delay(50)
-				// .attr("class", "line_estado")
-				// .attr("d", line(linedata))
-				// .style("stroke-width", 5);
-			
-			svg.append("path")
-				.transition().delay(50)
-				.attr("class", "line")
-				.attr("d", line(line_meso))
-				.style("stroke","grey")
-				.style("stroke-width", 5);
-			
-			svg.append("path")
-				.transition().delay(50)
-				.attr("class", "line")
-				.attr("d", line(line_micro))
-				.style("stroke","grey")
-				.style("stroke-width", 5);
-
-		}else{
-			svg.selectAll("path")
-				.transition().delay(50)
-				.remove();
-				
-			svg.append("path")
-				  .datum(linedata)
-				  .transition().delay(50)
-				  .attr("class", "line")
-				  .attr("d", line)
-				  .style("stroke-width", 5);
-			
-			svg.append("path")
-				.transition().delay(50)
-				.attr("class", "line")
-				.attr("d", line(line_meso))
-				.style("stroke","grey")
-				.style("stroke-width", 5);
-
-			svg.append("path")
-				.transition().delay(50)
-				.attr("class", "line")
-				.attr("d", line(line_micro))
-				.style("stroke","grey")
-				.style("stroke-width", 5);
-			
-			// var bars = d3.select("#div_indicador").select("svg").selectAll("rect")
-			// .data(subset)
-			// .transition()
-			// .attr("y", function(d) {
-				// return h - yScale(d);
-			// });
+			line_micro = [{'x' :d3.min(micro,function(d){return parseFloat(d[indicador])/100}) , 'y' : 270},
+						  {'x': (d3.max(micro,function(d){return parseFloat(d[indicador])/100})), 'y' : 270}];
 		}
-	
 		
-		//Define sort order flag
-		// var sortOrder = false;
-	
-		// //Define sort function
-		// var sortBars = function() {
-	
-			// //Flip value of sortOrder
-			// sortOrder = !sortOrder;
-	
-			// svgBar.selectAll("rect").sort(function(a, b) {
-				// if (sortOrder) {
-					// return d3.ascending(a, b);
-				// } else {
-					// return d3.descending(a, b);
-				// }
-			// }).transition().delay(function(d, i) {
-				// return i * 50;
-			// }).duration(1000).attr("x", function(d, i) {
-				// return xScale(i);
-			// });
-	
-		// };		
+		var teste;
+		if (svg[0][0] == null){
+
+			var svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", h);
+			
+			plot_ranges(svg, line_estado, 100);
+			plot_ranges(svg, line_estado, 185);
+			plot_ranges(svg, line_estado, 270);
+			
+			plot_bars(svg, line_estado, line_estado, 100,currentYearData[indicador]);
+			plot_bars(svg , line_estado, line_meso, 185,currentYearData[indicador]);
+			plot_bars(svg , line_estado, line_micro, 270,currentYearData[indicador]);
+
+			
+			svg.append("text")
+				.attr("y", 100)
+				.style("text-align", "right")
+				.text("Paraíba");
+			
+			svg.append("text")
+				.style("text-align", "right")
+				.attr("y", 187)
+				.text(currentYearData.NOME_MESO);
+				
+			svg.append("text")
+				.attr("y", 272)
+				.text(currentYearData.NOME_MESO);
+			
+		}else{
+
+			svg.selectAll("g").transition()
+				 .remove();
+			
+			svg.selectAll("line").transition()
+				 .remove();
+			
+			svg.selectAll("rect").transition()
+				 .remove();
+			
+			//svg.selectAll("circle").transition()
+			//	 .remove();
+			
+			svg.selectAll("text").transition()
+				 .remove();
+			
+			plot_ranges(svg, line_estado, 100);
+			plot_ranges(svg, line_estado, 185);
+			plot_ranges(svg, line_estado, 270);
+			
+			plot_bars(svg, line_estado, line_estado, 100,currentYearData[indicador]);
+			plot_bars(svg , line_estado, line_meso, 185,currentYearData[indicador]);
+			plot_bars(svg , line_estado, line_micro, 270,currentYearData[indicador]);
+			
+			svg.append("text")
+				.attr("y", 100)
+				.text("Paraíba");
+			
+			svg.append("text")
+				.attr("y", 187)
+				.text(currentYearData.NOME_MESO);
+				
+			svg.append("text")
+				.attr("y", 272)
+				.text(currentYearData.NOME_MICRO);
+
+		}
 	}else{
 		d3.select("svg").remove();
 	}
 	
 };
 
+function plot_bars(svg,dados,dados_regiao, y0, indicador_value){
+
+	var x1 = d3.scale.linear()
+          .domain([dados[0].x, dados[1].x])
+          .range([110+ dados[0].x, 600+ dados[1].x]);
+	
+	svg.append("line")
+		  .transition().duration(duration)
+		  .attr("x1", x1(dados_regiao[0].x))
+		  .attr("x2", x1(dados_regiao[1].x))
+		  .attr("y1",y0)
+		  .attr("y2",y0)
+		  .style("stroke",d3.rgb(200,200,200))
+		  .style("stroke-width", 10);
+			  
+	// svg.append("circle")
+		// .transition().duration(duration)
+		// .attr("cx", x1(parseFloat(indicador_value)) )	
+		// .attr("cy",y0)
+		// .style("fill","black")
+		// .attr("r", 6);
+		
+	svg.append("rect")
+		  .transition().duration(duration).delay(1000)
+		  .attr("x", x1(indicador_value))
+		  .attr("y",(y0-8))
+		  .attr("width", 3)
+		  .attr("height" , 15)
+		  .style("fill", "black");
+	
+	// svg.append("text")
+		// .transition().duration(duration).delay(500)
+		// .attr("x", x1(indicador_value))
+		// .attr("y", (y0 - 30))
+		// .text(cidade);
+}
+
+function plot_ranges(svg, dados, y0){
+
+	var x1 = d3.scale.linear()
+          .domain([dados[0].x, dados[1].x])
+          .range([110+ dados[0].x, 600+ dados[1].x]);
+
+	var xAxis = d3.svg.axis()
+			.scale(x1)
+			.orient("bottom")
+			.ticks(5);
+			
+	svg.append("g")
+		  .attr("class", "x axis")
+		  .attr("transform", "translate(0," + (y0+12) + ")")
+		  .transition().duration(duration).delay(500)
+		  .call(xAxis);
+	
+	svg.append("text")
+		.transition().duration(duration).delay(500)
+		.attr("x", (100 + dados[0].x))
+		.attr("y", (y0 + 30))
+		.text("Min");
+		
+	svg.append("text")
+		.transition().duration(duration).delay(500)
+		.attr("x", (590 + dados[1].x))
+		.attr("y", (y0 + 30))
+		.text("Max");
+	
+	svg.append("line")
+			  .transition().duration(duration)
+			  .attr("x1", 110 + dados[0].x)
+			  .attr("x2", 600 + dados[1].x)
+			  .attr("y1",y0)
+			  .attr("y2",y0)
+			  .style("stroke",d3.rgb(220,220,220))
+			  .style("stroke-width", 25);
+			  
+
+}
