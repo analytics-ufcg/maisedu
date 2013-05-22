@@ -13,7 +13,7 @@ function getMenuOption(selection) {
 	
     cidade = selection.options[selection.selectedIndex].value;
 	plotSeries(cidade);
-	rawdata = dataset.filter(function(i){return i.NOME_MUNICIPIO == cidade;})	
+	rawdata = dataset.filter(function(i){return i.NOME_MUNICIPIO == cidade;});	
 	
 	dicionario.sort(function (a, b) {
     			return getDesvio(a.desvio) - getDesvio(b.desvio);
@@ -37,11 +37,11 @@ function getMenuOption(selection) {
     
 };
 
-function plotNome(indicador){
+/*function plotNome(indicador){
 	d3.selectAll("svg")
 	.enter()
 	.text(indicador.name);
-}
+}*/
 
 function cleanContainers(){
 	d3.selectAll("svg")
@@ -202,7 +202,7 @@ function plotIndicadores(indicador) {
 		
 		var teste;
 		if (svg[0][0] == null){
-
+			
 			var svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", h);
 			
 			//eixo das barras
@@ -217,9 +217,16 @@ function plotIndicadores(indicador) {
 			plot_bars(svg , line_estado, line_micro, 270,currentYearData[indicador]);
 
 			//barra com as cores dos indicadores
-
-			plot_desvios_barras(svg,estado, indicador,100, parseFloat(currentYearData[indicador]));
 			
+			plot_desvios_barras(svg,estado, indicador,100, parseFloat(currentYearData[indicador]));
+
+
+			svg.append("text")
+			.attr("y", 60)
+			.style("text-align", "middle")
+			.text("Gráfico para indicador " + indicador + " referente ao ano " + currentYearData.ANO);
+			
+		
 			svg.append("text")
 				.attr("y", 100)
 				.style("text-align", "right")
@@ -261,6 +268,13 @@ function plotIndicadores(indicador) {
 
 			//barra com as cores dos indicadores
 			plot_desvios_barras(svg,estado, indicador,100,parseFloat(currentYearData[indicador]));
+			
+
+			svg.append("text")
+			.attr("y", 60)
+			.style("text-align", "middle")
+			.text("Gráfico para indicador " + indicador + " referente ao ano " + currentYearData.ANO);
+			
 			
 			svg.append("text")
 				.attr("y", 100)

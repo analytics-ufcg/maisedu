@@ -238,6 +238,12 @@ function plotGraph(indicador){//(nome_indicador){
 	
 		//legenda do grafico
 		
+		svg.append("text")
+		.attr("cx", 60)
+		.style("text-align", "middle")
+		.text("Evolução do indicador " + indicador + " ao longo dos últimos anos");
+		
+		
 		svg.append("circle")
 			.style("fill", "blue")
 			.attr("r", 4)
