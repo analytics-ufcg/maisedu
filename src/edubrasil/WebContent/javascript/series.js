@@ -215,8 +215,8 @@ function plotGraph(indicador){//(nome_indicador){
 			.attr('class', 'data-point')
 			.enter().append("circle")
 			.style('fill', "green")
-			.attr('cx', function(d) { return x(d.ANO) })
-			.attr('cy', function(d) { return y(d[indicador]) })
+			.attr('cx', function(d) { return x(d.ANO);})
+			.attr('cy', function(d) { return y(d[indicador]);})
 			.attr('r', 4)
 			.on("mouseover", function(d) {
 
@@ -239,9 +239,8 @@ function plotGraph(indicador){//(nome_indicador){
 		//legenda do grafico
 		
 		svg.append("text")
-		.attr("cx", 60)
-		.style("text-align", "middle")
-		.text("Evolução do indicador " + indicador + " ao longo dos últimos anos");
+		.attr("class", "titulo_grafico")
+		.text("Evolução do " + nomeIndicador(indicador));
 		
 		
 		svg.append("circle")

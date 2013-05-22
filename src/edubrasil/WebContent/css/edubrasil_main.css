@@ -28,14 +28,6 @@ html,body {
 	height: 70px;
 }
 
-#indicador_titulo {
-	background-color: black;
-	padding: 0;
-	margin: 0px;
-	color: #DCDCDC;
-	font-size: 3.75em;
-	height: 70px;
-}
 
 #menu {
 	background-color: black;
@@ -72,6 +64,11 @@ html,body {
     float: left;
     width: 75%;
 	background-color: white;
+}
+
+/*colocar no meio*/
+.titulo_grafico {
+	font-size: 1.75em;
 }
 
 #div_indicador_options {

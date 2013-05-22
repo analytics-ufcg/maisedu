@@ -111,10 +111,6 @@ function loadUpButtons() {
 			plotSeries(cidade,d.id);
 		});
 	});
-	d3.select("#indicador_titulo")
-	.append(p)
-	.text("Selecione Uma Cidade");
-	
 }
 
 //Pode retornar NA se não houver nenhum ano disponivel para o Indicador
@@ -156,6 +152,15 @@ function getButtonColor(colunaDesvio) {
 	else {
         return "indicador_branco";
 		//return "#E0E0E0";
+	}
+}
+
+//recebe o id do indicador e retorna o nome
+function nomeIndicador(indicador) {
+	for (var linha = 0; linha < dicionario.length; linha++) {
+		if(dicionario[linha].id == indicador) {
+			return dicionario[linha].name;
+		}
 	}
 }
 
@@ -218,13 +223,16 @@ function plotIndicadores(indicador) {
 
 			//barra com as cores dos indicadores
 			
+			
+			
 			plot_desvios_barras(svg,estado, indicador,100, parseFloat(currentYearData[indicador]));
 
 
 			svg.append("text")
+			.attr("class", "titulo_grafico")
 			.attr("y", 60)
 			.style("text-align", "middle")
-			.text("Gráfico para indicador " + indicador + " referente ao ano " + currentYearData.ANO);
+			.text(nomeIndicador(indicador) + " referente ao ano " + currentYearData.ANO);
 			
 		
 			svg.append("text")
@@ -271,9 +279,10 @@ function plotIndicadores(indicador) {
 			
 
 			svg.append("text")
+			.attr("class", "titulo_grafico")
 			.attr("y", 60)
 			.style("text-align", "middle")
-			.text("Gráfico para indicador " + indicador + " referente ao ano " + currentYearData.ANO);
+			.text(nomeIndicador(indicador) + " referente ao ano " + currentYearData.ANO);
 			
 			
 			svg.append("text")
@@ -302,32 +311,32 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 	
 	var cinza = dados_estado.filter(function(d){return(valores_nulos.indexOf(d["DESVIOS_MELHOR_" + indicador]) > -1 |
 														  valores_nulos.indexOf(d["DESVIOS_NEUTRO_" + indicador]) > -1 |
-														  valores_nulos.indexOf(d["DESVIOS_PIOR_" + indicador]) > -1)});
+														  valores_nulos.indexOf(d["DESVIOS_PIOR_" + indicador]) > -1);});
 	
 	var amarelo = dados_estado.filter(function(d){return(d["DESVIOS_MELHOR_" + indicador] == "-2" |
 														  d["DESVIOS_NEUTRO_" + indicador] == "-2" |
-														  d["DESVIOS_PIOR_" + indicador] == "-2")});
+														  d["DESVIOS_PIOR_" + indicador] == "-2");});
 														  
 	var laranja = dados_estado.filter(function(d){return(d["DESVIOS_MELHOR_" + indicador] == "-3" |
 														  d["DESVIOS_NEUTRO_" + indicador] == "-3" |
-														  d["DESVIOS_PIOR_" + indicador] == "-3")});
+														  d["DESVIOS_PIOR_" + indicador] == "-3");});
 
 	var vermelho = dados_estado.filter(function(d){return(d["DESVIOS_MELHOR_" + indicador] == "-4" |
 														  d["DESVIOS_NEUTRO_" + indicador] == "-4" |
-														  d["DESVIOS_PIOR_" + indicador] == "-4")});														
+														  d["DESVIOS_PIOR_" + indicador] == "-4");});														
 	
 	var verde = dados_estado.filter(function(d){return(d["DESVIOS_MELHOR_" + indicador] == "3" |
 														  d["DESVIOS_NEUTRO_" + indicador] == "3" |
-														  d["DESVIOS_PIOR_" + indicador] == "3")});
+														  d["DESVIOS_PIOR_" + indicador] == "3");});
 	
 	var x1 = d3.scale.linear()
-          .domain([(d3.min(dados_estado,function(d){return parseFloat(d[indicador])})),(d3.max(dados_estado,function(d){return parseFloat(d[indicador])}))])
+          .domain([(d3.min(dados_estado,function(d){return parseFloat(d[indicador]);})),(d3.max(dados_estado,function(d){return parseFloat(d[indicador]);}))])
           .range([120, 650]);
 
 	//linhas com cores referentes aos desvios do indicador
 	svg.append("line")
-		   .attr("x1", x1(d3.min(dados_estado,function(d){return parseFloat(d[indicador])})))
-		   .attr("x2", x1(d3.max(dados_estado,function(d){return parseFloat(d[indicador])})))
+		   .attr("x1", x1(d3.min(dados_estado,function(d){return parseFloat(d[indicador]);})))
+		   .attr("x2", x1(d3.max(dados_estado,function(d){return parseFloat(d[indicador]);})))
 		   .attr("y1",(y0))
 		   .attr("y2",(y0))
 		   .transition().duration(duration)
@@ -335,8 +344,8 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 		   .attr("stroke-width",10);
 	
 	 svg.append("line")
-		   .attr("x1", x1(d3.min(cinza,function(d){return parseFloat(d[indicador])})))
-		   .attr("x2", x1(d3.max(cinza,function(d){return parseFloat(d[indicador])})))
+		   .attr("x1", x1(d3.min(cinza,function(d){return parseFloat(d[indicador]);})))
+		   .attr("x2", x1(d3.max(cinza,function(d){return parseFloat(d[indicador]);})))
 		   .attr("y1",(y0))
 		   .attr("y2",(y0))
 		   .transition().duration(duration)
@@ -344,8 +353,8 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 		   .attr("stroke-width",10);
 	
 	 svg.append("line")
-		   .attr("x1", x1(d3.min(amarelo,function(d){return parseFloat(d[indicador])})))
-		   .attr("x2", x1(d3.max(amarelo,function(d){return parseFloat(d[indicador])})))
+		   .attr("x1", x1(d3.min(amarelo,function(d){return parseFloat(d[indicador]);})))
+		   .attr("x2", x1(d3.max(amarelo,function(d){return parseFloat(d[indicador]);})))
 		   .attr("y1",(y0))
 		   .attr("y2",(y0))
 		   .transition().duration(duration)
@@ -353,8 +362,8 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 		   .attr("stroke-width",10);
 		   
 	svg.append("line")
-		   .attr("x1", x1(d3.min(laranja,function(d){return parseFloat(d[indicador])})))
-		   .attr("x2", x1(d3.max(laranja,function(d){return parseFloat(d[indicador])})))
+		   .attr("x1", x1(d3.min(laranja,function(d){return parseFloat(d[indicador]);})))
+		   .attr("x2", x1(d3.max(laranja,function(d){return parseFloat(d[indicador]);})))
 		   .attr("y1",(y0))
 		   .attr("y2",(y0))
 		   .transition().duration(duration)
@@ -362,8 +371,8 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 		   .attr("stroke-width",10);
 		   
 	svg.append("line")
-		   .attr("x1", x1(d3.min(vermelho,function(d){return parseFloat(d[indicador])})))
-		   .attr("x2", x1(d3.max(vermelho,function(d){return parseFloat(d[indicador])})))
+		   .attr("x1", x1(d3.min(vermelho,function(d){return parseFloat(d[indicador]);})))
+		   .attr("x2", x1(d3.max(vermelho,function(d){return parseFloat(d[indicador]);})))
 		   .attr("y1",(y0))
 		   .attr("y2",(y0))
 		   .transition().duration(duration)
@@ -371,8 +380,8 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 		   .attr("stroke-width",10);
 	
 	svg.append("line")
-		   .attr("x1", x1(d3.min(verde,function(d){return parseFloat(d[indicador])})))
-		   .attr("x2", x1(d3.max(verde,function(d){return parseFloat(d[indicador])})))
+		   .attr("x1", x1(d3.min(verde,function(d){return parseFloat(d[indicador]);})))
+		   .attr("x2", x1(d3.max(verde,function(d){return parseFloat(d[indicador]);})))
 		   .attr("y1",(y0))
 		   .attr("y2",(y0))
 		   .transition().duration(duration)
@@ -389,8 +398,8 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 		  .attr("height" , 30)
 		  .style("fill", "black");
 	
-	if((parseFloat(valor_cidade) != d3.min(dados_estado,function(d){return parseFloat(d[indicador])})) & 
-		(parseFloat(valor_cidade) != d3.max(dados_estado,function(d){return parseFloat(d[indicador])}))){
+	if((parseFloat(valor_cidade) != d3.min(dados_estado,function(d){return parseFloat(d[indicador]);})) & 
+		(parseFloat(valor_cidade) != d3.max(dados_estado,function(d){return parseFloat(d[indicador]);}))){
 		svg.append("text")
 				.attr("x", x1(valor_cidade))
 				.attr("y",(y0 + 30))
