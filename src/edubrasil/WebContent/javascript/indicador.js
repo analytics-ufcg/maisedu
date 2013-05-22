@@ -175,11 +175,7 @@ function plotIndicadores(indicador) {
 		
 		//Create SVG element
 		var svg = d3.select("#div_indicador").select("svg");
-	
-		
-	
 		var estado = dataset.filter(function(d){return d[indicador] != "NA" & d.ANO == currentYearData.ANO;});
-			
 		var meso = dataset.filter(function(d){return d[indicador] != "NA" & d.NOME_MESO == currentYearData.NOME_MESO & d.ANO == currentYearData.ANO;});
 		
 		var micro = dataset.filter(function(d){return d[indicador] != "NA" & d.NOME_MICRO == currentYearData.NOME_MICRO & d.ANO == currentYearData.ANO;});
@@ -209,14 +205,20 @@ function plotIndicadores(indicador) {
 
 			var svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", h);
 			
+			//eixo das barras
 			plot_ranges(svg, line_estado, 100);
 			plot_ranges(svg, line_estado, 185);
 			plot_ranges(svg, line_estado, 270);
 			
-			plot_bars(svg, line_estado, line_estado, 100,currentYearData[indicador]);
+			
+			//barras cinzas equivalentes ao valor das regioes
+			//plot_bars(svg, line_estado, line_estado, 100,currentYearData[indicador]);
 			plot_bars(svg , line_estado, line_meso, 185,currentYearData[indicador]);
 			plot_bars(svg , line_estado, line_micro, 270,currentYearData[indicador]);
 
+			//barra com as cores dos indicadores
+
+			plot_desvios_barras(svg,estado, indicador,100, parseFloat(currentYearData[indicador]));
 			
 			svg.append("text")
 				.attr("y", 100)
@@ -243,19 +245,22 @@ function plotIndicadores(indicador) {
 			svg.selectAll("rect").transition()
 				 .remove();
 			
-			//svg.selectAll("circle").transition()
-			//	 .remove();
-			
 			svg.selectAll("text").transition()
 				 .remove();
 			
+			//eixo das barras
 			plot_ranges(svg, line_estado, 100);
 			plot_ranges(svg, line_estado, 185);
 			plot_ranges(svg, line_estado, 270);
 			
-			plot_bars(svg, line_estado, line_estado, 100,currentYearData[indicador]);
+			
+			//barras cinzas equivalentes ao valor das regioes
+			//plot_bars(svg, line_estado, line_estado, 100,currentYearData[indicador]);
 			plot_bars(svg , line_estado, line_meso, 185,currentYearData[indicador]);
 			plot_bars(svg , line_estado, line_micro, 270,currentYearData[indicador]);
+
+			//barra com as cores dos indicadores
+			plot_desvios_barras(svg,estado, indicador,100,parseFloat(currentYearData[indicador]));
 			
 			svg.append("text")
 				.attr("y", 100)
@@ -274,55 +279,177 @@ function plotIndicadores(indicador) {
 		d3.select("svg").remove();
 	}
 	
-};
+}
 
-function plot_bars(svg,dados,dados_regiao, y0, indicador_value){
+function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
+	//DESVIOS_MELHOR_ ou DESVIOS_NEUTRO ou DESVIOS_PIOR
 
+	var valores_nulos = ["-1","NA","1","2"];
+	
+	var cinza = dados_estado.filter(function(d){return(valores_nulos.indexOf(d["DESVIOS_MELHOR_" + indicador]) > -1 |
+														  valores_nulos.indexOf(d["DESVIOS_NEUTRO_" + indicador]) > -1 |
+														  valores_nulos.indexOf(d["DESVIOS_PIOR_" + indicador]) > -1)});
+	
+	var amarelo = dados_estado.filter(function(d){return(d["DESVIOS_MELHOR_" + indicador] == "-2" |
+														  d["DESVIOS_NEUTRO_" + indicador] == "-2" |
+														  d["DESVIOS_PIOR_" + indicador] == "-2")});
+														  
+	var laranja = dados_estado.filter(function(d){return(d["DESVIOS_MELHOR_" + indicador] == "-3" |
+														  d["DESVIOS_NEUTRO_" + indicador] == "-3" |
+														  d["DESVIOS_PIOR_" + indicador] == "-3")});
+
+	var vermelho = dados_estado.filter(function(d){return(d["DESVIOS_MELHOR_" + indicador] == "-4" |
+														  d["DESVIOS_NEUTRO_" + indicador] == "-4" |
+														  d["DESVIOS_PIOR_" + indicador] == "-4")});														
+	
+	var verde = dados_estado.filter(function(d){return(d["DESVIOS_MELHOR_" + indicador] == "3" |
+														  d["DESVIOS_NEUTRO_" + indicador] == "3" |
+														  d["DESVIOS_PIOR_" + indicador] == "3")});
+	
 	var x1 = d3.scale.linear()
-          .domain([dados[0].x, dados[1].x])
-          .range([110+ dados[0].x, 600+ dados[1].x]);
+          .domain([(d3.min(dados_estado,function(d){return parseFloat(d[indicador])})),(d3.max(dados_estado,function(d){return parseFloat(d[indicador])}))])
+          .range([120, 650]);
+
+	//linhas com cores referentes aos desvios do indicador
+	svg.append("line")
+		   .attr("x1", x1(d3.min(dados_estado,function(d){return parseFloat(d[indicador])})))
+		   .attr("x2", x1(d3.max(dados_estado,function(d){return parseFloat(d[indicador])})))
+		   .attr("y1",(y0))
+		   .attr("y2",(y0))
+		   .transition().duration(duration)
+		   .style("stroke",d3.rgb("#768d87"))
+		   .attr("stroke-width",10);
+	
+	 svg.append("line")
+		   .attr("x1", x1(d3.min(cinza,function(d){return parseFloat(d[indicador])})))
+		   .attr("x2", x1(d3.max(cinza,function(d){return parseFloat(d[indicador])})))
+		   .attr("y1",(y0))
+		   .attr("y2",(y0))
+		   .transition().duration(duration)
+		   .style("stroke",d3.rgb("#E0E0E0"))
+		   .attr("stroke-width",10);
+	
+	 svg.append("line")
+		   .attr("x1", x1(d3.min(amarelo,function(d){return parseFloat(d[indicador])})))
+		   .attr("x2", x1(d3.max(amarelo,function(d){return parseFloat(d[indicador])})))
+		   .attr("y1",(y0))
+		   .attr("y2",(y0))
+		   .transition().duration(duration)
+		   .style("stroke",d3.rgb("#FFCC00"))
+		   .attr("stroke-width",10);
+		   
+	svg.append("line")
+		   .attr("x1", x1(d3.min(laranja,function(d){return parseFloat(d[indicador])})))
+		   .attr("x2", x1(d3.max(laranja,function(d){return parseFloat(d[indicador])})))
+		   .attr("y1",(y0))
+		   .attr("y2",(y0))
+		   .transition().duration(duration)
+		   .style("stroke",d3.rgb("#FF6600"))
+		   .attr("stroke-width",10);
+		   
+	svg.append("line")
+		   .attr("x1", x1(d3.min(vermelho,function(d){return parseFloat(d[indicador])})))
+		   .attr("x2", x1(d3.max(vermelho,function(d){return parseFloat(d[indicador])})))
+		   .attr("y1",(y0))
+		   .attr("y2",(y0))
+		   .transition().duration(duration)
+		   .style("stroke",d3.rgb("#FF0000"))
+		   .attr("stroke-width",10);
 	
 	svg.append("line")
-		  .transition().duration(duration)
-		  .attr("x1", x1(dados_regiao[0].x))
-		  .attr("x2", x1(dados_regiao[1].x))
-		  .attr("y1",y0)
-		  .attr("y2",y0)
-		  .style("stroke",d3.rgb(200,200,200))
-		  .style("stroke-width", 10);
-			  
-	// svg.append("circle")
-		// .transition().duration(duration)
-		// .attr("cx", x1(parseFloat(indicador_value)) )	
-		// .attr("cy",y0)
-		// .style("fill","black")
-		// .attr("r", 6);
-		
+		   .attr("x1", x1(d3.min(verde,function(d){return parseFloat(d[indicador])})))
+		   .attr("x2", x1(d3.max(verde,function(d){return parseFloat(d[indicador])})))
+		   .attr("y1",(y0))
+		   .attr("y2",(y0))
+		   .transition().duration(duration)
+		   .style("stroke",d3.rgb("#74ad5a"))
+		   .attr("stroke-width",10);
+	
+	//plotando valor atual
+	
 	svg.append("rect")
 		  .transition().duration(duration).delay(1000)
-		  .attr("x", x1(indicador_value))
-		  .attr("y",(y0-8))
-		  .attr("width", 3)
-		  .attr("height" , 15)
+		  .attr("x", x1(valor_cidade))
+		  .attr("y",(y0-12))
+		  .attr("width", 1)
+		  .attr("height" , 30)
 		  .style("fill", "black");
 	
-	// svg.append("text")
-		// .transition().duration(duration).delay(500)
-		// .attr("x", x1(indicador_value))
-		// .attr("y", (y0 - 30))
-		// .text(cidade);
+	if((parseFloat(valor_cidade) != d3.min(dados_estado,function(d){return parseFloat(d[indicador])})) & 
+		(parseFloat(valor_cidade) != d3.max(dados_estado,function(d){return parseFloat(d[indicador])}))){
+		svg.append("text")
+				.attr("x", x1(valor_cidade))
+				.attr("y",(y0 + 30))
+				.attr("text-anchor", "middle")
+				.transition().duration(duration).delay(1000)
+				.text(parseFloat(valor_cidade).toFixed(2));
+	}
+	
+	svg.append("text")
+		.attr("x", x1(valor_cidade))
+		.attr("y",(y0 - 20))
+		.attr("text-anchor", "middle")
+		.transition().duration(duration).delay(1000)
+		.text(cidade);
+	
+}
+
+function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value){
+
+	var x1 = d3.scale.linear()
+          .domain([dados_estado[0].x, dados_estado[1].x])
+          .range([120, 650]);
+		
+	svg.append("line")
+		  .attr("x1", x1(dados_regiao[0].x))
+		  .attr("x2", x1(dados_regiao[1].x))
+		  .attr("y1",(y0))
+		  .attr("y2",(y0))
+		  .transition().duration(duration)
+		  .style("stroke",d3.rgb("#E0E0E0"))
+		  .attr("stroke-width",10);
+	
+	svg.append("rect")
+		  .transition().duration(duration).delay(1000)
+		  .attr("x", x1(dados_regiao[0].x))
+		  .attr("y",(y0-12))
+		  .attr("width", 1)
+		  .attr("height" , 30)
+		  .style("fill", "black");
+	
+	svg.append("rect")
+		  .transition().duration(duration).delay(1000)
+		  .attr("x", x1(dados_regiao[1].x))
+		  .attr("y",(y0-12))
+		  .attr("width", 1)
+		  .attr("height" , 30)
+		  .style("fill", "black");
+	
+	if((dados_estado[0].x != dados_regiao[0].x)){
+		svg.append("text")
+			.attr("x", x1(dados_regiao[0].x) - 10)
+			.attr("y",(y0 + 30))
+			.text((dados_regiao[0].x).toFixed(2));
+	}
+	if(dados_estado[1].x != dados_regiao[1].x){
+		svg.append("text")
+			.attr("x", x1(dados_regiao[1].x) - 10)
+			.attr("y",(y0 + 30))
+			.text((dados_regiao[1].x).toFixed(2));
+	}
+
 }
 
 function plot_ranges(svg, dados, y0){
-
 	var x1 = d3.scale.linear()
           .domain([dados[0].x, dados[1].x])
-          .range([110+ dados[0].x, 600+ dados[1].x]);
+          .range([120, 650]);
 
 	var xAxis = d3.svg.axis()
 			.scale(x1)
 			.orient("bottom")
-			.ticks(5);
+			.tickValues([dados[0].x,dados[1].x])
+			.ticks(6);
 			
 	svg.append("g")
 		  .attr("class", "x axis")
@@ -331,25 +458,20 @@ function plot_ranges(svg, dados, y0){
 		  .call(xAxis);
 	
 	svg.append("text")
-		.transition().duration(duration).delay(500)
-		.attr("x", (100 + dados[0].x))
-		.attr("y", (y0 + 30))
+		.attr("x", x1(dados[0].x) - 10)
+		.attr("y", (y0 + 44))
 		.text("Min");
 		
 	svg.append("text")
-		.transition().duration(duration).delay(500)
-		.attr("x", (590 + dados[1].x))
-		.attr("y", (y0 + 30))
+		.attr("x", x1(dados[1].x) - 10)
+		.attr("y", (y0 + 44))
 		.text("Max");
 	
 	svg.append("line")
-			  .transition().duration(duration)
-			  .attr("x1", 110 + dados[0].x)
-			  .attr("x2", 600 + dados[1].x)
+			  .attr("x1", x1(dados[0].x))
+			  .attr("x2", x1(dados[1].x))
 			  .attr("y1",y0)
 			  .attr("y2",y0)
-			  .style("stroke",d3.rgb(220,220,220))
+			  .style("stroke",d3.rgb("#F0F0F0"))
 			  .style("stroke-width", 25);
-			  
-
 }
