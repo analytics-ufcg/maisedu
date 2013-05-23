@@ -37,12 +37,6 @@ function getMenuOption(selection) {
     
 };
 
-/*function plotNome(indicador){
-	d3.selectAll("svg")
-	.enter()
-	.text(indicador.name);
-}*/
-
 function cleanContainers(){
 	d3.selectAll("svg")
     .remove();
@@ -247,7 +241,7 @@ function plotIndicadores(indicador) {
 		
 			svg.append("text")
 				.attr("y", 100)
-				.style("text-align", "right")
+				.attr("text-anchor", "right")
 				.text("Paraíba");
 			
 			svg.append("text")
@@ -409,7 +403,7 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 		  .attr("x", x1(valor_cidade))
 		  .attr("y",(y0-12))
 		  .attr("width", 1)
-		  .attr("height" , 30)
+		  .attr("height" , 30)//200)
 		  .style("fill", "black");
 	
 	if((parseFloat(valor_cidade) != d3.min(dados_estado,function(d){return parseFloat(d[indicador]);})) & 
@@ -422,10 +416,13 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 				.text(parseFloat(valor_cidade).toFixed(2));
 	}
 	
+	//font-weight: bold
+	
 	svg.append("text")
 		.attr("x", x1(valor_cidade))
 		.attr("y",(y0 - 20))
 		.attr("text-anchor", "middle")
+		.attr("font-weight", "bold")
 		.transition().duration(duration).delay(1000)
 		.text(cidade);
 	
