@@ -182,7 +182,6 @@ function plotIndicadores(indicador) {
 		var svg = d3.select("#div_indicador").select("svg");
 		var estado = dataset.filter(function(d){return d[indicador] != "NA" & d.ANO == currentYearData.ANO;});
 		var meso = dataset.filter(function(d){return d[indicador] != "NA" & d.NOME_MESO == currentYearData.NOME_MESO & d.ANO == currentYearData.ANO;});
-		
 		var micro = dataset.filter(function(d){return d[indicador] != "NA" & d.NOME_MICRO == currentYearData.NOME_MICRO & d.ANO == currentYearData.ANO;});
 		
 		var line_estado = [{'x' : d3.min(estado,function(d){return parseFloat(d[indicador])}) , 'y' : 100},
@@ -244,10 +243,20 @@ function plotIndicadores(indicador) {
 				.style("text-align", "right")
 				.attr("y", 187)
 				.text(currentYearData.NOME_MESO);
-				
+			
+			svg.append("text")
+			.style("text-align", "center")
+			.attr("y", 199)
+			.text("(Mesorregião)");
+			
 			svg.append("text")
 				.attr("y", 272)
 				.text(currentYearData.NOME_MESO);
+			
+			svg.append("text")
+			.style("text-align", "center")
+			.attr("y", 284)
+			.text("(Microrregião)");
 			
 		}else{
 
@@ -291,8 +300,8 @@ function plotIndicadores(indicador) {
 			
 			svg.append("text")
 				.attr("y", 187)
-				.text(currentYearData.NOME_MESO);
-				
+				//.text(currentYearData.NOME_MESO);
+				.text("Meso");
 			svg.append("text")
 				.attr("y", 272)
 				.text(currentYearData.NOME_MICRO);

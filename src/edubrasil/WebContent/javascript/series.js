@@ -278,11 +278,11 @@ function plotGraph(indicador){//(nome_indicador){
 		svg.append("text")
 			.attr("x", 650)
 			.attr("y", 332)
-			.text(micro);
+			.text("Microrregião");
 		svg.append("text")
 			.attr("x", 650)
 			.attr("y", 347)
-			.text(meso);
+			.text("Mesorregião");
 		
 	}
 }
