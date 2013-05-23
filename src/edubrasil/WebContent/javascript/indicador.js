@@ -204,16 +204,16 @@ function plotIndicadores(indicador) {
 		var line_micro = [{'x' :d3.min(micro,function(d){return parseFloat(d[indicador])}) , 'y' : 270},
 						  {'x': (d3.max(micro,function(d){return parseFloat(d[indicador])})), 'y' : 270}];
 		
-		if(indicador == "INDICADOR_7"){
-			line_estado = [{'x' : d3.min(estado,function(d){return parseFloat(d[indicador])/100}) , 'y' : 100},
-						   {'x':(d3.max(estado,function(d){return parseFloat(d[indicador])/100})), 'y' : 100}];
+		// if(indicador == "INDICADOR_7"){
+			// line_estado = [{'x' : d3.min(estado,function(d){return parseFloat(d[indicador])/100}) , 'y' : 100},
+						   // {'x':(d3.max(estado,function(d){return parseFloat(d[indicador])/100})), 'y' : 100}];
 					
-			line_meso =[{'x' : d3.min(meso,function(d){return parseFloat(d[indicador])/100}) , 'y' : 185}, 
-						{'x': (d3.max(meso,function(d){return parseFloat(d[indicador])/100})), 'y' : 185}];
+			// line_meso =[{'x' : d3.min(meso,function(d){return parseFloat(d[indicador])/100}) , 'y' : 185}, 
+						// {'x': (d3.max(meso,function(d){return parseFloat(d[indicador])/100})), 'y' : 185}];
 		
-			line_micro = [{'x' :d3.min(micro,function(d){return parseFloat(d[indicador])/100}) , 'y' : 270},
-						  {'x': (d3.max(micro,function(d){return parseFloat(d[indicador])/100})), 'y' : 270}];
-		}
+			// line_micro = [{'x' :d3.min(micro,function(d){return parseFloat(d[indicador])/100}) , 'y' : 270},
+						  // {'x': (d3.max(micro,function(d){return parseFloat(d[indicador])/100})), 'y' : 270}];
+		// }
 		
 		var teste;
 		if (svg[0][0] == null){
@@ -460,10 +460,12 @@ function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value){
 	
 
 	svg.append("text")
+		.attr("text-anchor","middle")
 		.attr("x", x1(dados_regiao[0].x) - 10)
 		.attr("y",(y0 + 30))
 		.text((dados_regiao[0].x).toFixed(2));
 	svg.append("text")
+		.attr("text-anchor","left")
 		.attr("x", x1(dados_regiao[1].x) - 10)
 		.attr("y",(y0 + 30))
 		.text((dados_regiao[1].x).toFixed(2));
