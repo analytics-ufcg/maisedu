@@ -296,7 +296,6 @@ function plotIndicadores(indicador) {
 			svg.append("text")
 				.attr("y", 100)
 				.text("Paraíba");
-			
 			svg.append("text")
 				.attr("y", 187)
 				//.text(currentYearData.NOME_MESO);
@@ -304,7 +303,17 @@ function plotIndicadores(indicador) {
 			svg.append("text")
 				.attr("y", 272)
 				.text(currentYearData.NOME_MICRO);
-
+				
+			svg.append("text")
+			.style("text-align", "center")
+			.attr("y", 284)
+			.text("(Microrregião)");
+			
+			svg.append("text")
+			.style("text-align", "center")
+			.attr("y", 199)
+			.text("(Mesorregião)");
+		
 		}
 	}else{
 		d3.select("svg").remove();
@@ -339,7 +348,7 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 	
 	var x1 = d3.scale.linear()
           .domain([(d3.min(dados_estado,function(d){return parseFloat(d[indicador]);})),(d3.max(dados_estado,function(d){return parseFloat(d[indicador]);}))])
-          .range([120, 650]);
+          .range([120, 750]);
 
 	//linhas com cores referentes aos desvios do indicador
 	svg.append("line")
@@ -422,7 +431,7 @@ function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value){
 
 	var x1 = d3.scale.linear()
           .domain([dados_estado[0].x, dados_estado[1].x])
-          .range([120, 650]);
+          .range([120, 750]);
 		
 	svg.append("line")
 		  .attr("x1", x1(dados_regiao[0].x))
@@ -449,48 +458,47 @@ function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value){
 		  .attr("height" , 30)
 		  .style("fill", "black");
 	
-	if((dados_estado[0].x != dados_regiao[0].x)){
-		svg.append("text")
-			.attr("x", x1(dados_regiao[0].x) - 10)
-			.attr("y",(y0 + 30))
-			.text((dados_regiao[0].x).toFixed(2));
-	}
-	if(dados_estado[1].x != dados_regiao[1].x){
-		svg.append("text")
-			.attr("x", x1(dados_regiao[1].x) - 10)
-			.attr("y",(y0 + 30))
-			.text((dados_regiao[1].x).toFixed(2));
-	}
+
+	svg.append("text")
+		.attr("x", x1(dados_regiao[0].x) - 10)
+		.attr("y",(y0 + 30))
+		.text((dados_regiao[0].x).toFixed(2));
+	svg.append("text")
+		.attr("x", x1(dados_regiao[1].x) - 10)
+		.attr("y",(y0 + 30))
+		.text((dados_regiao[1].x).toFixed(2));
 
 }
 
 function plot_ranges(svg, dados, y0){
 	var x1 = d3.scale.linear()
           .domain([dados[0].x, dados[1].x])
-          .range([120, 650]);
+          .range([120, 750]);
 
 	var xAxis = d3.svg.axis()
 			.scale(x1)
 			.orient("bottom")
-			.tickValues([dados[0].x,dados[1].x])
+			.tickValues([parseFloat(dados[0].x).toFixed(2),parseFloat(dados[1].x).toFixed(2)])
 			.ticks(6);
-			
-	svg.append("g")
+	
+	if(y0 == 100){
+		svg.append("g")
 		  .attr("class", "x axis")
 		  .attr("transform", "translate(0," + (y0+12) + ")")
 		  .transition().duration(duration).delay(500)
 		  .call(xAxis);
-	
-	svg.append("text")
-		.attr("x", x1(dados[0].x) - 10)
-		.attr("y", (y0 + 44))
-		.text("Min");
 		
-	svg.append("text")
-		.attr("x", x1(dados[1].x) - 10)
-		.attr("y", (y0 + 44))
-		.text("Max");
-	
+		svg.append("text")
+			.attr("x", x1(dados[0].x) - 10)
+			.attr("y", (y0 + 44))
+			.text("Min");
+			
+		svg.append("text")
+			.attr("x", x1(dados[1].x) - 10)
+			.attr("y", (y0 + 44))
+			.text("Max");	
+	}
+
 	svg.append("line")
 			  .attr("x1", x1(dados[0].x))
 			  .attr("x2", x1(dados[1].x))
