@@ -398,33 +398,23 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 	
 	//plotando valor atual
 	
-	svg.append("rect")
+	svg.append("line")
 		  .transition().duration(duration).delay(1000)
-		  .attr("x", x1(valor_cidade))
-		  .attr("y",(y0-12))
-		  .attr("width", 1)
-		  .attr("height" , 30)//200)
-		  .style("fill", "black");
-	
-	if((parseFloat(valor_cidade) != d3.min(dados_estado,function(d){return parseFloat(d[indicador]);})) & 
-		(parseFloat(valor_cidade) != d3.max(dados_estado,function(d){return parseFloat(d[indicador]);}))){
-		svg.append("text")
-				.attr("x", x1(valor_cidade))
-				.attr("y",(y0 + 30))
-				.attr("text-anchor", "middle")
-				.transition().duration(duration).delay(1000)
-				.text(parseFloat(valor_cidade).toFixed(2));
-	}
-	
+		  .attr("x1", x1(valor_cidade))
+		  .attr("x2", x1(valor_cidade) + 1)
+		  .attr("y1" , (y0 - 12))
+		  .style("stroke-dasharray", ("5, 3"))
+		  .attr("y2", 283)//200
+		  .attr("stroke","black");
+
 	//font-weight: bold
-	
 	svg.append("text")
 		.attr("x", x1(valor_cidade))
 		.attr("y",(y0 - 20))
 		.attr("text-anchor", "middle")
 		.attr("font-weight", "bold")
 		.transition().duration(duration).delay(1000)
-		.text(cidade);
+		.text(cidade + ": " + (parseFloat(valor_cidade).toFixed(2)));
 	
 }
 
