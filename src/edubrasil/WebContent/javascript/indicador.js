@@ -298,8 +298,8 @@ function plotIndicadores(indicador) {
 				.text("Paraíba");
 			svg.append("text")
 				.attr("y", 187)
-				//.text(currentYearData.NOME_MESO);
-				.text("Meso");
+				.text(currentYearData.NOME_MESO);
+			
 			svg.append("text")
 				.attr("y", 272)
 				.text(currentYearData.NOME_MICRO);
