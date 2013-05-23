@@ -46,6 +46,8 @@ function getMenuOption(selection) {
 function cleanContainers(){
 	d3.selectAll("svg")
     .remove();
+	
+	d3.selectAll("h1").remove();
 }
 
 Array.prototype.unique = function() {
@@ -111,6 +113,21 @@ function loadUpButtons() {
 			plotSeries(cidade,d.id);
 		});
 	});
+}
+
+//Plota o titulo do indicador
+function plotTitulosGraficos(indicador, ano) {
+	d3.selectAll("h1").remove();
+	
+	d3.select("#div_indicador_titulo")
+	.append("h1")
+	.attr("class", "titulo_grafico")
+	.text(nomeIndicador(indicador) + " - " + ano);
+	
+	d3.select("#div_series_titulo")
+	.append("h1")
+	.attr("class", "titulo_grafico")
+	.text(nomeIndicador(indicador) + " nos últimos anos");
 }
 
 //Pode retornar NA se não houver nenhum ano disponivel para o Indicador
@@ -226,13 +243,7 @@ function plotIndicadores(indicador) {
 			
 			plot_desvios_barras(svg,estado, indicador,100, parseFloat(currentYearData[indicador]));
 
-
-			svg.append("text")
-			.attr("class", "titulo_grafico")
-			.attr("y", 60)
-			.style("text-align", "middle")
-			.text(nomeIndicador(indicador) + " referente ao ano " + currentYearData.ANO);
-			
+			plotTitulosGraficos(indicador, currentYearData.ANO);			
 		
 			svg.append("text")
 				.attr("y", 100)
@@ -284,15 +295,9 @@ function plotIndicadores(indicador) {
 			plot_bars(svg , line_estado, line_micro, 270,currentYearData[indicador]);
 
 			//barra com as cores dos indicadores
-			plot_desvios_barras(svg,estado, indicador,100,parseFloat(currentYearData[indicador]));
-			
+			plot_desvios_barras(svg,estado, indicador,100,parseFloat(currentYearData[indicador]));			
 
-			svg.append("text")
-			.attr("class", "titulo_grafico")
-			.attr("y", 60)
-			.style("text-align", "middle")
-			.text(nomeIndicador(indicador) + " referente ao ano " + currentYearData.ANO);
-			
+			plotTitulosGraficos(indicador, currentYearData.ANO);			
 			
 			svg.append("text")
 				.attr("y", 100)
