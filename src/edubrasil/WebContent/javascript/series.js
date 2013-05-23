@@ -141,6 +141,9 @@ function plotGraph(indicador){//(nome_indicador){
 			.attr('r', 4)
 			.on("mouseover", function(d) {
 
+				//Get indicator value and tranform to float
+				var valorIndicador = parseFloat(d[indicador]);
+				
 				//Get the values for tooltip position
 				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
 				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
@@ -148,7 +151,7 @@ function plotGraph(indicador){//(nome_indicador){
 				//Update the tooltip position and value
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(d[indicador]);
+				.select("#value").text(valorIndicador.toFixed(2));
 
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);})
@@ -166,6 +169,9 @@ function plotGraph(indicador){//(nome_indicador){
 			.attr('cy', function(d) { return y(d[indicador]) })
 			.attr('r', 4)
 			.on("mouseover", function(d) {
+				
+				//Get indicator value and tranform to float
+				var valorIndicador = parseFloat(d[indicador]);
 
 				//Get the values for tooltip position
 				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
@@ -174,7 +180,7 @@ function plotGraph(indicador){//(nome_indicador){
 				//Update the tooltip position and value
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(d[indicador]);
+				.select("#value").text(valorIndicador.toFixed(2));
 
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);})
@@ -193,6 +199,9 @@ function plotGraph(indicador){//(nome_indicador){
 			.attr('cy', function(d) { return y(d[indicador]) })
 			.attr('r', 4)
 			.on("mouseover", function(d) {
+				
+				//Get indicator value and tranform to float
+				var valorIndicador = parseFloat(d[indicador]);
 
 				//Get the values for tooltip position
 				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
@@ -201,7 +210,7 @@ function plotGraph(indicador){//(nome_indicador){
 				//Update the tooltip position and value
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(d[indicador]);
+				.select("#value").text(valorIndicador.toFixed(2));
 
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);})
@@ -219,6 +228,9 @@ function plotGraph(indicador){//(nome_indicador){
 			.attr('cy', function(d) { return y(d[indicador]);})
 			.attr('r', 4)
 			.on("mouseover", function(d) {
+				
+				//Get indicator value and tranform to float
+				var valorIndicador = parseFloat(d[indicador]);
 
 				//Get the values for tooltip position
 				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
@@ -227,7 +239,7 @@ function plotGraph(indicador){//(nome_indicador){
 				//Update the tooltip position and value
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(d[indicador]);
+				.select("#value").text(valorIndicador.toFixed(2));
 
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);})
