@@ -247,13 +247,6 @@ function plotGraph(indicador){//(nome_indicador){
 			.on("mouseout", function() {//Hide the tooltip
 					d3.select("#tooltip").classed("hidden", true);
 			});	
-	
-		//legenda do grafico
-		
-		svg.append("text")
-		.attr("class", "titulo_grafico")
-		.text("Evolução do " + nomeIndicador(indicador));
-		
 		
 		svg.append("circle")
 			.style("fill", "blue")

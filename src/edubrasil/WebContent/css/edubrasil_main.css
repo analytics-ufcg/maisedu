@@ -69,6 +69,8 @@ html,body {
 /*colocar no meio*/
 .titulo_grafico {
 	font-size: 1.75em;
+	orient: "bottom";
+	color: #000000;
 }
 
 #div_indicador_options {
