@@ -87,9 +87,9 @@ function plotGraph(indicador){//(nome_indicador){
 		var line = d3.svg.line()
 			.x(function(d) { return x(d.ANO); })
 			.y(function(d) { return y(parseFloat(d[indicador]));});
-
+		
 		x.domain(d3.extent(dados_estado, function(d) { return d.ANO; }));
-		y.domain([d3.min(val_y),d3.max(val_y)]);
+		y.domain([d3.min(val_y) * 0.95 , d3.max(val_y) * 1.05]);
 		
 		svg.append("g")
 		  .attr("class", "x axis")
@@ -136,8 +136,8 @@ function plotGraph(indicador){//(nome_indicador){
 			.attr('class', 'data-point')
 			.enter().append("circle")
 			.style('fill', "blue")
-			.attr('cx', function(d) { return x(d.ANO) })
-			.attr('cy', function(d) { return y(d[indicador]) })
+			.attr('cx', function(d) { return x(d.ANO);})
+			.attr('cy', function(d) { return y(d[indicador]);})
 			.attr('r', 4)
 			.on("mouseover", function(d) {
 
@@ -165,8 +165,8 @@ function plotGraph(indicador){//(nome_indicador){
 			.attr('class', 'data-point')
 			.enter().append("circle")
 			.style('fill', "red")
-			.attr('cx', function(d) { return x(d.ANO) })
-			.attr('cy', function(d) { return y(d[indicador]) })
+			.attr('cx', function(d) { return x(d.ANO);})
+			.attr('cy', function(d) { return y(d[indicador]);})
 			.attr('r', 4)
 			.on("mouseover", function(d) {
 				
@@ -195,8 +195,8 @@ function plotGraph(indicador){//(nome_indicador){
 			.attr('class', 'data-point')
 			.enter().append("circle")
 			.style('fill', "orange")
-			.attr('cx', function(d) { return x(d.ANO) })
-			.attr('cy', function(d) { return y(d[indicador]) })
+			.attr('cx', function(d) { return x(d.ANO);})
+			.attr('cy', function(d) { return y(d[indicador]);})
 			.attr('r', 4)
 			.on("mouseover", function(d) {
 				
