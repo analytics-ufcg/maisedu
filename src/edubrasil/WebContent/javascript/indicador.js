@@ -5,6 +5,7 @@ var cidade = "";
 var duration = 1000;
 var w = 800;
 var h = 350;
+var mensagemBotaoCinza = "Indicador sem dados. Escolha outro indicador";
 
 //Recebe uma cidade e pinta os botoes
 function getMenuOption(selection) {
@@ -103,8 +104,20 @@ function loadUpButtons() {
 		.attr("id", function (d, i){return d.id;})
         .attr("class", "indicador indicador_cinza")
 		.on("click", function(d) {
-			plotIndicadores(d.id);
-			plotSeries(cidade,d.id);
+			
+			//limpa tela caso o botao clicado seja cinza(inativo)
+			if(getButtonColor(d.desvio) == "indicador_cinza"){
+				cleanContainers();
+				
+				d3.select("#div_indicador_titulo")
+				.append("h1")
+				.attr("class", "titulo_grafico")
+				.text(mensagemBotaoCinza);
+
+			}else{			
+				plotIndicadores(d.id);
+				plotSeries(cidade,d.id);
+			}
 		});
 	});
 }
@@ -180,14 +193,15 @@ function plotIndicadores(indicador) {
 // e se todos forem NAs?
 	
 	//Width and height
-	
+
 	
 	if(rawdata.length != 0){
-		
 		
 		var maxYear = d3.max(rawdata.filter(function(d){return d[indicador] != "NA";}).map(function(d){return parseInt(d.ANO)}));
 		var currentYearData = rawdata.filter(function(d){return d.ANO == maxYear;})[0];
 		var subset = [10, parseFloat(currentYearData[indicador])];
+
+		
 		
 		//Create SVG element
 		var svg = d3.select("#div_indicador").select("svg");
@@ -215,8 +229,12 @@ function plotIndicadores(indicador) {
 						  // {'x': (d3.max(micro,function(d){return parseFloat(d[indicador])/100})), 'y' : 270}];
 		// }
 		
+		
+		
 		var teste;
 		if (svg[0][0] == null){
+			
+			
 			
 			var svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", h);
 			
@@ -263,6 +281,7 @@ function plotIndicadores(indicador) {
 			.attr("y", 284)
 			.text("(Microrregião)");
 			
+
 		}else{
 
 			svg.selectAll("g").transition()
@@ -315,6 +334,8 @@ function plotIndicadores(indicador) {
 			.text("(Mesorregião)");
 		
 		}
+		
+		
 	}else{
 		d3.select("svg").remove();
 	}
