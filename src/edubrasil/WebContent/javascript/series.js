@@ -63,7 +63,7 @@ function plotGraph(indicador){//(nome_indicador){
 		}
 		
 		svg = d3.select("#div_series").append("svg")
-			.attr("width", width + margin.left + margin.right + 100)
+			.attr("width", width + margin.left + margin.right + 150)
 			.attr("height", height + margin.top + margin.bottom)
 			.append("g")
 			.attr("transform", "translate(" + (margin.left + 50) + "," + margin.top + ")");
