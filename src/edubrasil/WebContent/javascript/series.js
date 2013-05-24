@@ -63,7 +63,7 @@ function plotGraph(indicador){//(nome_indicador){
 		}
 		
 		svg = d3.select("#div_series").append("svg")
-			.attr("width", width + margin.left + margin.right)
+			.attr("width", width + margin.left + margin.right + 100)
 			.attr("height", height + margin.top + margin.bottom)
 			.append("g")
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -287,7 +287,6 @@ function plotGraph(indicador){//(nome_indicador){
 		svg.append("text")
 			.attr("x", 650)
 			.attr("y", 347)
-			.text("Mesorregião");
-		
+			.text("Mesorregião");		
 	}
 }
