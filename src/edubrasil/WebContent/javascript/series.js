@@ -66,7 +66,7 @@ function plotGraph(indicador){//(nome_indicador){
 			.attr("width", width + margin.left + margin.right + 100)
 			.attr("height", height + margin.top + margin.bottom)
 			.append("g")
-			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+			.attr("transform", "translate(" + (margin.left + 50) + "," + margin.top + ")");
 		
 		
 		var x = d3.time.scale()

@@ -5,7 +5,7 @@ var cidade = "";
 var duration = 1000;
 var w = 800;
 var h = 350;
-var mensagemBotaoCinza = "Indicador sem dados. Escolha outro indicador";
+var mensagemBotaoCinza = "Dados Indisponíveis";
 
 //Recebe uma cidade e pinta os botoes
 function getMenuOption(selection) {
