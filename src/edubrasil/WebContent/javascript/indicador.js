@@ -268,18 +268,18 @@ function plotIndicadores(indicador) {
 				.text(currentYearData.NOME_MESO);
 			
 			svg.append("text")
-			.style("text-align", "center")
-			.attr("y", 199)
-			.text("(Mesorregião)");
+				.style("text-align", "center")
+				.attr("y", 199)
+				.text("(Mesorregião)");
 			
 			svg.append("text")
 				.attr("y", 272)
 				.text(currentYearData.NOME_MESO);
 			
 			svg.append("text")
-			.style("text-align", "center")
-			.attr("y", 284)
-			.text("(Microrregião)");
+				.style("text-align", "center")
+				.attr("y", 284)
+				.text("(Microrregião)");
 			
 
 		}else{
@@ -315,6 +315,7 @@ function plotIndicadores(indicador) {
 			svg.append("text")
 				.attr("y", 100)
 				.text("Paraíba");
+			
 			svg.append("text")
 				.attr("y", 187)
 				.text(currentYearData.NOME_MESO);
@@ -324,14 +325,14 @@ function plotIndicadores(indicador) {
 				.text(currentYearData.NOME_MICRO);
 				
 			svg.append("text")
-			.style("text-align", "center")
-			.attr("y", 284)
-			.text("(Microrregião)");
+				.style("text-align", "center")
+				.attr("y", 284)
+				.text("(Microrregião)");
 			
 			svg.append("text")
-			.style("text-align", "center")
-			.attr("y", 199)
-			.text("(Mesorregião)");
+				.style("text-align", "center")
+				.attr("y", 199)
+				.text("(Mesorregião)");
 		
 		}
 		

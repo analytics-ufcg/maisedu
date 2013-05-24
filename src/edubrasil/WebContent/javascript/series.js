@@ -252,41 +252,48 @@ function plotGraph(indicador){//(nome_indicador){
 			.style("fill", "blue")
 			.attr("r", 4)
 			.attr("cx", 645)
-			.attr("cy", 300);
+			.attr("cy", 110);
 		
 		svg.append("circle")
 			.style("fill", "red")
 			.attr("r", 4)
 			.attr("cx", 645)
-			.attr("cy", 315);
+			.attr("cy", 125);
 			
 		svg.append("circle")
 			.style("fill", "orange")
 			.attr("r", 4)
 			.attr("cx", 645)
-			.attr("cy", 330);
+			.attr("cy", 140);
 			
 		svg.append("circle")
 			.style("fill", "green")
 			.attr("r", 4)
 			.attr("cx", 645)
-			.attr("cy", 345);
+			.attr("cy", 155);
 		
 		svg.append("text")
 			.attr("x", 650)
-			.attr("y", 302)
+			.attr("y", 112)
+			.attr("font-weight", "bold")
 			.text(cidade);
+		
 		svg.append("text")
 			.attr("x", 650)
-			.attr("y", 317)
+			.attr("y", 127)
+			.attr("font-weight", "bold")
 			.text("Paraíba");
+		
 		svg.append("text")
 			.attr("x", 650)
-			.attr("y", 332)
+			.attr("y", 142)
+			.attr("font-weight", "bold")
 			.text("Microrregião");
+		
 		svg.append("text")
 			.attr("x", 650)
-			.attr("y", 347)
+			.attr("y", 157)
+			.attr("font-weight", "bold")
 			.text("Mesorregião");		
 	}
 }
