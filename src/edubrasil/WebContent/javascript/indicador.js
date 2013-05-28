@@ -323,7 +323,7 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
           .domain([min,max])
           .range([120, 750]);
 		  
-	desvios(svg,desvio,media,y0,min,max,dado_indicador[0].referencial_maior);
+	desvios(svg,desvio,media,y0,min,max,dado_indicador[0].referencial_maior,dados_estado,indicador);
 	
 	//plotando valor atual
 	svg.append("line")
@@ -345,7 +345,9 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 		.text(cidade + ": " + (parseFloat(valor_cidade).toFixed(2)));
 }
 
-function desvios(svg,desvio,media, y0,min, max, referencial){
+function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
+	var min_cidade,max_cidade;
+	
 	var x1 = d3.scale.linear()
           .domain([min,max])
           .range([120, 750]);
@@ -353,55 +355,83 @@ function desvios(svg,desvio,media, y0,min, max, referencial){
 	if(referencial == "melhor" | referencial == "neutro"){
 		//amarelo
 		if((media - (desvio) < max) & (media - (2*desvio) > min)){
-			addLine(svg,x1(media - (desvio)),x1(media - (2*desvio)),y0,y0,"#FFCC00",10);
+			addLine(svg,x1(media - (2*desvio)),x1(media - (desvio)),y0,y0,"#FFCC00",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media - (desvio)));}), indicador,"#FFCC00",min,max,10,y0);
 		}else if((media - (desvio) > max) & (media - (2*desvio) > min)){
+			console.log("estou aqui");
 			addLine(svg,x1(max),x1(media - (2*desvio)),y0,y0,"#FFCC00",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= max)}), indicador,"#FFCC00",min,max,10,y0);
 		}else if((media - (desvio) < max) & (media - (2*desvio) < min)){
 			addLine(svg,x1(media - (desvio)),x1(min),y0,y0,"#FFCC00",10);
+			 plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= min & d[indicador] <= media - (desvio))}), indicador,"#FFCC00",min,max,10,y0);
 		}
 		//laranja
 		if((media - (2*desvio) < max) & (media - (3*desvio) > min)){
 			addLine(svg,x1(media - (2*desvio)),x1(media - (3*desvio)),y0,y0,"#FF6600",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (3*desvio)) & d[indicador] <= (media - (2*desvio)));}), indicador,"#FF6600",min,max,10,y0);
 		}else if((media - (2*desvio) > max) & (media - (3*desvio) > min)){
 			addLine(svg,x1(max),x1(media - (3*desvio)),y0,y0,"#FF6600",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= max);}), indicador,"#FF6600",min,max,10,y0);
 		}else if((media - (3*desvio) < min) & (media - (2*desvio) > min)){
 			addLine(svg,x1(media - (2*desvio)),x1(min),y0,y0,"#FF6600",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (2*desvio)));}), indicador,"#FF6600",min,max,10,y0);
 		 }
 		//vermelho
 		if((media - (3*desvio) > min) & (media - (2*desvio) > min) & (media - desvio > min)){
 			addLine(svg,x1(media - (3*desvio)),x1(min),y0,y0,"#FF0000",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (3*desvio)));}), indicador,"#FF0000",min,max,10,y0);
 		}
 		//verde
 		if(media + (2*desvio) < max){
 			addLine(svg,x1(max),x1(media + (2*desvio)),y0,y0,"green",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (max));}), indicador,"green",min,max,10,y0);
+		}
+		//cinza
+		if((media - desvio > min) & (media +(2*desvio) < max)){
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - desvio ) & d[indicador] <= (media +(2*desvio)));}), indicador,"#E0E0E0",min,max,10,y0);
+		}else if((media - desvio > min) & (media +(2*desvio) > max)){
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - desvio ) & d[indicador] <= (max))}), indicador,"#E0E0E0",min,max,10,y0);
 		}
 		
 	}else{
 		 //vermelho
 		if(media + (3*desvio) < max){
 			addLine(svg,x1(media + (3*desvio)),x1(max),y0,y0,"#FF0000",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (3*desvio)) & d[indicador] <= (max))}), indicador,"#FF0000",min,max,10,y0);
 		}
 		//laranja
 		if((media + (3*desvio) < max) & (media + (2*desvio) > min)){
 			addLine(svg,x1(media + (3*desvio)),x1(media + (2*desvio)),y0,y0,"#FF6600",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (media + (3*desvio)))}), indicador,"#FF6600",min,max,10,y0);
 		}else if((media + (3*desvio) > max) & (media +(2*desvio) > min)){
 			addLine(svg,x1(media + (2*desvio)),x1(max),y0,y0,"#FF6600",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (max))}), indicador,"#FF6600",min,max,10,y0);
 		}else if((media +(3*desvio) < max) & (media + (2*desvio) < min)){
 			addLine(svg,x1(min),x1(media + (3*desvio)),y0,y0,"#FF6600",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media + (3*desvio)))}), indicador,"#FF6600",min,max,10,y0);
 		}
 		//amarelo
 		if((media + (2*desvio) < max) & (media + (desvio) > min)){
 			addLine(svg,x1(media + (desvio)),x1(media + (2*desvio)),y0,y0,"#FFCC00",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (desvio)) & d[indicador] <= (media + (2*desvio)))}), indicador,"#FFCC00",min,max,10,y0);
 		}else if((media + (2*desvio) > max) & (media +(desvio) > min)){
 			addLine(svg,x1(media + (2*desvio)),x1(max),y0,y0,"#FFCC00",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (max))}), indicador,"#FFCC00",min,max,10,y0);
 		}else if((media +(2*desvio) < max) & (media+(desvio) < min)){
 			addLine(svg,x1(min),x1(media + (2*desvio)),y0,y0,"#FFCC00",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media + (2*desvio)))}), indicador,"#FFCC00",min,max,10,y0);
 		}
 		//verde
 		if((media - (2*desvio) > min)){
 			addLine(svg,x1(media - (2*desvio)),x1(min),y0,y0,"green",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (2*desvio)))}), indicador,"green",min,max,10,y0);
 		}
-	
+		//cinza
+		if((media - (2*desvio) > min) & (media + (desvio) < max)){
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media + (desvio)));}), indicador,"#E0E0E0",min,max,10,y0);
+		}else if((media - (2*desvio) < min) & (media +(desvio) < max)){
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media +(desvio)))}), indicador,"#E0E0E0",min,max,10,y0);
+		}
 	}
 	
 }
@@ -496,12 +526,47 @@ function sd(theArray, indicador) {
 }
 
 function addLine(svg,x1,x2,y1,y2,cor,largura){
-	svg.append("line")
+	
+	if(y1 > 100){
+		svg.append("line")
 			  .attr("x1", x1)
 			  .attr("x2", x2)
 			  .attr("y1",y1)
 			  .attr("y2",y2)
 			  .transition().duration(duration)
 			  .style("stroke",cor)
-			  .attr("stroke-width",largura);
+			  //.attr("opacity",0.2)
+			  .attr("stroke-width",25);
+	}else{
+		svg.append("line")
+			  .attr("x1", x1)
+			  .attr("x2", x2)
+			  .attr("y1",y1)
+			  .attr("y2",y2)
+			  .transition().duration(duration)
+			  .style("stroke",cor)
+			  .attr("opacity",0.2)
+			  .attr("stroke-width",25);
+	}
+}
+
+function plot_cidades(svg, dados, indicador,cor, min, max,largura, y0){
+	var x1 = d3.scale.linear()
+          .domain([min,max])
+          .range([120, 750]);
+	
+	
+	for(var i = 0; i< dados.length;i++){
+		var tmp = dados[i];
+		//console.log(tmp[indicador]);
+		 svg.append("line")
+		   .attr("x1", x1(tmp[indicador]))
+		   .attr("x2", x1(tmp[indicador]) + 2)
+		   .attr("y1",y0)
+		   .attr("y2",y0)
+		   .transition().duration(duration)
+		   .style("stroke",cor)
+		   .attr("opacity",0.7)
+		   .attr("stroke-width",24);
+	}
 }
