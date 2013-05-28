@@ -182,30 +182,30 @@ function nomeIndicador(indicador) {
 
 //Plota grafico
 function plotIndicadores(indicador) {
+	var svg;
 	if(rawdata.length != 0){
-		var maxYear = d3.max(rawdata.filter(function(d){return d[indicador] != "NA";}).map(function(d){return parseInt(d.ANO)}));
+		var maxYear = d3.max(rawdata.filter(function(d){return d[indicador] != "NA";}).map(function(d){return parseInt(d.ANO);}));
 		var currentYearData = rawdata.filter(function(d){return d.ANO == maxYear;})[0];
-		var subset = [10, parseFloat(currentYearData[indicador])];
 
 		//Create SVG element
-		var svg = d3.select("#div_indicador").select("svg");
+		svg = d3.select("#div_indicador").select("svg");
 		var estado = dataset.filter(function(d){return d[indicador] != "NA" & d.ANO == currentYearData.ANO;});
 		var meso = dataset.filter(function(d){return d[indicador] != "NA" & d.NOME_MESO == currentYearData.NOME_MESO & d.ANO == currentYearData.ANO;});
 		var micro = dataset.filter(function(d){return d[indicador] != "NA" & d.NOME_MICRO == currentYearData.NOME_MICRO & d.ANO == currentYearData.ANO;});
 		
-		var line_estado = [{'x' : d3.min(estado,function(d){return parseFloat(d[indicador])}) , 'y' : 100},
-						   {'x':(d3.max(estado,function(d){return parseFloat(d[indicador])})), 'y' : 100}];
+		var line_estado = [{'x' : d3.min(estado,function(d){return parseFloat(d[indicador]);}) , 'y' : 100},
+						   {'x':(d3.max(estado,function(d){return parseFloat(d[indicador]);})), 'y' : 100}];
 					
-		var line_meso =[{'x' : d3.min(meso,function(d){return parseFloat(d[indicador])}) , 'y' : 185}, 
-						{'x': (d3.max(meso,function(d){return parseFloat(d[indicador])})), 'y' : 185}];
+		var line_meso =[{'x' : d3.min(meso,function(d){return parseFloat(d[indicador]);}) , 'y' : 185}, 
+						{'x': (d3.max(meso,function(d){return parseFloat(d[indicador]);})), 'y' : 185}];
 		
-		var line_micro = [{'x' :d3.min(micro,function(d){return parseFloat(d[indicador])}) , 'y' : 270},
-						  {'x': (d3.max(micro,function(d){return parseFloat(d[indicador])})), 'y' : 270}];
+		var line_micro = [{'x' :d3.min(micro,function(d){return parseFloat(d[indicador]);}) , 'y' : 270},
+						  {'x': (d3.max(micro,function(d){return parseFloat(d[indicador]);})), 'y' : 270}];
 
-		var teste;
+		
 		if (svg[0][0] == null){
 
-			var svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", h);
+			svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", h);
 			
 			//eixo das barras
 			plot_ranges(svg, line_estado, 100);
@@ -432,12 +432,12 @@ function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value){
 
 	svg.append("text")
 		.attr("text-anchor","middle")
-		.attr("x", x1(dados_regiao[0].x) - 10)
+		.attr("x", x1(dados_regiao[0].x) - 2)
 		.attr("y",(y0 + 30))
 		.text((dados_regiao[0].x).toFixed(2));
 	svg.append("text")
 		.attr("text-anchor","left")
-		.attr("x", x1(dados_regiao[1].x) - 10)
+		.attr("x", x1(dados_regiao[1].x) - 15)
 		.attr("y",(y0 + 30))
 		.text((dados_regiao[1].x).toFixed(2));
 
@@ -479,7 +479,7 @@ function plot_ranges(svg, dados, y0){
 function mean(theArray,indicador) {
 	var sum = 0, length = theArray.length; 
 	for(var i=0;i<length;i++) {
-		var tmp = theArray[i]
+		var tmp = theArray[i];
 		sum += parseFloat(tmp[indicador]);
 	}
 	return sum/length; 
