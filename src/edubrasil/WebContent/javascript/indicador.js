@@ -29,13 +29,7 @@ function getMenuOption(selection) {
           return "indicador " + getButtonColor(d.desvio);
     })
 	.attr("value", function (d){return d.name;})
-	.attr("id", function (d, i){return d.id;});	
-	
-   // plotIndicadores("");
-   // plotSeries(""); 
-   // plotSeries(value); 
-   // plotIndicadores(value);   
-    
+	.attr("id", function (d, i){return d.id;});	  
 };
 
 function cleanContainers(){
@@ -355,182 +349,57 @@ function desvios(svg,desvio,media, y0,min, max, referencial){
 	var x1 = d3.scale.linear()
           .domain([min,max])
           .range([120, 750]);
-	
-	svg.append("line")
-			  .attr("x1", x1(min))
-			  .attr("x2", x1(max))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#E0E0E0"))
-			  .attr("stroke-width",10);
-	
+	addLine(svg, x1(min), x1(max), y0,y0,"#E0E0E0",10);
 	if(referencial == "melhor" | referencial == "neutro"){
-		//vermelho eh de -3 desvio ate o minimo da reta
-		//verde eh de 3 ate o max da reta
-
+		//amarelo
 		if((media - (desvio) < max) & (media - (2*desvio) > min)){
-			svg.append("line") //amarelo
-			  .attr("x1", x1(media - (desvio)))
-			  .attr("x2", x1(media - (2*desvio)))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#FFCC00"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(media - (desvio)),x1(media - (2*desvio)),y0,y0,"#FFCC00",10);
 		}else if((media - (desvio) > max) & (media - (2*desvio) > min)){
-			svg.append("line") //amarelo
-			  .attr("x1", x1(max))
-			  .attr("x2", x1(media - (2*desvio)))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#FFCC00"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(max),x1(media - (2*desvio)),y0,y0,"#FFCC00",10);
 		}else if((media - (desvio) < max) & (media - (2*desvio) < min)){
-			svg.append("line") //amarelo
-			  .attr("x1", x1(media - (desvio)))
-			  .attr("x2", x1(min))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#FFCC00"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(media - (desvio)),x1(min),y0,y0,"#FFCC00",10);
 		}
-		//reta laranja
+		//laranja
 		if((media - (2*desvio) < max) & (media - (3*desvio) > min)){
-			svg.append("line") //laranja
-			  .attr("x1", x1(media - (2*desvio)))
-			  .attr("x2", x1(media - (3*desvio)))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#FF6600"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(media - (2*desvio)),x1(media - (3*desvio)),y0,y0,"#FF6600",10);
 		}else if((media - (2*desvio) > max) & (media - (3*desvio) > min)){
-			svg.append("line") //laranja
-			  .attr("x1", x1(max))
-			  .attr("x2", x1(media - (3*desvio)))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#FF6600"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(max),x1(media - (3*desvio)),y0,y0,"#FF6600",10);
 		}else if((media - (3*desvio) < min) & (media - (2*desvio) > min)){
-			svg.append("line") //laranja
-			  .attr("x1", x1(media - (2*desvio)))
-			  .attr("x2", x1(min))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#FF6600"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(media - (2*desvio)),x1(min),y0,y0,"#FF6600",10);
 		 }
-		//reta vermelha
+		//vermelho
 		if((media - (3*desvio) > min) & (media - (2*desvio) > min) & (media - desvio > min)){
-			svg.append("line") //vermelho
-			  .attr("x1", x1(media - (3*desvio)))
-			  .attr("x2", x1(min))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#FF0000"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(media - (3*desvio)),x1(min),y0,y0,"#FF0000",10);
 		}
-
+		//verde
 		if(media + (2*desvio) < max){
-			svg.append("line") //verde
-			  .attr("x1", x1(max))
-			  .attr("x2", x1(media + (2*desvio)))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("green"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(max),x1(media + (2*desvio)),y0,y0,"green",10);
 		}
 		
 	}else{
-		
+		 //vermelho
 		if(media + (3*desvio) < max){
-			svg.append("line") //vermelho
-			  .attr("x1", x1(media + (3*desvio)))
-			  .attr("x2", x1(max))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#FF0000"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(media + (3*desvio)),x1(max),y0,y0,"#FF0000",10);
 		}
 		//laranja
 		if((media + (3*desvio) < max) & (media + (2*desvio) > min)){
-			svg.append("line") //laranja
-			  .attr("x1", x1(media + (3*desvio)))
-			  .attr("x2", x1(media + (2*desvio)))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#FF6600"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(media + (3*desvio)),x1(media + (2*desvio)),y0,y0,"#FF6600",10);
 		}else if((media + (3*desvio) > max) & (media +(2*desvio) > min)){
-			svg.append("line") //laranja
-			  .attr("x1", x1(media + (2*desvio)))
-			  .attr("x2", x1(max))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#FF6600"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(media + (2*desvio)),x1(max),y0,y0,"#FF6600",10);
 		}else if((media +(3*desvio) < max) & (media + (2*desvio) < min)){
-			svg.append("line") //laranja
-			  .attr("x1", x1(min))
-			  .attr("x2", x1(media + (3*desvio)))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#FF6600"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(min),x1(media + (3*desvio)),y0,y0,"#FF6600",10);
 		}
 		//amarelo
 		if((media + (2*desvio) < max) & (media + (desvio) > min)){
-			svg.append("line") //amarelo
-			  .attr("x1", x1(media + (desvio)))
-			  .attr("x2", x1(media + (2*desvio)))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#FFCC00"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(media + (desvio)),x1(media + (2*desvio)),y0,y0,"#FFCC00",10);
 		}else if((media + (2*desvio) > max) & (media +(desvio) > min)){
-			svg.append("line") //amarelo
-			  .attr("x1", x1(media + (2*desvio)))
-			  .attr("x2", x1(max))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#FFCC00"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(media + (2*desvio)),x1(max),y0,y0,"#FFCC00",10);
 		}else if((media +(2*desvio) < max) & (media+(desvio) < min)){
-			svg.append("line") //amarelo
-			  .attr("x1", x1(min))
-			  .attr("x2", x1(media + (2*desvio)))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke",d3.rgb("#FFCC00"))
-			  .attr("stroke-width",10);
+			addLine(svg,x1(min),x1(media + (2*desvio)),y0,y0,"#FFCC00",10);
 		}
-		//reta verde
-		console.log(media - (2*desvio));
-		console.log(min);
+		//verde
 		if((media - (2*desvio) > min)){
-			svg.append("line") //verde
-			  .attr("x1", x1(media - (2*desvio)))
-			  .attr("x2", x1(min))
-			  .attr("y1",(y0))
-			  .attr("y2",(y0))
-			  .transition().duration(duration)
-			  .style("stroke","green")
-			  .attr("stroke-width",10);
+			addLine(svg,x1(media - (2*desvio)),x1(min),y0,y0,"green",10);
 		}
 	
 	}
@@ -538,19 +407,11 @@ function desvios(svg,desvio,media, y0,min, max, referencial){
 }
 
 function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value){
-
 	var x1 = d3.scale.linear()
           .domain([dados_estado[0].x, dados_estado[1].x])
           .range([120, 750]);
-		
-	svg.append("line")
-		  .attr("x1", x1(dados_regiao[0].x))
-		  .attr("x2", x1(dados_regiao[1].x))
-		  .attr("y1",(y0))
-		  .attr("y2",(y0))
-		  .transition().duration(duration)
-		  .style("stroke",d3.rgb("#E0E0E0"))
-		  .attr("stroke-width",10);
+	
+	addLine(svg,x1(dados_regiao[0].x),x1(dados_regiao[1].x),y0,y0,"#E0E0E0",10);
 	
 	svg.append("rect")
 		  .transition().duration(duration).delay(1000)
@@ -610,14 +471,9 @@ function plot_ranges(svg, dados, y0){
 			.attr("y", (y0 + 44))
 			.text("Max");	
 	}
-
-	svg.append("line")
-			  .attr("x1", x1(dados[0].x))
-			  .attr("x2", x1(dados[1].x))
-			  .attr("y1",y0)
-			  .attr("y2",y0)
-			  .style("stroke",d3.rgb("#F0F0F0"))
-			  .style("stroke-width", 25);
+	
+	addLine(svg,x1(dados[0].x),x1(dados[1].x),y0,y0,"#F0F0F0",25);
+	
 }
 
 function mean(theArray,indicador) {
@@ -637,4 +493,15 @@ function sd(theArray, indicador) {
 		sum += Math.pow(parseFloat(tmp[indicador])-arithmeticMean, 2);
 	}
 	return Math.pow(sum/length, 0.5);
+}
+
+function addLine(svg,x1,x2,y1,y2,cor,largura){
+	svg.append("line")
+			  .attr("x1", x1)
+			  .attr("x2", x2)
+			  .attr("y1",y1)
+			  .attr("y2",y2)
+			  .transition().duration(duration)
+			  .style("stroke",cor)
+			  .attr("stroke-width",largura);
 }
