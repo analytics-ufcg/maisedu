@@ -194,7 +194,8 @@ function plotGraph(indicador){//(nome_indicador){
 		svg.selectAll('.dot')
 			.data(dados_estado)//estado
 			.attr('class', 'data-point')
-			.enter().append("circle")
+			.enter()
+			.append("circle")
 			.style('fill', cor_estado)
 			.attr('cx', function(d) { return x(d.ANO);})
 			.attr('cy', function(d) { return y(d[indicador]);})
