@@ -228,7 +228,9 @@ function plotIndicadores(indicador) {
 		
 			svg.append("text")
 				.attr("y", 100)
+				.attr("x", 60)
 				.attr("text-anchor", "right")
+				.attr("font-weight", "bold")
 				.text("Paraíba");
 			
 			svg.append("text")
@@ -239,6 +241,8 @@ function plotIndicadores(indicador) {
 			svg.append("text")
 				.style("text-align", "center")
 				.attr("y", 199)
+				.attr("x", 25)
+				.attr("font-weight", "bold")	
 				.text("(Mesorregião)");
 			
 			svg.append("text")
@@ -248,6 +252,8 @@ function plotIndicadores(indicador) {
 			svg.append("text")
 				.style("text-align", "center")
 				.attr("y", 284)
+				.attr("x", 25)
+				.attr("font-weight", "bold")
 				.text("(Microrregião)");
 			
 
@@ -283,6 +289,8 @@ function plotIndicadores(indicador) {
 			
 			svg.append("text")
 				.attr("y", 100)
+				.attr("x", 60)
+				.attr("font-weight", "bold")
 				.text("Paraíba");
 			
 			svg.append("text")
@@ -296,11 +304,15 @@ function plotIndicadores(indicador) {
 			svg.append("text")
 				.style("text-align", "center")
 				.attr("y", 284)
+								.attr("x", 25)
+				.attr("font-weight", "bold")
 				.text("(Microrregião)");
 			
 			svg.append("text")
 				.style("text-align", "center")
 				.attr("y", 199)
+								.attr("x", 25)
+				.attr("font-weight", "bold")
 				.text("(Mesorregião)");
 		
 		}
@@ -448,7 +460,7 @@ function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value){
 		  .attr("x", x1(dados_regiao[0].x))
 		  .attr("y",(y0-12))
 		  .attr("width", 1)
-		  .attr("height" , 30)
+		  .attr("height", 30)
 		  .style("fill", "black");
 	
 	svg.append("rect")
