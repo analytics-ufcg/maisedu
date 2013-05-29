@@ -23,9 +23,10 @@ function plotSeries(cidade,indicador) {
 			data.forEach(function(d){
 				d.ANO = parseDate(d.ANO);
 				if(d.NOME_MUNICIPIO == cidade & d[indicador] != "NA"){
-					val_y.push(parseFloat(d[indicador]));
 					meso = d.NOME_MESO;
 					micro = d.NOME_MICRO;
+				}else if(d[indicador] != "NA"){
+					val_y.push(parseFloat(d[indicador]));
 				}
 			});
 			dados_cidade = data.filter(function(i){return i.NOME_MUNICIPIO == cidade & i[indicador] != "NA";});
@@ -41,7 +42,7 @@ function plotSeries(cidade,indicador) {
 			dados_estado = data.filter(function(i){return i.REGIAO == "Paraíba" & i[indicador] != "NA";});
 			dados_micro = data.filter(function(i){return i.REGIAO == micro & i[indicador] != "NA";});
 			dados_meso = data.filter(function(i){return i.REGIAO == meso & i[indicador] != "NA";});//
-
+			
 			plotGraph(indicador);
 		});
 	};
@@ -53,6 +54,9 @@ function plotGraph(indicador){//(nome_indicador){
 		var margin = {top: 30, right: 120, bottom: 40, left: 60},
 			width = 800 - margin.left - margin.right,
 			height = 400 - margin.top - margin.bottom;
+		
+		var maxYear = d3.max(dados_estado.map(function(d){return parseInt(d.ANO);}));
+		var minYear = d3.min(dados_estado.map(function(d){return parseInt(d.ANO);}));
 		
 		var svg = d3.select("#div_series").select("svg");
 
@@ -73,12 +77,13 @@ function plotGraph(indicador){//(nome_indicador){
 			.range([0, width]);
 
 		var y = d3.scale.linear()
+			.domain([0, d3.max(val_y)])
 			.range([height, 0]);
 
 		var xAxis = d3.svg.axis()
 			.scale(x)
 			.orient("bottom")
-			.ticks(6);
+			.ticks(4);
 			
 		var yAxis = d3.svg.axis()
 			.scale(y)
@@ -88,8 +93,18 @@ function plotGraph(indicador){//(nome_indicador){
 			.x(function(d) { return x(d.ANO); })
 			.y(function(d) { return y(parseFloat(d[indicador]));});
 		
-		x.domain(d3.extent(dados_estado, function(d) { return d.ANO; }));
-		y.domain([d3.min(val_y) * 0.95 , d3.max(val_y) * 1.05]);
+		minYear = (d3.min(d3.extent(dados_estado, function(d){return d.ANO;})));
+		maxYear = (d3.max(d3.extent(dados_estado, function(d){return d.ANO;})));
+		
+		
+		if(minYear == maxYear){
+			var min = minYear.getFullYear() - 4;
+			min = min.toString();
+			console.log(min);
+			x.domain([parseDate(min), maxYear]);
+		}else{
+			x.domain([minYear,maxYear]);
+		}
 		
 		svg.append("g")
 		  .attr("class", "x axis")
@@ -151,7 +166,7 @@ function plotGraph(indicador){//(nome_indicador){
 				//Update the tooltip position and value
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(valorIndicador.toFixed(2));
+				.select("#value").text(valorIndicador.toFixed(2));//cidade + " : " +valorIndicador.toFixed(2));
 
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);})
@@ -180,7 +195,7 @@ function plotGraph(indicador){//(nome_indicador){
 				//Update the tooltip position and value
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(valorIndicador.toFixed(2));
+				.select("#value").text(valorIndicador.toFixed(2));//"Estado : " + valorIndicador.toFixed(2));
 
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);})
@@ -210,7 +225,7 @@ function plotGraph(indicador){//(nome_indicador){
 				//Update the tooltip position and value
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(valorIndicador.toFixed(2));
+				.select("#value").text(valorIndicador.toFixed(2));//"Microrregião : " + valorIndicador.toFixed(2));
 
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);})
@@ -239,7 +254,7 @@ function plotGraph(indicador){//(nome_indicador){
 				//Update the tooltip position and value
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(valorIndicador.toFixed(2));
+				.select("#value").text(valorIndicador.toFixed(2));//"Mesorregião : " + valorIndicador.toFixed(2));
 
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);})
