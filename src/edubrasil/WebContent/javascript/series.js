@@ -49,7 +49,23 @@ function plotSeries(cidade,indicador) {
 };
 
 function plotGraph(indicador){//(nome_indicador){
-
+	//versao colorida//
+	// var cor_cidade = d3.rgb(117, 112, 179);
+	// var cor_estado = d3.rgb(231, 41, 138);
+	// var cor_meso = d3.rgb(217, 95, 2);
+	// var cor_micro = d3.rgb(27, 158, 119);
+	//versao bw//
+	// var cor_cidade = d3.rgb(136, 86, 167);
+	// var cor_estado = d3.rgb(126,126,126);
+	// var cor_meso = d3.rgb(86,86,86);
+	// var cor_micro = d3.rgb(60,60,60);
+	//versao_original//
+	var cor_cidade = "blue";
+	var cor_estado = "red";
+	var cor_meso = "orange";
+	var cor_micro = "green";
+	
+	
 	if(dados_cidade.length != 0){
 		var margin = {top: 30, right: 120, bottom: 40, left: 60},
 			width = 800 - margin.left - margin.right,
@@ -125,32 +141,32 @@ function plotGraph(indicador){//(nome_indicador){
 		  .datum(dados_cidade) //municipio
 		  .attr("class", "line")
 		  .attr("d", line)
-		  .style("stroke","blue");
+		  .style("stroke",cor_cidade);
 		  
 		svg.append("path")
 		  .datum(dados_estado) //estado
 		  .attr("class", "line")
 		  .attr("d", line)
-		  .style("stroke","red");
+		  .style("stroke",cor_estado);
 		
 		svg.append("path")
 		  .datum(dados_micro) //microrregiao
 		  .attr("class", "line")
 		  .attr("d", line)
-		  .style("stroke","orange");
+		  .style("stroke",cor_micro);
 		  
 		svg.append("path")
 		  .datum(dados_meso) //mesorregiao
 		  .attr("class", "line")
 		  .attr("d", line)
-		  .style("stroke","green");
+		  .style("stroke",cor_meso);
 		
 		//plotando os pontos
 		svg.selectAll('.dot')
 			.data(dados_cidade)//municipio
 			.attr('class', 'data-point')
 			.enter().append("circle")
-			.style('fill', "blue")
+			.style('fill', cor_cidade)
 			.attr('cx', function(d) { return x(d.ANO);})
 			.attr('cy', function(d) { return y(d[indicador]);})
 			.attr('r', 4)
@@ -179,7 +195,7 @@ function plotGraph(indicador){//(nome_indicador){
 			.data(dados_estado)//estado
 			.attr('class', 'data-point')
 			.enter().append("circle")
-			.style('fill', "red")
+			.style('fill', cor_estado)
 			.attr('cx', function(d) { return x(d.ANO);})
 			.attr('cy', function(d) { return y(d[indicador]);})
 			.attr('r', 4)
@@ -209,7 +225,7 @@ function plotGraph(indicador){//(nome_indicador){
 			.data(dados_micro)//micro
 			.attr('class', 'data-point')
 			.enter().append("circle")
-			.style('fill', "orange")
+			.style('fill', cor_micro)
 			.attr('cx', function(d) { return x(d.ANO);})
 			.attr('cy', function(d) { return y(d[indicador]);})
 			.attr('r', 4)
@@ -238,7 +254,7 @@ function plotGraph(indicador){//(nome_indicador){
 			.data(dados_meso)//meso
 			.attr('class', 'data-point')
 			.enter().append("circle")
-			.style('fill', "green")
+			.style('fill', cor_meso)
 			.attr('cx', function(d) { return x(d.ANO);})
 			.attr('cy', function(d) { return y(d[indicador]);})
 			.attr('r', 4)
@@ -264,25 +280,25 @@ function plotGraph(indicador){//(nome_indicador){
 			});	
 		
 		svg.append("circle")
-			.style("fill", "blue")
+			.style("fill", cor_cidade)
 			.attr("r", 4)
 			.attr("cx", 645)
 			.attr("cy", 110);
 		
 		svg.append("circle")
-			.style("fill", "red")
+			.style("fill", cor_estado)
 			.attr("r", 4)
 			.attr("cx", 645)
 			.attr("cy", 125);
 			
 		svg.append("circle")
-			.style("fill", "orange")
+			.style("fill", cor_meso)
 			.attr("r", 4)
 			.attr("cx", 645)
 			.attr("cy", 140);
 			
 		svg.append("circle")
-			.style("fill", "green")
+			.style("fill", cor_micro)
 			.attr("r", 4)
 			.attr("cx", 645)
 			.attr("cy", 155);
