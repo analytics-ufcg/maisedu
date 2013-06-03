@@ -369,7 +369,6 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 			addLine(svg,x1(media - (2*desvio)),x1(media - (desvio)),y0,y0,"#FFCC00",10);
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media - (desvio)));}), indicador,"#FFCC00",min,max,10,y0);
 		}else if((media - (desvio) > max) & (media - (2*desvio) > min)){
-			console.log("estou aqui");
 			addLine(svg,x1(max),x1(media - (2*desvio)),y0,y0,"#FFCC00",10);
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= max);}), indicador,"#FFCC00",min,max,10,y0);
 		}else if((media - (desvio) < max) & (media - (2*desvio) < min)){
@@ -485,14 +484,19 @@ function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value){
 }
 
 function plot_ranges(svg, dados, y0){
+	
+	var valor1 = String(dados[0].x).replace(/\,/g,'');
+	var valor2 = String(dados[1].x).replace(/\,/g,'');
+	
 	var x1 = d3.scale.linear()
-          .domain([dados[0].x, dados[1].x])
-          .range([120, 750]);
-
+          .domain([parseFloat(valor1), parseFloat(valor2)])
+          .range([120, 750]);	
+	
 	var xAxis = d3.svg.axis()
 			.scale(x1)
 			.orient("bottom")
-			.tickValues([parseFloat(dados[0].x).toFixed(2),parseFloat(dados[1].x).toFixed(2)])
+			.tickFormat(d3.format(".2f"))
+			.tickValues([parseFloat(valor1),parseFloat(valor2)])
 			.ticks(6);
 	
 	if(y0 == 100){
@@ -568,20 +572,44 @@ function plot_cidades(svg, dados, indicador,cor, min, max,largura, y0, nomeCidad
           .range([120, 750]);
 	
 	
-	for(var i = 0; i< dados.length;i++){
-		var tmp = dados[i];
-		//console.log(tmp[indicador]);
-		 svg.append("line")
-		   .attr("x1", x1(tmp[indicador]))
-		   .attr("x2", x1(tmp[indicador]) + 2)
-		   .attr("y1",y0)
-		   .attr("y2",y0)
-		   .attr("class","linha_cidade")
-		   .attr("text",tmp.NOME_MUNICIPIO)
-		   .transition().duration(duration)
-		   .style("stroke",cor)
-		   .attr("opacity",0.7)
-		   .attr("stroke-width",24);
-	}
+	var g = svg.append("g");
+	
+	console.log(x1(dados[0][indicador]));
+	
+	g.selectAll("line").data(dados)
+					.enter()
+					.append("line")
+					.attr("x1", function(d){console.log(d[indicador]);return x1(d[indicador]);})
+					.attr("x2", function(d){return x1(d[indicador]) + 2;})
+					.attr("y1",y0)
+					.attr("y2",y0)
+					.attr("class","linha_cidade")
+					.attr("text",function(d){return d.NOME_MUNICIPIO;})
+					.transition().duration(duration)
+					.style("stroke",cor)
+					.attr("opacity",0.7)
+					.attr("stroke-width",24);
+	
+	g.selectAll("line").on("mouseover", function(d) {
+				
+						//Get indicator value and tranform to float
+						var valorIndicador = d.NOME_MUNICIPIO + ": " + d3.format(".2f")(d[indicador]);
+				
+						//Get the values for tooltip position
+						var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
+						var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
+				
+						//Update the tooltip position and value
+						d3.select("#tooltip").style("left", xPosition + "px")
+						.style("top", yPosition + "px")
+						.select("#value").text(valorIndicador);//cidade + " : " +valorIndicador.toFixed(2));
+				
+						//Show the tooltip
+						d3.select("#tooltip").classed("hidden", false);
+					})
+				
+					.on("mouseout", function() {//Hide the tooltip
+						d3.select("#tooltip").classed("hidden", true);
+					});
 }
 
