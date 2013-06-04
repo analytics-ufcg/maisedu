@@ -50,20 +50,10 @@ function plotSeries(cidade,indicador) {
 
 function plotGraph(indicador){//(nome_indicador){
 	//versao colorida//
-	// var cor_cidade = d3.rgb(117, 112, 179);
-	// var cor_estado = d3.rgb(231, 41, 138);
-	// var cor_meso = d3.rgb(217, 95, 2);
-	// var cor_micro = d3.rgb(27, 158, 119);
-	//versao bw//
-	// var cor_cidade = d3.rgb(136, 86, 167);
-	// var cor_estado = d3.rgb(126,126,126);
-	// var cor_meso = d3.rgb(86,86,86);
-	// var cor_micro = d3.rgb(60,60,60);
-	//versao_original//
-	var cor_cidade = "blue";
-	var cor_estado = "red";
-	var cor_meso = "orange";
-	var cor_micro = "green";
+	var cor_cidade = d3.rgb(197,27,125);
+	var cor_estado = d3.rgb(37,52,148);
+	var cor_meso = d3.rgb(44,127,184);
+	var cor_micro = d3.rgb(65,182,196);
 	
 	
 	if(dados_cidade.length != 0){
@@ -116,7 +106,6 @@ function plotGraph(indicador){//(nome_indicador){
 		if(minYear == maxYear){
 			var min = minYear.getFullYear() - 4;
 			min = min.toString();
-			console.log(min);
 			x.domain([parseDate(min), maxYear]);
 		}else{
 			x.domain([minYear,maxYear]);

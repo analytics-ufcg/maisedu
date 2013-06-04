@@ -574,12 +574,10 @@ function plot_cidades(svg, dados, indicador,cor, min, max,largura, y0, nomeCidad
 	
 	var g = svg.append("g");
 	
-	console.log(x1(dados[0][indicador]));
-	
 	g.selectAll("line").data(dados)
 					.enter()
 					.append("line")
-					.attr("x1", function(d){console.log(d[indicador]);return x1(d[indicador]);})
+					.attr("x1", function(d){return x1(d[indicador]);})
 					.attr("x2", function(d){return x1(d[indicador]) + 2;})
 					.attr("y1",y0)
 					.attr("y2",y0)
