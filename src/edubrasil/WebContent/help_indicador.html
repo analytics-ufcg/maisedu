@@ -1,28 +1,67 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-            <title>EduBrasil</title>            
-            <link href="css/help_indicador.css" rel="stylesheet" type="text/css" />       
-    </head>
-    <body>
-        <div id="container">
-            
-            <div id ="title_header">EduBrasil</div>
-            <div id="main_content">
-               <strong>Como é feita a análise estatística dos indicadores?</strong>
-               <p>
-					A analise foi realizada após um estudo dos dados. Os dados paraibanos seguem um comportamento de uma Distribuição Normal*, a partir disso podemos identificar valores dentro desses dados que não seguem a normalidade do que seria aceitavél para os valores dos indicadores.
-					Da forma como estão os dados, sabemos que aproximadamente 70% deles estão dentro da normalidade, fora desse intervalo temos outros valores que ja merecem atenção, eles são destacados em níveis, baseado no Desvio Padrão* (ou ౮). 
-					Temos também intervalos especiais, ou seja, não representam valores ruins, e sim bons, eles são os dados que estão agrupados a partir do 1౮, 2౮ e 3౮.
-				</p>
- 
-            </div>
-            
-            <div id="footer">
-                Analytics UFCG
-            </div>
-        </div>
-    </body>
+<head>
+<meta charset="utf-8">
+<title>EduBrasil</title>
+<link href="css/help_indicador.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div id="container">
+
+		<div id="title_header">EduBrasil</div>
+		<div id="main_content">
+
+			<strong>Quais os objetivos do projeto EduBrasil?</strong>
+			<p>O EduBrasil veio para facilitar e agilizar o trabalho dos
+				auditores fiscais do TCE-PB, ele é uma ferramenta de analise
+				estatistica que além de apresentar diversos indicadores para a
+				educação paraibana, também apresenta os dados referentes ao longo do
+				tempo e uma analise estatistica de quais indicadores possuem dados
+				que não seguem a normalidade do estado.</p>
+
+			<strong>Como é feita a análise estatística dos indicadores?</strong>
+			<p>Após uma análise dos dados, encontrou-se um comportamento
+				semelhante ao de uma Distribuição Normal, a partir daí podemos
+				inferir algumas propriedades, como a avaliação dos dados de acordo
+				com a sua distância da mediana dos dados (ц). Eles são destacados em
+				níveis de -3 a 3, dependendo do indicador nos temos que quanto mais
+				longe da mediana pior pode ser sua avaliação comparada ao estado, as
+				cores podem ser verde (para bons valores para o indicador), cinza
+				(para valores que não merecem atenção), amarelo (para valores que já
+				merecem atenção por serem baixos comparados ao estado), laranja
+				(para valores ainda piores que os amarelos) e vermelho (valores
+				ainda piores).</p>
+				
+			<strong>Como analisar os indicadores?</strong>
+			<p>Os dados que estiverem nos intervalos de -1 a -2 ou 1 a 2 (dependendo do indicador), são considerados valores ruins comparados
+			 ao estado e por isso recebem uma cor amarela para seus botões, e ficam no intervalo amarelo da barra dos indicadores.
+			 Como exemplo temos a cidade Água Branca e o indicador Taxa aprovação total - fundamental(%) - 2011, com o valor de 65.8%, 
+			 fazendo-o assim ficar de fora dos 70% melhores dados, e dentro dos 13,6% que compõem o grupo que já merece uma atenção do auditor.
+			 O ano do indicador mostrado na barra é referente (sempre) aos dados mais recentes.
+			 </p>
+			 <p>Os dados no intervalo de -2 a -3 ou 2 a 3 (dependendo do indicador), já estão muito longe dos valores medianos do estado. Eles recebem uma coloração de maior 
+			 destaque por isso, a cor laranja.
+			 Como exemplo temos a cidade de Manaíra, com o indicador Indice precariedade infraestrutura(%) - 2011, com o valor de 46,76%, colocando-a no grupo que compõem o 
+			 indicador laranja, ou seja, possui dados muito ruins e estão muito proximas dos piores dados do estado (maximo para o estado referente a esse indicador é 49%).
+			 </p>
+			 <p>
+			 Os piores valores do estado estão após o intervalo -3 ou 3 (dependendo do indicador), esse grupo dispõe dos piores valores e são sempre os que merecem maior 
+			 atenção por contar com dados muito ruins comparados aos outros municipios do estado.
+			 Como exemplo temos São Domingos e o indicador Taxa abandono total - fundamental(%) - 2008, com o valor 40.9% que é considerado um valor muito ruim comparado ao restante 
+			 do estado e assim ele recebe a cor vermelha de indicador, fazendo-o merecer a maior prioridade de atenção.
+			</p>
+
+		</div>
+
+		<div id="plot_imagens">
+			<embed src="data\imagens\normal_melhor.svg" type="image/svg+xml" ><p> Figura 1. Quanto maior o valor do indicador melhor.</p></embed>
+			<embed src="data\imagens\normal_pior.svg" type="image/svg+xml" ><p>Figura 2. Quanto menor o valor do indicador melhor.</p></embed>
+		</div>
+		
+		
+
+		<div id="footer">Analytics UFCG</div>
+	</div>
+</body>
 </html>
 
