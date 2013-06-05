@@ -22,14 +22,17 @@
     background-color: white;
 }
 
-#footer {
+#footer{
 	background-color: black;
 	padding: 0;
 	margin: 0px;
 	color: #DCDCDC;
-	font-size: 3em;
-	text-align: center;
+	font-size: 1.5em;
 	height: 70px;
+    bottom:0;
+    width:100%;
+    position:absolute;
+    text-align: center;
 }
 
 #plot_imagens {
