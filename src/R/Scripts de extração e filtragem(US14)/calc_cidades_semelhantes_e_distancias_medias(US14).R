@@ -28,9 +28,9 @@ norm_dados <- function(dados){
 
 
 #Normalizando colunas dos atributos que serão usados
-data$FPM = normDados(data$FPM)
-data$IFDM = normDados(data$IFDM)
-data$numero.matriculas = normDados(data$numero.matriculas)
+data$FPM = norm_dados(data$FPM)
+data$IFDM = norm_dados(data$IFDM)
+data$numero.matriculas = norm_dados(data$numero.matriculas)
 
 
 #Função que recebe o nome de uma cidade e retorna as n cidades mais proximas(10 é o padrão), também é possivel retornar as cidades mais proximas somente na mesorregiao
@@ -69,25 +69,32 @@ calcDistanciaMediaTodasCidades = function(quant.cidades = 10, mesorregiao = F) {
   return(tabela)
 }
 
+
 #Funcao que retorna um data frame com a cidade, as suas n cidades mais proximas e os valores de distancia***********************
 calcTodasDistanciasCidadesSemelhantes = function(data, quant.cidades = 10, mesorregiao = F) {
   tabela = data.frame()
+  media_cidades = calcDistanciaMediaTodasCidades()
   for(nome.cidade in data$NOME_MUNICIPIO) {
     linha = calcDistanciaCidadesSemelhantes(nome.cidade, quant.cidades, mesorregiao)
-    tabela = rbind(tabela,append(paste(as.character(linha$cidade),as.character(linha$distancia.euclidiana), sep = " : "),"patos",after=0))
+    cidade = cbind(nome.cidade,rbind(linha$distancia.euclidiana),as.numeric(media_cidades[media_cidades$cidade == nome.cidade, ]$distancia.media))
+    tabela = rbind(tabela,as.data.frame(cidade))
   }
+  
+
   nomes = c(1:10)
   colnames(tabela)[1] = "cidade"
-  colnames(tabela)[2:11] = paste("proxima", nomes,sep = "")
+  colnames(tabela)[2:11] = paste("Vizinho", nomes,sep = "")
+  colnames(tabela)[12] = "distancia.media"
+  
   return(tabela)
 }
 
-append(paste(as.character(linha$cidade),as.character(linha$distancia.euclidiana), sep = " : "),"patos",after=0)
-
-calcTodasDistanciasCidadesSemelhantes(data)
+#dd[with(dd, order(-z, b)), ]
+cidades_semelhantes_distancias = calcTodasDistanciasCidadesSemelhantes(data)
+write.csv(cidades_semelhantes_distancias, "cidades_semelhantes_distancias.csv", row.names = T)
 
 #Tabela com as distancias medias
-tabela = calcDistanciaMediaTodasCidades(mesorregiao = T)
+#tabela = calcDistanciaMediaTodasCidades(mesorregiao = T)
 
 #histograma com as distancias medias da tabela acima
 hist(tabela$distancia.media,main="Histograma da distância média",xlim=c(0,1.5), xlab="Distância Média")
