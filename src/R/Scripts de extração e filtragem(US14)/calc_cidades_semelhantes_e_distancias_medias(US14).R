@@ -14,7 +14,7 @@ calcDistanciaEuclidiana <- function (cidade, outra.cidade){
   
   distancia <- sqrt(x + y + z)
   
-  return (distancia)  
+  return (distancia)
 }
 
 
@@ -69,17 +69,36 @@ calcDistanciaMediaTodasCidades = function(quant.cidades = 10, mesorregiao = F) {
   return(tabela)
 }
 
+#Funcao que retorna um data frame com a cidade, as suas n cidades mais proximas e os valores de distancia***********************
+calcTodasDistanciasCidadesSemelhantes = function(data, quant.cidades = 10, mesorregiao = F) {
+  tabela = data.frame()
+  for(nome.cidade in data$NOME_MUNICIPIO) {
+    linha = calcDistanciaCidadesSemelhantes(nome.cidade, quant.cidades, mesorregiao)
+    tabela = rbind(tabela,append(paste(as.character(linha$cidade),as.character(linha$distancia.euclidiana), sep = " : "),"patos",after=0))
+  }
+  nomes = c(1:10)
+  colnames(tabela)[1] = "cidade"
+  colnames(tabela)[2:11] = paste("proxima", nomes,sep = "")
+  return(tabela)
+}
+
+append(paste(as.character(linha$cidade),as.character(linha$distancia.euclidiana), sep = " : "),"patos",after=0)
+
+calcTodasDistanciasCidadesSemelhantes(data)
+
 #Tabela com as distancias medias
-tabela = calcDistanciaMediaTodasCidades()
+tabela = calcDistanciaMediaTodasCidades(mesorregiao = T)
 
 #histograma com as distancias medias da tabela acima
-hist(tabela$distancia.media,main="Histograma da distância média",xlim=c(0,1.3), xlab="Distância Média")
+hist(tabela$distancia.media,main="Histograma da distância média",xlim=c(0,1.5), xlab="Distância Média")
+
+plot(ecdf(tabela$distancia.media),main="Histograma da distância média",xlim=c(0,1.5), xlab="Distância Média")
 
 
-distancia = calcDistanciaCidadesSemelhantes("João Pessoa")
+
 
 boxplot(distancia$distancia.euclidiana)
-write.csv(tabela, "tabela_media_distancias_das_cidades_mais_proximas.csv",row.names=F)
+write.csv(tabela, "tabela_media_distancias_das_cidades_mais_proximas_com_mesorregiao.csv",row.names=F)
 
 tab = data.frame(Vectorize(calcDistanciaCidadesSemelhantes,c("nome.cidade"))(as.character(tabela$cidade[209:219]),quant.cidades=10, mesorregiao=T))
 
