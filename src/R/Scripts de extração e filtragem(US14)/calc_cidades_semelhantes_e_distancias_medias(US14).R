@@ -80,7 +80,7 @@ calcTodasDistanciasCidadesSemelhantes = function(data, quant.cidades = 10, mesor
       cidade = cbind(nome.cidade,rbind(t((as.character(linha$cidade)))))
       tabela = rbind(tabela,as.data.frame(cidade))
     }else{
-      cidade = cbind(nome.cidade,rbind(linha$distancia.euclidiana),as.numeric(media_cidades[media_cidades$cidade == nome.cidade, ]$distancia.media))
+      cidade = cbind(nome.cidade,rbind(round(linha$distancia.euclidiana,4)),round(as.numeric(media_cidades[media_cidades$cidade == nome.cidade, ]$distancia.media),4))
       tabela = rbind(tabela,as.data.frame(cidade))
     }
     
@@ -96,10 +96,26 @@ calcTodasDistanciasCidadesSemelhantes = function(data, quant.cidades = 10, mesor
 
 
 cidades_semelhantes_distancias = calcTodasDistanciasCidadesSemelhantes(data, nomes = T)
-write.csv(cidades_semelhantes_distancias, "cidades_semelhantes_nomes.csv", row.names = T)
+write.csv(cidades_semelhantes_distancias, "cidades_semelhantes_nomes.csv", row.names = F)
 
 cidades_semelhantes_distancias = calcTodasDistanciasCidadesSemelhantes(data, nomes = F)
-write.csv(cidades_semelhantes_distancias, "cidades_semelhantes_distancias.csv", row.names = T)
+write.csv(cidades_semelhantes_distancias, "cidades_semelhantes_distancias.csv", row.names = F)
+
+####considerando a mesorregiao####
+cidades_semelhantes_distancias = calcTodasDistanciasCidadesSemelhantes(data,mesorregiao = T,nomes = T)
+write.csv(cidades_semelhantes_distancias, "cidades_semelhantes_nomes_meso.csv", row.names = F)
+
+cidades_semelhantes_distancias2 = calcTodasDistanciasCidadesSemelhantes(data,mesorregiao = T, nomes = F)
+write.csv(cidades_semelhantes_distancias, "cidades_semelhantes_distancias_meso.csv", row.names = F)
+
+####Ordenar de acordo com a maior distancia media####
+cidades_distancias = read.csv("cidades_semelhantes_distancias.csv", head = T, dec = ".")
+cidades_distancias = cidades_distancias[with(cidades_distancias,order(cidades_distancias$V12)), ]
+write.csv(cidades_distancias,"cidades_semelhantes_distancias.csv",row.names = F)
+
+cidades_distancias = read.csv("cidades_semelhantes_distancias_meso.csv", head = T, dec = ".")
+cidades_distancias = cidades_distancias[with(cidades_distancias,order(cidades_distancias$V12)), ]
+write.csv(cidades_distancias,"cidades_semelhantes_distancias_meso.csv",row.names = F)
 
 #Tabela com as distancias medias
 #tabela = calcDistanciaMediaTodasCidades(mesorregiao = T)
