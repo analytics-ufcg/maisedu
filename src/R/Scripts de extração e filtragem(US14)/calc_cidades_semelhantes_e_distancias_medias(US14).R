@@ -73,7 +73,11 @@ calcDistanciaMediaTodasCidades = function(quant.cidades = 10, mesorregiao = F) {
 #Funcao que retorna um data frame com a cidade, as suas n cidades mais proximas e os valores de distancia***********************
 calcTodasDistanciasCidadesSemelhantes = function(data, quant.cidades = 10, mesorregiao = F, nomes) {
   tabela = data.frame()
-  media_cidades = calcDistanciaMediaTodasCidades()
+  if(mesorregiao){
+    media_cidades = calcDistanciaMediaTodasCidades(mesorregiao = T)
+  }else{
+    media_cidades = calcDistanciaMediaTodasCidades(mesorregiao = F)  
+  }
   for(nome.cidade in data$NOME_MUNICIPIO) {
     linha = calcDistanciaCidadesSemelhantes(nome.cidade, quant.cidades, mesorregiao)
     if(nomes){
@@ -95,35 +99,30 @@ calcTodasDistanciasCidadesSemelhantes = function(data, quant.cidades = 10, mesor
 }
 
 
-cidades_semelhantes_distancias = calcTodasDistanciasCidadesSemelhantes(data, nomes = T)
-write.csv(cidades_semelhantes_distancias, "cidades_semelhantes_nomes.csv", row.names = F)
-
-cidades_semelhantes_distancias = calcTodasDistanciasCidadesSemelhantes(data, nomes = F)
-write.csv(cidades_semelhantes_distancias, "cidades_semelhantes_distancias.csv", row.names = F)
-
+####lista com nome das cidades semelhantes####
+semelhantes_nomes = calcTodasDistanciasCidadesSemelhantes(data,nomes = T)
+write.csv(semelhantes_nomes, "cidades_semelhantes_nomes.csv", row.names = F)
 ####considerando a mesorregiao####
-cidades_semelhantes_distancias = calcTodasDistanciasCidadesSemelhantes(data,mesorregiao = T,nomes = T)
-write.csv(cidades_semelhantes_distancias, "cidades_semelhantes_nomes_meso.csv", row.names = F)
+semelhantes_nomes_meso = calcTodasDistanciasCidadesSemelhantes(data,mesorregiao = T,nomes = T)
+write.csv(semelhantes_nomes_meso, "cidades_semelhantes_nomes_meso.csv", row.names = F)
 
-cidades_semelhantes_distancias2 = calcTodasDistanciasCidadesSemelhantes(data,mesorregiao = T, nomes = F)
-write.csv(cidades_semelhantes_distancias, "cidades_semelhantes_distancias_meso.csv", row.names = F)
+####lista com distancia das cidades semelhantes####
+semelhantes_distancias = calcTodasDistanciasCidadesSemelhantes(data, nomes = F)
+write.csv(semelhantes_distancias, "cidades_semelhantes_distancias.csv", row.names = F)
+####considerando a mesorregiao####
+semelhantes_distancias_meso = calcTodasDistanciasCidadesSemelhantes(data,mesorregiao = T, nomes = F)
+write.csv(semelhantes_distancias_meso, "cidades_semelhantes_distancias_meso.csv", row.names = F)
+
+
+
+
 
 ####Ordenar de acordo com a maior distancia media####
 cidades_distancias = read.csv("cidades_semelhantes_distancias.csv", head = T, dec = ".")
 cidades_distancias = cidades_distancias[with(cidades_distancias,order(cidades_distancias$V12)), ]
 write.csv(cidades_distancias,"cidades_semelhantes_distancias.csv",row.names = F)
 
-cidades_distancias = read.csv("cidades_semelhantes_distancias_meso.csv", head = T, dec = ".")
-cidades_distancias = cidades_distancias[with(cidades_distancias,order(cidades_distancias$V12)), ]
-write.csv(cidades_distancias,"cidades_semelhantes_distancias_meso.csv",row.names = F)
-
-#Tabela com as distancias medias
-#tabela = calcDistanciaMediaTodasCidades(mesorregiao = T)
-#histograma com as distancias medias da tabela acima
-#hist(tabela$distancia.media,main="Histograma da distância média",xlim=c(0,1.5), xlab="Distância Média")
-#plot(ecdf(tabela$distancia.media),main="Histograma da distância média",xlim=c(0,1.5), xlab="Distância Média")
-#boxplot(distancia$distancia.euclidiana)
-#write.csv(tabela, "tabela_media_distancias_das_cidades_mais_proximas_com_mesorregiao.csv",row.names=F)
-#tab = data.frame(Vectorize(calcDistanciaCidadesSemelhantes,c("nome.cidade"))(as.character(tabela$cidade[209:219]),quant.cidades=10, mesorregiao=T))
-
+cidades_distancias_meso = read.csv("cidades_semelhantes_distancias_meso.csv", head = T, dec = ".")
+cidades_distancias_meso = cidades_distancias_meso[with(cidades_distancias,order(cidades_distancias_meso$V12)), ]
+write.csv(cidades_distancias_meso,"cidades_semelhantes_distancias_meso.csv",row.names = F)
 
