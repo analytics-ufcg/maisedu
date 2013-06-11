@@ -81,7 +81,7 @@ calcTodasDistanciasCidadesSemelhantes = function(data, quant.cidades = 10, mesor
   for(nome.cidade in data$NOME_MUNICIPIO) {
     linha = calcDistanciaCidadesSemelhantes(nome.cidade, quant.cidades, mesorregiao)
     if(nomes){
-      cidade = cbind(nome.cidade,rbind(t((as.character(linha$cidade)))))
+      cidade = cbind(nome.cidade,rbind(as.character(linha$cidade)))
       tabela = rbind(tabela,as.data.frame(cidade))
     }else{
       cidade = cbind(nome.cidade,rbind(round(linha$distancia.euclidiana,4)),round(as.numeric(media_cidades[media_cidades$cidade == nome.cidade, ]$distancia.media),4))
@@ -95,9 +95,32 @@ calcTodasDistanciasCidadesSemelhantes = function(data, quant.cidades = 10, mesor
   colnames(tabela)[2:11] = paste("Vizinho", nomes,sep = "")
   if(!nomes)colnames(tabela)[12] = "distancia.media"
   
+  
   return(tabela)
 }
 
+
+calCidadesDiferentes <- function(data, quant.cidades = 10){
+  #cidades_nomes = read.csv("cidades_semelhantes_nomes.csv", head = T)
+  #cidades_nomes_meso = read.csv("cidades_semelhantes_nomes_meso.csv", head = T)
+  tabela = data.frame()
+  media_cidades_meso = calcDistanciaMediaTodasCidades(mesorregiao = T)
+  media_cidades = calcDistanciaMediaTodasCidades(mesorregiao = F)
+  
+  for(nome.cidade in data$NOME_MUNICIPIO) {
+    linha_meso = calcDistanciaCidadesSemelhantes(nome.cidade,quant.cidades, mesorregiao = T)
+    linha = calcDistanciaCidadesSemelhantes(nome.cidade,quant.cidades, mesorregiao = F)
+    diferencas = cbind(as.character(linha_meso$cidade)) == cbind(as.character(linha$cidade))
+    media.cidade = media_cidades[media_cidades$cidade == nome.cidade, ]$distancia.media
+    media.cidade.meso = media_cidades_meso[media_cidades_meso$cidade == nome.cidade, ]$distancia.media
+    total = (10 - sum(diferencas[diferencas[,1] == TRUE, ]))
+    tabela = rbind(tabela,cbind(nome.cidade,as.numeric(total), round(media.cidade,4), round(media.cidade.meso,4)))
+  }
+  
+  colnames(tabela) = c("nome.cidade","total.cidades","media","media.meso")
+  return(tabela)
+  
+}
 
 ####lista com nome das cidades semelhantes####
 semelhantes_nomes = calcTodasDistanciasCidadesSemelhantes(data,nomes = T)
@@ -113,10 +136,6 @@ write.csv(semelhantes_distancias, "cidades_semelhantes_distancias.csv", row.name
 semelhantes_distancias_meso = calcTodasDistanciasCidadesSemelhantes(data,mesorregiao = T, nomes = F)
 write.csv(semelhantes_distancias_meso, "cidades_semelhantes_distancias_meso.csv", row.names = F)
 
-
-
-
-
 ####Ordenar de acordo com a maior distancia media####
 cidades_distancias = read.csv("cidades_semelhantes_distancias.csv", head = T, dec = ".")
 cidades_distancias = cidades_distancias[with(cidades_distancias,order(cidades_distancias$V12)), ]
@@ -126,3 +145,6 @@ cidades_distancias_meso = read.csv("cidades_semelhantes_distancias_meso.csv", he
 cidades_distancias_meso = cidades_distancias_meso[with(cidades_distancias,order(cidades_distancias_meso$V12)), ]
 write.csv(cidades_distancias_meso,"cidades_semelhantes_distancias_meso.csv",row.names = F)
 
+####Quantidade de cidades diferentes####
+cidades_diferentes = calCidadesDiferentes(data,10)
+write.csv(cidades_diferentes,"cidades_diferentes_medias.csv",row.names = F)
