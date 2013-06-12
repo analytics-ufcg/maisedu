@@ -147,27 +147,21 @@ function getButtonColor(colunaDesvio) {
 	valor = getRecentValueIndicadorColuna(colunaDesvio);
 	if (valor == "NA" ) {
         return "indicador_cinza";
-//		return "gray";
 	}
 	else if (parseFloat(valor) == -2) {
         return "indicador_amarelo";
-        //return "#FFCC00";
 	}
 	else if (parseFloat(valor) == -3) {
 		return "indicador_laranja";
-        //return "#FF6600";
 	}
 	else if (parseFloat(valor) <= -4) {
 		return "indicador_vermelho";
-        //return "#FF0000";
 	}
 	else if (parseFloat(valor) >= 3) {
         return "indicador_verde";
-//		return "green";
 	}
 	else {
         return "indicador_branco";
-		//return "#E0E0E0";
 	}
 }
 
@@ -196,11 +190,11 @@ function plotIndicadores(indicador) {
 		var line_estado = [{'x' : d3.min(estado,function(d){return parseFloat(d[indicador]);}) , 'y' : 100},
 						   {'x':(d3.max(estado,function(d){return parseFloat(d[indicador]);})), 'y' : 100}];
 					
-		var line_meso =[{'x' : d3.min(meso,function(d){return parseFloat(d[indicador]);}) , 'y' : 185}, 
-						{'x': (d3.max(meso,function(d){return parseFloat(d[indicador]);})), 'y' : 185}];
+		var line_meso =[{'x' : d3.min(meso,function(d){return parseFloat(d[indicador]);}) , 'y' : 160}, 
+						{'x': (d3.max(meso,function(d){return parseFloat(d[indicador]);})), 'y' : 160}];
 		
-		var line_micro = [{'x' :d3.min(micro,function(d){return parseFloat(d[indicador]);}) , 'y' : 270},
-						  {'x': (d3.max(micro,function(d){return parseFloat(d[indicador]);})), 'y' : 270}];
+		var line_micro = [{'x' :d3.min(micro,function(d){return parseFloat(d[indicador]);}) , 'y' : 220},
+						  {'x': (d3.max(micro,function(d){return parseFloat(d[indicador]);})), 'y' : 220}];
 
 		
 		if (svg[0][0] == null){
@@ -209,14 +203,17 @@ function plotIndicadores(indicador) {
 			
 			//eixo das barras
 			plot_ranges(svg, line_estado, 100);
-			plot_ranges(svg, line_estado, 185);
-			plot_ranges(svg, line_estado, 270);
+			plot_ranges(svg, line_estado, 160);
+			plot_ranges(svg, line_estado, 220);
+			plot_ranges(svg, line_estado, 280);
 			
 			
 			//barras cinzas equivalentes ao valor das regioes
 			//plot_bars(svg, line_estado, line_estado, 100,currentYearData[indicador]);
-			plot_bars(svg , line_estado, line_meso, 185,currentYearData[indicador]);
-			plot_bars(svg , line_estado, line_micro, 270,currentYearData[indicador]);
+			plot_bars(svg , line_estado, line_meso, 160,currentYearData[indicador]);
+			plot_bars(svg , line_estado, line_micro, 220,currentYearData[indicador]);
+			//plot_bars(svg , line_estado, line_estado, 280,currentYearData[indicador]);
+			
 
 			//barra com as cores dos indicadores
 			
@@ -235,26 +232,33 @@ function plotIndicadores(indicador) {
 			
 			svg.append("text")
 				.style("text-align", "right")
-				.attr("y", 187)
+				.attr("y", 162)
 				.text(currentYearData.NOME_MESO);
 			
 			svg.append("text")
 				.style("text-align", "center")
-				.attr("y", 199)
+				.attr("y", 174)
 				.attr("x", 25)
 				.attr("font-weight", "bold")	
 				.text("(Mesorregião)");
 			
 			svg.append("text")
-				.attr("y", 272)
+				.attr("y", 222)
 				.text(currentYearData.NOME_MESO);
 			
 			svg.append("text")
 				.style("text-align", "center")
-				.attr("y", 284)
+				.attr("y", 234)
 				.attr("x", 25)
 				.attr("font-weight", "bold")
 				.text("(Microrregião)");
+			
+			svg.append("text")
+			.attr("y", 284)
+			.attr("x", 60)
+			.attr("text-anchor", "right")
+			.attr("font-weight", "bold")
+			.text("Similares");
 			
 
 		}else{
@@ -273,14 +277,15 @@ function plotIndicadores(indicador) {
 			
 			//eixo das barras
 			plot_ranges(svg, line_estado, 100);
-			plot_ranges(svg, line_estado, 185);
-			plot_ranges(svg, line_estado, 270);
+			plot_ranges(svg, line_estado, 160);
+			plot_ranges(svg, line_estado, 220);
+			plot_ranges(svg, line_estado, 280);
 			
 			
 			//barras cinzas equivalentes ao valor das regioes
 			//plot_bars(svg, line_estado, line_estado, 100,currentYearData[indicador]);
-			plot_bars(svg , line_estado, line_meso, 185,currentYearData[indicador]);
-			plot_bars(svg , line_estado, line_micro, 270,currentYearData[indicador]);
+			plot_bars(svg , line_estado, line_meso, 160,currentYearData[indicador]);
+			plot_bars(svg , line_estado, line_micro, 220,currentYearData[indicador]);
 
 			//barra com as cores dos indicadores
 			plot_desvios_barras(svg,estado, indicador,100,parseFloat(currentYearData[indicador]));			
@@ -294,26 +299,33 @@ function plotIndicadores(indicador) {
 				.text("Paraíba");
 			
 			svg.append("text")
-				.attr("y", 187)
+				.attr("y", 162)
 				.text(currentYearData.NOME_MESO);
 			
 			svg.append("text")
-				.attr("y", 272)
+				.attr("y", 222)
 				.text(currentYearData.NOME_MICRO);
 				
 			svg.append("text")
 				.style("text-align", "center")
-				.attr("y", 284)
+				.attr("y", 234)
 								.attr("x", 25)
 				.attr("font-weight", "bold")
 				.text("(Microrregião)");
 			
 			svg.append("text")
 				.style("text-align", "center")
-				.attr("y", 199)
+				.attr("y", 174)
 								.attr("x", 25)
 				.attr("font-weight", "bold")
 				.text("(Mesorregião)");
+			
+			svg.append("text")
+			.attr("y", 284)
+			.attr("x", 60)
+			.attr("text-anchor", "right")
+			.attr("font-weight", "bold")
+			.text("Similares");
 		
 		}
 		
@@ -337,6 +349,9 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 		  
 	desvios(svg,desvio,media,y0,min,max,dado_indicador[0].referencial_maior,dados_estado,indicador);
 	
+	//Plota cidades na quarta barra
+	
+	
 	//plotando valor atual
 	svg.append("line")
 		  .transition().duration(duration).delay(1000)
@@ -344,7 +359,7 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 		  .attr("x2", x1(valor_cidade) + 1)
 		  .attr("y1" , (y0 - 12))
 		  .style("stroke-dasharray", ("5, 3"))
-		  .attr("y2", 283)//200
+		  .attr("y2", 294)//200
 		  .attr("stroke","black");
 
 	//font-weight: bold
@@ -565,7 +580,10 @@ function addLine(svg,x1,x2,y1,y2,cor,largura){
 	}
 }
 
-function plot_cidades(svg, dados, indicador,cor, min, max,largura, y0, nomeCidade){
+
+//plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media - (desvio)));}), indicador,"#FFCC00",min,max,10,y0);
+
+function plot_cidades(svg, dados, indicador,cor, min, max,largura, y0){
 	
 	var x1 = d3.scale.linear()
           .domain([min,max])
