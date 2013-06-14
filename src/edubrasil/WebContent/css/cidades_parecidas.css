@@ -1,0 +1,45 @@
+@CHARSET "UTF-8";
+
+#title_header {
+	background-color: black;
+	padding: 0;
+	margin: 0px;
+	color: #DCDCDC;
+	font-size: 3.75em;
+	text-align: center;
+	height: 70px;
+}
+
+
+#main_content {
+	height: 100%;
+	width: 100%;
+	color: black;
+	font: 16px sans-serif;
+	padding: 0;
+	margin: 0;
+    text-align: left;
+    background-color: white;
+}
+
+#footer{
+	background-color: black;
+	padding: 0;
+	margin: 0px;
+	color: #DCDCDC;
+	font-size: 1.5em;
+	height: 70px;
+    bottom:0;
+    width:100%;
+    position:botton;
+    text-align: center;
+}
+
+#plot_imagens {
+	padding: 0 0;
+	margin: 0px;
+    min-height: 100%;
+    padding-bottom: 70px;
+    overflow: hidden;
+	text-align: center;
+}
