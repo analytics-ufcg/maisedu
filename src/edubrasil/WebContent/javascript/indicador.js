@@ -201,7 +201,7 @@ function plotIndicadores(indicador) {
 		var line_micro = [{'x' :d3.min(micro,function(d){return parseFloat(d[indicador]);}) , 'y' : 220},
 						  {'x': (d3.max(micro,function(d){return parseFloat(d[indicador]);})), 'y' : 220}];
 
-		var vizinhos = similares.filter(function(d){return d.cidade == cidade;});
+		//var vizinhos = similares.filter(function(d){return d.cidade == cidade;});
 		//console.log(vizinhos);
 
 		if (svg[0][0] == null){
@@ -388,7 +388,7 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= max);}), indicador,"#FFCC00",min,max,10,y0);
 		}else if((media - (desvio) < max) & (media - (2*desvio) < min)){
 			addLine(svg,x1(media - (desvio)),x1(min),y0,y0,"#FFCC00",10);
-			 plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= min & d[indicador] <= media - (desvio));}), indicador,"#FFCC00",min,max,10,y0);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= min & d[indicador] <= media - (desvio));}), indicador,"#FFCC00",min,max,10,y0);
 		}
 		//laranja
 		if((media - (2*desvio) < max) & (media - (3*desvio) > min)){
@@ -403,8 +403,8 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 		 }
 		//vermelho
 		if((media - (3*desvio) > min) & (media - (2*desvio) > min) & (media - desvio > min)){
-			addLine(svg,x1(media - (3*desvio)),x1(min),y0,y0,"#FF0000",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (3*desvio)));}), indicador,"#FF0000",min,max,10,y0);
+			addLine(svg,x1(media - (3*desvio)),x1(min),y0,y0,"#DE2D26",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (3*desvio)));}), indicador,"#A50F15",min,max,10,y0);
 		}
 		//verde
 		if(media + (2*desvio) < max){
@@ -415,14 +415,14 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 		if((media - desvio > min) & (media +(2*desvio) < max)){
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - desvio ) & d[indicador] <= (media +(2*desvio)));}), indicador,"#E0E0E0",min,max,10,y0);
 		}else if((media - desvio > min) & (media +(2*desvio) > max)){
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - desvio ) & d[indicador] <= (max));}), indicador,"#E0E0E0",min,max,10,y0);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - desvio ) & d[indicador] <= (max));}), indicador,"#C0C0C0",min,max,10,y0);
 		}
 		
 	}else{
 		 //vermelho
 		if(media + (3*desvio) < max){
-			addLine(svg,x1(media + (3*desvio)),x1(max),y0,y0,"#FF0000",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (3*desvio)) & d[indicador] <= (max));}), indicador,"#FF0000",min,max,10,y0);
+			addLine(svg,x1(media + (3*desvio)),x1(max),y0,y0,"#DE2D26",10);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (3*desvio)) & d[indicador] <= (max));}), indicador,"#A50F15",min,max,10,y0);
 		}
 		//laranja
 		if((media + (3*desvio) < max) & (media + (2*desvio) > min)){
@@ -453,9 +453,9 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 		}
 		//cinza
 		if((media - (2*desvio) > min) & (media + (desvio) < max)){
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media + (desvio)));}), indicador,"#E0E0E0",min,max,10,y0);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media + (desvio)));}), indicador,"#C0C0C0",min,max,10,y0);
 		}else if((media - (2*desvio) < min) & (media +(desvio) < max)){
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media +(desvio)));}), indicador,"#E0E0E0",min,max,10,y0);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media +(desvio)));}), indicador,"#C0C0C0",min,max,10,y0);
 		}
 	}
 	
@@ -575,7 +575,7 @@ function addLine(svg,x1,x2,y1,y2,cor,largura){
 			  .attr("y2",y2)
 			  .transition().duration(duration)
 			  .style("stroke",cor)
-			  .attr("opacity",0.2)
+			  .attr("opacity",0.6)
 			  .attr("stroke-width",25);
 	}
 }
@@ -599,7 +599,6 @@ function plot_cidades(svg, dados, indicador,cor, min, max,largura, y0){
 					.attr("text",function(d){return d.NOME_MUNICIPIO;})
 					.transition().duration(duration)
 					.style("stroke",cor)
-					.attr("opacity",0.7)
 					.attr("stroke-width",24);
 	
 	g.selectAll("line").on("mouseover", function(d) {
