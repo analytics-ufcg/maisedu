@@ -2,6 +2,7 @@ var dataset = [];
 var rawdata = [];
 var dicionario = [];
 var similares = [];
+var similares_meso = [];
 var cidade = "";
 var duration = 1000;
 var w = 800;
@@ -80,8 +81,11 @@ function loadData() {
 	
 	});
 	
-	d3.csv("data/cidades_semelhantes_nomes.csv", function (data){
+	d3.csv("data/tabela_cidades_semelhantes.csv", function (data){
 			similares = data;});
+	
+	d3.csv("data/tabela_cidades_semelhantes_com_mesorregiao.csv", function (data){
+		similares_meso = data;});
 	
 	loadUpButtons();
 };
@@ -171,61 +175,95 @@ function getButtonColor(colunaDesvio) {
 }
 
 //recebe o id do indicador e retorna o nome
-function nomeIndicador(indicador) {
+function nomeIndicador(idIndicador) {
 	for (var linha = 0; linha < dicionario.length; linha++) {
-		if(dicionario[linha].id == indicador) {
+		if(dicionario[linha].id == idIndicador) {
 			return dicionario[linha].name;
 		}
 	}
 }
 
+function in_array(array, value) {
+    if(array.indexOf(value) == -1) {
+    	return false;
+    }
+    return true;
+}
+
+//Filtra dados das cidades similares a cidade principal
+function filtraSimilares(ano, dataSimilares, indicador) {
+	var vizinhos = dataSimilares.filter(function(d){return d.Cidade == cidade;});
+	
+	var values = Object.keys(vizinhos[0]).map(function (key) {
+	    return vizinhos[0][key];
+	});
+	
+	values = values.splice(1,values.length);
+	
+	var indicadores = dataset.filter(function(d) {return (d.ANO == ano & d[indicador] != "NA");});
+	indicadores = indicadores.filter(function(d){return in_array(values,d.NOME_MUNICIPIO);});
+	
+	return indicadores;	
+}
+
 //Plota grafico
 function plotIndicadores(indicador) {
 	var svg;
+	var h1 = 60;
+	var	h2 = h1 + 60;
+	var h3 = h2 + 60;
+	var h4 = h3 + 60;
 	if(rawdata.length != 0){
 		var maxYear = d3.max(rawdata.filter(function(d){return d[indicador] != "NA";}).map(function(d){return parseInt(d.ANO);}));
 		var currentYearData = rawdata.filter(function(d){return d.ANO == maxYear;})[0];
-
+		
 		//Create SVG element
 		svg = d3.select("#div_indicador").select("svg");
 		var estado = dataset.filter(function(d){return d[indicador] != "NA" & d.ANO == currentYearData.ANO;});
 		var meso = dataset.filter(function(d){return d[indicador] != "NA" & d.NOME_MESO == currentYearData.NOME_MESO & d.ANO == currentYearData.ANO;});
 		var micro = dataset.filter(function(d){return d[indicador] != "NA" & d.NOME_MICRO == currentYearData.NOME_MICRO & d.ANO == currentYearData.ANO;});
 		
-		var line_estado = [{'x' : d3.min(estado,function(d){return parseFloat(d[indicador]);}) , 'y' : 100},
-						   {'x':(d3.max(estado,function(d){return parseFloat(d[indicador]);})), 'y' : 100}];
+		var line_estado = [{'x' : d3.min(estado,function(d){return parseFloat(d[indicador]);}) , 'y' : h1},
+						   {'x':(d3.max(estado,function(d){return parseFloat(d[indicador]);})), 'y' : h1}];
 					
-		var line_meso =[{'x' : d3.min(meso,function(d){return parseFloat(d[indicador]);}) , 'y' : 160}, 
-						{'x': (d3.max(meso,function(d){return parseFloat(d[indicador]);})), 'y' : 160}];
+		var line_meso =[{'x' : d3.min(meso,function(d){return parseFloat(d[indicador]);}) , 'y' : h2}, 
+						{'x': (d3.max(meso,function(d){return parseFloat(d[indicador]);})), 'y' : h2}];
 		
-		var line_micro = [{'x' :d3.min(micro,function(d){return parseFloat(d[indicador]);}) , 'y' : 220},
-						  {'x': (d3.max(micro,function(d){return parseFloat(d[indicador]);})), 'y' : 220}];
-
-		//var vizinhos = similares.filter(function(d){return d.cidade == cidade;});
-		//console.log(vizinhos);
-
+		var line_micro = [{'x' :d3.min(micro,function(d){return parseFloat(d[indicador]);}) , 'y' : h3},
+						  {'x': (d3.max(micro,function(d){return parseFloat(d[indicador]);})), 'y' : h3}];
+		
+		var vizinhos = filtraSimilares(currentYearData.ANO, similares, indicador);
+		
+		var vizinhos_meso = filtraSimilares(currentYearData.ANO, similares_meso, indicador);
+		
 		if (svg[0][0] == null){
-
-			svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", h);
+			
+			svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", h);			
 			
 			//eixo das barras
-			plot_ranges(svg, line_estado, 100);
-			plot_ranges(svg, line_estado, 160);
-			plot_ranges(svg, line_estado, 220);
-			plot_ranges(svg, line_estado, 280);
+			plot_ranges(svg, line_estado, h1);
+			plot_ranges(svg, line_estado, h2);
+			plot_ranges(svg, line_estado, h3);
+			plot_ranges(svg, line_estado, h4);
+			
+			plot_similares(svg, vizinhos, indicador, (d3.min(estado,function(d){return parseFloat(d[indicador]);})),
+					(d3.max(estado,function(d){return parseFloat(d[indicador]);})), h4, currentYearData.ANO);
 			
 			
 			//barras cinzas equivalentes ao valor das regioes
-			plot_bars(svg , line_estado, line_meso, 160,currentYearData[indicador]);
-			plot_bars(svg , line_estado, line_micro, 220,currentYearData[indicador]);
+			plot_bars(svg , line_estado, line_meso, h2,currentYearData[indicador]);
+			plot_bars(svg , line_estado, line_micro, h3,currentYearData[indicador]);
+			
+			plot_similares(svg, vizinhos_meso, indicador, (d3.min(estado,function(d){return parseFloat(d[indicador]);})),
+					(d3.max(estado,function(d){return parseFloat(d[indicador]);})), h2, currentYearData.ANO);
 
 			//barra com as cores dos indicadores
-			plot_desvios_barras(svg,estado, indicador,100, parseFloat(currentYearData[indicador]));
+			plot_desvios_barras(svg,estado, indicador,h1, parseFloat(currentYearData[indicador]));
 
 			plotTitulosGraficos(indicador, currentYearData.ANO);			
 		
 			svg.append("text")
-				.attr("y", 100)
+				.attr("y", h1)
 				.attr("x", 60)
 				.attr("text-anchor", "right")
 				.attr("font-weight", "bold")
@@ -233,29 +271,29 @@ function plotIndicadores(indicador) {
 			
 			svg.append("text")
 				.style("text-align", "right")
-				.attr("y", 162)
+				.attr("y", h2 + 2)
 				.text(currentYearData.NOME_MESO);
 			
 			svg.append("text")
 				.style("text-align", "center")
-				.attr("y", 174)
+				.attr("y", h2 + 14)
 				.attr("x", 25)
 				.attr("font-weight", "bold")	
 				.text("(Mesorregião)");
 			
 			svg.append("text")
-				.attr("y", 222)
+				.attr("y", h3 + 2)
 				.text(currentYearData.NOME_MESO);
 			
 			svg.append("text")
 				.style("text-align", "center")
-				.attr("y", 234)
+				.attr("y", h3 + 14)
 				.attr("x", 25)
 				.attr("font-weight", "bold")
 				.text("(Microrregião)");
 			
 			svg.append("text")
-			.attr("y", 284)
+			.attr("y", h4 + 4)
 			.attr("x", 60)
 			.attr("text-anchor", "right")
 			.attr("font-weight", "bold")
@@ -277,52 +315,58 @@ function plotIndicadores(indicador) {
 				 .remove();
 			
 			//eixo das barras
-			plot_ranges(svg, line_estado, 100);
-			plot_ranges(svg, line_estado, 160);
-			plot_ranges(svg, line_estado, 220);
-			plot_ranges(svg, line_estado, 280);
+			plot_ranges(svg, line_estado, h1);
+			plot_ranges(svg, line_estado, h2);
+			plot_ranges(svg, line_estado, h3);
+			plot_ranges(svg, line_estado, h4);
 			
 			
 			//barras cinzas equivalentes ao valor das regioes
 			//plot_bars(svg, line_estado, line_estado, 100,currentYearData[indicador]);
-			plot_bars(svg , line_estado, line_meso, 160,currentYearData[indicador]);
-			plot_bars(svg , line_estado, line_micro, 220,currentYearData[indicador]);
+			plot_bars(svg , line_estado, line_meso, h2,currentYearData[indicador]);
+			plot_bars(svg , line_estado, line_micro, h3,currentYearData[indicador]);
 
 			//barra com as cores dos indicadores
-			plot_desvios_barras(svg,estado, indicador,100,parseFloat(currentYearData[indicador]));			
-
+			plot_desvios_barras(svg,estado, indicador,h1,parseFloat(currentYearData[indicador]));			
+			
+			plot_similares(svg, vizinhos, indicador, (d3.min(estado,function(d){return parseFloat(d[indicador]);})),
+					(d3.max(estado,function(d){return parseFloat(d[indicador]);})), h4, currentYearData.ANO);
+			
+			plot_similares(svg, vizinhos_meso, indicador, (d3.min(estado,function(d){return parseFloat(d[indicador]);})),
+					(d3.max(estado,function(d){return parseFloat(d[indicador]);})), h2, currentYearData.ANO);
+			
 			plotTitulosGraficos(indicador, currentYearData.ANO);			
 			
 			svg.append("text")
-				.attr("y", 100)
+				.attr("y", h1)
 				.attr("x", 60)
 				.attr("font-weight", "bold")
 				.text("Paraíba");
 			
 			svg.append("text")
-				.attr("y", 162)
+				.attr("y", h2 + 2)
 				.text(currentYearData.NOME_MESO);
 			
 			svg.append("text")
-				.attr("y", 222)
+				.attr("y", h3 + 2)
 				.text(currentYearData.NOME_MICRO);
 				
 			svg.append("text")
 				.style("text-align", "center")
-				.attr("y", 234)
+				.attr("y", h3 + 14)
 								.attr("x", 25)
 				.attr("font-weight", "bold")
 				.text("(Microrregião)");
 			
 			svg.append("text")
 				.style("text-align", "center")
-				.attr("y", 174)
+				.attr("y", h2 + 14)
 								.attr("x", 25)
 				.attr("font-weight", "bold")
 				.text("(Mesorregião)");
 			
 			svg.append("text")
-			.attr("y", 284)
+			.attr("y", h4 + 4)
 			.attr("x", 60)
 			.attr("text-anchor", "right")
 			.attr("font-weight", "bold")
@@ -359,7 +403,7 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 		  .attr("x2", x1(valor_cidade) + 1)
 		  .attr("y1" , (y0 - 12))
 		  .style("stroke-dasharray", ("5, 3"))
-		  .attr("y2", 294)//200
+		  .attr("y2", 256)//200
 		  .attr("stroke","black");
 
 	//font-weight: bold
@@ -377,85 +421,85 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 	var x1 = d3.scale.linear()
           .domain([min,max])
           .range([120, 750]);
-	addLine(svg, x1(min), x1(max), y0,y0,"#E0E0E0",10);
+	addLine(svg, x1(min), x1(max), y0,y0,"#E0E0E0");
 	if(referencial == "melhor" | referencial == "neutro"){
 		//amarelo
 		if((media - (desvio) < max) & (media - (2*desvio) > min)){
-			addLine(svg,x1(media - (2*desvio)),x1(media - (desvio)),y0,y0,"#FFCC00",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media - (desvio)));}), indicador,"#FFCC00",min,max,10,y0);
+			addLine(svg,x1(media - (2*desvio)),x1(media - (desvio)),y0,y0,"#FFCC00");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media - (desvio)));}), indicador,"#FFCC00",min,max,y0);
 		}else if((media - (desvio) > max) & (media - (2*desvio) > min)){
-			addLine(svg,x1(max),x1(media - (2*desvio)),y0,y0,"#FFCC00",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= max);}), indicador,"#FFCC00",min,max,10,y0);
+			addLine(svg,x1(max),x1(media - (2*desvio)),y0,y0,"#FFCC00");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= max);}), indicador,"#FFCC00",min,max,y0);
 		}else if((media - (desvio) < max) & (media - (2*desvio) < min)){
-			addLine(svg,x1(media - (desvio)),x1(min),y0,y0,"#FFCC00",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= min & d[indicador] <= media - (desvio));}), indicador,"#FFCC00",min,max,10,y0);
+			addLine(svg,x1(media - (desvio)),x1(min),y0,y0,"#FFCC00");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= min & d[indicador] <= media - (desvio));}), indicador,"#FFCC00",min,max,y0);
 		}
 		//laranja
 		if((media - (2*desvio) < max) & (media - (3*desvio) > min)){
-			addLine(svg,x1(media - (2*desvio)),x1(media - (3*desvio)),y0,y0,"#FF6600",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (3*desvio)) & d[indicador] <= (media - (2*desvio)));}), indicador,"#FF6600",min,max,10,y0);
+			addLine(svg,x1(media - (2*desvio)),x1(media - (3*desvio)),y0,y0,"#FF6600");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (3*desvio)) & d[indicador] <= (media - (2*desvio)));}), indicador,"#FF6600",min,max,y0);
 		}else if((media - (2*desvio) > max) & (media - (3*desvio) > min)){
-			addLine(svg,x1(max),x1(media - (3*desvio)),y0,y0,"#FF6600",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= max);}), indicador,"#FF6600",min,max,10,y0);
+			addLine(svg,x1(max),x1(media - (3*desvio)),y0,y0,"#FF6600");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= max);}), indicador,"#FF6600",min,max,y0);
 		}else if((media - (3*desvio) < min) & (media - (2*desvio) > min)){
-			addLine(svg,x1(media - (2*desvio)),x1(min),y0,y0,"#FF6600",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (2*desvio)));}), indicador,"#FF6600",min,max,10,y0);
+			addLine(svg,x1(media - (2*desvio)),x1(min),y0,y0,"#FF6600");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (2*desvio)));}), indicador,"#FF6600",min,max,y0);
 		 }
 		//vermelho
 		if((media - (3*desvio) > min) & (media - (2*desvio) > min) & (media - desvio > min)){
-			addLine(svg,x1(media - (3*desvio)),x1(min),y0,y0,"#DE2D26",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (3*desvio)));}), indicador,"#A50F15",min,max,10,y0);
+			addLine(svg,x1(media - (3*desvio)),x1(min),y0,y0,"#DE2D26");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (3*desvio)));}), indicador,"#A50F15",min,max,y0);
 		}
 		//verde
 		if(media + (2*desvio) < max){
-			addLine(svg,x1(max),x1(media + (2*desvio)),y0,y0,"green",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (max));}), indicador,"green",min,max,10,y0);
+			addLine(svg,x1(max),x1(media + (2*desvio)),y0,y0,"green");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (max));}), indicador,"green",min,max,y0);
 		}
 		//cinza
 		if((media - desvio > min) & (media +(2*desvio) < max)){
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - desvio ) & d[indicador] <= (media +(2*desvio)));}), indicador,"#E0E0E0",min,max,10,y0);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - desvio ) & d[indicador] <= (media +(2*desvio)));}), indicador,"#C0C0C0",min,max,y0);
 		}else if((media - desvio > min) & (media +(2*desvio) > max)){
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - desvio ) & d[indicador] <= (max));}), indicador,"#C0C0C0",min,max,10,y0);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - desvio ) & d[indicador] <= (max));}), indicador,"#C0C0C0",min,max,y0);
 		}
 		
 	}else{
 		 //vermelho
 		if(media + (3*desvio) < max){
-			addLine(svg,x1(media + (3*desvio)),x1(max),y0,y0,"#DE2D26",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (3*desvio)) & d[indicador] <= (max));}), indicador,"#A50F15",min,max,10,y0);
+			addLine(svg,x1(media + (3*desvio)),x1(max),y0,y0,"#DE2D26");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (3*desvio)) & d[indicador] <= (max));}), indicador,"#A50F15",min,max,y0);
 		}
 		//laranja
 		if((media + (3*desvio) < max) & (media + (2*desvio) > min)){
-			addLine(svg,x1(media + (3*desvio)),x1(media + (2*desvio)),y0,y0,"#FF6600",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (media + (3*desvio)));}), indicador,"#FF6600",min,max,10,y0);
+			addLine(svg,x1(media + (3*desvio)),x1(media + (2*desvio)),y0,y0,"#FF6600");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (media + (3*desvio)));}), indicador,"#FF6600",min,max,y0);
 		}else if((media + (3*desvio) > max) & (media +(2*desvio) > min)){
-			addLine(svg,x1(media + (2*desvio)),x1(max),y0,y0,"#FF6600",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (max));}), indicador,"#FF6600",min,max,10,y0);
+			addLine(svg,x1(media + (2*desvio)),x1(max),y0,y0,"#FF6600");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (max));}), indicador,"#FF6600",min,max,y0);
 		}else if((media +(3*desvio) < max) & (media + (2*desvio) < min)){
-			addLine(svg,x1(min),x1(media + (3*desvio)),y0,y0,"#FF6600",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media + (3*desvio)));}), indicador,"#FF6600",min,max,10,y0);
+			addLine(svg,x1(min),x1(media + (3*desvio)),y0,y0,"#FF6600");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media + (3*desvio)));}), indicador,"#FF6600",min,max,y0);
 		}
 		//amarelo
 		if((media + (2*desvio) < max) & (media + (desvio) > min)){
-			addLine(svg,x1(media + (desvio)),x1(media + (2*desvio)),y0,y0,"#FFCC00",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (desvio)) & d[indicador] <= (media + (2*desvio)));}), indicador,"#FFCC00",min,max,10,y0);
+			addLine(svg,x1(media + (desvio)),x1(media + (2*desvio)),y0,y0,"#FFCC00");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (desvio)) & d[indicador] <= (media + (2*desvio)));}), indicador,"#FFCC00",min,max,y0);
 		}else if((media + (2*desvio) > max) & (media +(desvio) > min)){
-			addLine(svg,x1(media + (2*desvio)),x1(max),y0,y0,"#FFCC00",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (max));}), indicador,"#FFCC00",min,max,10,y0);
+			addLine(svg,x1(media + (2*desvio)),x1(max),y0,y0,"#FFCC00");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (max));}), indicador,"#FFCC00",min,max,y0);
 		}else if((media +(2*desvio) < max) & (media+(desvio) < min)){
-			addLine(svg,x1(min),x1(media + (2*desvio)),y0,y0,"#FFCC00",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media + (2*desvio)));}), indicador,"#FFCC00",min,max,10,y0);
+			addLine(svg,x1(min),x1(media + (2*desvio)),y0,y0,"#FFCC00");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media + (2*desvio)));}), indicador,"#FFCC00",min,max,y0);
 		}
 		//verde
 		if((media - (2*desvio) > min)){
-			addLine(svg,x1(media - (2*desvio)),x1(min),y0,y0,"green",10);
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (2*desvio)));}), indicador,"green",min,max,10,y0);
+			addLine(svg,x1(media - (2*desvio)),x1(min),y0,y0,"green");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (2*desvio)));}), indicador,"green",min,max,y0);
 		}
 		//cinza
 		if((media - (2*desvio) > min) & (media + (desvio) < max)){
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media + (desvio)));}), indicador,"#C0C0C0",min,max,10,y0);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media + (desvio)));}), indicador,"#C0C0C0",min,max,y0);
 		}else if((media - (2*desvio) < min) & (media +(desvio) < max)){
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media +(desvio)));}), indicador,"#C0C0C0",min,max,10,y0);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media +(desvio)));}), indicador,"#C0C0C0",min,max,y0);
 		}
 	}
 	
@@ -555,7 +599,7 @@ function sd(theArray, indicador) {
 	return Math.pow(sum/length, 0.5);
 }
 
-function addLine(svg,x1,x2,y1,y2,cor,largura){
+function addLine(svg,x1,x2,y1,y2,cor){
 	
 	if(y1 > 100){
 		svg.append("line")
@@ -580,7 +624,7 @@ function addLine(svg,x1,x2,y1,y2,cor,largura){
 	}
 }
 
-function plot_cidades(svg, dados, indicador,cor, min, max,largura, y0){
+function plot_cidades(svg, dados, indicador,cor, min, max, y0){
 	
 	var x1 = d3.scale.linear()
           .domain([min,max])
@@ -599,6 +643,51 @@ function plot_cidades(svg, dados, indicador,cor, min, max,largura, y0){
 					.attr("text",function(d){return d.NOME_MUNICIPIO;})
 					.transition().duration(duration)
 					.style("stroke",cor)
+					.attr("stroke-width",24);
+	
+	g.selectAll("line").on("mouseover", function(d) {
+				
+						//Get indicator value and tranform to float
+						var valorIndicador = d.NOME_MUNICIPIO + ": " + d3.format(".2f")(d[indicador]);
+				
+						//Get the values for tooltip position
+						var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
+						var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
+				
+						//Update the tooltip position and value
+						d3.select("#tooltip").style("left", xPosition + "px")
+						.style("top", yPosition + "px")
+						.select("#value").text(valorIndicador);//cidade + " : " +valorIndicador.toFixed(2));
+				
+						//Show the tooltip
+						d3.select("#tooltip").classed("hidden", false);
+					})
+				
+					.on("mouseout", function() {//Hide the tooltip
+						d3.select("#tooltip").classed("hidden", true);
+					});
+}
+
+function plot_similares(svg, similares, indicador, min, max, y0, ano){	
+	
+	var x1 = d3.scale.linear()
+          .domain([min,max])
+          .range([120, 750]);
+	
+	var g = svg.append("g");
+
+	
+	g.selectAll("line").data(similares)
+					.enter()
+					.append("line")
+					.attr("x1", function(d){return x1(d[indicador]);})
+					.attr("x2", function(d){return x1(d[indicador]) + 2;})
+					.attr("y1",y0)
+					.attr("y2",y0)
+					.attr("class","linha_cidade")
+					.attr("text",function(d){return d.NOME_MUNICIPIO;})
+					.transition().duration(duration)
+					.style("stroke","#C0C0C0")
 					.attr("stroke-width",24);
 	
 	g.selectAll("line").on("mouseover", function(d) {
