@@ -1,6 +1,7 @@
 var dataset = [];
 var rawdata = [];
 var dicionario = [];
+var similares = [];
 var cidade = "";
 var duration = 1000;
 var w = 800;
@@ -78,6 +79,10 @@ function loadData() {
 		.attr("label",function(d){return d;});
 	
 	});
+	
+	d3.csv("data/cidades_semelhantes_nomes.csv", function (data){
+			similares = data;});
+	
 	loadUpButtons();
 };
 
@@ -196,7 +201,9 @@ function plotIndicadores(indicador) {
 		var line_micro = [{'x' :d3.min(micro,function(d){return parseFloat(d[indicador]);}) , 'y' : 220},
 						  {'x': (d3.max(micro,function(d){return parseFloat(d[indicador]);})), 'y' : 220}];
 
-		
+		var vizinhos = similares.filter(function(d){return d.cidade == cidade;});
+		//console.log(vizinhos);
+
 		if (svg[0][0] == null){
 
 			svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", h);
@@ -209,16 +216,10 @@ function plotIndicadores(indicador) {
 			
 			
 			//barras cinzas equivalentes ao valor das regioes
-			//plot_bars(svg, line_estado, line_estado, 100,currentYearData[indicador]);
 			plot_bars(svg , line_estado, line_meso, 160,currentYearData[indicador]);
 			plot_bars(svg , line_estado, line_micro, 220,currentYearData[indicador]);
-			//plot_bars(svg , line_estado, line_estado, 280,currentYearData[indicador]);
-			
 
 			//barra com as cores dos indicadores
-			
-			
-			
 			plot_desvios_barras(svg,estado, indicador,100, parseFloat(currentYearData[indicador]));
 
 			plotTitulosGraficos(indicador, currentYearData.ANO);			
@@ -328,7 +329,6 @@ function plotIndicadores(indicador) {
 			.text("Similares");
 		
 		}
-		
 		
 	}else{
 		d3.select("svg").remove();
@@ -580,15 +580,11 @@ function addLine(svg,x1,x2,y1,y2,cor,largura){
 	}
 }
 
-
-//plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media - (desvio)));}), indicador,"#FFCC00",min,max,10,y0);
-
 function plot_cidades(svg, dados, indicador,cor, min, max,largura, y0){
 	
 	var x1 = d3.scale.linear()
           .domain([min,max])
           .range([120, 750]);
-	
 	
 	var g = svg.append("g");
 	
