@@ -126,5 +126,5 @@ cidades_distancias = cidades_distancias[with(cidades_distancias,order(cidades_di
 write.csv(cidades_distancias,"cidades_semelhantes_distancias.csv",row.names = F)
 
 ####Quantidade de cidades diferentes####
-cidades_diferentes = calCidadesDiferentes(data,10)
-write.csv(cidades_diferentes,"cidades_diferentes_medias.csv",row.names = F)
+#cidades_diferentes = calCidadesDiferentes(data,10)
+#write.csv(cidades_diferentes,"cidades_diferentes_medias.csv",row.names = F)
