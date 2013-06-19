@@ -7,12 +7,12 @@ require("gdata")
 perl.path = "C:/strawberry/perl/bin/perl"
 
 #Carrega arquivos necess√°rtios
-total.matriculas = read.xls("INDICADOR_219 - Total MatrÌ≠culas.xls",perl=perl.path)
+total.matriculas = read.xls("INDICADOR_219 - Total MatrÌculas.xls",perl=perl.path)
 IFDM = read.xls("IFDM_2010_Paraiba.xls",perl=perl.path)[,]
 receita = receita = read.xls("Receita.xls", perl = perl.path)
 receita = receita[1:(nrow(receita)-1), ]
 receita$Valor = gsub(",","",receita$Valor)
-#FPM = read.xls("tabela de munic√≠pios com coeficiente FPM e cod IBGE.xls",perl=perl.path)
+#FPM = read.xls("tabela de munic√?pios com coeficiente FPM e cod IBGE.xls",perl=perl.path)
 
 
 #Selecionando colunas e linhas necess√°rias e ordenando
@@ -21,18 +21,25 @@ total.matriculas = total.matriculas[with(total.matriculas,order(NOME_MUNICIPIO))
 
 IFDM = IFDM[order(IFDM$Cidade),]
 receita = receita[order(receita$Muninipio), ]
-#FPM = FPM[order(FPM$Nome.do.Munic√≠pio),]
+#FPM = FPM[order(FPM$Nome.do.Munic√?pio),]
+
+
 
 #Merge dos atributos
 #data = cbind(total.matriculas,IFDM$IFDM, FPM$Coeficiente)
-data = cbind(total.matriculas,IFDM$IFDM, receita$Valor)
+data = cbind(total.matriculas,IFDM$IFDM)#, receita$Valor)
+data$receita = NA
+
+for(i in 1:nrow(data)){
+  nome = as.character(data$NOME_MUNICIPIO[i])
+  data[i,]$receita = gsub(",","",receita[receita$Muninipio == nome, ]$Valor)
+}
 
 #colnames(data)[10:12] = c("numero.matriculas", "IFDM", "FPM") 
 colnames(data)[10:12] = c("numero.matriculas", "IFDM", "receita") 
 
-
 #Salvando informa√ß√µes agregadas
-write.csv(data,"numero.matriculas_IFDM_e_receita_agregados.csv",row.names=F)
+write.csv(data,"numero.matriculas_IFDM_e_receita_agregados.csv",row.names=F, dec = ".")
 
 
 
