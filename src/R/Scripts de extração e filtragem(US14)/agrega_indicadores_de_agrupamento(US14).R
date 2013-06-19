@@ -11,6 +11,7 @@ total.matriculas = read.xls("INDICADOR_219 - Total Matrí­culas.xls",perl=perl.pa
 IFDM = read.xls("IFDM_2010_Paraiba.xls",perl=perl.path)[,]
 receita = receita = read.xls("Receita.xls", perl = perl.path)
 receita = receita[1:(nrow(receita)-1), ]
+receita$Valor = gsub(",","",receita$Valor)
 #FPM = read.xls("tabela de municÃ­pios com coeficiente FPM e cod IBGE.xls",perl=perl.path)
 
 
