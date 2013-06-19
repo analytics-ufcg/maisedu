@@ -669,47 +669,49 @@ function plot_cidades(svg, dados, indicador,cor, min, max, y0){
 }
 
 function plot_similares(svg, similares, indicador, min, max, y0, ano){	
-	
+
 	var x1 = d3.scale.linear()
-          .domain([min,max])
-          .range([120, 750]);
-	
+	.domain([min,max])
+	.range([120, 750]);
+
 	var g = svg.append("g");
 
-	
+
 	g.selectAll("line").data(similares)
-					.enter()
-					.append("line")
-					.attr("x1", function(d){return x1(d[indicador]);})
-					.attr("x2", function(d){return x1(d[indicador]) + 2;})
-					.attr("y1",y0)
-					.attr("y2",y0)
-					.attr("class","linha_cidade")
-					.attr("text",function(d){return d.NOME_MUNICIPIO;})
-					.transition().duration(duration)
-					.style("stroke","#C0C0C0")
-					.attr("stroke-width",24);
-	
+	.enter()
+	.append("line")
+	.attr("x1", function(d){return x1(d[indicador]);})
+	.attr("x2", function(d){return x1(d[indicador]) + 2;})
+	.attr("y1",y0)
+	.attr("y2",y0)
+	.attr("class","linha_cidade")
+	.attr("text",function(d){return d.NOME_MUNICIPIO;})
+	.transition().duration(duration)
+	.style("stroke","#C0C0C0")
+	.attr("stroke-width",24);
+
 	g.selectAll("line").on("mouseover", function(d) {
-				
-						//Get indicator value and tranform to float
-						var valorIndicador = d.NOME_MUNICIPIO + ": " + d3.format(".2f")(d[indicador]);
-				
-						//Get the values for tooltip position
-						var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
-						var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
-				
-						//Update the tooltip position and value
-						d3.select("#tooltip").style("left", xPosition + "px")
-						.style("top", yPosition + "px")
-						.select("#value").text(valorIndicador);//cidade + " : " +valorIndicador.toFixed(2));
-				
-						//Show the tooltip
-						d3.select("#tooltip").classed("hidden", false);
-					})
-				
-					.on("mouseout", function() {//Hide the tooltip
-						d3.select("#tooltip").classed("hidden", true);
-					});
+
+		//Get indicator value and tranform to float
+		var valorIndicador = d.NOME_MUNICIPIO + ": " + d3.format(".2f")(d[indicador]);
+
+		//Get the values for tooltip position
+		var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
+		var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
+
+		//Update the tooltip position and value
+		d3.select("#tooltip").style("left", xPosition + "px")
+		.style("top", yPosition + "px")
+		.select("#value").text(valorIndicador);//cidade + " : " +valorIndicador.toFixed(2));
+
+		//Show the tooltip
+		d3.select("#tooltip").classed("hidden", false);
+	})
+
+	.on("mouseout", function() {//Hide the tooltip
+		d3.select("#tooltip").classed("hidden", true);
+	})
+	.on("click", function(d) { windowObjectReference = window.open('cidades_parecidas.html','_blank'); })
+	;
 }
 
