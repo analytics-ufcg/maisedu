@@ -2,7 +2,6 @@ var dataset = [];
 var rawdata = [];
 var dicionario = [];
 var similares = [];
-var similares_meso = [];
 var cidade = "";
 var duration = 1000;
 var w = 800;
@@ -84,8 +83,6 @@ function loadData() {
 	d3.csv("data/tabela_cidades_semelhantes.csv", function (data){
 			similares = data;});
 	
-	d3.csv("data/tabela_cidades_semelhantes_com_mesorregiao.csv", function (data){
-		similares_meso = data;});
 	
 	loadUpButtons();
 };
@@ -234,7 +231,6 @@ function plotIndicadores(indicador) {
 		
 		var vizinhos = filtraSimilares(currentYearData.ANO, similares, indicador);
 		
-		var vizinhos_meso = filtraSimilares(currentYearData.ANO, similares_meso, indicador);
 		
 		if (svg[0][0] == null){
 			
@@ -254,9 +250,6 @@ function plotIndicadores(indicador) {
 			plot_bars(svg , line_estado, line_meso, h2,currentYearData[indicador]);
 			plot_bars(svg , line_estado, line_micro, h3,currentYearData[indicador]);
 			
-			plot_similares(svg, vizinhos_meso, indicador, (d3.min(estado,function(d){return parseFloat(d[indicador]);})),
-					(d3.max(estado,function(d){return parseFloat(d[indicador]);})), h2, currentYearData.ANO);
-
 			//barra com as cores dos indicadores
 			plot_desvios_barras(svg,estado, indicador,h1, parseFloat(currentYearData[indicador]));
 
@@ -332,8 +325,6 @@ function plotIndicadores(indicador) {
 			plot_similares(svg, vizinhos, indicador, (d3.min(estado,function(d){return parseFloat(d[indicador]);})),
 					(d3.max(estado,function(d){return parseFloat(d[indicador]);})), h4, currentYearData.ANO);
 			
-			plot_similares(svg, vizinhos_meso, indicador, (d3.min(estado,function(d){return parseFloat(d[indicador]);})),
-					(d3.max(estado,function(d){return parseFloat(d[indicador]);})), h2, currentYearData.ANO);
 			
 			plotTitulosGraficos(indicador, currentYearData.ANO);			
 			
