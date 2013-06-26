@@ -31,19 +31,33 @@ function loadData() {
 };
 
 
-function plotHistograms(){ //TODO fazer metodo depois que se escolher o grafico para representar
-	var dataset = [ 25, 7, 5, 26, 11, 8, 25, 14, 23, 19,
-	                14, 11, 22, 29, 11, 13, 12, 17, 18, 10,
-	                24, 18, 25, 9, 3 ];
+function plotParallelLines(){
+	var margin = {top: 30, right: 120, bottom: 40, left: 60},
+		width = 800 - margin.left - margin.right,
+		height = 400 - margin.top - margin.bottom;
 	
-	d3.select("plot_imagens").selectAll("div")
-    .data(dataset)
-    .enter()
-    .append("div")
-    .attr("class", "bar")
-    .style("height", function(d) {
-        var barHeight = d * 5;
-        return barHeight + "px";
-    });
+	var svg = d3.select("#div_parallel_lines").select("svg");
+	
+	svg = d3.select("#div_parallel_lines").append("svg")
+	.attr("width", width + margin.left + margin.right + 150)
+	.attr("height", height + margin.top + margin.bottom)
+	.append("g")
+	.attr("transform", "translate(" + (margin.left + 50) + "," + margin.top + ")");
+	
+	var x = d3.scale.ordinal().rangePoints([0, w], 1),
+    	y = {};
+
+	var line = d3.svg.line(),
+	axis = d3.svg.axis().orient("left"),
+	background,
+	foreground;
+
+	var svg = d3.select("body").append("svg:svg")
+	.attr("width", w + m[1] + m[3])
+	.attr("height", h + m[0] + m[2])
+	.append("svg:g")
+	.attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+	
+		
 }
 

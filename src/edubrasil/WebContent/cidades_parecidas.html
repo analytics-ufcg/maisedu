@@ -4,37 +4,32 @@
 <meta charset="utf-8">
 <title>MAIS.edu</title>
 <link href="css/cidades_parecidas.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="javascript/protovis.js"></script>
 </head>
-<body>
 
-	<div id="container">
-
-		<div id="title_header">MAIS.edu</div>
-
-		<div id="main_content">
+    <body onload="loadData()">
+        <div id="container">
+            
+            <div id ="title_header">MAIS.edu</div>
+            
             <div id="main_content">
-   
-
+                <div id="plot_area">
+               		 <div id="div_indicador_titulo" class="single_plot">
+                    </div>
+                    <div id="div_parallel_lines" class="single_plot">
+                    </div>
+                </div>
+            </div>
+            
+            <div id="footer">
+            Maquina de Análise de Indicadores Sociais
+            	<br>Analytics UFCG
             </div>
         </div>
-
-		</div>
-		<div id="plot_imagens">
-			<embed src="data\imagens\normal_melhor.svg" type="image/svg+xml">
-			<p>Figura 1. Quanto maior o valor do indicador melhor.</p>
-			</embed>
-			<embed src="data\imagens\normal_pior.svg" type="image/svg+xml">
-			<p>Figura 2. Quanto menor o valor do indicador melhor.</p>
-			</embed>
-		</div>
-		
-		<div id="footer">Maquina de Análise de Indicadores Sociais
-			<br>Analytics UFCG</br>
-		</div>
-		
-	</div>
-
-</body>
+        <div id="tooltip" class="hidden">
+            <p>
+            <span id="value"></span>
+            </p>
+        </div>
+    </body>
 </html>
-
-
