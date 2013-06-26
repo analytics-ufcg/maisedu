@@ -276,7 +276,7 @@ function plotIndicadores(indicador) {
 			
 			svg.append("text")
 				.attr("y", h3 + 2)
-				.text(currentYearData.NOME_MESO);
+				.text(currentYearData.NOME_MICRO);
 			
 			svg.append("text")
 				.style("text-align", "center")
