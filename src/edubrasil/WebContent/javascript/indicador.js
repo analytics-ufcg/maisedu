@@ -665,7 +665,8 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 	.domain([min,max])
 	.range([120, 750]);
 
-	var g = svg.append("g");
+	var g = svg.append("g"); 
+		//window.open('cidades_parecidas.html','_blank'); });
 
 
 	g.selectAll("line").data(similares)
@@ -698,11 +699,10 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 		//Show the tooltip
 		d3.select("#tooltip").classed("hidden", false);
 	})
-
 	.on("mouseout", function() {//Hide the tooltip
 		d3.select("#tooltip").classed("hidden", true);
 	})
-	.on("click", function(d) { windowObjectReference = window.open('cidades_parecidas.html','_blank'); })
+	.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')})
 	;
 }
 
