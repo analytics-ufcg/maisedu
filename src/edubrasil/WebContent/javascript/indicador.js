@@ -549,7 +549,7 @@ function plot_ranges(svg, dados, y0){
 			.tickValues([parseFloat(valor1),parseFloat(valor2)])
 			.ticks(6);
 	
-	if(y0 == 100){
+	if(y0 == 60){
 		svg.append("g")
 		  .attr("class", "x axis")
 		  .attr("transform", "translate(0," + (y0+12) + ")")
