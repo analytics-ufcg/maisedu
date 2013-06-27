@@ -85,7 +85,7 @@ function loadData() {
 	
 	
 	loadUpButtons();
-	
+
 	
 };
 
@@ -104,8 +104,8 @@ function loadUpButtons() {
 		.attr("id", function (d, i){return d.id;})
         .attr("class", "indicador indicador_cinza")
 		.on("click", function(d) {
-			
-			//limpa tela caso o botao clicado seja cinza(inativo)
+
+		//limpa tela caso o botao clicado seja cinza(inativo)
 			if(getButtonColor(d.desvio) == "indicador_cinza"){
 				cleanContainers();
 				
@@ -119,12 +119,13 @@ function loadUpButtons() {
 				plotSeries(cidade,d.id);
 				
 				//botão de cidades similares
-				/*d3.select("#menu")
+				d3.select("#div_indicador_titulo")
 				.append("input")
+				.style("text-anchor", "left")
+				.attr("id","botao_similares")
 				.attr("type","button")
 				.attr("value", function (d){return 'Cidades Similares';})
-				.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});*/
-
+				.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});
 			}
 		});
 		
@@ -134,7 +135,9 @@ function loadUpButtons() {
 //Plota o titulo do indicador
 function plotTitulosGraficos(indicador, ano) {
 	d3.selectAll("h1").remove();
-	
+	d3.selectAll("#botao_similares").remove();
+	//d3.selectAll("input").remove();
+		
 	d3.select("#div_indicador_titulo")
 	.append("h1")
 	.attr("class", "titulo_grafico")
@@ -579,6 +582,7 @@ function plot_ranges(svg, dados, y0){
 	}
 	
 	addLine(svg,x1(dados[0].x),x1(dados[1].x),y0,y0,"#F0F0F0",25);
+	
 	
 }
 
