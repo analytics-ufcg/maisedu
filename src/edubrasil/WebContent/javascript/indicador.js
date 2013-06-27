@@ -119,13 +119,13 @@ function loadUpButtons() {
 				plotSeries(cidade,d.id);
 				
 				//botão de cidades similares
-				d3.select("#div_indicador_titulo")
+				/*d3.select("#div_indicador_titulo")
 				.append("input")
 				.style("text-anchor", "left")
 				.attr("id","botao_similares")
 				.attr("type","button")
 				.attr("value", function (d){return 'Cidades Similares';})
-				.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});
+				.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});*/
 			}
 		});
 		
@@ -301,12 +301,19 @@ function plotIndicadores(indicador) {
 			
 			svg.append("text")
 			.attr("y", h4 + 4)
-			.attr("x", 60)
+			.attr("x", 30)
 			.attr("text-anchor", "right")
-			.attr("font-weight", "bold")
 			.text("Similares");
 			
-
+			svg.append("text")
+			.attr("y", h4 + 16)
+			.attr("x", 20)
+			.attr("text-anchor", "right")
+			.attr("font-weight", "bold")
+			.text("(Mais Detalhes)")
+			.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});
+		
+	
 		}else{
 
 			svg.selectAll("g").transition()
