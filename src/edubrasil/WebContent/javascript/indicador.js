@@ -119,11 +119,11 @@ function loadUpButtons() {
 				plotSeries(cidade,d.id);
 				
 				//botão de cidades similares
-				d3.select("#menu")
+				/*d3.select("#menu")
 				.append("input")
 				.attr("type","button")
 				.attr("value", function (d){return 'Cidades Similares';})
-				.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});
+				.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});*/
 
 			}
 		});
