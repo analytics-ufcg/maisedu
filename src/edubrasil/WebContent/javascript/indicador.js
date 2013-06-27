@@ -305,14 +305,16 @@ function plotIndicadores(indicador) {
 			.attr("text-anchor", "right")
 			.text("Similares");
 			
-			svg.append("text")
+			svg.append("a")
+			.attr("xlink:href","http://www.google.com") //ADPTAR PARA CHAMAR SIMILARES
+			.attr("target", "_blank")
+			.append("text")
 			.attr("y", h4 + 16)
 			.attr("x", 20)
 			.attr("text-anchor", "right")
 			.attr("font-weight", "bold")
-			.text("(Mais Detalhes)")
-			.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});
-		
+			.text("(Mais Detalhes)");
+				
 	
 		}else{
 
@@ -383,14 +385,15 @@ function plotIndicadores(indicador) {
 			.attr("text-anchor", "right")
 			.text("Similares");
 			
-			svg.append("text")
+			svg.append("a")
+			.attr("xlink:href","http://www.google.com") //ADPTAR PARA CHAMAR SIMILARES
+			.attr("target", "_blank")
+			.append("text")
 			.attr("y", h4 + 16)
 			.attr("x", 20)
 			.attr("text-anchor", "right")
 			.attr("font-weight", "bold")
-			.text("(Mais Detalhes)")
-			.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});
-		
+			.text("(Mais Detalhes)");
 		}
 		
 	}else{
