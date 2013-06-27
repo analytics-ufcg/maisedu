@@ -119,7 +119,7 @@ function loadUpButtons() {
 				plotSeries(cidade,d.id);
 				
 				//botão de cidades similares
-				d3.select("#div_indicador_options")
+				d3.select("#menu")
 				.append("input")
 				.attr("type","button")
 				.attr("value", function (d){return 'Cidades Similares';})
