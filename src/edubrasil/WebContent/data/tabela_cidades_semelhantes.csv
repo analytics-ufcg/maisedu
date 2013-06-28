@@ -1,220 +1,217 @@
-Cidade,Vizinho1,Vizinho2,Vizinho3,Vizinho4,Vizinho5,Vizinho6,Vizinho7,Vizinho8,Vizinho9,Vizinho10
-Água Branca,Juru,Belém do Brejo do Cruz,Santarém,Bonito de Santa Fé,Serra Redonda,Logradouro,Santa Helena,Aguiar,Pilões,Santa Cecília
-Aguiar,Santarém,Santa Helena,Juru,Belém do Brejo do Cruz,Lagoa,Logradouro,Serraria,Itatuba,Água Branca,São Mamede
-Alagoa Grande,Bananeiras,Boqueirão,Solânea,Areia,Itabaiana,Alagoa Nova,Araruna,Mulungu,Cuité,São João do Rio do Peixe
-Alagoa Nova,Cacimba de Dentro,Uiraúna,Cuité,Bananeiras,Itaporanga,Itabaiana,São Bento,Areia,Tavares,Sumé
-Alagoinha,Itapororoca,Caiçara,Pitimbu,Pilões,Coremas,Taperoá,Bonito de Santa Fé,Montadas,Cacimba de Dentro,São José da Lagoa Tapada
-Alcantil,Diamante,Santo André,São José de Princesa,Passagem,Serra da Raiz,São José do Brejo do Cruz,São José do Sabugi,Assunção,Vieirópolis,Cabaceiras
-Algodão de Jandaíra,São Francisco,Tenório,São João do Tigre,Frei Martinho,Catingueira,Camalaú,Malta,Igaracy,Sossêgo,Curral Velho
-Alhandra,Fagundes,Tacima,Umbuzeiro,Soledade,Belém,Nazarezinho,Poço Dantas,Gado Bravo,Jericó,Pedra Branca
-Amparo,Mato Grosso,Bom Sucesso,Borborema,Bom Jesus,Santana dos Garrotes,Caldas Brandão,Pilõezinhos,Aparecida,Barra de São Miguel,São José de Caiana
-Aparecida,Maturéia,Borborema,Damião,Santana dos Garrotes,São José de Caiana,Cubati,Pirpirituba,Barra de São Miguel,Mato Grosso,Nova Olinda
-Araçagi,Tavares,Brejo do Cruz,Mataraca,Serra Branca,Imaculada,Marizópolis,Junco do Seridó,Ingá,Santa Cecília,Pilões
-Arara,Cachoeira dos Índios,Olivedos,Natuba,São Mamede,Massaranduba,Poço de José de Moura,Itatuba,Lagoa de Dentro,Salgado de São Félix,Cacimbas
-Araruna,São João do Rio do Peixe,Cuité,Teixeira,Picuí,Puxinanã,Barra de Santa Rosa,São José de Piranhas,Uiraúna,Sumé,Bananeiras
-Areia,Catolé do Rocha,Itabaiana,Alagoa Nova,Bananeiras,Boqueirão,Ingá,Tavares,Mulungu,Araçagi,Itaporanga
-Areia de Baraúnas,São Domingos,Santa Inês,São José do Sabugi,São Domingos do Cariri,Assunção,Serra da Raiz,Cabaceiras,Santo André,Riacho dos Cavalos,Boa Vista
-Areial,Olho d'Água,Santana de Mangueira,Caturité,Matinhas,São Miguel de Taipu,Cajazeirinhas,Gado Bravo,Sobrado,São Sebastião do Umbuzeiro,Santa Cruz
-Assunção,Cabaceiras,São Domingos,Santa Inês,São José do Sabugi,Areia de Baraúnas,Boa Vista,Riacho dos Cavalos,Diamante,Serra da Raiz,São Domingos do Cariri
-Baía da Traição,Pirpirituba,Damião,Maturéia,Bernardino Batista,Nova Olinda,São José de Caiana,Aparecida,Cuitegi,Cubati,São Bentinho
-Bananeiras,Alagoa Grande,Alagoa Nova,Boqueirão,Araruna,Itabaiana,Cuité,Mulungu,Areia,Uiraúna,São João do Rio do Peixe
-Baraúna,Santa Cruz,Monte Horebe,Sobrado,Riacho dos Cavalos,Barra de Santana,São Sebastião do Umbuzeiro,Boa Vista,São Domingos do Cariri,Cabaceiras,São Miguel de Taipu
-Barra de Santa Rosa,São José de Piranhas,Picuí,Taperoá,Desterro,Cacimba de Dentro,Coremas,Cuité,Araruna,São João do Rio do Peixe,Poço Dantas
-Barra de Santana,Riacho dos Cavalos,Boa Vista,Baraúna,Sobrado,Cabaceiras,Mogeiro,Monte Horebe,São Miguel de Taipu,Santa Cruz,Assunção
-Barra de São Miguel,Caldas Brandão,Cubati,Pilõezinhos,Santana dos Garrotes,Bom Jesus,Borborema,Cacimbas,Bom Sucesso,Aparecida,Poço de José de Moura
-Bayeux,Cajazeiras,Sousa,Guarabira,Alagoa Grande,Seridó,Solânea,Boqueirão,Bananeiras,Santa Teresinha,Areia
-Belém,Poço Dantas,Umbuzeiro,Soledade,Tacima,Teixeira,Desterro,São José de Piranhas,São João do Rio do Peixe,Alhandra,Barra de Santa Rosa
-Belém do Brejo do Cruz,Logradouro,Juru,Serra Redonda,Santarém,Aguiar,Água Branca,Bonito de Santa Fé,Santa Helena,Ibiara,Montadas
-Bernardino Batista,Nova Olinda,Pirpirituba,Cuitegi,São Bentinho,São José de Caiana,Damião,Cacimba de Areia,Vista Serrana,Gurjão,Caraúbas
-Boa Ventura,Santa Luzia,São Sebastião de Lagoa de Roça,Condado,São José de Espinharas,Nova Palmeira,Monteiro,São José do Bonfim,Dona Inês,Serra Grande,Riacho de Santo Antônio
-Boa Vista,Riacho dos Cavalos,Cabaceiras,Assunção,São Domingos,Santa Inês,Barra de Santana,Diamante,São Domingos do Cariri,São José do Sabugi,Areia de Baraúnas
-Bom Jesus,Caldas Brandão,Pilõezinhos,Bom Sucesso,Barra de São Miguel,Amparo,Santana dos Garrotes,Borborema,Mato Grosso,Cubati,Riachão do Bacamarte
-Bom Sucesso,Amparo,Bom Jesus,Mato Grosso,Caldas Brandão,Borborema,Santana dos Garrotes,Pilõezinhos,Barra de São Miguel,Aparecida,Cubati
-Bonito de Santa Fé,Serra Redonda,Ibiara,São José da Lagoa Tapada,Logradouro,Belém do Brejo do Cruz,Água Branca,Juru,Capim,Curral de Cima,São João do Tigre
-Boqueirão,Itabaiana,Mulungu,Bananeiras,Alagoa Grande,Areia,Solânea,Quixabá,Alagoa Nova,Uiraúna,Cuité
-Borborema,Santana dos Garrotes,Aparecida,Amparo,Mato Grosso,Bom Sucesso,Cubati,Barra de São Miguel,Bom Jesus,Caldas Brandão,Maturéia
-Brejo do Cruz,Mataraca,Serra Branca,Tavares,Araçagi,Junco do Seridó,Marizópolis,Imaculada,Santa Cecília,Pilões,Montadas
-Brejo dos Santos,Serra Grande,São José dos Ramos,São José do Bonfim,Sertãozinho,Carrapateira,Riacho de Santo Antônio,Riachão do Poço,Livramento,Coxixola,Riachão do Bacamarte
-Caaporã,São Bento,Queimadas,Rio Tinto,Araçagi,Pocinhos,Tavares,Imaculada,Itapororoca,Pitimbu,Santa Cecília
-Cabaceiras,Assunção,Boa Vista,Riacho dos Cavalos,São Domingos,Santa Inês,São José do Sabugi,Areia de Baraúnas,Diamante,São Domingos do Cariri,Serra da Raiz
-Cabedelo,Juarez Távora,Pilar,Gurinhém,Pedras de Fogo,Conceição,Fagundes,Nazarezinho,Várzea,Umbuzeiro,São José dos Cordeiros
-Cachoeira dos Índios,Arara,Olivedos,São Mamede,Itatuba,Serraria,Lagoa,Poço de José de Moura,Natuba,Cacimbas,Barra de São Miguel
-Cacimba de Areia,São Bentinho,Cuitegi,Zabelê,Emas,Caraúbas,Ouro Velho,Curral Velho,Vista Serrana,Parari,Gurjão
-Cacimba de Dentro,Barra de Santa Rosa,Picuí,Pitimbu,Alagoa Nova,Itapororoca,São Bento,São José de Piranhas,Taperoá,Alagoinha,Cuité
-Cacimbas,Lagoa de Dentro,Lucena,Salgado de São Félix,Cubati,Barra de São Miguel,Poço de José de Moura,Massaranduba,Pilõezinhos,Caldas Brandão,Santana dos Garrotes
-Caiçara,Alagoinha,Itapororoca,Pitimbu,Coremas,Taperoá,São José da Lagoa Tapada,Riachão,Montadas,Bonito de Santa Fé,Pilões
-Cajazeiras,Solânea,Alagoa Grande,Bayeux,Prata,Boqueirão,Bananeiras,Seridó,Conceição,Araruna,São João do Rio do Peixe
-Cajazeirinhas,Olho d'Água,Areial,Congo,Duas Estradas,Matinhas,Caturité,Santana de Mangueira,São José dos Cordeiros,Várzea,Gado Bravo
-Caldas Brandão,Bom Jesus,Pilõezinhos,Barra de São Miguel,Bom Sucesso,Santana dos Garrotes,Borborema,Amparo,Cubati,Riachão do Bacamarte,Mato Grosso
-Camalaú,Igaracy,Caraúbas,Curral Velho,Emas,São João do Tigre,Cuitegi,Frei Martinho,Algodão de Jandaíra,Tenório,São Francisco
-Campina Grande,Bayeux,Santa Rita,Cajazeiras,Cabedelo,Paulista,Sousa,Santa Teresinha,Guarabira,João Pessoa,Alagoa Grande
-Capim,Pedra Lavrada,Juripiranga,Curral de Cima,São João do Tigre,Igaracy,Camalaú,Algodão de Jandaíra,São Francisco,Tenório,Casserengue
-Caraúbas,Emas,Curral Velho,Camalaú,Igaracy,Cacimba de Areia,Cuitegi,Ouro Velho,Zabelê,Frei Martinho,São Bentinho
-Carrapateira,Riacho de Santo Antônio,Serra Grande,São José do Bonfim,Brejo dos Santos,Coxixola,Sertãozinho,São José dos Ramos,Riachão do Poço,Nova Palmeira,Livramento
-Casserengue,Curral de Cima,Vieirópolis,Capim,Cuité de Mamanguape,Malta,Sossêgo,Catingueira,Alcantil,São João do Tigre,São José do Brejo do Cruz
-Catingueira,Malta,Sossêgo,Vieirópolis,Algodão de Jandaíra,São Francisco,Tenório,São João do Tigre,Curral de Cima,Frei Martinho,São José do Brejo do Cruz
-Catolé do Rocha,Ingá,Areia,Esperança,Araçagi,Manaíra,Serra Branca,Brejo do Cruz,Tavares,Alagoa Nova,Itabaiana
-Caturité,Matinhas,Santana de Mangueira,São Sebastião do Umbuzeiro,Sobrado,Santa Cruz,São Miguel de Taipu,Areial,Baraúna,Monte Horebe,Olho d'Água
-Conceição,Pilar,Umbuzeiro,Gurinhém,Belém,Teixeira,Solânea,São João do Rio do Peixe,Fagundes,Nazarezinho,Poço Dantas
-Condado,Dona Inês,São Sebastião de Lagoa de Roça,Nova Palmeira,Natuba,São José do Bonfim,Serra Grande,Riacho de Santo Antônio,Carrapateira,Brejo dos Santos,Marcação
-Conde,Lagoa Seca,Pocinhos,Pombal,Pitimbu,Itapororoca,Piancó,Cuité de Mamanguape,Alagoinha,Princesa Isabel,Mogeiro
-Congo,Duas Estradas,São José dos Cordeiros,Várzea,Cajazeirinhas,Olho d'Água,Areial,Gado Bravo,Matinhas,Caturité,Santana de Mangueira
-Coremas,Taperoá,Riachão,Desterro,São José de Piranhas,Barra de Santa Rosa,Sumé,Caiçara,Itaporanga,Uiraúna,Lastro
-Coxixola,Carrapateira,Riacho de Santo Antônio,Serra Grande,São José do Bonfim,Brejo dos Santos,Sertãozinho,Riachão do Poço,São José dos Ramos,Riachão do Bacamarte,Livramento
-Cruz do Espírito Santo,Marcação,Dona Inês,Jacaraú,Natuba,Arara,Cachoeira dos Índios,Condado,Olivedos,São Sebastião de Lagoa de Roça,Rio Tinto
-Cubati,Barra de São Miguel,Santana dos Garrotes,Maturéia,Aparecida,Borborema,Cacimbas,Caldas Brandão,Pilõezinhos,Bom Jesus,Damião
-Cuité,Uiraúna,Puxinanã,Araruna,Sumé,São João do Rio do Peixe,Itaporanga,Teixeira,Barra de Santa Rosa,São José de Piranhas,Alagoa Nova
-Cuité de Mamanguape,Princesa Isabel,Piancó,Mogeiro,Diamante,Casserengue,Alcantil,Pombal,Boa Vista,Cabaceiras,Assunção
-Cuitegi,Cacimba de Areia,Bernardino Batista,Caraúbas,São Bentinho,Nova Olinda,Camalaú,Igaracy,Emas,Curral Velho,Pirpirituba
-Curral de Cima,Capim,São João do Tigre,Malta,Casserengue,Catingueira,Algodão de Jandaíra,Sossêgo,Vieirópolis,São Francisco,Tenório
-Curral Velho,Emas,Caraúbas,Ouro Velho,Zabelê,Camalaú,Frei Martinho,Igaracy,Cacimba de Areia,Cuitegi,Tenório
-Damião,São José de Caiana,Pirpirituba,Aparecida,Maturéia,Nova Olinda,Bernardino Batista,Baía da Traição,Borborema,Santana dos Garrotes,Gurjão
-Desterro,Poço Dantas,Taperoá,São José de Piranhas,Coremas,Barra de Santa Rosa,Riachão,Puxinanã,Sumé,Lastro,Teixeira
-Diamante,Alcantil,Assunção,Cabaceiras,São José do Sabugi,Boa Vista,Santo André,Riacho dos Cavalos,Serra da Raiz,São Domingos,Santa Inês
-Dona Inês,Natuba,Condado,Marcação,Cruz do Espírito Santo,Arara,São Sebastião de Lagoa de Roça,Olivedos,São José dos Ramos,Livramento,Nova Palmeira
-Duas Estradas,Congo,Várzea,São José dos Cordeiros,Cajazeirinhas,Olho d'Água,Areial,Gado Bravo,Matinhas,Santana de Mangueira,Caturité
-Emas,Curral Velho,Caraúbas,Ouro Velho,Zabelê,Cacimba de Areia,Camalaú,Igaracy,Frei Martinho,Cuitegi,São Bentinho
-Esperança,Ingá,Catolé do Rocha,Araçagi,Areia,Caaporã,Jacaraú,Tavares,Brejo do Cruz,Serra Branca,São Bento
-Fagundes,Nazarezinho,Alhandra,Umbuzeiro,Tacima,Belém,Soledade,Gado Bravo,Areial,Olho d'Água,Poço Dantas
-Frei Martinho,Tenório,São Francisco,Algodão de Jandaíra,Curral Velho,Emas,São João do Tigre,Camalaú,Ouro Velho,Caraúbas,Zabelê
-Gado Bravo,Areial,Olho d'Água,São Miguel de Taipu,Santana de Mangueira,Sobrado,Cajazeirinhas,Caturité,Matinhas,Remígio,São Sebastião do Umbuzeiro
-Guarabira,Manaíra,Alagoa Grande,Seridó,Catolé do Rocha,Areia,Boqueirão,Bananeiras,Esperança,Sousa,Itabaiana
-Gurinhém,Pilar,Nazarezinho,Fagundes,Umbuzeiro,Conceição,Alhandra,Duas Estradas,Várzea,Congo,São José dos Cordeiros
-Gurjão,Vista Serrana,São Bentinho,Parari,Cacimba de Areia,Nova Olinda,Bernardino Batista,São José de Caiana,Cuitegi,Pirpirituba,Zabelê
-Ibiara,Serra Redonda,São José da Lagoa Tapada,Bonito de Santa Fé,Logradouro,Belém do Brejo do Cruz,São Francisco,Tenório,Algodão de Jandaíra,Catingueira,Malta
-Igaracy,Camalaú,Caraúbas,Curral Velho,Emas,São João do Tigre,Cuitegi,Algodão de Jandaíra,Tenório,São Francisco,Frei Martinho
-Imaculada,Santa Cecília,Pilões,Brejo do Cruz,Montadas,Serra Branca,Mataraca,Juru,Santa Helena,Água Branca,Araçagi
-Ingá,Catolé do Rocha,Araçagi,Esperança,Serra Branca,Brejo do Cruz,Areia,Tavares,Junco do Seridó,Mataraca,Jacaraú
-Itabaiana,Mulungu,Itaporanga,Boqueirão,Uiraúna,Pedro Régis,Sumé,Salgadinho,Areia,Quixabá,Alagoa Nova
-Itaporanga,Uiraúna,Sumé,Pedro Régis,Salgadinho,Lastro,Cuité,Puxinanã,Mulungu,Coremas,Taperoá
-Itapororoca,Pitimbu,Alagoinha,Caiçara,Cacimba de Dentro,Pocinhos,Pilões,Bonito de Santa Fé,Montadas,Conde,Santa Cecília
-Itatuba,São Mamede,Lagoa,Serraria,Santa Helena,Aguiar,Cachoeira dos Índios,Santarém,Juru,Maturéia,Cubati
-Jacaraú,Cruz do Espírito Santo,Marcação,Ingá,Dona Inês,Natuba,Esperança,São Sebastião de Lagoa de Roça,Arara,Condado,Serra Branca
-Jericó,Pedra Branca,São João do Cariri,Mãe d'Água,Riacho dos Cavalos,Boa Vista,Cabaceiras,Assunção,Santa Inês,São Domingos,Barra de Santana
-João Pessoa,Campina Grande,Bayeux,Santa Rita,Sousa,Guarabira,Cajazeiras,Alagoa Grande,Queimadas,Patos,Santa Teresinha
-Juarez Távora,Cabedelo,Várzea,São José dos Cordeiros,Pedras de Fogo,Gurinhém,Duas Estradas,Congo,Pilar,Cajazeirinhas,Nazarezinho
-Juazeirinho,Pedra Lavrada,Juripiranga,Capim,Pombal,Pocinhos,Baía da Traição,Curral de Cima,Água Branca,Casserengue,Igaracy
-Junco do Seridó,Serra Branca,Brejo do Cruz,Mataraca,Marizópolis,Imaculada,Santa Cecília,Tavares,Araçagi,Montadas,Pilões
-Juripiranga,Pedra Lavrada,Capim,Igaracy,Camalaú,São João do Tigre,Curral de Cima,Cuitegi,Caraúbas,Algodão de Jandaíra,São Francisco
-Juru,Santarém,Água Branca,Belém do Brejo do Cruz,Aguiar,Santa Helena,Logradouro,Serra Redonda,Bonito de Santa Fé,Santa Cecília,Itatuba
-Lagoa,Serraria,Itatuba,São Mamede,Santa Helena,Aguiar,Santarém,Cachoeira dos Índios,Borborema,Santana dos Garrotes,Aparecida
-Lagoa de Dentro,Salgado de São Félix,Lucena,Cacimbas,Massaranduba,Poço de José de Moura,Mari,Cubati,Barra de São Miguel,Livramento,Pilõezinhos
-Lagoa Seca,Conde,Pocinhos,Pombal,Pitimbu,Itapororoca,Piancó,Cuité de Mamanguape,Alagoinha,Princesa Isabel,Mogeiro
-Lastro,Sumé,Salgadinho,Itaporanga,Pedro Régis,Uiraúna,Puxinanã,Quixabá,Riachão,Coremas,Mulungu
-Livramento,São José dos Ramos,Riachão do Poço,Sertãozinho,Brejo dos Santos,Poço de José de Moura,Riachão do Bacamarte,Serra Grande,São José do Bonfim,Massaranduba,Carrapateira
-Logradouro,Belém do Brejo do Cruz,Serra Redonda,Juru,Ibiara,Santarém,Bonito de Santa Fé,Aguiar,Água Branca,Santa Helena,Camalaú
-Lucena,Salgado de São Félix,Lagoa de Dentro,Cacimbas,Mari,Massaranduba,Cubati,Poço de José de Moura,Barra de São Miguel,Maturéia,Pilõezinhos
-Mãe d'Água,São José da Lagoa Tapada,Jericó,Pedra Branca,Alcantil,Santo André,São João do Cariri,Serra da Raiz,São José de Princesa,Passagem,São José do Sabugi
-Malta,Catingueira,Sossêgo,Vieirópolis,Algodão de Jandaíra,São Francisco,Tenório,Curral de Cima,São João do Tigre,São José do Brejo do Cruz,Frei Martinho
-Mamanguape,Pocinhos,Lagoa Seca,Conde,Pombal,Juazeirinho,Queimadas,Caaporã,Patos,Piancó,Cuité de Mamanguape
-Manaíra,Catolé do Rocha,Areia,Ingá,Guarabira,Boqueirão,Seridó,Itabaiana,Esperança,Mulungu,Alagoa Grande
-Marcação,Cruz do Espírito Santo,Natuba,Dona Inês,Jacaraú,Arara,Cachoeira dos Índios,Olivedos,Condado,São Sebastião de Lagoa de Roça,São Mamede
-Mari,Lucena,Salgado de São Félix,Lagoa de Dentro,Cacimbas,Massaranduba,Cubati,Rio Tinto,Maturéia,Baía da Traição,Barra de São Miguel
-Marizópolis,Mataraca,Tavares,Brejo do Cruz,Pilões,Santa Cecília,Junco do Seridó,Montadas,Serra Branca,Araçagi,Imaculada
-Massaranduba,Lagoa de Dentro,Salgado de São Félix,Poço de José de Moura,Livramento,Lucena,Cacimbas,São José dos Ramos,Riachão do Poço,Sertãozinho,Riachão do Bacamarte
-Mataraca,Marizópolis,Brejo do Cruz,Tavares,Araçagi,Junco do Seridó,Serra Branca,Santa Cecília,Pilões,Imaculada,Montadas
-Matinhas,Caturité,Santana de Mangueira,São Sebastião do Umbuzeiro,Areial,Santa Cruz,Sobrado,São Miguel de Taipu,Baraúna,Olho d'Água,Monte Horebe
-Mato Grosso,Amparo,Bom Sucesso,Borborema,Santana dos Garrotes,Bom Jesus,Aparecida,Caldas Brandão,São José de Caiana,Pilõezinhos,Barra de São Miguel
-Maturéia,Aparecida,Damião,São José de Caiana,Cubati,Santana dos Garrotes,Borborema,Pirpirituba,Baía da Traição,Nova Olinda,Barra de São Miguel
-Mogeiro,Piancó,Princesa Isabel,Remígio,Barra de Santana,Cuité de Mamanguape,Boa Vista,Riacho dos Cavalos,Diamante,Cabaceiras,Assunção
-Montadas,Pilões,Santa Cecília,Belém do Brejo do Cruz,Logradouro,Imaculada,Serra Redonda,Marizópolis,Juru,Bonito de Santa Fé,Água Branca
-Monte Horebe,Baraúna,Santa Cruz,São Domingos do Cariri,Riacho dos Cavalos,Santa Inês,São Sebastião do Umbuzeiro,Boa Vista,São Domingos,Cabaceiras,Areia de Baraúnas
-Monteiro,São Sebastião de Lagoa de Roça,Dona Inês,Natuba,Nova Palmeira,Condado,Massaranduba,Boa Ventura,São José dos Ramos,Livramento,Brejo dos Santos
-Mulungu,Itabaiana,Quixabá,Sumé,Itaporanga,Uiraúna,Lastro,Salgadinho,Pedro Régis,Puxinanã,Cuité
-Natuba,Dona Inês,Arara,Olivedos,Marcação,Cachoeira dos Índios,Condado,Cruz do Espírito Santo,Livramento,Massaranduba,São José dos Ramos
-Nazarezinho,Fagundes,Tacima,Umbuzeiro,Alhandra,Olho d'Água,Cajazeirinhas,Belém,Areial,Soledade,Gurinhém
-Nova Olinda,Bernardino Batista,Pirpirituba,São José de Caiana,Damião,São Bentinho,Cuitegi,Gurjão,Vista Serrana,Cacimba de Areia,Aparecida
-Nova Palmeira,São José do Bonfim,Serra Grande,Riacho de Santo Antônio,Carrapateira,Brejo dos Santos,São José dos Ramos,Coxixola,Sertãozinho,Livramento,Riachão do Poço
-Olho d'Água,Cajazeirinhas,Areial,Matinhas,Santana de Mangueira,Caturité,Gado Bravo,São Miguel de Taipu,São Sebastião do Umbuzeiro,Duas Estradas,Congo
-Olivedos,Cachoeira dos Índios,Arara,São Mamede,Riachão do Bacamarte,Natuba,Riachão do Poço,Sertãozinho,Serraria,Poço de José de Moura,Livramento
-Ouro Velho,Zabelê,Emas,Curral Velho,Cacimba de Areia,Caraúbas,Frei Martinho,Parari,São Bentinho,Camalaú,Cuitegi
-Parari,Vista Serrana,Gurjão,São Bentinho,Cacimba de Areia,Zabelê,Ouro Velho,Emas,Cuitegi,Curral Velho,Nova Olinda
-Passagem,São José de Princesa,São José do Brejo do Cruz,Alcantil,Vieirópolis,Santo André,Serra da Raiz,Sossêgo,São José do Sabugi,Malta,Catingueira
-Patos,Queimadas,Mamanguape,Caaporã,Rio Tinto,Mari,Pocinhos,Juazeirinho,São Bento,Lagoa Seca,Conde
-Paulista,Santa Teresinha,Prata,Cajazeiras,Conceição,Seridó,Solânea,Sousa,Pilar,Boqueirão,Bayeux
-Pedra Branca,São João do Cariri,Jericó,Mãe d'Água,Monte Horebe,São Domingos do Cariri,Riacho dos Cavalos,Boa Vista,Santa Inês,Cabaceiras,São Domingos
-Pedra Lavrada,Juripiranga,Capim,Igaracy,Camalaú,Curral de Cima,São João do Tigre,Cuitegi,Algodão de Jandaíra,Caraúbas,São Francisco
-Pedras de Fogo,Gado Bravo,Duas Estradas,Congo,Várzea,Gurinhém,São José dos Cordeiros,Fagundes,Olho d'Água,Alhandra,Cajazeirinhas
-Pedro Régis,Salgadinho,Itaporanga,Lastro,Sumé,Uiraúna,Riachão,Coremas,Itabaiana,Mulungu,Taperoá
-Piancó,Princesa Isabel,Cuité de Mamanguape,Mogeiro,Diamante,Barra de Santana,Pombal,Remígio,Boa Vista,Riacho dos Cavalos,Casserengue
-Picuí,Barra de Santa Rosa,São José de Piranhas,Cacimba de Dentro,Araruna,São João do Rio do Peixe,Cuité,Taperoá,Teixeira,Pitimbu,Belém
-Pilar,Gurinhém,Conceição,Nazarezinho,Umbuzeiro,Fagundes,Alhandra,Belém,Tacima,Várzea,São José dos Cordeiros
-Pilões,Santa Cecília,Montadas,Imaculada,Marizópolis,Água Branca,Juru,Mataraca,Belém do Brejo do Cruz,Alagoinha,Serra Redonda
-Pilõezinhos,Caldas Brandão,Bom Jesus,Barra de São Miguel,Bom Sucesso,Riachão do Bacamarte,Poço de José de Moura,Santana dos Garrotes,Borborema,Amparo,Cubati
-Pirpirituba,Nova Olinda,Bernardino Batista,Damião,São José de Caiana,Cuitegi,Baía da Traição,São Bentinho,Maturéia,Aparecida,Gurjão
-Pitimbu,Itapororoca,Alagoinha,Caiçara,Cacimba de Dentro,Pocinhos,Conde,Lagoa Seca,Barra de Santa Rosa,São José de Piranhas,Taperoá
-Pocinhos,Conde,Lagoa Seca,Juazeirinho,Itapororoca,Pitimbu,Pombal,Água Branca,Alagoinha,Bonito de Santa Fé,Pedra Lavrada
-Poço Dantas,Desterro,Belém,São José de Piranhas,Soledade,Taperoá,Teixeira,Barra de Santa Rosa,Puxinanã,Tacima,Coremas
-Poço de José de Moura,Riachão do Bacamarte,Livramento,Riachão do Poço,Pilõezinhos,Sertãozinho,Barra de São Miguel,Cacimbas,Caldas Brandão,Massaranduba,São José dos Ramos
-Pombal,Cuité de Mamanguape,Piancó,Casserengue,Princesa Isabel,Conde,Juazeirinho,Lagoa Seca,Pocinhos,Mogeiro,Capim
-Prata,Conceição,Paulista,Solânea,Cajazeiras,Santa Teresinha,Seridó,Quixabá,Boqueirão,Pilar,Mulungu
-Princesa Isabel,Piancó,Cuité de Mamanguape,Mogeiro,Diamante,Barra de Santana,Boa Vista,Riacho dos Cavalos,Cabaceiras,Alcantil,Assunção
-Puxinanã,Sumé,Teixeira,Cuité,Uiraúna,São João do Rio do Peixe,Lastro,Itaporanga,Desterro,Araruna,São José de Piranhas
-Queimadas,Caaporã,São Bento,Mamanguape,Patos,Pocinhos,Rio Tinto,Esperança,Lagoa Seca,Conde,Cacimba de Dentro
-Quixabá,Mulungu,Lastro,Salgadinho,Sumé,Pedro Régis,Itabaiana,Itaporanga,Puxinanã,Uiraúna,Cuité
-Remígio,Mogeiro,Barra de Santana,Piancó,São Miguel de Taipu,Princesa Isabel,Sobrado,Boa Vista,Riacho dos Cavalos,Baraúna,Cuité de Mamanguape
-Riachão,Coremas,Taperoá,Desterro,Salgadinho,Lastro,Pedro Régis,Sumé,Itaporanga,Caiçara,Uiraúna
-Riachão do Bacamarte,Riachão do Poço,Sertãozinho,Poço de José de Moura,Livramento,Pilõezinhos,São José dos Ramos,Brejo dos Santos,Caldas Brandão,Bom Jesus,Coxixola
-Riachão do Poço,Sertãozinho,Riachão do Bacamarte,São José dos Ramos,Livramento,Brejo dos Santos,Poço de José de Moura,Serra Grande,Carrapateira,Riacho de Santo Antônio,São José do Bonfim
-Riacho de Santo Antônio,Carrapateira,São José do Bonfim,Serra Grande,Brejo dos Santos,Coxixola,São José dos Ramos,Sertãozinho,Riachão do Poço,Nova Palmeira,Livramento
-Riacho dos Cavalos,Boa Vista,Cabaceiras,Assunção,Santa Inês,São Domingos,Barra de Santana,São Domingos do Cariri,Monte Horebe,Diamante,Baraúna
-Rio Tinto,Mari,Lucena,Arara,Salgado de São Félix,Lagoa de Dentro,Cachoeira dos Índios,Cacimbas,Caaporã,São Mamede,Massaranduba
-Salgadinho,Pedro Régis,Lastro,Itaporanga,Sumé,Uiraúna,Riachão,Coremas,Mulungu,Quixabá,Puxinanã
-Salgado de São Félix,Lagoa de Dentro,Lucena,Cacimbas,Massaranduba,Mari,Poço de José de Moura,Cubati,Barra de São Miguel,Livramento,Pilõezinhos
-Santa Cecília,Pilões,Imaculada,Montadas,Juru,Mataraca,Água Branca,Marizópolis,Brejo do Cruz,Santarém,Belém do Brejo do Cruz
-Santa Cruz,Baraúna,Monte Horebe,São Sebastião do Umbuzeiro,Sobrado,Caturité,São Domingos do Cariri,Santana de Mangueira,Matinhas,Riacho dos Cavalos,Boa Vista
-Santa Helena,Aguiar,Santarém,Juru,Lagoa,Itatuba,Serraria,Belém do Brejo do Cruz,Logradouro,Água Branca,São Mamede
-Santa Inês,São Domingos,Areia de Baraúnas,Assunção,São Domingos do Cariri,Cabaceiras,São José do Sabugi,Riacho dos Cavalos,Boa Vista,Serra da Raiz,Santo André
-Santa Luzia,São José de Espinharas,Boa Ventura,São Sebastião de Lagoa de Roça,Monteiro,Condado,Nova Palmeira,Dona Inês,São José do Bonfim,Natuba,Serra Grande
-Santa Rita,Pedras de Fogo,Patos,Queimadas,Mamanguape,Alhandra,Cajazeiras,São Bento,Lagoa Seca,Picuí,Conde
-Santa Teresinha,Paulista,Sousa,Seridó,Prata,Cajazeiras,Solânea,Boqueirão,Bayeux,Guarabira,Alagoa Grande
-Santana de Mangueira,Caturité,Matinhas,São Miguel de Taipu,Sobrado,São Sebastião do Umbuzeiro,Areial,Santa Cruz,Baraúna,Monte Horebe,Olho d'Água
-Santana dos Garrotes,Borborema,Aparecida,Barra de São Miguel,Cubati,Amparo,Caldas Brandão,Bom Jesus,Bom Sucesso,Maturéia,Mato Grosso
-Santarém,Aguiar,Santa Helena,Juru,Belém do Brejo do Cruz,Logradouro,Lagoa,Água Branca,Itatuba,Serraria,Serra Redonda
-Santo André,Serra da Raiz,São José do Sabugi,Alcantil,Areia de Baraúnas,Assunção,Passagem,São Domingos,São José de Princesa,Santa Inês,Diamante
-São Bentinho,Cacimba de Areia,Vista Serrana,Gurjão,Parari,Cuitegi,Nova Olinda,Bernardino Batista,Zabelê,Ouro Velho,Caraúbas
-São Bento,Cacimba de Dentro,Alagoa Nova,Caaporã,Pitimbu,Tavares,Itapororoca,Picuí,Araçagi,Barra de Santa Rosa,Alagoinha
-São Domingos,Santa Inês,Assunção,Areia de Baraúnas,São José do Sabugi,Cabaceiras,São Domingos do Cariri,Riacho dos Cavalos,Boa Vista,Serra da Raiz,Santo André
-São Domingos do Cariri,Santa Inês,São Domingos,Areia de Baraúnas,Monte Horebe,Assunção,Cabaceiras,São José do Sabugi,Riacho dos Cavalos,Boa Vista,Baraúna
-São Francisco,Tenório,Algodão de Jandaíra,São João do Tigre,Frei Martinho,Catingueira,Camalaú,Malta,Igaracy,Curral Velho,Sossêgo
-São João do Cariri,Pedra Branca,Jericó,São Domingos do Cariri,Monte Horebe,Mãe d'Água,Santa Inês,Santa Cruz,São Domingos,Areia de Baraúnas,Baraúna
-São João do Rio do Peixe,Teixeira,Araruna,Cuité,Puxinanã,Barra de Santa Rosa,São José de Piranhas,Picuí,Uiraúna,Sumé,Belém
-São João do Tigre,Algodão de Jandaíra,São Francisco,Tenório,Camalaú,Igaracy,Frei Martinho,Curral de Cima,Catingueira,Malta,Capim
-São José da Lagoa Tapada,Ibiara,Bonito de Santa Fé,Serra Redonda,Mãe d'Água,Vieirópolis,Logradouro,Malta,Sossêgo,Catingueira,Curral de Cima
-São José de Caiana,Damião,Pirpirituba,Aparecida,Nova Olinda,Maturéia,Bernardino Batista,Borborema,Gurjão,Santana dos Garrotes,Vista Serrana
-São José de Espinharas,Santa Luzia,Boa Ventura,São Sebastião de Lagoa de Roça,Condado,Monteiro,Nova Palmeira,Dona Inês,Natuba,Marcação,São José do Bonfim
-São José de Piranhas,Barra de Santa Rosa,Taperoá,Desterro,Picuí,Coremas,Poço Dantas,Cuité,Puxinanã,Cacimba de Dentro,São João do Rio do Peixe
-São José de Princesa,Passagem,São José do Brejo do Cruz,Alcantil,Vieirópolis,Santo André,Serra da Raiz,Sossêgo,Malta,São José do Sabugi,Catingueira
-São José do Bonfim,Serra Grande,Riacho de Santo Antônio,Carrapateira,Brejo dos Santos,São José dos Ramos,Coxixola,Sertãozinho,Nova Palmeira,Riachão do Poço,Livramento
-São José do Brejo do Cruz,São José de Princesa,Passagem,Vieirópolis,Alcantil,Sossêgo,Santo André,Malta,Serra da Raiz,Catingueira,São José do Sabugi
-São José do Sabugi,Serra da Raiz,Areia de Baraúnas,São Domingos,Santo André,Assunção,Santa Inês,Cabaceiras,Diamante,São Domingos do Cariri,Alcantil
-São José dos Cordeiros,Várzea,Congo,Duas Estradas,Cajazeirinhas,Olho d'Água,Areial,Gado Bravo,Matinhas,Nazarezinho,Caturité
-São José dos Ramos,Brejo dos Santos,Livramento,Sertãozinho,Riachão do Poço,Serra Grande,São José do Bonfim,Carrapateira,Riacho de Santo Antônio,Riachão do Bacamarte,Poço de José de Moura
-São Mamede,Itatuba,Lagoa,Serraria,Cachoeira dos Índios,Santa Helena,Arara,Olivedos,Aguiar,Cubati,Santarém
-São Miguel de Taipu,Sobrado,Santana de Mangueira,Caturité,Baraúna,Santa Cruz,Barra de Santana,Areial,Matinhas,São Sebastião do Umbuzeiro,Monte Horebe
-São Sebastião de Lagoa de Roça,Condado,Dona Inês,Monteiro,Boa Ventura,Natuba,Nova Palmeira,Marcação,Cruz do Espírito Santo,São José do Bonfim,Santa Luzia
-São Sebastião do Umbuzeiro,Santa Cruz,Caturité,Matinhas,Santana de Mangueira,Monte Horebe,Baraúna,Sobrado,São Miguel de Taipu,São Domingos do Cariri,Riacho dos Cavalos
-Seridó,Boqueirão,Guarabira,Manaíra,Sousa,Alagoa Grande,Solânea,Itabaiana,Santa Teresinha,Mulungu,Areia
-Serra Branca,Junco do Seridó,Brejo do Cruz,Mataraca,Araçagi,Imaculada,Tavares,Marizópolis,Santa Cecília,Ingá,Pilões
-Serra da Raiz,Santo André,São José do Sabugi,Areia de Baraúnas,São Domingos,Assunção,Santa Inês,Alcantil,Passagem,São José de Princesa,Diamante
-Serra Grande,São José do Bonfim,Riacho de Santo Antônio,Carrapateira,Brejo dos Santos,São José dos Ramos,Sertãozinho,Coxixola,Riachão do Poço,Livramento,Nova Palmeira
-Serra Redonda,Bonito de Santa Fé,Logradouro,Ibiara,Belém do Brejo do Cruz,São José da Lagoa Tapada,Juru,Água Branca,Santarém,São João do Tigre,Algodão de Jandaíra
-Serraria,Lagoa,Itatuba,São Mamede,Santa Helena,Aguiar,Santarém,Cachoeira dos Índios,Borborema,Santana dos Garrotes,Amparo
-Sertãozinho,Riachão do Poço,São José dos Ramos,Brejo dos Santos,Livramento,Riachão do Bacamarte,Serra Grande,Carrapateira,São José do Bonfim,Riacho de Santo Antônio,Poço de José de Moura
-Sobrado,São Miguel de Taipu,Baraúna,Santana de Mangueira,Santa Cruz,Caturité,Barra de Santana,São Sebastião do Umbuzeiro,Monte Horebe,Matinhas,Riacho dos Cavalos
-Solânea,Boqueirão,Bananeiras,Alagoa Grande,Araruna,São João do Rio do Peixe,Mulungu,Teixeira,Cuité,Puxinanã,Itabaiana
-Soledade,Tacima,Belém,Poço Dantas,Jericó,Alhandra,Desterro,São José de Piranhas,Pedra Branca,Barra de Santa Rosa,São João do Cariri
-Sossêgo,Malta,Catingueira,Vieirópolis,Algodão de Jandaíra,São Francisco,Tenório,São José do Brejo do Cruz,São João do Tigre,Curral de Cima,São José de Princesa
-Sousa,Seridó,Santa Teresinha,Guarabira,Bayeux,Cajazeiras,Manaíra,Alagoa Grande,Boqueirão,Solânea,Paulista
-Sumé,Uiraúna,Itaporanga,Lastro,Puxinanã,Salgadinho,Cuité,Pedro Régis,Taperoá,Coremas,Mulungu
-Tacima,Soledade,Alhandra,Fagundes,Belém,Umbuzeiro,Poço Dantas,Nazarezinho,Pedra Branca,Jericó,São João do Cariri
-Taperoá,Coremas,São José de Piranhas,Desterro,Riachão,Barra de Santa Rosa,Sumé,Uiraúna,Caiçara,Itaporanga,Puxinanã
-Tavares,Mataraca,Brejo do Cruz,Araçagi,Marizópolis,Serra Branca,Imaculada,Santa Cecília,Pilões,Junco do Seridó,Cacimba de Dentro
-Teixeira,São João do Rio do Peixe,Puxinanã,Araruna,Cuité,Poço Dantas,São José de Piranhas,Sumé,Belém,Barra de Santa Rosa,Uiraúna
-Tenório,São Francisco,Algodão de Jandaíra,São João do Tigre,Frei Martinho,Catingueira,Camalaú,Malta,Igaracy,Curral Velho,Sossêgo
-Uiraúna,Itaporanga,Sumé,Cuité,Puxinanã,Pedro Régis,Lastro,Salgadinho,Mulungu,Taperoá,Coremas
-Umbuzeiro,Belém,Fagundes,Alhandra,Tacima,Nazarezinho,Poço Dantas,Soledade,Teixeira,São João do Rio do Peixe,Desterro
-Várzea,São José dos Cordeiros,Congo,Duas Estradas,Cajazeirinhas,Olho d'Água,Areial,Gado Bravo,Matinhas,Nazarezinho,Caturité
-Vieirópolis,Sossêgo,Malta,Catingueira,São José do Brejo do Cruz,São José de Princesa,Passagem,Curral de Cima,Alcantil,Casserengue,Algodão de Jandaíra
-Vista Serrana,Gurjão,São Bentinho,Parari,Cacimba de Areia,Nova Olinda,Bernardino Batista,Cuitegi,Zabelê,São José de Caiana,Ouro Velho
-Zabelê,Ouro Velho,Emas,Curral Velho,Cacimba de Areia,Caraúbas,Parari,São Bentinho,Frei Martinho,Camalaú,Cuitegi
+"cidade","Vizinho1","Vizinho2","Vizinho3","Vizinho4","Vizinho5","Vizinho6","Vizinho7","Vizinho8","Vizinho9","Vizinho10"
+"Água Branca","Puxinanã","Massaranduba","Juripiranga","Cuité de Mamanguape","Capim","Pilar","Salgado de São Félix","Juarez Távora","Mogeiro","Curral de Cima"
+"Aguiar","Pilõezinhos","Santana dos Garrotes","Igaracy","Santa Cruz","Bernardino Batista","Nova Floresta","São José da Lagoa Tapada","Jericó","Vista Serrana","Santo André"
+"Alagoa Grande","Bananeiras","Rio Tinto","Lagoa Seca","Pedras de Fogo","Cacimba de Dentro","Sousa","Alagoa Nova","São Bento","Monteiro","Remígio"
+"Alagoa Nova","Pitimbu","São João do Rio do Peixe","Cacimba de Dentro","Ingá","Rio Tinto","Boqueirão","Remígio","Mari","Bananeiras","Monteiro"
+"Alagoinha","Soledade","Boqueirão","Itabaiana","Uiraúna","Ingá","Casserengue","Itaporanga","Caiçara","São José de Piranhas","Remígio"
+"Alcantil","Condado","Santarém","São José de Espinharas","Pedro Régis","São José do Bonfim","Cubati","Congo","Prata","Desterro","Damião"
+"Algodão de Jandaíra","Tenório","São Bentinho","Serra Grande","Sossêgo","São Domingos do Cariri","Malta","Pedra Branca","Gurjão","Junco do Seridó","Cuitegi"
+"Alhandra","Catolé do Rocha","Pombal","Umbuzeiro","Mataraca","Belém","São Sebastião de Lagoa de Roça","Sumé","Solânea","Esperança","São Mamede"
+"Amparo","Matinhas","Bom Sucesso","Catingueira","Mato Grosso","Borborema","Bom Jesus","Emas","Santana de Mangueira","São José dos Ramos","Caldas Brandão"
+"Aparecida","Serra Redonda","Juru","Santana de Mangueira","Borborema","São José da Lagoa Tapada","São José dos Ramos","Igaracy","Matinhas","Curral Velho","Barra de São Miguel"
+"Araçagi","Juazeirinho","Itapororoca","Gado Bravo","Gurinhém","Areia","Tavares","Cruz do Espírito Santo","Salgado de São Félix","Brejo do Cruz","Baía da Traição"
+"Arara","Marizópolis","Cachoeira dos Índios","Poço Dantas","Imaculada","Pilões","Cacimbas","Olho d'Água","Coremas","Lagoa","Marcação"
+"Araruna","Jacaraú","Barra de Santa Rosa","Pocinhos","Piancó","Solânea","Cuité","Lucena","Lagoa Seca","Princesa Isabel","Teixeira"
+"Areia","Tavares","Mari","Salgado de São Félix","Juazeirinho","Araçagi","Gurinhém","Mogeiro","Massaranduba","Cuité de Mamanguape","São João do Rio do Peixe"
+"Areia de Baraúnas","São João do Cariri","São José do Brejo do Cruz","Riacho de Santo Antônio","Assunção","Prata","Cabaceiras","São José de Espinharas","Santa Helena","Pedro Régis","São Francisco"
+"Areial","Mataraca","Nova Palmeira","Santa Teresinha","Umbuzeiro","Frei Martinho","Natuba","São Mamede","Cajazeirinhas","Sumé","São Sebastião de Lagoa de Roça"
+"Assunção","Cabaceiras","Santa Helena","Pedro Régis","Areia de Baraúnas","Prata","São José do Brejo do Cruz","Riacho de Santo Antônio","São João do Cariri","Damião","Boa Vista"
+"Baía da Traição","Brejo do Cruz","Gurinhém","Juripiranga","Puxinanã","Cuité de Mamanguape","Nova Floresta","Massaranduba","Salgado de São Félix","Água Branca","Bernardino Batista"
+"Bananeiras","Rio Tinto","Lagoa Seca","Cacimba de Dentro","Alagoa Grande","Monteiro","Alagoa Nova","Remígio","Pitimbu","Boqueirão","Ingá"
+"Baraúna","Montadas","Sertãozinho","São Francisco","Quixabá","Santa Cecília","Sobrado","Barra de Santana","Boa Vista","São Mamede","Riacho de Santo Antônio"
+"Barra de Santa Rosa","Lucena","Cuité","Piancó","Princesa Isabel","São José de Piranhas","Lagoa de Dentro","Araruna","Remígio","Teixeira","Jacaraú"
+"Barra de Santana","Paulista","Sobrado","Santa Cecília","Maturéia","Montadas","Boa Vista","Teixeira","Baraúna","Santa Helena","Cabaceiras"
+"Barra de São Miguel","Riacho dos Cavalos","São José dos Ramos","Caldas Brandão","Pilões","Santana de Mangueira","Logradouro","Bom Jesus","Lagoa","Serra Redonda","Borborema"
+"Bayeux","Queimadas","Pedras de Fogo","Cajazeiras","Sousa","Alagoa Grande","Sapé","São Bento","Caaporã","Bananeiras","Lagoa Seca"
+"Belém","São Sebastião de Lagoa de Roça","Sumé","Santa Cecília","Paulista","Teixeira","Barra de Santana","Mataraca","São Mamede","Catolé do Rocha","Sobrado"
+"Belém do Brejo do Cruz","Duas Estradas","Olivedos","Camalaú","Livramento","Curral de Cima","Junco do Seridó","Pedra Branca","Jericó","Cacimba de Areia","Capim"
+"Bernardino Batista","Santana dos Garrotes","Nova Floresta","Jericó","Aguiar","Pilõezinhos","Igaracy","Santa Cruz","São José da Lagoa Tapada","Cacimba de Areia","Santo André"
+"Boa Ventura","São Miguel de Taipu","Monte Horebe","Santa Inês","São José de Caiana","Conceição","Nova Olinda","Itatuba","Diamante","Coxixola","Manaíra"
+"Boa Vista","Santa Helena","Cabaceiras","Maturéia","Sobrado","Assunção","Damião","Montadas","São Francisco","Barra de Santana","Paulista"
+"Bom Jesus","Caldas Brandão","Emas","Logradouro","Catingueira","Bom Sucesso","Riacho dos Cavalos","Salgadinho","São José dos Ramos","Lagoa","Barra de São Miguel"
+"Bom Sucesso","Catingueira","Amparo","Emas","Bom Jesus","Matinhas","Caldas Brandão","Logradouro","Borborema","São José dos Ramos","Santana de Mangueira"
+"Bonito de Santa Fé","Itaporanga","Casserengue","Juarez Távora","Cuitegi","Livramento","Algodão de Jandaíra","Curral de Cima","Pilar","Fagundes","Junco do Seridó"
+"Boqueirão","Ingá","Remígio","Alagoinha","Soledade","Pitimbu","Cacimba de Dentro","São José de Piranhas","São João do Rio do Peixe","Itabaiana","Alagoa Nova"
+"Borborema","Santana de Mangueira","Serra Redonda","São José dos Ramos","Matinhas","Aparecida","Catingueira","Amparo","Juru","Bom Sucesso","Barra de São Miguel"
+"Brejo do Cruz","Baía da Traição","Gurinhém","Juripiranga","Puxinanã","Nova Floresta","Massaranduba","Cuité de Mamanguape","Salgado de São Félix","Água Branca","Bernardino Batista"
+"Brejo dos Santos","Caraúbas","Riachão do Poço","Lastro","Serraria","Serra da Raiz","São José de Princesa","São José dos Cordeiros","Riachão do Bacamarte","Coremas","Olho d'Água"
+"Caaporã","Sapé","Areia","Juazeirinho","Mari","Araçagi","Itapororoca","Mamanguape","Tavares","Alagoa Nova","Cruz do Espírito Santo"
+"Cabaceiras","Santa Helena","Assunção","Boa Vista","Pedro Régis","Damião","Maturéia","Riacho de Santo Antônio","Areia de Baraúnas","São João do Cariri","Sobrado"
+"Cabedelo","Patos","Guarabira","Picuí","Conde","Pedra Lavrada","Dona Inês","Santa Luzia","São José do Sabugi","Várzea","Esperança"
+"Cachoeira dos Índios","Poço Dantas","Pilões","Arara","Imaculada","Lagoa","Cacimbas","Riacho dos Cavalos","Olho d'Água","Barra de São Miguel","Marizópolis"
+"Cacimba de Areia","Santo André","Zabelê","Olivedos","Ouro Velho","Vista Serrana","Duas Estradas","Belém do Brejo do Cruz","Jericó","Santana dos Garrotes","Bernardino Batista"
+"Cacimba de Dentro","Remígio","Alagoa Nova","Boqueirão","Rio Tinto","Pitimbu","Ingá","Bananeiras","Monteiro","São João do Rio do Peixe","Lagoa Seca"
+"Cacimbas","Imaculada","Marcação","Pilões","Cachoeira dos Índios","Arara","Barra de São Miguel","Poço Dantas","Cruz do Espírito Santo","Riacho dos Cavalos","Juru"
+"Caiçara","Poço de José de Moura","Pirpirituba","Uiraúna","Casserengue","Taperoá","Alagoinha","Itaporanga","Soledade","São João do Tigre","Cubati"
+"Cajazeiras","Esperança","São Bento","Queimadas","Catolé do Rocha","Solânea","Pocinhos","Alhandra","Sousa","Pombal","Jacaraú"
+"Cajazeirinhas","Caturité","Nova Palmeira","Frei Martinho","Natuba","Areial","Santa Luzia","Santa Teresinha","São José do Sabugi","Umbuzeiro","Dona Inês"
+"Caldas Brandão","Logradouro","Bom Jesus","Riacho dos Cavalos","Emas","Lagoa","Catingueira","Barra de São Miguel","Salgadinho","São José dos Ramos","Bom Sucesso"
+"Camalaú","Junco do Seridó","Duas Estradas","Belém do Brejo do Cruz","Pedra Branca","Olivedos","Livramento","Curral de Cima","Serra Grande","Sossêgo","Algodão de Jandaíra"
+"Campina Grande","Santa Rita","Patos","Cabedelo","Bayeux","Guarabira","Cajazeiras","Queimadas","Esperança","Conde","Picuí"
+"Capim","Pilar","Curral de Cima","Livramento","Juarez Távora","Puxinanã","Água Branca","Juripiranga","Belém do Brejo do Cruz","Jericó","Cuité de Mamanguape"
+"Caraúbas","Brejo dos Santos","Riachão do Poço","Serra da Raiz","São José de Princesa","São José dos Cordeiros","Lastro","Serraria","Riachão do Bacamarte","Coxixola","Coremas"
+"Carrapateira","Vieirópolis","Congo","São José do Bonfim","Mãe d'Água","São João do Tigre","Parari","Malta","Condado","Gurjão","Cuitegi"
+"Casserengue","Itaporanga","Caiçara","Bonito de Santa Fé","Soledade","Pirpirituba","Alagoinha","Cuitegi","Poço de José de Moura","São João do Tigre","Uiraúna"
+"Catingueira","Bom Sucesso","Bom Jesus","Emas","Amparo","Caldas Brandão","Matinhas","Logradouro","São José dos Ramos","Borborema","Santana de Mangueira"
+"Catolé do Rocha","Alhandra","Belém","Umbuzeiro","Solânea","Mataraca","São Sebastião de Lagoa de Roça","Pombal","Pocinhos","Sumé","Jacaraú"
+"Caturité","Cajazeirinhas","Nova Palmeira","Frei Martinho","Natuba","Santa Luzia","Areial","São José do Sabugi","Dona Inês","Várzea","Santa Teresinha"
+"Conceição","Itatuba","São Miguel de Taipu","Manaíra","Diamante","Nova Olinda","Mulungu","Monte Horebe","Coremas","Riachão do Poço","Caraúbas"
+"Condado","Congo","São José do Bonfim","Alcantil","Vieirópolis","Poço de José de Moura","São José de Espinharas","Santarém","São João do Tigre","Cubati","Parari"
+"Conde","Picuí","Pombal","Esperança","Dona Inês","Guarabira","Santa Luzia","Natuba","Pedra Lavrada","Alhandra","Umbuzeiro"
+"Congo","São José do Bonfim","Condado","Vieirópolis","Carrapateira","São João do Tigre","Parari","Alcantil","Pirpirituba","Poço de José de Moura","Mãe d'Água"
+"Coremas","Marizópolis","Mulungu","Olho d'Água","Brejo dos Santos","Serraria","Riachão do Poço","Manaíra","Riachão do Bacamarte","Lastro","Poço Dantas"
+"Coxixola","São José de Princesa","Serra da Raiz","São José dos Cordeiros","Caraúbas","Riachão do Poço","Brejo dos Santos","Lastro","Nova Olinda","Serraria","Diamante"
+"Cruz do Espírito Santo","Itapororoca","Gado Bravo","Marcação","Cacimbas","Imaculada","Araçagi","Juazeirinho","Pilões","Juru","Gurinhém"
+"Cubati","Taperoá","Desterro","Serra Branca","Alcantil","Santarém","Poço de José de Moura","Damião","Condado","Pedro Régis","Uiraúna"
+"Cuité","Lucena","Barra de Santa Rosa","Piancó","São José de Piranhas","Princesa Isabel","Lagoa de Dentro","Remígio","Uiraúna","Monteiro","Taperoá"
+"Cuité de Mamanguape","Massaranduba","Água Branca","Salgado de São Félix","Puxinanã","Juripiranga","Tavares","Mogeiro","Gurinhém","Capim","Baía da Traição"
+"Cuitegi","Malta","Mãe d'Água","São João do Tigre","São Bentinho","Algodão de Jandaíra","Tenório","Pirpirituba","Gurjão","Vieirópolis","Bonito de Santa Fé"
+"Curral de Cima","Livramento","Capim","Belém do Brejo do Cruz","Pilar","Juarez Távora","Camalaú","Duas Estradas","Olivedos","Junco do Seridó","Jericó"
+"Curral Velho","Passagem","Santa Cruz","Mato Grosso","Vista Serrana","São José da Lagoa Tapada","Pilõezinhos","Igaracy","Aguiar","Matinhas","Ouro Velho"
+"Damião","Desterro","Pedro Régis","Santarém","Serra Branca","Santa Helena","Assunção","Maturéia","Cabaceiras","São José de Espinharas","Boa Vista"
+"Desterro","Damião","Serra Branca","Santarém","Pedro Régis","Cubati","Maturéia","São José de Espinharas","Alcantil","Santa Helena","Assunção"
+"Diamante","Nova Olinda","Itatuba","Mulungu","Manaíra","Riachão do Poço","Caraúbas","Brejo dos Santos","São José de Princesa","Serra da Raiz","Coremas"
+"Dona Inês","Santa Luzia","Pedra Lavrada","São José do Sabugi","Natuba","Várzea","Caturité","Cajazeirinhas","Picuí","Conde","Pombal"
+"Duas Estradas","Olivedos","Belém do Brejo do Cruz","Camalaú","Junco do Seridó","Pedra Branca","Livramento","Curral de Cima","Cacimba de Areia","Jericó","Zabelê"
+"Emas","Bom Jesus","Bom Sucesso","Logradouro","Catingueira","Caldas Brandão","Salgadinho","Amparo","Lagoa","Riacho dos Cavalos","São José dos Ramos"
+"Esperança","Pombal","Catolé do Rocha","Alhandra","Conde","Cajazeiras","Umbuzeiro","Solânea","Natuba","Pocinhos","Mataraca"
+"Fagundes","Mogeiro","Juarez Távora","São João do Rio do Peixe","Água Branca","Pilar","Bonito de Santa Fé","Capim","Ingá","Massaranduba","Cuité de Mamanguape"
+"Frei Martinho","Nova Palmeira","Cajazeirinhas","Areial","Santa Teresinha","Caturité","Sertãozinho","Natuba","São Mamede","Mataraca","Sumé"
+"Gado Bravo","Itapororoca","Cruz do Espírito Santo","Araçagi","Marcação","Juazeirinho","Gurinhém","Baía da Traição","Brejo do Cruz","Cacimbas","Imaculada"
+"Guarabira","Conde","Picuí","Esperança","Patos","Pombal","Dona Inês","Pedra Lavrada","Cajazeiras","Santa Luzia","Alhandra"
+"Gurinhém","Brejo do Cruz","Salgado de São Félix","Baía da Traição","Tavares","Massaranduba","Cuité de Mamanguape","Araçagi","Juripiranga","Juazeirinho","Água Branca"
+"Gurjão","São Bentinho","São Domingos do Cariri","Malta","Tenório","Algodão de Jandaíra","Sossêgo","Serra Grande","Mãe d'Água","Cuitegi","Pedra Branca"
+"Ibiara","Camalaú","Junco do Seridó","Pedra Branca","Belém do Brejo do Cruz","Duas Estradas","Olivedos","Serra Grande","Sossêgo","Zabelê","Livramento"
+"Igaracy","Pilõezinhos","Aguiar","São José da Lagoa Tapada","Santana dos Garrotes","Santa Cruz","Nova Floresta","Bernardino Batista","Curral Velho","Vista Serrana","Jericó"
+"Imaculada","Cacimbas","Pilões","Marcação","Cachoeira dos Índios","Arara","Barra de São Miguel","Poço Dantas","Riacho dos Cavalos","Cruz do Espírito Santo","Juru"
+"Ingá","Pitimbu","Boqueirão","São João do Rio do Peixe","Alagoinha","Soledade","Alagoa Nova","Remígio","Cacimba de Dentro","Fagundes","Itabaiana"
+"Itabaiana","Soledade","Uiraúna","Alagoinha","Itaporanga","São José de Piranhas","Taperoá","Caiçara","Boqueirão","Poço de José de Moura","Casserengue"
+"Itaporanga","Casserengue","Soledade","Bonito de Santa Fé","Itabaiana","Pirpirituba","Alagoinha","Caiçara","Cuitegi","Poço de José de Moura","Uiraúna"
+"Itapororoca","Cruz do Espírito Santo","Gado Bravo","Araçagi","Juazeirinho","Marcação","Cacimbas","Gurinhém","Imaculada","Brejo do Cruz","Baía da Traição"
+"Itatuba","Diamante","Nova Olinda","Manaíra","Mulungu","Conceição","Riachão do Poço","Caraúbas","Brejo dos Santos","Coremas","São José de Princesa"
+"Jacaraú","Pocinhos","Solânea","Araruna","Teixeira","Piancó","Barra de Santa Rosa","Princesa Isabel","Lucena","Cuité","Belém"
+"Jericó","Bernardino Batista","Santana dos Garrotes","Nova Floresta","Belém do Brejo do Cruz","Aguiar","Olivedos","Pilõezinhos","Duas Estradas","Juripiranga","Cacimba de Areia"
+"João Pessoa","Campina Grande","Santa Rita","Cabedelo","Patos","Bayeux","Guarabira","Cajazeiras","Queimadas","Pedras de Fogo","Esperança"
+"Juarez Távora","Capim","Curral de Cima","Livramento","Pilar","Bonito de Santa Fé","Água Branca","Fagundes","Puxinanã","Belém do Brejo do Cruz","Camalaú"
+"Juazeirinho","Araçagi","Itapororoca","Areia","Gado Bravo","Gurinhém","Tavares","Cruz do Espírito Santo","Salgado de São Félix","Brejo do Cruz","Baía da Traição"
+"Junco do Seridó","Pedra Branca","Camalaú","Duas Estradas","Serra Grande","Belém do Brejo do Cruz","Sossêgo","Olivedos","Algodão de Jandaíra","Tenório","Livramento"
+"Juripiranga","Puxinanã","Água Branca","Capim","Cuité de Mamanguape","Pilar","Massaranduba","Jericó","Baía da Traição","Brejo do Cruz","Curral de Cima"
+"Juru","Aparecida","Serra Redonda","Santana de Mangueira","Borborema","São José dos Ramos","Barra de São Miguel","São José da Lagoa Tapada","Riacho dos Cavalos","Matinhas","Igaracy"
+"Lagoa","Salgadinho","Logradouro","Riacho dos Cavalos","Caldas Brandão","Bom Jesus","Barra de São Miguel","Poço Dantas","Riachão","Olho d'Água","Emas"
+"Lagoa de Dentro","São José de Piranhas","Lucena","Uiraúna","Taperoá","Barra de Santa Rosa","Cuité","Cubati","Caiçara","Alagoinha","Poço de José de Moura"
+"Lagoa Seca","Bananeiras","Rio Tinto","Monteiro","Araruna","Cacimba de Dentro","Remígio","Alagoa Grande","Barra de Santa Rosa","Cuité","Alagoa Nova"
+"Lastro","Serraria","Riachão do Bacamarte","Brejo dos Santos","São José dos Cordeiros","Caraúbas","Riachão","Riachão do Poço","Serra da Raiz","Olho d'Água","São José de Princesa"
+"Livramento","Curral de Cima","Belém do Brejo do Cruz","Capim","Pilar","Camalaú","Juarez Távora","Duas Estradas","Olivedos","Junco do Seridó","Pedra Branca"
+"Logradouro","Caldas Brandão","Salgadinho","Bom Jesus","Lagoa","Emas","Riacho dos Cavalos","Catingueira","Barra de São Miguel","Bom Sucesso","São José dos Ramos"
+"Lucena","Barra de Santa Rosa","Cuité","Piancó","São José de Piranhas","Lagoa de Dentro","Princesa Isabel","Uiraúna","Taperoá","Remígio","Araruna"
+"Mãe d'Água","Malta","Cuitegi","São João do Tigre","Vieirópolis","Gurjão","Carrapateira","São Bentinho","Algodão de Jandaíra","Tenório","Pirpirituba"
+"Malta","Mãe d'Água","São Bentinho","Cuitegi","Gurjão","Algodão de Jandaíra","Tenório","São Domingos do Cariri","Sossêgo","Serra Grande","São João do Tigre"
+"Mamanguape","Sapé","Caaporã","Cruz do Espírito Santo","Itapororoca","Juazeirinho","Araçagi","Gado Bravo","Areia","Marcação","Cacimbas"
+"Manaíra","Mulungu","Diamante","Itatuba","Coremas","Riachão do Poço","Nova Olinda","Marizópolis","Brejo dos Santos","Caraúbas","Serraria"
+"Marcação","Cacimbas","Imaculada","Cruz do Espírito Santo","Gado Bravo","Pilões","Itapororoca","Juru","Cachoeira dos Índios","Barra de São Miguel","Arara"
+"Mari","Areia","São João do Rio do Peixe","Mogeiro","Tavares","Pitimbu","Salgado de São Félix","Alagoa Nova","Fagundes","Massaranduba","Ingá"
+"Marizópolis","Arara","Poço Dantas","Coremas","Olho d'Água","Cachoeira dos Índios","Riachão do Bacamarte","Serraria","Pilões","Mulungu","Lagoa"
+"Massaranduba","Cuité de Mamanguape","Salgado de São Félix","Água Branca","Tavares","Puxinanã","Juripiranga","Mogeiro","Gurinhém","Capim","Pilar"
+"Mataraca","São Sebastião de Lagoa de Roça","Umbuzeiro","São Mamede","Sumé","Areial","Belém","Santa Cecília","Santa Teresinha","Sertãozinho","Alhandra"
+"Matinhas","Amparo","Mato Grosso","Borborema","Catingueira","Bom Sucesso","Santana de Mangueira","Serra Redonda","São José dos Ramos","Curral Velho","Passagem"
+"Mato Grosso","Passagem","Matinhas","Curral Velho","Amparo","Borborema","Santa Cruz","Bom Sucesso","São José da Lagoa Tapada","Catingueira","Santana de Mangueira"
+"Maturéia","Sobrado","Boa Vista","Santa Helena","Damião","Cabaceiras","Paulista","Barra de Santana","Desterro","Serra Branca","Assunção"
+"Mogeiro","Fagundes","Massaranduba","Tavares","Salgado de São Félix","Cuité de Mamanguape","Água Branca","São João do Rio do Peixe","Mari","Puxinanã","Juarez Távora"
+"Montadas","Baraúna","São Francisco","Sobrado","Quixabá","Barra de Santana","Sertãozinho","Santa Cecília","Boa Vista","Santa Helena","Cabaceiras"
+"Monte Horebe","Nova Olinda","São Miguel de Taipu","Itatuba","Diamante","Conceição","Coxixola","Boa Ventura","São José de Princesa","Serra da Raiz","Mulungu"
+"Monteiro","Remígio","Lagoa Seca","Cuité","Bananeiras","Cacimba de Dentro","Boqueirão","São José de Piranhas","Rio Tinto","Alagoa Nova","Barra de Santa Rosa"
+"Mulungu","Manaíra","Diamante","Coremas","Riachão do Poço","Itatuba","Brejo dos Santos","Nova Olinda","Caraúbas","Marizópolis","Serraria"
+"Natuba","Areial","Umbuzeiro","Caturité","Cajazeirinhas","Nova Palmeira","Santa Luzia","Mataraca","Dona Inês","Frei Martinho","Pombal"
+"Nova Floresta","Bernardino Batista","Santana dos Garrotes","Aguiar","Igaracy","Pilõezinhos","Jericó","São José da Lagoa Tapada","Santa Cruz","Juripiranga","Baía da Traição"
+"Nova Olinda","Diamante","Itatuba","Mulungu","Riachão do Poço","Manaíra","São José de Princesa","Caraúbas","Brejo dos Santos","Serra da Raiz","Coxixola"
+"Nova Palmeira","Frei Martinho","Cajazeirinhas","Caturité","Areial","Natuba","Santa Teresinha","Mataraca","Umbuzeiro","São Mamede","Santa Luzia"
+"Olho d'Água","Poço Dantas","Riachão do Bacamarte","Riachão","Serraria","Lagoa","Lastro","Marizópolis","Cachoeira dos Índios","Salgadinho","Coremas"
+"Olivedos","Duas Estradas","Belém do Brejo do Cruz","Camalaú","Cacimba de Areia","Junco do Seridó","Pedra Branca","Livramento","Curral de Cima","Jericó","Zabelê"
+"Ouro Velho","Santo André","Vista Serrana","Cacimba de Areia","Santa Cruz","Zabelê","Passagem","Pilõezinhos","Curral Velho","Aguiar","Santana dos Garrotes"
+"Parari","São José do Bonfim","Congo","Carrapateira","Condado","Vieirópolis","Alcantil","São José de Espinharas","Prata","São José do Brejo do Cruz","São João do Tigre"
+"Passagem","Curral Velho","Mato Grosso","Santa Cruz","Vista Serrana","Pilõezinhos","São José da Lagoa Tapada","Matinhas","Igaracy","Ouro Velho","Aguiar"
+"Patos","Guarabira","Cajazeiras","Esperança","Conde","Picuí","Pombal","Bayeux","Alhandra","Catolé do Rocha","Queimadas"
+"Paulista","Barra de Santana","Sobrado","Teixeira","Maturéia","Boa Vista","Santa Cecília","Montadas","Santa Helena","Cabaceiras","Baraúna"
+"Pedra Branca","Junco do Seridó","Camalaú","Serra Grande","Sossêgo","Tenório","Algodão de Jandaíra","Duas Estradas","Belém do Brejo do Cruz","Olivedos","São Bentinho"
+"Pedra Lavrada","Dona Inês","São José do Sabugi","Várzea","Picuí","Santa Luzia","Caturité","Conde","Natuba","Cajazeirinhas","Nova Palmeira"
+"Pedras de Fogo","Queimadas","Alagoa Grande","Sousa","Bananeiras","Rio Tinto","Caaporã","São Bento","Lagoa Seca","Sapé","Alagoa Nova"
+"Pedro Régis","Santarém","São José de Espinharas","Damião","Desterro","Prata","Assunção","Alcantil","Cabaceiras","Santa Helena","São José do Brejo do Cruz"
+"Piancó","Princesa Isabel","Barra de Santa Rosa","Cuité","Lucena","São José de Piranhas","Teixeira","Araruna","Lagoa de Dentro","Jacaraú","Serra Branca"
+"Picuí","Conde","Pedra Lavrada","Dona Inês","Santa Luzia","Guarabira","Pombal","São José do Sabugi","Várzea","Natuba","Esperança"
+"Pilar","Capim","Curral de Cima","Livramento","Puxinanã","Juarez Távora","Água Branca","Juripiranga","Belém do Brejo do Cruz","Jericó","Massaranduba"
+"Pilões","Cachoeira dos Índios","Imaculada","Barra de São Miguel","Cacimbas","Riacho dos Cavalos","Poço Dantas","Lagoa","Arara","Caldas Brandão","São José dos Ramos"
+"Pilõezinhos","Aguiar","Igaracy","Santana dos Garrotes","Santa Cruz","Bernardino Batista","Nova Floresta","São José da Lagoa Tapada","Vista Serrana","Curral Velho","Santo André"
+"Pirpirituba","Poço de José de Moura","São João do Tigre","Caiçara","Vieirópolis","Cuitegi","Casserengue","Itaporanga","Mãe d'Água","Congo","Condado"
+"Pitimbu","São João do Rio do Peixe","Ingá","Alagoa Nova","Boqueirão","Cacimba de Dentro","Mari","Remígio","Alagoinha","Fagundes","Soledade"
+"Pocinhos","Solânea","Jacaraú","Araruna","Teixeira","Piancó","Barra de Santa Rosa","São Bento","Belém","Catolé do Rocha","Princesa Isabel"
+"Poço Dantas","Cachoeira dos Índios","Olho d'Água","Marizópolis","Pilões","Lagoa","Arara","Riachão do Bacamarte","Riachão","Riacho dos Cavalos","Salgadinho"
+"Poço de José de Moura","Caiçara","Pirpirituba","Uiraúna","Taperoá","São João do Tigre","Condado","Cubati","Vieirópolis","Congo","Casserengue"
+"Pombal","Alhandra","Esperança","Catolé do Rocha","Umbuzeiro","Natuba","Conde","Mataraca","Dona Inês","Santa Luzia","Areial"
+"Prata","São José do Brejo do Cruz","São José de Espinharas","Pedro Régis","Areia de Baraúnas","Assunção","Santarém","Alcantil","São João do Cariri","Cabaceiras","Damião"
+"Princesa Isabel","Piancó","Lucena","Cuité","Barra de Santa Rosa","Serra Branca","Teixeira","São José de Piranhas","Taperoá","Lagoa de Dentro","Desterro"
+"Puxinanã","Juripiranga","Água Branca","Capim","Pilar","Massaranduba","Cuité de Mamanguape","Curral de Cima","Jericó","Livramento","Baía da Traição"
+"Queimadas","Pedras de Fogo","Alagoa Grande","São Bento","Sousa","Cajazeiras","Bananeiras","Lagoa Seca","Bayeux","Rio Tinto","Araruna"
+"Quixabá","São Francisco","Baraúna","Riacho de Santo Antônio","Montadas","São João do Cariri","Sertãozinho","Areia de Baraúnas","Cabaceiras","Boa Vista","Santa Helena"
+"Remígio","Boqueirão","Cacimba de Dentro","São José de Piranhas","Monteiro","Ingá","Alagoinha","Cuité","Pitimbu","Soledade","Lagoa de Dentro"
+"Riachão","Riachão do Bacamarte","Olho d'Água","Serraria","Salgadinho","Lastro","Lagoa","Logradouro","Poço Dantas","São José dos Cordeiros","Brejo dos Santos"
+"Riachão do Bacamarte","Serraria","Lastro","Riachão","Olho d'Água","Brejo dos Santos","São José dos Cordeiros","Caraúbas","Riachão do Poço","Poço Dantas","Coremas"
+"Riachão do Poço","Brejo dos Santos","Caraúbas","São José de Princesa","Serra da Raiz","Lastro","Serraria","São José dos Cordeiros","Mulungu","Riachão do Bacamarte","Coremas"
+"Riacho de Santo Antônio","São João do Cariri","Areia de Baraúnas","São Francisco","Assunção","Cabaceiras","São José do Brejo do Cruz","Quixabá","Santa Helena","Prata","Boa Vista"
+"Riacho dos Cavalos","Barra de São Miguel","Caldas Brandão","Logradouro","Lagoa","São José dos Ramos","Bom Jesus","Pilões","Salgadinho","Santana de Mangueira","Emas"
+"Rio Tinto","Bananeiras","Cacimba de Dentro","Alagoa Nova","Lagoa Seca","Remígio","Monteiro","Pitimbu","Alagoa Grande","Boqueirão","Ingá"
+"Salgadinho","Logradouro","Lagoa","Caldas Brandão","Emas","Bom Jesus","Riachão","Riacho dos Cavalos","Catingueira","Bom Sucesso","Olho d'Água"
+"Salgado de São Félix","Tavares","Massaranduba","Cuité de Mamanguape","Gurinhém","Água Branca","Mogeiro","Puxinanã","Juripiranga","Brejo do Cruz","Areia"
+"Santa Cecília","São Mamede","São Sebastião de Lagoa de Roça","Barra de Santana","Baraúna","Montadas","Paulista","Sertãozinho","Sobrado","Sumé","Belém"
+"Santa Cruz","Pilõezinhos","Aguiar","Igaracy","Curral Velho","Vista Serrana","Santana dos Garrotes","São José da Lagoa Tapada","Passagem","Santo André","Bernardino Batista"
+"Santa Helena","Cabaceiras","Boa Vista","Assunção","Maturéia","Damião","Sobrado","Pedro Régis","Desterro","Riacho de Santo Antônio","Areia de Baraúnas"
+"Santa Inês","São José de Caiana","Boa Ventura","São Miguel de Taipu","Monte Horebe","Conceição","Itatuba","Nova Olinda","Diamante","Coxixola","Manaíra"
+"Santa Luzia","Dona Inês","Caturité","São José do Sabugi","Natuba","Várzea","Cajazeirinhas","Nova Palmeira","Pedra Lavrada","Areial","Frei Martinho"
+"Santa Rita","Bayeux","Patos","Queimadas","Cajazeiras","Pedras de Fogo","Guarabira","Sapé","São Bento","Sousa","Esperança"
+"Santa Teresinha","Sertãozinho","São Mamede","Areial","Frei Martinho","Baraúna","Sumé","Santa Cecília","Mataraca","Quixabá","Montadas"
+"Santana de Mangueira","Serra Redonda","Borborema","São José dos Ramos","Aparecida","Juru","Barra de São Miguel","Matinhas","Catingueira","Riacho dos Cavalos","Caldas Brandão"
+"Santana dos Garrotes","Bernardino Batista","Aguiar","Pilõezinhos","Nova Floresta","Igaracy","Jericó","Santa Cruz","São José da Lagoa Tapada","Santo André","Vista Serrana"
+"Santarém","Pedro Régis","São José de Espinharas","Desterro","Alcantil","Damião","Prata","Serra Branca","Assunção","Cubati","Condado"
+"Santo André","Ouro Velho","Vista Serrana","Cacimba de Areia","Santa Cruz","Pilõezinhos","Zabelê","Aguiar","Santana dos Garrotes","Bernardino Batista","Curral Velho"
+"São Bentinho","Tenório","Algodão de Jandaíra","Sossêgo","Gurjão","Serra Grande","São Domingos do Cariri","Malta","Cuitegi","Pedra Branca","Mãe d'Água"
+"São Bento","Pocinhos","Solânea","Lagoa Seca","Araruna","Jacaraú","Alagoa Grande","Sousa","Bananeiras","Monteiro","Rio Tinto"
+"São Domingos do Cariri","Sossêgo","Tenório","São Bentinho","Gurjão","Serra Grande","Algodão de Jandaíra","Malta","Pedra Branca","Junco do Seridó","Mãe d'Água"
+"São Francisco","Quixabá","Riacho de Santo Antônio","Montadas","Baraúna","São João do Cariri","Cabaceiras","Boa Vista","Santa Helena","Areia de Baraúnas","Assunção"
+"São João do Cariri","Riacho de Santo Antônio","Areia de Baraúnas","São José do Brejo do Cruz","Assunção","São Francisco","Cabaceiras","Prata","Santa Helena","Quixabá","Boa Vista"
+"São João do Rio do Peixe","Pitimbu","Ingá","Alagoa Nova","Mari","Fagundes","Mogeiro","Boqueirão","Soledade","Alagoinha","Cacimba de Dentro"
+"São João do Tigre","Vieirópolis","Mãe d'Água","Pirpirituba","Cuitegi","Carrapateira","Congo","Malta","Poço de José de Moura","São José do Bonfim","Condado"
+"São José da Lagoa Tapada","Igaracy","Pilõezinhos","Aguiar","Santa Cruz","Aparecida","Nova Floresta","Curral Velho","Santana dos Garrotes","Passagem","Bernardino Batista"
+"São José de Caiana","Santa Inês","Boa Ventura","São Miguel de Taipu","Monte Horebe","Conceição","Itatuba","Nova Olinda","Diamante","Coxixola","Manaíra"
+"São José de Espinharas","Prata","Pedro Régis","Santarém","Alcantil","São José do Brejo do Cruz","Assunção","Damião","Desterro","Condado","Areia de Baraúnas"
+"São José de Piranhas","Cuité","Lucena","Lagoa de Dentro","Uiraúna","Remígio","Taperoá","Barra de Santa Rosa","Itabaiana","Alagoinha","Boqueirão"
+"São José de Princesa","Serra da Raiz","Caraúbas","São José dos Cordeiros","Brejo dos Santos","Coxixola","Riachão do Poço","Lastro","Serraria","Riachão do Bacamarte","Nova Olinda"
+"São José do Bonfim","Congo","Condado","Parari","Vieirópolis","Carrapateira","Alcantil","São João do Tigre","São José de Espinharas","Mãe d'Água","Pirpirituba"
+"São José do Brejo do Cruz","Prata","Areia de Baraúnas","Assunção","São José de Espinharas","São João do Cariri","Pedro Régis","Riacho de Santo Antônio","Cabaceiras","Santarém","Santa Helena"
+"São José do Sabugi","Várzea","Santa Luzia","Dona Inês","Pedra Lavrada","Caturité","Cajazeirinhas","Nova Palmeira","Natuba","Frei Martinho","Areial"
+"São José dos Cordeiros","Serra da Raiz","Lastro","São José de Princesa","Caraúbas","Brejo dos Santos","Serraria","Riachão do Bacamarte","Riachão do Poço","Coxixola","Riachão"
+"São José dos Ramos","Santana de Mangueira","Serra Redonda","Borborema","Barra de São Miguel","Riacho dos Cavalos","Caldas Brandão","Catingueira","Bom Jesus","Juru","Aparecida"
+"São Mamede","São Sebastião de Lagoa de Roça","Santa Cecília","Sertãozinho","Sumé","Mataraca","Santa Teresinha","Baraúna","Montadas","Areial","Barra de Santana"
+"São Miguel de Taipu","Monte Horebe","Conceição","Boa Ventura","Itatuba","Nova Olinda","Diamante","Manaíra","Mulungu","Riachão do Poço","Coxixola"
+"São Sebastião de Lagoa de Roça","São Mamede","Santa Cecília","Mataraca","Belém","Sumé","Barra de Santana","Sertãozinho","Paulista","Umbuzeiro","Baraúna"
+"Sapé","Mamanguape","Caaporã","Pedras de Fogo","Juazeirinho","Alagoa Grande","Areia","Araçagi","Itapororoca","Mari","Cruz do Espírito Santo"
+"Serra Branca","Desterro","Damião","Santarém","Cubati","Pedro Régis","Maturéia","Taperoá","Alcantil","Santa Helena","São José de Espinharas"
+"Serra da Raiz","São José de Princesa","São José dos Cordeiros","Caraúbas","Brejo dos Santos","Coxixola","Riachão do Poço","Lastro","Serraria","Riachão do Bacamarte","Riachão"
+"Serra Grande","Sossêgo","Tenório","Algodão de Jandaíra","São Bentinho","São Domingos do Cariri","Pedra Branca","Junco do Seridó","Gurjão","Malta","Camalaú"
+"Serra Redonda","Santana de Mangueira","Borborema","Aparecida","São José dos Ramos","Juru","Barra de São Miguel","Matinhas","Catingueira","Riacho dos Cavalos","São José da Lagoa Tapada"
+"Serraria","Riachão do Bacamarte","Lastro","Brejo dos Santos","Riachão","Olho d'Água","Caraúbas","São José dos Cordeiros","Riachão do Poço","Serra da Raiz","São José de Princesa"
+"Sertãozinho","Baraúna","Santa Teresinha","São Mamede","Montadas","Quixabá","Santa Cecília","São Francisco","Sumé","São Sebastião de Lagoa de Roça","Barra de Santana"
+"Sobrado","Barra de Santana","Maturéia","Boa Vista","Paulista","Santa Helena","Montadas","Cabaceiras","Baraúna","Santa Cecília","Assunção"
+"Solânea","Pocinhos","Jacaraú","Araruna","Teixeira","Belém","Catolé do Rocha","Piancó","São Bento","Barra de Santa Rosa","Princesa Isabel"
+"Soledade","Alagoinha","Itabaiana","Itaporanga","Boqueirão","Casserengue","Ingá","Uiraúna","Caiçara","São José de Piranhas","Bonito de Santa Fé"
+"Sossêgo","Serra Grande","Tenório","Algodão de Jandaíra","São Domingos do Cariri","São Bentinho","Pedra Branca","Gurjão","Junco do Seridó","Malta","Camalaú"
+"Sousa","Alagoa Grande","São Bento","Lagoa Seca","Bananeiras","Monteiro","Rio Tinto","Pedras de Fogo","Araruna","Alagoa Nova","Remígio"
+"Sumé","São Mamede","São Sebastião de Lagoa de Roça","Mataraca","Belém","Santa Cecília","Sertãozinho","Santa Teresinha","Baraúna","Montadas","Areial"
+"Taperoá","Uiraúna","Cubati","Poço de José de Moura","Lagoa de Dentro","Caiçara","São José de Piranhas","Serra Branca","Itabaiana","Desterro","Pirpirituba"
+"Tavares","Salgado de São Félix","Massaranduba","Cuité de Mamanguape","Areia","Gurinhém","Mogeiro","Água Branca","Mari","Puxinanã","Brejo do Cruz"
+"Teixeira","Paulista","Barra de Santana","Princesa Isabel","Piancó","Maturéia","Sobrado","Jacaraú","Barra de Santa Rosa","Belém","Lucena"
+"Tenório","Algodão de Jandaíra","Sossêgo","Serra Grande","São Bentinho","São Domingos do Cariri","Gurjão","Pedra Branca","Malta","Junco do Seridó","Cuitegi"
+"Uiraúna","Taperoá","Caiçara","São José de Piranhas","Itabaiana","Lagoa de Dentro","Alagoinha","Poço de José de Moura","Soledade","Cubati","Pirpirituba"
+"Umbuzeiro","Mataraca","Areial","Natuba","São Sebastião de Lagoa de Roça","Alhandra","São Mamede","Catolé do Rocha","Sumé","Belém","Santa Teresinha"
+"Várzea","São José do Sabugi","Santa Luzia","Pedra Lavrada","Dona Inês","Caturité","Cajazeirinhas","Nova Palmeira","Natuba","Frei Martinho","Areial"
+"Vieirópolis","São João do Tigre","Carrapateira","Congo","Mãe d'Água","São José do Bonfim","Pirpirituba","Condado","Cuitegi","Malta","Poço de José de Moura"
+"Vista Serrana","Ouro Velho","Santo André","Santa Cruz","Pilõezinhos","Cacimba de Areia","Curral Velho","Passagem","Aguiar","Santana dos Garrotes","Igaracy"
+"Zabelê","Cacimba de Areia","Olivedos","Santo André","Duas Estradas","Ouro Velho","Camalaú","Pedra Branca","Junco do Seridó","Belém do Brejo do Cruz","Vista Serrana"

@@ -1,0 +1,68 @@
+#Script que carrega arquivos de indicadores necessários para o agrupamento da US14 e salva todos agregados em um unico arquivo
+#São necessarios os arquivos que estão na pasta Indicadores Selecionados/5 - Indicadores para Análises de Grupos/
+
+require("gdata")
+
+#Caminho do interpretedor perl(arquivos xls precisam dessa lib(gdata))
+perl.path = "C:/ProgramFiles/strawberry/perl/bin/perl"
+
+
+data = read.csv("tabela_com_todos_os_indicadores_selecionados_e_desvios.csv")
+
+
+
+#Carrega arquivos necessártios
+total.matriculas = read.xls("INDICADOR_219 - Total Matr�culas.xls", perl=perl.path)
+
+IFDM = read.xls("IFDM_2010_Paraiba.xls",perl=perl.path)[,]
+
+
+receita = read.xls("Receita.xls", perl = perl.path)
+receita = receita[1:(nrow(receita)-1), ]
+receita$Valor = gsub(",","",receita$Valor)
+
+
+#Selecionando colunas e linhas necessárias e ordenando
+total.matriculas = total.matriculas[total.matriculas$ANO==2011,]
+total.matriculas = total.matriculas[with(total.matriculas,order(NOME_MUNICIPIO)),]
+
+#ordenando os indicadores
+data = data[data$ANO == 2011, ]
+data = data[order(data$NOME_MUNICIPIO), ]
+IFDM = IFDM[order(IFDM$Cidade),]
+receita = receita[order(receita$Muninipio), ]
+
+#Merge dos atributos
+data$receita = NA
+data$numero.matriculas = NA
+data$IFDM = NA
+
+for(i in 1:nrow(data)){
+  nome = as.character(data$NOME_MUNICIPIO[i])
+  if(nrow(receita[receita$Muninipio == nome,]) > 0){
+    data[i,]$receita = receita[receita$Muninipio == nome, ]$Valor
+  }
+}
+
+for(i in 1:nrow(data)){
+  nome = as.character(data$NOME_MUNICIPIO[i])
+  if(nrow(IFDM[IFDM$Cidade == nome,]) > 0){
+    data[i,]$IFDM = IFDM[IFDM$Cidade == nome, ]$IFDM
+  }
+}
+
+for(i in 1:nrow(data)){
+  nome = as.character(data$NOME_MUNICIPIO[i])
+  if(nrow(total.matriculas[total.matriculas$NOME_MUNICIPIO == nome,]) > 0){
+    data[i,]$numero.matriculas = total.matriculas[total.matriculas$NOME_MUNICIPIO == nome, ]$INDICADOR_219
+  }
+}
+
+#Salvando informações agregadas
+write.csv(data,"numero.matriculas_IFDM_e_receita_agregados.csv",row.names=F, dec = ".")
+
+
+
+
+
+
