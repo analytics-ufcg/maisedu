@@ -31,14 +31,19 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 	lista_cidades.push(nome_cidade);
 	if(indicadores_selecionados.length == 3 && (ano == "2011")){
 		indicadores_selecionados.push(indicador);
+		if(legenda.length == 3)legenda = ["Indicador","Receita","Número Matrículas","IFDM"];
 	}else{
 		indicadores_selecionados = indicadores_selecionados.slice(0,3);
 		if((ano == "2011")){
 			indicadores_selecionados.push(indicador);
+			if(legenda.length == 3)legenda = ["Indicador","Receita","Número Matrículas","IFDM"];
 		}else{
-			legenda = legenda.slice(1,4);
+			legenda = ["Receita","Número Matrículas","IFDM"];
 		}
 	}
+	
+	console.log(legenda);
+	
 	var container = d3.select(div);
 	container.select("#plotSimilares").remove();
 	svg = container.append("svg:svg")
@@ -65,10 +70,7 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 				
 		  }));
 
-		
-		
-		console.log(cidades);
-		
+
 		foreground = svg.append("svg:g")
 			.attr("class", "foreground")
 			.selectAll("path")
