@@ -306,14 +306,17 @@ function plotIndicadores(indicador) {
 			.text("Similares");
 			
 			svg.append("a")
-			.attr("xlink:href","cidades_parecidas.html?cidade=" + cidade) //ADPTAR PARA CHAMAR SIMILARES
-			.attr("target", "_blank")
+			.attr("href","#")
+			.attr("class","big-link")
+			.attr("data-reveal-id","container3")
+			.attr("data-animation","fade")
 			.append("text")
 			.attr("y", h4 + 16)
 			.attr("x", 20)
 			.attr("text-anchor", "right")
 			.attr("font-weight", "bold")
-			.text("(Mais Detalhes)");
+			.text("(Mais Detalhes)")
+			.on("click", parallel_graph("Campina Grande","#container3"));
 				
 	
 		}else{
@@ -388,14 +391,17 @@ function plotIndicadores(indicador) {
 			
 			
 			svg.append("a")
-			.attr("xlink:href","cidades_parecidas.html") //ADPTAR PARA CHAMAR SIMILARES
-			.attr("target", "_blank")
+			.attr("class","big-link") //ADPTAR PARA CHAMAR SIMILARES
+			.attr("data-reveal-id","container3")
+			.attr("data-animation","fade")
+			.attr("href","#")
 			.append("text")
 			.attr("y", h4 + 16)
 			.attr("x", 20)
 			.attr("text-anchor", "right")
 			.attr("font-weight", "bold")
-			.text("(Mais Detalhes)");
+			.text("(Mais Detalhes)")
+			.on("click", parallel_graph("Campina Grande","#container3"));
 		}
 		
 	}else{

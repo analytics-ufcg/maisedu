@@ -1,45 +1,33 @@
 @CHARSET "UTF-8";
 
-#title_header {
-	background-color: black;
-	padding: 0;
-	margin: 0px;
-	color: #DCDCDC;
-	font-size: 3.75em;
-	text-align: center;
-	height: 70px;
+.foreground path {
+	fill: none;
+	stroke-opacity: .7;
+	stroke-width: 2px;
 }
 
-
-#main_content {
-	height: 100%;
-	width: 100%;
-	color: black;
-	font: 16px sans-serif;
-	padding: 0;
-	margin: 0;
-    text-align: left;
-    background-color: white;
+.brush .extent {
+	fill-opacity: .3;
+	stroke: #fff;
+	shape-rendering: crispEdges;
 }
 
-#footer{
-	background-color: black;
-	padding: 0;
-	margin: 0px;
-	color: #DCDCDC;
-	font-size: 1.5em;
-	height: 70px;
-    bottom:0;
-    width:100%;
-    position:botton;
-    text-align: center;
+.axis line,.axis path {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+
+.axis text {
+	text-shadow: 0 1px 0 #fff;
+	cursor: move;
 }
 
 #plot_imagens {
 	padding: 0 0;
 	margin: 0px;
-    min-height: 100%;
-    padding-bottom: 70px;
-    overflow: hidden;
+	min-height: 100%;
+	padding-bottom: 70px;
+	overflow: hidden;
 	text-align: center;
 }
