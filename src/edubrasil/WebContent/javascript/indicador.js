@@ -306,7 +306,7 @@ function plotIndicadores(indicador) {
 			.text("Similares");
 			
 			svg.append("a")
-			.attr("xlink:href","cidades_parecidas.html") //ADPTAR PARA CHAMAR SIMILARES
+			.attr("xlink:href","cidades_parecidas.html?cidade=" + cidade) //ADPTAR PARA CHAMAR SIMILARES
 			.attr("target", "_blank")
 			.append("text")
 			.attr("y", h4 + 16)
@@ -385,8 +385,10 @@ function plotIndicadores(indicador) {
 			.attr("text-anchor", "right")
 			.text("Similares");
 			
+			
+			
 			svg.append("a")
-			.attr("xlink:href","http://www.google.com") //ADPTAR PARA CHAMAR SIMILARES
+			.attr("xlink:href","cidades_parecidas.html") //ADPTAR PARA CHAMAR SIMILARES
 			.attr("target", "_blank")
 			.append("text")
 			.attr("y", h4 + 16)

@@ -4,6 +4,7 @@ var indicadores_selecionados = ["numero.matriculas", "IFDM", "receita", "INDICAD
 var lista_cidades = ["Alagoa Grande","Alagoa Nova","Alagoinha","Arara","Areia","Bananeiras","Campina Grande","Itabaiana","Mulungu","Patos"];
 var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A","#FFFF99","#FFED6F"];
 var legenda = ["Indicador","Número Matrículas","IFDM","Receita"];
+var cidade = "";
 	
 var m = [30, 10, 10, 10],
     w = 860 - m[1] - m[3],
@@ -22,13 +23,15 @@ function position(d) {
   return v == null ? x(d) : v;
 }
 
+
 // Returns the path for a given data point.
 function path(d) { 
   return line(dimensions.map(function(p) { return [position(p), y[p](d[p])]; }));
 }
 
 function parallel_graph(nome_cidade){//, lista_cidades){
-	svg = d3.select("body").append("svg:svg")
+	console.log(cidade);
+	svg = d3.select("#div_parallel_lines").append("svg:svg")
     .attr("width", w + m[1] + m[3])
     .attr("height", h + m[0] + m[2])
 	.append("svg:g")
@@ -45,7 +48,6 @@ function parallel_graph(nome_cidade){//, lista_cidades){
 		  }));
   
 		cidades = cidades.filter(function(d){ return ((lista_cidades.indexOf(d.NOME_MUNICIPIO) > -1) && d[indicadores_selecionados[1]] != "NA" && d[indicadores_selecionados[0]] != "NA")});
-		console.log(cidades);
 		foreground = svg.append("svg:g")
 			.attr("class", "foreground")
 			.selectAll("path")
