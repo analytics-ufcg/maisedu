@@ -31,10 +31,13 @@ function path(d) {
 
 function parallel_graph(nome_cidade, div){//, lista_cidades){
 	console.log(cidade);
-	svg = d3.select(div).append("svg:svg")
+	var container = d3.select(div);
+	container.select("#plotSimilares").remove();
+	svg = container.append("svg:svg")
     .attr("width", w + m[1] + m[3])
     .attr("height", h + m[0] + m[2])
-	.append("svg:g")
+    .attr("id","plotSimilares")
+    .append("svg:g")	
     .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
 	d3.csv("data/numero.matriculas_IFDM_e_receita_agregados.csv", function(cidades) {

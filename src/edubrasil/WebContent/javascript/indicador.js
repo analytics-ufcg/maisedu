@@ -248,7 +248,7 @@ function plotIndicadores(indicador) {
 		
 		if (svg[0][0] == null){
 			
-			svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", h);			
+			svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", 300);			
 			
 			//eixo das barras
 			plot_ranges(svg, line_estado, h1);
@@ -306,7 +306,7 @@ function plotIndicadores(indicador) {
 			.text("Similares");
 			
 			svg.append("a")
-			.attr("href","#")
+			.attr("xlink:href","#")
 			.attr("class","big-link")
 			.attr("data-reveal-id","container3")
 			.attr("data-animation","fade")
@@ -394,7 +394,7 @@ function plotIndicadores(indicador) {
 			.attr("class","big-link") //ADPTAR PARA CHAMAR SIMILARES
 			.attr("data-reveal-id","container3")
 			.attr("data-animation","fade")
-			.attr("href","#")
+			.attr("xlink:href","#")
 			.append("text")
 			.attr("y", h4 + 16)
 			.attr("x", 20)
