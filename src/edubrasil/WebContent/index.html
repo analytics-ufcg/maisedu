@@ -62,73 +62,47 @@
 		<div id="main_content2" style="text-align: left;">
 
 			<strong>Quais os objetivos do projeto MAIS?</strong>
-			<p>O MAIS educação veio para facilitar e agilizar o trabalho dos
-				auditores fiscais do TCE-PB. Ele é uma ferramenta de análise
-				estatística que visa pôr em destaque os indicadores relacionados a
-				educação de cidades que estão abaixo do padrão, isto é, abaixo dos
-				valores do mesmo indicador que estão sendo vistos nas outras cidades
-				do estado. A ferramenta também ilustra como esses indicadores vem se
-				comportando ao longo do tempo.</p>
+			<p>O MAIS educação veio para facilitar e agilizar o trabalho dos auditores 
+			de contas do TCE-PB. Ele é uma ferramenta de análise estatística que visa pôr 
+			em destaque os indicadores relacionados à educação de cidades que estão muito diferentes 
+			do padrão, isto é, muito abaixo ou muito acima dos valores do mesmo indicador que estão sendo vistos 
+			nas outras cidades do estado. A ferramenta também ilustra como esses indicadores 
+			vêm se comportando ao longo do tempo.</p>
 
 			<strong>Como é feita a análise estatística dos indicadores?</strong>
-			<p>Após uma análise dos dados, encontrou-se um comportamento
-				semelhante ao de uma Distribuição Normal, a partir daí podemos
-				inferir algumas propriedades, como a avaliação dos dados de acordo
-				com a sua distância para a média dos dados (ц). De forma
-				simplificada, podemos dizer que eles são classificados quanto à dua
-				distância até a média em níveis que variam de -3 a 3. Quanto mais
-				longe da média, isto é, mais distante de 0 (zero), pior pode ser sua
-				avaliação se comparada às demais cidades do estado. As cores usadas
-				no sistema indicam essa avaliação: verde, que indica ótimos valores
-				para o indicador; cinza, para valores que não merecem atenção no
-				momento; amarelo para alertar sobre valores que já merecem atenção
-				por serem ruins comparados ao estado; laranja para destacar valores
-				ainda mais críticos que os amarelos e vermelho para os valores
-				piores mais extremos.</p>
-
+			<p>Baseado nos dados do estado da Paraíba, foi realizada uma análise
+			estatística para identificar suas propriedades. A partir daí apareceram características
+			que permitiram a definição de comportamentos para esses dados, e assim foram criados grupos
+			para alocar as cidades do estado, podemos defini-los por: cidades que apresentam dados considerados normais, 
+			cidades que apresentam dados muito bons, cidades que apresentam dados ruins, cidades que apresentam dados muito ruins 
+			e por último as cidades que apresentam dados péssimos comparados aos municípios do estado.</p>
+			  
 			<strong>Como analisar os indicadores?</strong>
-			<p>Os dados que estiverem nos intervalos de -1 a -2 ou 1 a 2
-				(dependendo do indicador), são considerados valores ruins comparados
-				ao estado e por isso recebem uma cor amarela para seus botões, e
-				ficam no intervalo amarelo da barra dos indicadores. Como exemplo
-				temos a cidade Água Branca e o indicador Taxa aprovação total -
-				fundamental(%) - 2011, com o valor de 65.8%, fazendo-o assim ficar
-				de fora do nível [-1,1] (em geral, 68,4% dos dados), e dentro do
-				nível ]-2,-1[ ou ]1,2[ que abrange 13,6% que compõem o grupo e que
-				já merecem uma atenção do auditor. O ano do indicador mostrado na
-				barra é referente (sempre) aos dados mais recentes coletados.</p>
+			<p>Os dados que estiverem no grupo de cidades que apresentam dados ruins, 
+			são considerados valores atípicos comparados aos dados do estado e por isso recebem uma cor amarela 
+			para seus botões, e ficam no intervalo amarelo da barra dos indicadores. Pode-se exemplificar essa situação 
+			com a cidade de Água Branca e o indicador Taxa aprovação total - fundamental(%) - 2011, que apresenta um valor 
+			ruim (valor de 65.8%), e assim é encaixada no grupo amarelo. O ano do indicador mostrado na barra é referente  
+			aos dados mais recentes coletados.</p>
+			
+			<p>As cidades que estiverem no grupo laranja, já estão muito longe 
+			dos valores típicos de tendência central do estado. Eles recebem uma coloração de maior destaque 
+			por isso. Como exemplo temos a cidade de Manaíra, com o indicador Indice precariedade 
+			infraestrutura(%) - 2011 (com o valor de 46,76%), colocando-a no grupo que compõem o indicador 
+			laranja, ou seja, possui dados muito ruins e estão muito proximas dos piores dados do 
+			estado (maximo para o estado referente a esse indicador é 49%).</p>
 
-			<p>Os dados no intervalo de -2 a -3 ou 2 a 3 (dependendo do
-				indicador), já estão muito longe dos valores típicos de tendência
-				central do estado. Eles recebem uma coloração de maior destaque por
-				isso, a cor laranja. Como exemplo temos a cidade de Manaíra, com o
-				indicador Indice precariedade infraestrutura(%) - 2011, com o valor
-				de 46,76%, colocando-a no grupo que compõem o indicador laranja, ou
-				seja, possui dados muito ruins e estão muito proximas dos piores
-				dados do estado (maximo para o estado referente a esse indicador é
-				49%).</p>
-
-			<p>Os piores valores do estado estão após o intervalo -3 ou 3
-				(dependendo do indicador), esse grupo dispõe dos piores valores e
-				são sempre os que merecem maior atenção por contar com dados muito
-				ruins comparados aos outros municipios do estado. Como exemplo temos
-				São Domingos e o indicador Taxa abandono total - fundamental(%) -
-				2008, com o valor 40.9% que é considerado um valor muito ruim
-				comparado ao restante do estado e assim ele recebe a cor vermelha de
-				indicador, fazendo-o merecer a maior prioridade de atenção. As
-				figuras a seguir ilustram essa classificação com cores usada no
-				sistema.</p>
+			<p>As piores cidades do estado estão no grupo vermelho, 
+			esse grupo dispõe dos piores valores e são sempre os que merecem maior atenção por contar 
+			com dados muito ruins comparados aos outros municipios do estado. Como exemplo temos São Domingos 
+			e o indicador Taxa abandono total - fundamental(%) - 2008 (com o valor 40.9%), 
+			fazendo-o merecer a maior prioridade de atenção.</p>
 
 
 
 		</div>
 
-		<div id="plot_imagens2">
-			<embed src="data\imagens\normal_melhor.svg" type="image/svg+xml">
-			<p>Figura 1. Quanto maior o valor do indicador melhor.</p>
-			<embed src="data\imagens\normal_pior.svg" type="image/svg+xml">
-			<p>Figura 2. Quanto menor o valor do indicador melhor.</p>
-		</div>
+
 
 		<div id="footer2" style="background-color: black; color: #FFFFFF;">
 			Maquina de Análise de Indicadores Sociais <br>Analytics UFCG
