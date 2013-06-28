@@ -17,8 +17,19 @@
 <script type="text/javascript" src="javascript/jquery.reveal.js"></script>
 <link rel="stylesheet" href="css/reveal.css">
 
+<script>
+			function Video(state) {
+				
+				var div = document.getElementById("idVideo");
+				var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
+				div.style.display = state == 'hide' ? 'none' : '';
+				func = state == 'hide' ? 'pauseVideo' : 'playVideo';
+				iframe.postMessage('{"event":"command","func":"' + func + '","args":""}', '*');
+			}
+</script>
+
 </head>
-<body onload="loadData()">
+<body onload="loadData();document.getElementById('botao').click();">
 	<div id="container">
 
 		<div id="title_header">MAIS.edu</div>
@@ -112,6 +123,17 @@
 
 	<div id="container3" style="color: #000000;" class="reveal-modal">
 	<a class="close-reveal-modal">&#215;</a>
+	</div>
+	
+	<a href="#" id="botao" style="display:none" class="big-link" onClick= "Video();"  data-reveal-id="idVideo" data-animation="fade" data-closeonbackgroundclick="false" >
+	</a>
+	
+	<div id="idVideo" class="reveal-modal" style="color:black;"  style="height:auto;display:none" >
+			<h1 >MAIS.edu</h1>
+	
+			<iframe width="800" height="600" src="http://www.youtube.com/embed/NRAu7M152UM?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+
+		   <a class="close-reveal-modal" onClick="Video('hide');"  >&#215;</a>
 	</div>
 	
 </body>
