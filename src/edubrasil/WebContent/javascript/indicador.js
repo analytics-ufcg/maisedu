@@ -8,6 +8,7 @@ var w = 800;
 var h = 350;
 var mensagemBotaoCinza = "Dados Indisponíveis";
 
+
 //Recebe uma cidade e pinta os botoes
 function getMenuOption(selection) {
 	//limpa containers
@@ -245,6 +246,7 @@ function plotIndicadores(indicador) {
 		
 		var vizinhos = filtraSimilares(currentYearData.ANO, similares, indicador);
 		
+		var lista_similares = (vizinhos.map(function(d){return (d.NOME_MUNICIPIO);}));
 		
 		if (svg[0][0] == null){
 			
@@ -316,7 +318,7 @@ function plotIndicadores(indicador) {
 			.attr("text-anchor", "right")
 			.attr("font-weight", "bold")
 			.text("(Mais Detalhes)")
-			.on("click", parallel_graph("Campina Grande","#container3"));
+			.on("click", parallel_graph(cidade,indicador,lista_similares,currentYearData.ANO,"#container3"));
 				
 	
 		}else{
@@ -401,7 +403,7 @@ function plotIndicadores(indicador) {
 			.attr("text-anchor", "right")
 			.attr("font-weight", "bold")
 			.text("(Mais Detalhes)")
-			.on("click", parallel_graph("Campina Grande","#container3"));
+			.on("click", parallel_graph(cidade,indicador,lista_similares,currentYearData.ANO,"#container3"));
 		}
 		
 	}else{

@@ -1,13 +1,11 @@
 ﻿
 var svg;
-var indicadores_selecionados = ["numero.matriculas", "IFDM", "receita", "INDICADOR_7"];
-var lista_cidades = ["Alagoa Grande","Alagoa Nova","Alagoinha","Arara","Areia","Bananeiras","Campina Grande","Itabaiana","Mulungu","Patos"];
-var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A","#FFFF99","#FFED6F"];
-var legenda = ["Indicador","Número Matrículas","IFDM","Receita"];
-var cidade = "";
+var indicadores_selecionados = ["numero.matriculas", "IFDM", "receita"];
+var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FFFF99","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A"];
+var legenda = ["Indicador","Receita","Número Matrículas","IFDM"];
 	
 var m = [30, 10, 10, 10],
-    w = 860 - m[1] - m[3],
+    w = 960 - m[1] - m[3],
     h = 500 - m[0] - m[2];
 
 var x = d3.scale.ordinal().rangePoints([0, 770], 1),
@@ -29,8 +27,18 @@ function path(d) {
   return line(dimensions.map(function(p) { return [position(p), y[p](d[p])]; }));
 }
 
-function parallel_graph(nome_cidade, div){//, lista_cidades){
-	console.log(cidade);
+function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
+	lista_cidades.push(nome_cidade);
+	if(indicadores_selecionados.length == 3 && (ano == "2011")){
+		indicadores_selecionados.push(indicador);
+	}else{
+		indicadores_selecionados = indicadores_selecionados.slice(0,3);
+		if((ano == "2011")){
+			indicadores_selecionados.push(indicador);
+		}else{
+			legenda = legenda.slice(1,4);
+		}
+	}
 	var container = d3.select(div);
 	container.select("#plotSimilares").remove();
 	svg = container.append("svg:svg")
@@ -42,15 +50,25 @@ function parallel_graph(nome_cidade, div){//, lista_cidades){
 
 	d3.csv("data/numero.matriculas_IFDM_e_receita_agregados.csv", function(cidades) {
 	
+		cidades = cidades.filter(function(d){ return ((lista_cidades.indexOf(d.NOME_MUNICIPIO) > -1) && 
+														d[indicadores_selecionados[0]] != "NA" && 
+														d[indicadores_selecionados[1]] != "NA" &&
+														d[indicadores_selecionados[2]] != "NA" &&
+														d[indicadores_selecionados[3]] != "NA")});
+		
+
 		// Extract the list of dimensions and create a scale for each.
 		  x.domain(dimensions = d3.keys(cidades[0]).filter(function(d) {
 			return (indicadores_selecionados.indexOf(d) > -1) && (y[d] = d3.scale.linear()
-				.domain([0,Math.round(d3.max(cidades, function(p) {return +p[d]; }))])
+				.domain([0,((d3.max(cidades, function(p) {return (+p[d]); }))) + 0.1*((d3.max(cidades, function(p) {return (+p[d]); })))])
 				.range([h, 0]));
 				
 		  }));
-  
-		cidades = cidades.filter(function(d){ return ((lista_cidades.indexOf(d.NOME_MUNICIPIO) > -1) && d[indicadores_selecionados[1]] != "NA" && d[indicadores_selecionados[0]] != "NA")});
+
+		
+		
+		console.log(cidades);
+		
 		foreground = svg.append("svg:g")
 			.attr("class", "foreground")
 			.selectAll("path")
@@ -68,9 +86,9 @@ function parallel_graph(nome_cidade, div){//, lista_cidades){
 			 
 			 svg.append("rect")
 			.attr("class","rect")
-			.attr("x", 730)
+			.attr("x", 690)
 			.attr("y", i*20)
-			.attr("width", 20)
+			.attr("width", 15)
 			.attr("height", 3)
 			.style("fill", cores[i]);
 		}
@@ -80,7 +98,7 @@ function parallel_graph(nome_cidade, div){//, lista_cidades){
 					.data(lista_cidades)
 					.enter().append("svg:g")
 					.attr("class", "legend")
-					.attr("transform", function(d, i) { return "translate("+ 750 +"," + (i * 20) + ")"; });
+					.attr("transform", function(d, i) { return "translate("+ 700 +"," + (i * 20) + ")"; });
 					
 		legend.append("svg:text")
 			.attr("x", 12)
@@ -103,6 +121,7 @@ function parallel_graph(nome_cidade, div){//, lista_cidades){
 			.attr("text-anchor", "middle")
 			.attr("y", -9)
 			.text(String);
+		
 
 });
 }
