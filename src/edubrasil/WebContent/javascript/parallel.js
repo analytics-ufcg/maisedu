@@ -42,7 +42,7 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 		}
 	}
 	
-	console.log(legenda);
+	
 	
 	var container = d3.select(div);
 	container.select("#plotSimilares").remove();
@@ -70,7 +70,8 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 				
 		  }));
 
-
+		lista_cidades = (cidades.map(function(d){return (d.NOME_MUNICIPIO);}));
+		
 		foreground = svg.append("svg:g")
 			.attr("class", "foreground")
 			.selectAll("path")
