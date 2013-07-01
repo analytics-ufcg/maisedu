@@ -77,7 +77,8 @@ function loadData() {
 		
 		myList.selectAll("option").data(cities).enter().append("option")
 		.attr("value",function(d){return d;})
-		.attr("label",function(d){return d;});
+		.attr("label",function(d){return d;})
+		.text(function(d){return d;});
 	
 	});
 	
