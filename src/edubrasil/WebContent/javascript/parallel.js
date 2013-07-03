@@ -1,8 +1,10 @@
 ﻿
 var svg;
 var indicadores_selecionados = ["numero.matriculas", "IFDM", "receita"];
-var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FFFF99","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A"];
-var legenda = ["Indicador","Receita","Número Matrículas","IFDM"];
+//var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FFFF99","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A"];
+var cores = ["black","#C9C1FF","#A79BFF","#8A79FF","#6F5AFF","#5339FF","#3517FF","#2A0FDB","#301CB9","#3A29AA","#4638A7","#C9C1FF"];
+
+var legenda = ["Indicador","Receita","Número Matrículas","IFDM*"];
 	
 var m = [30, 10, 10, 10],
     w = 960 - m[1] - m[3],
@@ -31,14 +33,14 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 	lista_cidades.push(nome_cidade);
 	if(indicadores_selecionados.length == 3 && (ano == "2011")){
 		indicadores_selecionados.push(indicador);
-		if(legenda.length == 3)legenda = ["Indicador","Receita","Número Matrículas","IFDM"];
+		if(legenda.length == 3)legenda = ["Indicador","Receita","Número Matrículas","IFDM*"];
 	}else{
 		indicadores_selecionados = indicadores_selecionados.slice(0,3);
 		if((ano == "2011")){
 			indicadores_selecionados.push(indicador);
-			if(legenda.length == 3)legenda = ["Indicador","Receita","Número Matrículas","IFDM"];
+			if(legenda.length == 3)legenda = ["Indicador","Receita","Número Matrículas","IFDM*"];
 		}else{
-			legenda = ["Receita","Número Matrículas","IFDM"];
+			legenda = ["Receita","Número Matrículas","IFDM*"];
 		}
 	}
 	
@@ -80,20 +82,37 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 			.attr("d", path);
 		
 		for(var i = 0; i < cidades.length; i++){
-			svg.append("path")
-			 .attr("class", "foreground")
-			 .attr("d", path(cidades[i]))
-			 .attr("fill","none")
-			 .attr("stroke-width",3)
-			 .attr("stroke", cores[i]);
-			 
-			 svg.append("rect")
-			.attr("class","rect")
-			.attr("x", 690)
-			.attr("y", i*20)
-			.attr("width", 15)
-			.attr("height", 3)
-			.style("fill", cores[i]);
+			if(cidades[i].NOME_MUNICIPIO != nome_cidade){
+				svg.append("path")
+				 .attr("class", "foreground")
+				 .attr("d", path(cidades[i]))
+				 .attr("fill","none")
+				 .attr("stroke-width",3)
+				 .attr("stroke", cores[i]);
+				 
+				 svg.append("rect")
+				.attr("class","rect")
+				.attr("x", 690)
+				.attr("y", i*20)
+				.attr("width", 15)
+				.attr("height", 3)
+				.style("fill", cores[i]);
+			}else{
+				svg.append("path")
+					 .attr("class", "foreground")
+					 .attr("d", path(cidades[i]))
+					 .attr("fill","none")
+					 .attr("stroke-width",3)
+					 .attr("stroke", "black");
+					 
+					 svg.append("rect")
+					.attr("class","rect")
+					.attr("x", 690)
+					.attr("y", i*20)
+					.attr("width", 15)
+					.attr("height", 3)
+					.style("fill", "black");
+			}			
 		}
 		
 		
@@ -125,6 +144,11 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 			.attr("y", -9)
 			.text(String);
 		
-
+		svg.append("svg:text")
+			.attr("x",670)
+			.attr("y", 465)
+			.style("font-size","10px")
+			.text("*Índice FIRJAN de Desenvolvimento Municipal")
+		
 });
 }
