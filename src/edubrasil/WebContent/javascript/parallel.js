@@ -2,7 +2,8 @@
 var svg;
 var indicadores_selecionados = ["numero.matriculas", "IFDM", "receita"];
 //var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FFFF99","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A"];
-var cores = ["black","#C9C1FF","#A79BFF","#8A79FF","#6F5AFF","#5339FF","#3517FF","#2A0FDB","#301CB9","#3A29AA","#4638A7","#C9C1FF"];
+//var cores = ["black","#C9C1FF","#A79BFF","#8A79FF","#6F5AFF","#5339FF","#3517FF","#2A0FDB","#301CB9","#3A29AA","#4638A7","#C9C1FF"];
+var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FF7F00","#CAB2D6","#6A3D9A","#D539D8"];
 
 var legenda = ["Indicador","Receita","Número Matrículas","IFDM*"];
 	
@@ -88,6 +89,7 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 				 .attr("d", path(cidades[i]))
 				 .attr("fill","none")
 				 .attr("stroke-width",3)
+				 .attr("opacity", .7)
 				 .attr("stroke", cores[i]);
 				 
 				 svg.append("rect")
@@ -103,6 +105,7 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 					 .attr("d", path(cidades[i]))
 					 .attr("fill","none")
 					 .attr("stroke-width",3)
+					 .attr("opacity", .7)
 					 .attr("stroke", "black");
 					 
 					 svg.append("rect")
@@ -145,8 +148,8 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 			.text(String);
 		
 		svg.append("svg:text")
-			.attr("x",670)
-			.attr("y", 465)
+			.attr("x",685)
+			.attr("y", 460)
 			.style("font-size","10px")
 			.text("*Índice FIRJAN de Desenvolvimento Municipal")
 		
