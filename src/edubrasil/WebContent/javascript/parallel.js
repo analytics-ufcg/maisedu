@@ -3,7 +3,7 @@ var svg;
 var indicadores_selecionados = ["numero.matriculas", "IFDM", "receita"];
 //var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FFFF99","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A"];
 //var cores = ["black","#C9C1FF","#A79BFF","#8A79FF","#6F5AFF","#5339FF","#3517FF","#2A0FDB","#301CB9","#3A29AA","#4638A7","#C9C1FF"];
-var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FF7F00","#CAB2D6","#6A3D9A","#D539D8"];
+var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FF7F00","#CAB2D6","#6A3D9A","#D539D8","#C67C20"];
 
 var legenda = ["Indicador","Receita","Número Matrículas","IFDM*"];
 	
@@ -83,14 +83,14 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 			.attr("d", path);
 		
 		for(var i = 0; i < cidades.length; i++){
-			if(cidades[i].NOME_MUNICIPIO != nome_cidade){
+			if(cidades[i].NOME_MUNICIPIO == nome_cidade){
 				svg.append("path")
 				 .attr("class", "foreground")
 				 .attr("d", path(cidades[i]))
 				 .attr("fill","none")
 				 .attr("stroke-width",3)
 				 .attr("opacity", .7)
-				 .attr("stroke", cores[i]);
+				 .attr("stroke", "black");
 				 
 				 svg.append("rect")
 				.attr("class","rect")
@@ -98,7 +98,7 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 				.attr("y", i*20)
 				.attr("width", 15)
 				.attr("height", 3)
-				.style("fill", cores[i]);
+				.style("fill", "black");
 			}else{
 				svg.append("path")
 					 .attr("class", "foreground")
@@ -106,7 +106,7 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 					 .attr("fill","none")
 					 .attr("stroke-width",3)
 					 .attr("opacity", .7)
-					 .attr("stroke", "black");
+					 .attr("stroke", cores[i]);
 					 
 					 svg.append("rect")
 					.attr("class","rect")
@@ -114,7 +114,7 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 					.attr("y", i*20)
 					.attr("width", 15)
 					.attr("height", 3)
-					.style("fill", "black");
+					.style("fill", cores[i]);
 			}			
 		}
 		
