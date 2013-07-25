@@ -31,7 +31,24 @@ function getMenuOption(selection) {
           return "indicador " + getButtonColor(d.desvio);
     })
 	.attr("value", function (d){return d.name;})
-	.attr("id", function (d, i){return d.id;});	  
+	.attr("id", function (d, i){return d.id;});
+	
+	// D3 code modification made ​​by Nailson ( add tooltip with jquery and the tooltipster's plugin)
+	$('.tooltips').tooltipster('destroy');	
+	
+	d3.selectAll(".tooltips")
+	.data(dicionario)
+	.attr("title", function (d){return d.big_description+".<a href='dicionario de dados.html?"+d.number+"' target='_blank'><img src='images/plus.png' onmouseover='this.src=&#39;images/plus2.png&#39;' onmouseout='this.src=&#39;images/plus.png&#39;' width='16' height='16'></a>";})
+	
+	$('.tooltips').tooltipster({ 
+			interactive: true,
+			maxWidth: 300,
+			offsetY: 2,
+			position: 'right',
+			theme: '.tooltipster-shadow'
+			
+		});
+	
 };
 
 function cleanContainers(){
@@ -100,6 +117,10 @@ function loadUpButtons() {
 		div_buttons.selectAll("input")
 		.data(data)
 		.enter()
+		.insert("span")
+		.attr("class", "tooltips")
+		.attr("title", function (d){return d.big_description+".<a href='dicionario de dados.html?"+d.number+"' target='_blank'><img src='images/plus.png' onmouseover='this.src=&#39;images/plus2.png&#39;' onmouseout='this.src=&#39;images/plus.png&#39;' width='16' height='16'></a>";})
+		.attr("id", function (d, i){return "span"+d.id;})
 		.append("input")
 		.attr("type","button")
 		.attr("value", function (d){return d.name;})
@@ -130,6 +151,17 @@ function loadUpButtons() {
 				.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});*/
 			}
 		});
+		
+		// D3 code modification made ​​by Nailson ( add tooltip with jquery and the tooltipster's plugin)
+		$('.tooltips').tooltipster({ 
+			interactive: true,
+			maxWidth: 300,
+			offsetY: 2,
+			position: 'right',
+			theme: '.tooltipster-shadow'
+			
+		});
+		
 		
 	});
 }
@@ -751,5 +783,7 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 	.attr("font-weight", "bold")
 	.text("Cidades similares")
 	.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});*/
+	
+	
 }
 

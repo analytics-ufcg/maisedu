@@ -1,0 +1,229 @@
+<!doctype html>
+ 
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<title>Dicionário de Dados</title>
+
+
+<script type="text/javascript" src="javascript/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="javascript/jquery-ui.js"></script>
+<link href="css/jquery-ui-1.9.2.custom.css" rel="stylesheet" type="text/css" />
+<link href="css/dicionario.css" rel="stylesheet" type="text/css" />
+
+<script>
+	$(function() {
+		$( "#accordion" ).accordion({
+		  heightStyle: "content"
+		});
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		var num = window.location.href.split("?")[1];
+		$( '#accordion' ).accordion( "option", "active", parseInt(num));
+		$('html, body').animate({
+			scrollTop: $("#ui-accordion-accordion-header-"+num).offset().top
+		}, 1500);
+		
+	});
+</script>
+</head>
+<body >
+	<div class="jumbotron masthead">
+		<h1>Mais.Edu</h1>
+		<p>Dicionário de indicadores do sistema Mais.Edu</p>
+	
+	</div>
+	
+	<div id="accordion" class="accordion" style="">
+	  <h3><b>Participação da despesa com pessoal e encargos sociais na função educação</b></h3>
+	  <div>
+		<p>
+			Refere-se à taxa de participação da despesa corrente com pessoal e encargos sociais 
+			(natureza da função educação) do município/microrregião/mesorregião i no gasto total 
+			da mesma região na função educação no ano t. Os valores consideram apenas a rede 
+			municipal de ensino. 
+			<br/><br/>
+			<i>Fonte: Tribunal de Contas do Estado da Paraíba.</i>
+		</p>
+	  </div>
+	  <h3><b>Índice de Desenvolvimento da Educação Básica (IDEB)</b></h3>
+	  <div>
+		<p>
+			Refere-se ao produto da média de proficiência em Língua Portuguesa e Matemática 
+			(padronizada entre zero e dez) para alunos concluintes das fases finais do ensino fundamental (5º ano e 9º ano) pelas as taxas de aprovações 
+			escolares em cada fase no município i no ano t. Para microrregiões e mesorregiões, 
+			esse indicador corresponde à média obtida pelos municípios correspondentes e com IDEB 
+			disponível. As notas de proficiência dos municípios consideram apenas as escolas 16 que 
+			participaram da Prova Brasil. O IDEB está disponível para as seguintes fases de ensino: ensino fundamental I (5º ano) e ensino fundamental II (9º ano).
+			<br/><br/>
+			<i>Fonte: Prova Brasil – Instituto Nacional de Pesquisas Educacionais Anísio Teixeira 
+			(INEP) e Censo Escolar – Instituto Nacional de Pesquisas Educacionais Anísio 
+			Teixeira (INEP).</i>
+		</p>
+	  </div>
+	  <h3><b>Taxa de analfabetismo(%)</b></h3>
+	  <div>
+		<p>
+			Refere-se ao percentual de pessoas analfabetas que residem na localidade i com 18 
+			anos de idade ou mais em relação ao total da população residente nessa mesma 
+			região. Essa faixa etária considerou, portanto, os indivíduos fora da faixa de idade 
+			escolar obrigatória (entre 4 e 17 anos de idade).
+			<br/><br/>
+			<i>Fonte: Censo Demográfico – Instituto Brasileiro de Geografia e Estatística (IBGE).</i>
+		</p>
+	  </div>
+	  <h3><b>Taxa de atendimento escolar(%)</b></h3>
+	  <div>
+		<p>
+			Trata-se do percentual da população em idade escolar que frequenta a escola, 
+			independente da série, da modalidade (regular ou especial) e da rede de ensino
+			(privada ou pública). Este indicador foi calculado para anos de 2000 e 2010, 
+			considerando as seguintes faixas de idade: entre 4 e 5 anos de idade; entre 6 e 10 
+			anos de idade; entre 11 e 14 anos de idade; entre 15 e 17 anos de idade; e entre 4 e 
+			17 anos de idade. Tais faixas de idade são consistentes com o Art. 208. da
+			Constituição Federal de 1988 e sua nova redação estabelecida pela emenda 
+			constitucional nº 59 de 2009, que estabelece educação básica obrigatória e gratuita 
+			dos 4 (quatro) aos 17 (dezessete) anos de idade.
+			<br/><br/>
+			<i>Fonte: Censo Demográfico – Instituto Brasileiro de Geografia e Estatística (IBGE).</i>
+		</p>
+	  </div>
+	  
+	  <h3><b>Taxa abandono(%)</b></h3>
+	  <div>
+		<p>
+			Refere-se à taxa de participação dos alunos matriculados em determinada fase de 
+			ensino do município/microrregião/mesorregião i com registro de abandono dos 
+			estudos pelo total de alunos matriculados nessa mesma fase e região no ano t. Esse 
+			indicador está disponível para as seguintes fases de ensino: ensino fundamental I (1º 
+			ao 5º ano), ensino fundamental II (6º ao 9º ano), ensino fundamental (1º ao 9º ano) e 
+			ensino médio.
+			<br/><br/>
+			<i>Fonte: Censo Escolar – Instituto Nacional de Pesquisas Educacionais Anísio Teixeira(INEP).</i>
+		</p>
+	  </div>
+	 
+	  <h3><b>Taxa aprovação total(%)</b></h3>
+	  <div>
+		<p>
+			Refere-se ao total de docentes da rede j da localidade i que possuem formação 
+			de nível superior pelo total de docentes da rede j da localidade i no período t.
+			<br/><br/>
+			<i>Fonte: Censo Escolar – Instituto Nacional de Pesquisas Educacionais Anísio Teixeira(INEP).</i>
+		</p>
+	  </div>
+	  
+	  <h3><b>Percentual docentes formação superior(%)</b></h3>
+	  <div>
+		<p>
+			Refere-se ao total de docentes da rede j da localidade i que possuem formação 
+			de nível superior pelo total de docentes da rede j da localidade i no período t.
+			<br/><br/>
+			<i>Fonte: Censo Escolar – Instituto Nacional de Pesquisas Educacionais Anísio Teixeira (INEP).</i>
+		</p>
+	  </div>
+	  
+	  <h3><b>Percentual de docentes temporários(%)</b></h3>
+	  <div>
+		<p>
+			Refere-se ao total de docentes da rede j da localidade i em regime de 
+			contratação por contrato temporário/terceirizado ou que não informou o tipo de 
+			vínculo de trabalho em relação ao total de docentes da rede j da localidade i no 
+			período t.
+			<br/><br/>
+			<i>Fonte: Censo Escolar – Instituto Nacional de Pesquisas Educacionais Anísio 
+			Teixeira (INEP).</i>
+		</p>
+	  </div>
+	  
+	  <h3><b>Índice precariedade infraestrutura(%)</b></h3>
+	  <div>
+		<p>
+			Refere-se à taxa média das variáveis que sinalizam a existência de problemas de infraestrutura das escolas no município/microrregião/mesorregião i da rede de ensino j no ano t. As variáveis consideradas foram: se a escola funciona em prédio compartilhado, se tem localização precária (galpão etc), se não tem água filtrada, se não tem abastecimento d'água, se não possui esgoto, se não 
+			tem energia, se não tem coleta de lixo, se não existe sala para diretor, se não existe sala para professores, se não existe laboratório de informática, se não existe laboratório de ciências, se não existe biblioteca, se não existe cozinha, se não possui internet, se não oferece merenda e se não existe sanitário dentro das instalações. Caso o indicador seja igual a 100% na rede j do município i, então 
+			todas as escolas da rede j desse município têm todos os problemas de infraestrutura acima listados. Caso o indicador seja igual a 0% na rede j do município i, então todas as escolas da rede j desse município não sofrem dos 
+			problemas de infraestrutura considerados. Portanto, quanto mais próximo de 100%, pior é a situação da infraestrutura das escolas no município.
+			<br/><br/>
+			<i>Fonte: Censo Escolar – Instituto Nacional de Pesquisas Educacionais Anísio Teixeira (INEP).</i>
+
+		</p>
+	  </div>
+	  
+	  <h3><b>Razão aluno por docente</b></h3>
+	  <div>
+		<p>
+			Refere-se ao total de alunos da rede j da localidade i dividido pelo total de 
+			docentes da rede j da localidade i no ano t. Destaca-se que neste indicador não 
+			se considerou matrículas repetidas para um mesmo aluno, nem a repetição de 
+			um mesmo docente em diferentes turmas e escolas da mesma rede j.
+			<br/><br/>
+			<i>Fonte: Censo Escolar – Instituto Nacional de Pesquisas Educacionais Anísio Teixeira (INEP).</i>
+
+		</p>
+	  </div>
+	  
+	  <h3><b>Despesa educação por aluno</b></h3>
+	  <div>
+		<p>
+			Refere-se ao produto da média de proficiência em Língua Portuguesa e Matemática (padronizada entre zero e dez) 
+			para alunos concluintes das fases finais do ensino fundamental (5º ano e 9º ano) pelas as taxas de aprovações 
+			escolares em cada fase no município i no ano t. Para microrregiões e mesorregiões, esse indicador corresponde à 
+			média obtida pelos municípios correspondentes e com IDEB disponível. As notas de proficiência dos municípios consideram 
+			apenas as escolas 16 que participaram da Prova Brasil. O IDEB está disponível para as seguintes fases de ensino: ensino 
+			fundamental I (5º ano) e ensino fundamental II (9º ano).
+			<br/><br/>
+			<i>Fonte: Censo Escolar – Instituto Nacional de Pesquisas Educacionais Anísio Teixeira (INEP) e Tribunal de Contas do Estado da Paraíba.</i>
+		</p>
+	  </div>
+	  
+	  <h3><b>Índice eficiência educação básica(%)</b></h3>
+	  <div>
+		<p>
+			Trata-se de um índice de desempenho do gasto público em educação básica 
+			que varia de 0% e 100%. Esse indicador foi produzido a partir do método de 
+			programação matemática conhecido como Análise Envoltória de Dados (DEA). 
+			Nessa análise foram consideradas como variáveis de resultado (outcomes) as 
+			notas médias de proficiência em Língua Portuguesa e em Matemática e o 
+			inverso da taxa de distorção idade-série de cada município paraibano que 
+			participou das Provas Brasil de 2009 e de 2011. A média de gasto corrente por 
+			aluno nos últimos três anos, a partir de cada data de referência já citada, foi 
+			usada como insumo (input). Logo, essa análise estimou um índice que mensura 
+			o quanto cada unidade monetária gasta em educação retorna à sociedade em 
+			termos de qualidade da educação. Quanto maior esse indicador, mais eficiente
+			é o município no uso dos recursos destinados à educação básica.
+
+			A metodologia DEA Sequencial (DEA-S) foi a abordagem empregada no cálculo 
+			do presente índice. A DEA-S é utilizada para calcular os escores de eficiência 
+			quando existem informações por município e por ano (dados em painel) e reflete, 
+			pois, a evolução da eficiência de um dado município ao longo do tempo. Nessa 
+			abordagem, o município é avaliado (i) em relação a todos os demais no ano 
+			corrente (eficiência contemporânea) e (ii) em todos os anos precedentes 
+			(eficiência histórica). Nessa abordagem, compara-se um dado município não 
+			somente com as demais unidades no período atual, mas também com ele 
+			mesmo nos anos precedentes. Essa dependência temporal dos escores de 
+			eficiência baseia-se na suposição de que os municípios podem sempre repetir 
+			desempenhos obtidos nos anos anteriores, excluindo, pois a possibilidade de 45
+			“retrocesso técnico” na educação. Reduções de eficiência são, nessa 
+			metodologia, atribuídos ao gerenciamento da educação e/ou à fatores exógenos 
+			(não controláveis pela municipalidade), e não a pioras da tecnologia 
+			educacional. Uma vantagem adicional da metodologia DEA-S é o fato de que a 
+			incorporação de informações passadas torna os escores de eficiência menos 
+			sensíveis à presença de outliers do que os índices de eficiência contemporânea.
+
+			Destaca-se que o índice de eficiência para as microrregiões e as mesorregiões
+			foram calculados a partir da média dos indicadores municipais de cada uma das 
+			unidades municipais pertencentes a essas regiões.
+			<br/><br/>
+			<i>Fonte: Censo Escolar e Prova Brasil – Instituto Nacional de Pesquisas 
+			Educacionais Anísio Teixeira (INEP) e Tribunal de Contas do Estado da Paraíba.</i>
+		</p>
+	  </div>
+	  
+	</div>
+
+ 
+</body>
+</html>

@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <title>MAIS.edu</title>
 
+<script type="text/javascript" src="javascript/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="javascript/jquery.reveal.js"></script>
+
 <script type="text/javascript" src="javascript/d3.v3.js"></script>
 <script type="text/javascript" src="javascript/indicador.js"></script>
 <script type="text/javascript" src="javascript/series.js"></script>
@@ -13,23 +16,29 @@
 <link href="css/cidades_parecidas.css" rel="stylesheet" type="text/css" />
 <link href="css/indicadores_buttons.css" rel="stylesheet" type="text/css" />
 
-<script type="text/javascript" src="javascript/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="javascript/jquery.reveal.js"></script>
+<script type="text/javascript" src="javascript/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="javascript/jquery.tooltipster.js"></script>
+<link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
+
 <link rel="stylesheet" href="css/reveal.css">
 
+
 <script>
-			function Video(state) {
-				
-				var div = document.getElementById("idVideo");
-				var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
-				div.style.display = state == 'hide' ? 'none' : '';
-				func = state == 'hide' ? 'pauseVideo' : 'playVideo';
-				iframe.postMessage('{"event":"command","func":"' + func + '","args":""}', '*');
-			}
+	function Video(state) {
+		
+		var div = document.getElementById("idVideo");
+		var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
+		div.style.display = state == 'hide' ? 'none' : '';
+		func = state == 'hide' ? 'pauseVideo' : 'playVideo';
+		iframe.postMessage('{"event":"command","func":"' + func + '","args":""}', '*');
+	}
 </script>
 
+
+  
 </head>
 <body onload="loadData();document.getElementById('botao').click();">
+
 	<div id="container">
 
 		<div id="title_header">MAIS.edu</div>
@@ -48,9 +57,7 @@
 				<div id="div_series_titulo" class="single_plot"></div>
 				<div id="div_series" class="single_plot"></div>
 			</div>
-			<div id="div_indicador_options">
-				<input type="button" value="Sobre os Indicadores" onClick=window.open('https://docs.google.com/document/d/1h2n5AEc7bS1BC5OjmAbPiTukNaT39QlNu1YXvSQVJeM/edit?usp=sharing','_blank')>
-			</div>
+			<div id="div_indicador_options"></div>
 		</div>
 
 		<div id="footer">
@@ -111,11 +118,7 @@
 			e o indicador Taxa abandono total - fundamental(%) - 2008 (com o valor 40.9%), 
 			fazendo-o merecer a maior prioridade de atenção.</p>
 
-
-
 		</div>
-
-
 
 		<div id="footer2" style="background-color: black; color: #FFFFFF;">
 			Maquina de Análise de Indicadores Sociais <br>Analytics UFCG
@@ -141,5 +144,6 @@
 	</div>
 	
 </body>
+
 </html>
 
