@@ -72,16 +72,16 @@ p {
 
 }
 ul {
-	list-style-type:circle;
+	list-style-type:none;
 	 
 }
 ol {
-	list-style-type:upper-roman;
+	list-style-type:none;
 }
 ol .ol-2{
-	list-style-type:lower-roman;
+	list-style-type:upper-roman;
 }
 
 ol .ol-3{
-	list-style-type:circle;
+	list-style-type:lower-roman;
 }
