@@ -71,6 +71,18 @@ p {
 	text-align:left; 
 
 }
+
+.fonte{
+	margin:0 auto;
+	line-height:30px;
+}
+.formula {
+
+	text-align: right;
+	padding: 10px 60px;
+	margin:0 auto;
+
+}
 ul {
 	list-style-type:none;
 	 
