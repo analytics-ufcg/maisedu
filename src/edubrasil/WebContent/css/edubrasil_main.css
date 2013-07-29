@@ -11,6 +11,7 @@ html,body {
     background-color: black;
 }
 
+
 #container {
 	width: 100%;
     min-height:100%;
@@ -63,6 +64,10 @@ html,body {
     position:absolute;
 	text-align:left;
 }
+
+
+
+
 a:link {text-decoration:none;color:#FFFFFF;} 
 a:visited {text-decoration:none;color:#FFFFFF;} 
 a:active {text-decoration:none;color:#FFFFFF;} 
@@ -73,13 +78,7 @@ footer a{
   color:#CCCCCC;
   text-decoration:none;
 }
-}
 
-#plot_area {
-    float: left;
-    width: 75%;
-	background-color: white;
-}
 
 /*colocar no meio*/
 .titulo_grafico {
@@ -138,4 +137,10 @@ rect:hover {
   fill: none;
   stroke: url(#temperature-gradient);
   stroke-width: 1.5px;
+}
+#plot_area {
+    float: left;
+    width: 75%;
+	background-color: white;
+	color: #000000;
 }
