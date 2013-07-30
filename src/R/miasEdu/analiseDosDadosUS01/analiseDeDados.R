@@ -70,7 +70,7 @@ central.values(ano.2011, 0.05)
 
 #Calcula o valor da correlacao entre todos os indicadores do data.frame ========================================
 #baseando-se no metodo passado como argumento. spearman ou kendall =============================================
-cor.values = function(df, metodo) {
+cor.values = function(df, metodo, cor.min) {
   cor = c()
   indicadores = c()
   for(i in 2:(ncol(df) - 1)) {
@@ -80,7 +80,7 @@ cor.values = function(df, metodo) {
       cor.value = round(cor.test(df[lines, i],
                                               df[lines, j],
                                               method=metodo)$estimate, 6)
-      if(cor.value <= -0.5 || cor.value >= 0.5) {
+      if(cor.value <= -cor.min || cor.value >= cor.min) {
         cor = c(cor, cor.value)
         indicadores = c(indicadores, paste(names(df)[i], 
                                            names(df)[j], sep=" & "))  
@@ -90,25 +90,32 @@ cor.values = function(df, metodo) {
   return(as.data.frame(cbind(indicadores, cor)))
 }
 
-sperman.2000 = cor.values(ano.2000, "spearman")
-sperman.2007 = cor.values(ano.2007, "spearman")
-sperman.2008 = cor.values(ano.2008, "spearman")
-sperman.2009 = cor.values(ano.2009, "spearman")
-sperman.2010 = cor.values(ano.2010, "spearman")
-sperman.2011 = cor.values(ano.2011, "spearman")
+sperman.2000 = cor.values(ano.2000, "spearman", 0.3)
+sperman.2007 = cor.values(ano.2007, "spearman", 0.3)
+sperman.2008 = cor.values(ano.2008, "spearman", 0.3)
+sperman.2009 = cor.values(ano.2009, "spearman", 0.3)
+sperman.2010 = cor.values(ano.2010, "spearman", 0.3)
+sperman.2011 = cor.values(ano.2011, "spearman", 0.3)
 
-kendall.2000 = cor.values(ano.2000, "kendall")
-kendall.2007 = cor.values(ano.2007, "kendall")
-kendall.2008 = cor.values(ano.2008, "kendall")
-kendall.2009 = cor.values(ano.2009, "kendall")
-kendall.2010 = cor.values(ano.2010, "kendall")
-kendall.2011 = cor.values(ano.2011, "kendall")
+kendall.2000 = cor.values(ano.2000, "kendall", 0.3)
+kendall.2007 = cor.values(ano.2007, "kendall", 0.3)
+kendall.2008 = cor.values(ano.2008, "kendall", 0.3)
+kendall.2009 = cor.values(ano.2009, "kendall", 0.3)
+kendall.2010 = cor.values(ano.2010, "kendall", 0.3)
+kendall.2011 = cor.values(ano.2011, "kendall", 0.3)
 
 #Cria imagnes .png com os plots dos indicadores do ano passado como argumento ==================================
 plot.histograms = function(df, ano) {
   for(i in 2:ncol(df)) {
-    png(paste(names(df)[i], ano, ".png"))
-    hist(df[, i], main=paste(names(df)[i], ano, ""), las=1)
+    png(paste(names(df)[i], ano, ".png"), width = 1200, height = 640)
+    par(mfrow=c(1, 2))
+    hist(df[, i], main=paste(names(df)[i], ano, ""), las=1, xlab="valores")
+    abline(v=mean(df[, i], na.rm=T), col="red", lty=2)
+    abline(v=median(df[, i], na.rm=T), col="blue", lty=2)
+    legend("topright", inset=.04,
+           c("media","mediana"), fill=c("red", "blue"), horiz=F)
+    qqnorm(df[, i], las=1)
+    qqline(df[, i])
     dev.off()
   }  
 }
