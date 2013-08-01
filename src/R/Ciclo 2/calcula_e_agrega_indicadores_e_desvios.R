@@ -50,7 +50,7 @@ generateOutlierColumn <- function(data.df, referencial.outlier){
     class = -1 * class
   }
   data.df = cbind(data.df, class)
-  colnames(data.df)[11] = paste("DESVIOS_", "_", colnames(data.df)[10], sep="")
+  colnames(data.df)[11] = paste("DESVIOS_", referencial.outlier, "_", colnames(data.df)[10], sep="")
   return(data.df)
 }
 
