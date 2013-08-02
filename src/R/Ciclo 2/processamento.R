@@ -1,9 +1,9 @@
 ###############
 # bibliotecas #
 ###############
-library(gdata)
-library(plyr)
-library(Hmisc)
+require(gdata)
+require(plyr)
+require(Hmisc)
 
 #---------------------------------------------------------------------------------------------------------------------------------#
 #-----------------------------------------------------------FUNCOES---------------------------------------------------------------#
@@ -11,32 +11,44 @@ library(Hmisc)
 
 
 #Calcula a mediana para as regi√µes agrupados pelos anos recebendo como entrada a regiao que vai ser calculada(micro, meso e estado)
+adjustIndictorData <- function(df){
+  df$COD_UF = 25
+  df$NOME_UF =  "ParaÌba"
+  return(df)
+}
+
 calcMedian = function(data, nome.regiao) {
   nome.coluna = colnames(data)[ncol(data)]
   #altera o nome da coluna para o ddply
   colnames(data)[ncol(data)] = "INDICADOR"
-  tabela = ddply(data, c(nome.regiao,"ANO"), summarize, INDICADOR = median(INDICADOR,na.rm=T))
+  print("calculando mediana")
+  print(nome.regiao)
+  print(colnames(data))
+  tabela = with(data,aggregate(INDICADOR, list(data[,nome.regiao],data$ANO), FUN= median, na.rm=T))
+  print("tabela calculada")
   colnames(tabela) = c("REGIAO", "ANO", nome.coluna)
   return(tabela)
 }
 
 
 #Calcula a mediana para a micro a meso e a paraiba e retorna em um data.frame agrupadas por ano
-agregaMedianas = function(data) {
-  tabela = rbind(calcMedian(data,"NOME_MICRO"), calcMedian(data,"NOME_MESO"), calcMedian(data,"NOME_UF"))
-  return(tabela)
+agregaMedianas = function(data2) {
+  print("entrou em agrega medianas")
+  tabela2 = rbind(calcMedian(data2,"NOME_MICRO"), calcMedian(data2,"NOME_MESO"), calcMedian(data2,"NOME_UF"))
+  return(tabela2)
 }
 
 
 #processa cada indicador com as funcoes anteriores e agrega todos em um unico data frame
-processaIndicadorNovoAno <- function(nome.indicador, arquivo.principal, perl){
-  anos_existentes = unique(arquivo.principal$ANO) #2000 
-  data = read.xls(xls=nome.indicador,perl=perl) #arquivo de indicador #2000 2001 2013
-  data <- subset(data, data$ANO %nin% anos_existentes)
-  print(unique(data$ANO))
-  data = agregaMedianas(data)
-  data.principal = merge(arquivo.principal,data,all.x=T)
-  return(data)
+processaIndicadorNovoAno <- function(df.indicador, arquivo.principal, perl){
+  anos_existentes = unique(arquivo.principal$ANO) 
+  data.nova <- subset(df.indicador, df.indicador$ANO %nin% anos_existentes)
+  print(unique(data.nova$ANO))
+  datadf = agregaMedianas(data.nova)
+  df2 = arquivo.principal[0,]
+  df2[]
+  #data.principal = merge(arquivo.principal,data,all.x=T)
+  return(datadf)
 }
 
 ########################################################################################################################################################################
@@ -50,8 +62,11 @@ mediana_default <- read.csv("medianas_para_todos_os_indicadores_agrupados_por_an
 perl.path = "C:/strawberry/perl/bin/perl"
 #lista de arquivos com os indicadores
 indicador = "INDICADOR_329 - Teste  -Taxa de analfabetismo.xls" #-- mudar apenas o arquivo
-#data.frame com todos os valores de indicadores e desvios(outliers)
-dffinal <- processaIndicadorNovoAno(indicador,mediana_default,perl.path)
+data.nova = read.xls(xls=indicador,perl=perl.path) 
+d = adjustIndictorData(data.nova)
+#p <- subset(d, d$ANO == 2018)
+dffinal <- processaIndicadorNovoAno(d,mediana_default,perl.path)
+
 #salva data frame
 con<-file("medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao22.csv",encoding="utf8")
 write.csv(dffinal, con, row.names=F)
