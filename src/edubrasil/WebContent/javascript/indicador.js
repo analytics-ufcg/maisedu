@@ -340,18 +340,21 @@ function plotIndicadores(indicador) {
 			.attr("text-anchor", "right")
 			.text("Similares");
 			
-			svg.append("a")
-			.attr("xlink:href","#")
-			.attr("class","big-link")
-			.attr("data-reveal-id","container3")
-			.attr("data-animation","fade")
-			.append("text")
-			.attr("y", h4 + 16)
-			.attr("x", 20)
-			.attr("text-anchor", "right")
-			.attr("font-weight", "bold")
-			.text("(Mais Detalhes)")
-			.on("click", parallel_graph(cidade,indicador,lista_similares,currentYearData.ANO,"#container3"));
+			if(currentYearData.ANO == 2011) {
+				svg.append("a")
+				.attr("xlink:href","#")
+				.attr("class","big-link")
+				.attr("data-reveal-id","container3")
+				.attr("data-animation","fade")
+				.append("text")
+				.attr("y", h4 + 16)
+				.attr("x", 20)
+				.attr("text-anchor", "right")
+				.attr("font-weight", "bold")
+				.text("(Mais Detalhes)")
+				.on("click", parallel_graph(cidade,indicador,lista_similares,currentYearData.ANO,"#container3", nomeIndicador(indicador)));
+			}
+			
 				
 	
 		}else{
@@ -425,18 +428,20 @@ function plotIndicadores(indicador) {
 			
 			
 			
-			svg.append("a")
-			.attr("class","big-link") //ADPTAR PARA CHAMAR SIMILARES
-			.attr("data-reveal-id","container3")
-			.attr("data-animation","fade")
-			.attr("xlink:href","#")
-			.append("text")
-			.attr("y", h4 + 16)
-			.attr("x", 20)
-			.attr("text-anchor", "right")
-			.attr("font-weight", "bold")
-			.text("(Mais Detalhes)")
-			.on("click", parallel_graph(cidade,indicador,lista_similares,currentYearData.ANO,"#container3"));
+			if(currentYearData.ANO == 2011) {
+				svg.append("a")
+				.attr("xlink:href","#")
+				.attr("class","big-link")
+				.attr("data-reveal-id","container3")
+				.attr("data-animation","fade")
+				.append("text")
+				.attr("y", h4 + 16)
+				.attr("x", 20)
+				.attr("text-anchor", "right")
+				.attr("font-weight", "bold")
+				.text("(Mais Detalhes)")
+				.on("click", parallel_graph(cidade,indicador,lista_similares,currentYearData.ANO,"#container3", nomeIndicador(indicador)));
+			}
 		}
 		
 	}else{

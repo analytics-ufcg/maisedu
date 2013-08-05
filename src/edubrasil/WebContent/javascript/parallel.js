@@ -3,7 +3,8 @@ var svg;
 var indicadores_selecionados = ["numero.matriculas", "IFDM", "receita"];
 //var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FFFF99","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A"];
 //var cores = ["black","#C9C1FF","#A79BFF","#8A79FF","#6F5AFF","#5339FF","#3517FF","#2A0FDB","#301CB9","#3A29AA","#4638A7","#C9C1FF"];
-var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FF7F00","#CAB2D6","#6A3D9A","#D539D8","#C67C20"];
+//var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FF7F00","#CAB2D6","#6A3D9A","#D539D8","#C67C20"];
+var cores = ["#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD"]
 
 var legenda = ["Indicador","Receita","Número Matrículas","IFDM*"];
 	
@@ -30,22 +31,37 @@ function path(d) {
   return line(dimensions.map(function(p) { return [position(p), y[p](d[p])]; }));
 }
 
-function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
+function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indicador){
+	
+	
+	// if(indicadores_selecionados.length == 3 && (ano == "2011")){
+		// indicadores_selecionados = indicadores_selecionados.slice(0,3);
+		// if((ano == "2011")){
+			// indicadores_selecionados.push(indicador);
+			// if(legenda.length >= 3)legenda = [nome_indicador,"Receita","Número Matrículas","IFDM*"];
+		// }else{
+			// legenda = ["Receita","Número Matrículas","IFDM*"];
+		// }
+	// }else{
+		// indicadores_selecionados = indicadores_selecionados.slice(0,3);
+		// if((ano == "2011")){
+			// indicadores_selecionados.push(indicador);
+			// if(legenda.length >= 3)legenda = [nome_indicador,"Receita","Número Matrículas","IFDM*"];
+		// }else{
+			// legenda = ["Receita","Número Matrículas","IFDM*"];
+		// }
+	// }
 	lista_cidades.push(nome_cidade);
-	if(indicadores_selecionados.length == 3 && (ano == "2011")){
-		indicadores_selecionados.push(indicador);
-		if(legenda.length == 3)legenda = ["Indicador","Receita","Número Matrículas","IFDM*"];
-	}else{
+	indicadores_selecionados = indicadores_selecionados.slice(0,3);
+	console.log(indicadores_selecionados);
+	console.log(indicadores_selecionados);
+	
+	if(indicadores_selecionados.length >= 3) {
 		indicadores_selecionados = indicadores_selecionados.slice(0,3);
-		if((ano == "2011")){
-			indicadores_selecionados.push(indicador);
-			if(legenda.length == 3)legenda = ["Indicador","Receita","Número Matrículas","IFDM*"];
-		}else{
-			legenda = ["Receita","Número Matrículas","IFDM*"];
-		}
+		console.log(indicadores_selecionados);
 	}
 	
-	
+	indicadores_selecionados.push(indicador);
 	
 	var container = d3.select(div);
 	container.select("#plotSimilares").remove();
@@ -63,6 +79,9 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div){
 														d[indicadores_selecionados[1]] != "NA" &&
 														d[indicadores_selecionados[2]] != "NA" &&
 														d[indicadores_selecionados[3]] != "NA")});
+														
+		
+		legenda = [nome_indicador,"Receita","Número Matrículas","IFDM*"];
 		
 
 		// Extract the list of dimensions and create a scale for each.
