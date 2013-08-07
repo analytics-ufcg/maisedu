@@ -645,6 +645,8 @@ function plot_ranges(svg, dados, y0){
 			.attr("y", (y0 + 44))
 			.text("Max");	
 	}
+
+
 	
 	addLine(svg,x1(dados[0].x),x1(dados[1].x),y0,y0,"#F0F0F0",25);
 	
@@ -678,6 +680,9 @@ function addLine(svg,x1,x2,y1,y2,cor){
 			  .attr("x2", x2)
 			  .attr("y1",y1)
 			  .attr("y2",y2)
+			  //Inicio - Henrique - 07/08/2013
+			  .attr("id","barra_indicador_altura_" + y1)
+			  //fim - Henrique - 07/08/2013
 			  .transition().duration(duration)
 			  .style("stroke",cor)
 			  //.attr("opacity",0.2)
@@ -688,6 +693,9 @@ function addLine(svg,x1,x2,y1,y2,cor){
 			  .attr("x2", x2)
 			  .attr("y1",y1)
 			  .attr("y2",y2)
+			  //Inicio - Henrique - 07/08/2013
+			  .attr("id","barra_indicador_altura_" + y1)
+			  //Fim - Henrique - 07/08/2013
 			  .transition().duration(duration)
 			  .style("stroke",cor)
 			  .attr("opacity",0.6)
@@ -739,56 +747,87 @@ function plot_cidades(svg, dados, indicador,cor, min, max, y0){
 					});
 }
 
-function plot_similares(svg, similares, indicador, min, max, y0, ano){	
+function plot_similares(svg, similares, indicador, min, max, y0, ano){
+	//Inicio - Henrique - 07/08/2013
+	if(ano == 2011) {
+	//Fim - Henrique - 07/08/2013
+		var x1 = d3.scale.linear()
+		.domain([min,max])
+		.range([120, 750]);
 
-	var x1 = d3.scale.linear()
-	.domain([min,max])
-	.range([120, 750]);
+		var g = svg.append("g"); 
 
-	var g = svg.append("g"); 
+		g.selectAll("line").data(similares)
+		.enter()
+		.append("line")
+		.attr("x1", function(d){return x1(d[indicador]);})
+		.attr("x2", function(d){return x1(d[indicador]) + 2;})
+		.attr("y1",y0)
+		.attr("y2",y0)
+		.attr("class","linha_cidade")
+		.attr("text",function(d){return d.NOME_MUNICIPIO;})
+		.transition().duration(duration)
+		.style("stroke","#C0C0C0")
+		.attr("stroke-width",24);
 
-	g.selectAll("line").data(similares)
-	.enter()
-	.append("line")
-	.attr("x1", function(d){return x1(d[indicador]);})
-	.attr("x2", function(d){return x1(d[indicador]) + 2;})
-	.attr("y1",y0)
-	.attr("y2",y0)
-	.attr("class","linha_cidade")
-	.attr("text",function(d){return d.NOME_MUNICIPIO;})
-	.transition().duration(duration)
-	.style("stroke","#C0C0C0")
-	.attr("stroke-width",24);
+		g.selectAll("line").on("mouseover", function(d) {
 
-	g.selectAll("line").on("mouseover", function(d) {
+			//Get indicator value and tranform to float
+			var valorIndicador = d.NOME_MUNICIPIO + ": " + d3.format(".2f")(d[indicador]);
 
-		//Get indicator value and tranform to float
-		var valorIndicador = d.NOME_MUNICIPIO + ": " + d3.format(".2f")(d[indicador]);
+			//Get the values for tooltip position
+			var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
+			var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
 
-		//Get the values for tooltip position
-		var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
-		var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
+			//Update the tooltip position and value
+			d3.select("#tooltip").style("left", xPosition + "px")
+			.style("top", yPosition + "px")
+			.select("#value").text(valorIndicador);//cidade + " : " +valorIndicador.toFixed(2));
 
-		//Update the tooltip position and value
-		d3.select("#tooltip").style("left", xPosition + "px")
-		.style("top", yPosition + "px")
-		.select("#value").text(valorIndicador);//cidade + " : " +valorIndicador.toFixed(2));
+			//Show the tooltip
+			d3.select("#tooltip").classed("hidden", false);
+		})
+		.on("mouseout", function() {//Hide the tooltip
+			d3.select("#tooltip").classed("hidden", true);
+		});
 
-		//Show the tooltip
-		d3.select("#tooltip").classed("hidden", false);
-	})
-	.on("mouseout", function() {//Hide the tooltip
-		d3.select("#tooltip").classed("hidden", true);
-	});
-
+		
+		/*svg.append("text")
+		.attr("y", h1 + 10)
+		.attr("x", 60 + 50)
+		.attr("font-weight", "bold")
+		.text("Cidades similares")
+		.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});*/
+		
+	}
+	//Inicio - Henrique - 07/08/2013
 	
-	/*svg.append("text")
-	.attr("y", h1 + 10)
-	.attr("x", 60 + 50)
-	.attr("font-weight", "bold")
-	.text("Cidades similares")
-	.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});*/
+	else {
+		svg.selectAll("#barra_indicador_altura_240").on("mouseover", function(d) {
+
+			//Get the values for tooltip position
+			//var xPosition = parseFloat(d3.select(this).attr("x1")) + 450;
+			//var yPosition = parseFloat(d3.select(this).attr("y1")) + 150;
+
+			var xPosition = window.event.clientX
+			var yPosition = window.event.clientY
+
+
+			//Update the tooltip position and value
+			d3.select("#tooltip").style("left", xPosition + "px")
+			.style("top", yPosition + "px")
+			.select("#value").text("Não existem cidades similares para esse ano.");
+
+			//Show the tooltip
+			d3.select("#tooltip").classed("hidden", false);
+		})
+		.on("mouseout", function() {//Hide the tooltip
+			d3.select("#tooltip").classed("hidden", true);
+		});
+	}
+	//Fim - Henrique - 07/08/2013
 	
+
 	
 }
 
