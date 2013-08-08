@@ -73,7 +73,7 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
     .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
 	d3.csv("data/numero.matriculas_IFDM_e_receita_agregados.csv", function(cidades) {
-	
+		
 		cidades = cidades.filter(function(d){ return ((lista_cidades.indexOf(d.NOME_MUNICIPIO) > -1) && 
 														d[indicadores_selecionados[0]] != "NA" && 
 														d[indicadores_selecionados[1]] != "NA" &&
@@ -83,14 +83,17 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 		
 		legenda = [nome_indicador,"Receita","Número Matrículas","IFDM*"];
 		
-
+		
+		//Inicio - giovanibarbosa@gmail.com 08/08/2013
 		// Extract the list of dimensions and create a scale for each.
-		  x.domain(dimensions = d3.keys(cidades[0]).filter(function(d) {
+		x.domain(dimensions = d3.keys(cidades[0]).filter(function(d) {
 			return (indicadores_selecionados.indexOf(d) > -1) && (y[d] = d3.scale.linear()
-				.domain([0,((d3.max(cidades, function(p) {return (+p[d]); }))) + 0.1*((d3.max(cidades, function(p) {return (+p[d]); })))])
+				.domain([(d3.min(cidades, function(p) {return (+p[d]); })),((d3.max(cidades, function(p) {return (+p[d]); })))])
 				.range([h, 0]));
 				
 		  }));
+		//Fim - giovanibarbosa@gmail.com 08/08/2013
+
 
 		lista_cidades = (cidades.map(function(d){return (d.NOME_MUNICIPIO);}));
 		
