@@ -79,9 +79,15 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 														d[indicadores_selecionados[1]] != "NA" &&
 														d[indicadores_selecionados[2]] != "NA" &&
 														d[indicadores_selecionados[3]] != "NA")});
-														
 		
-		legenda = [nome_indicador,"Receita","Número Matrículas","IFDM*"];
+		/*Inicio - Tamanho maximo do nome do indicador- iurygregory@gmail.com 08/08/2013 - */
+		var MAX_LENGTH_INDICADOR = 30;
+		if(nome_indicador.length > MAX_LENGTH_INDICADOR) {
+			legenda = [nome_indicador.substring(0, MAX_LENGTH_INDICADOR) + " ...","Receita","Número Matrículas","IFDM*"];
+		} else {
+			legenda = [nome_indicador,"Receita","Número Matrículas","IFDM*"];
+		}
+		/*Fim - Tamanho maximo do nome do indicador- iurygregory@gmail.com 08/08/2013 - */
 		
 		
 		//Inicio - giovanibarbosa@gmail.com 08/08/2013
@@ -151,6 +157,16 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 			.attr("x", 12)
 			.attr("dy", ".31em")
 			.text(function(d) { return d; });
+			
+		var tooltip = d3.select("body")
+		  .append("div")
+		  .style("position", "absolute")
+		  .style("height", "60px")
+		  .style("width", "140px")
+		  .style("background-color", "white")
+		  .style("z-index", "100")
+		  .style("visibility", "hidden")
+		  .text("iury");
 
 		  // Add a group element for each dimension.
 		var g = svg.selectAll(".dimension")
@@ -167,7 +183,38 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 			.data(legenda)
 			.attr("text-anchor", "middle")
 			.attr("y", -9)
-			.text(String);
+			.text(String)
+			.on("mousemove", function(){
+             var m = d3.mouse(root.node());
+             scr.x = window.scrollX;
+             scr.y = window.scrollY;
+             m[0] += svgpos.x;
+             m[1] += svgpos.y;
+                 tooltip.style("right", "");
+                 tooltip.style("left", "");
+                 tooltip.style("bottom", "");
+                 tooltip.style("top", "");
+             console.log('coordinates: doc/body/scr/svgpos/mouse: ', doc, body, scr, svgpos, m);
+             if (m[0] > scr.x + scr.w / 2) {
+                 tooltip.style("right", (body.w - m[0] + dist.x) + "px");
+             }
+             else {
+                 tooltip.style("left", (m[0] + dist.x) + "px");
+             }
+ 
+             if (m[1] > scr.y + scr.h / 2) {
+                 tooltip.style("bottom", (body.h - m[1] + dist.y) + "px");
+             }
+             else {
+                 tooltip.style("top", (m[1] + dist.y) + "px");
+             }
+             tooltip.style("visibility", "visible");
+         })
+   .on("mouseout", function(){
+             tooltip.style("visibility", "hidden");
+         });
+			
+	
 		
 		svg.append("svg:text")
 			.attr("x",685)
