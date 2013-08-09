@@ -129,35 +129,43 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 				.style("fill", "black");
 			}else{
 				svg.append("path")
-					 .attr("class", "foreground")
+					 .attr("class", "path_cidade")
 					 .attr("d", path(cidades[i]))
-					 .attr("id", i)
+					 .attr("id", "path-"+i)
 					 .attr("fill","none")
 					 .attr("stroke-width",3)
 					 .attr("opacity", .7)
 					 .attr("stroke", cores[i])
-					 // Nailson's Modification
-					 .on("mouseover", function() { d3.select(this).style("stroke", cores2[this.id] ); d3.select(this).style("stroke-width", 5 ); d3.select(this).style("opacity", .5 ) })     
-					 .on("mouseout",  function() { d3.select(this).style("stroke", cores[this.id] ); d3.select(this).style("stroke-width", 3 ); d3.select(this).style("opacity", .7 ) })
+					 // Nailson's Modification alert("\"#"+this.id+"\"")
+					 .on("mouseover", function() { d3.select(this).style("stroke", "red" ); d3.select(this).style("stroke-width", 5 ); d3.select(this).style("opacity", .5 ) })     
+					 .on("mouseout",  function() { d3.select(this).style("stroke", "#BDBDBD" ); d3.select(this).style("stroke-width", 3 ); d3.select(this).style("opacity", .7 ) })
 					 //END
 					 ;
 					 
-					 svg.append("rect")
+					svg.append("rect")
 					.attr("class","rect")
-					.attr("id", i)
+					.attr("id", "rect-"+i)
 					.attr("x", 690)
 					.attr("y", i*20)
 					.attr("width", 15)
 					.attr("height", 3)
 					.style("fill", cores[i])
 					// Nailson's Modification
-					.on("mouseover", function() { d3.select(this).style("fill", cores2[this.id]); d3.select(this).style("fill-opacity", .5); d3.select(this).style("height", 8)  })    
-					.on("mouseout",  function() { d3.select(this).style("fill", cores[this.id]); d3.select(this).style("fill-opacity", .7) })
+					.on("mouseover", function() { d3.select(this).style("fill",  "red" ); d3.select(this).style("fill-opacity", .5); d3.select(this).style("height", 8)  })    
+					.on("mouseout",  function() { d3.select(this).style("fill","#BDBDBD"); d3.select(this).style("fill-opacity", .7) })
 					//END
 					;
+					
+					
+					
+		
+				//svg.select("g").selectAll("path").selectAll("path_cidade").on("mouseover", function(d) {d.style("stroke", "red").style("stroke-width", 5 ).style("opacity", .5 );});
+					
+					
+				 $('.path_cidade').mouseover(function () { var x = $(this).attr("id").split("-")[1]; $( "#rect-"+x ).css("fill","blue");  $(this).css("stroke","blue"); });
 			}			
 		}
-		
+		//
 		
 		var legend = svg.selectAll("g.legend")
 					.data(lista_cidades)
