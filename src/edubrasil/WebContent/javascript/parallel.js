@@ -3,7 +3,7 @@ var svg;
 var indicadores_selecionados = ["numero.matriculas", "IFDM", "receita"];
 //var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FFFF99","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A"];
 //var cores = ["black","#C9C1FF","#A79BFF","#8A79FF","#6F5AFF","#5339FF","#3517FF","#2A0FDB","#301CB9","#3A29AA","#4638A7","#C9C1FF"];
-//var cores = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FF7F00","#CAB2D6","#6A3D9A","#D539D8","#C67C20"];
+var cores2 = ["#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#905c18","#CAB2D6","#6A3D9A","#D539D8","#C67C20"];
 var cores = ["#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD"]
 
 var legenda = ["Indicador","Receita","Número Matrículas","IFDM*"];
@@ -136,8 +136,8 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 					 .attr("opacity", .7)
 					 .attr("stroke", cores[i])
 					 // Nailson's Modification
-					 .on("mouseover", function() { d3.select(this).style("stroke", "red" ); d3.select(this).style("stroke-width", 5 ); d3.select(this).style("opacity", .5 ) })     
-					 .on("mouseout",  function() { d3.select(this).style("stroke", "#BDBDBD" ); d3.select(this).style("stroke-width", 3 ); d3.select(this).style("opacity", .7 ) })
+					 .on("mouseover", function() { d3.select(this).style("stroke", cores2[this.id] ); d3.select(this).style("stroke-width", 5 ); d3.select(this).style("opacity", .5 ) })     
+					 .on("mouseout",  function() { d3.select(this).style("stroke", cores[this.id] ); d3.select(this).style("stroke-width", 3 ); d3.select(this).style("opacity", .7 ) })
 					 //END
 					 ;
 					 
@@ -149,8 +149,8 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 					.attr("height", 3)
 					.style("fill", cores[i])
 					// Nailson's Modification
-					.on("mouseover", function() { d3.select(this).style("fill", "red"); d3.select(this).style("fill-opacity", .5); d3.select(this).style("height", 8)  })    
-					.on("mouseout",  function() { d3.select(this).style("fill", "#BDBDBD"); d3.select(this).style("fill-opacity", .7) })
+					.on("mouseover", function() { d3.select(this).style("fill", cores2[this.id]); d3.select(this).style("fill-opacity", .5); d3.select(this).style("height", 8)  })    
+					.on("mouseout",  function() { d3.select(this).style("fill", cores[this.id]); d3.select(this).style("fill-opacity", .7) })
 					//END
 					;
 			}			
