@@ -131,6 +131,7 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 				svg.append("path")
 					 .attr("class", "foreground")
 					 .attr("d", path(cidades[i]))
+					 .attr("id", i)
 					 .attr("fill","none")
 					 .attr("stroke-width",3)
 					 .attr("opacity", .7)
@@ -143,6 +144,7 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 					 
 					 svg.append("rect")
 					.attr("class","rect")
+					.attr("id", i)
 					.attr("x", 690)
 					.attr("y", i*20)
 					.attr("width", 15)
