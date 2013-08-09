@@ -1,12 +1,12 @@
 #script que adiciona novos dados ao sistema, a partir de uma tabela com o indicador a ser atualizado o script atualiza a tabela dos indicadores e dos desvios
 # e a tabela das medianas. O script recebe como entrada da linha de comando 6 argumentos:
 
-#1: endereÃ§o da nova tabela a ser adicionadac("INDICADOR_EXEMPLO - tabela com indicador_62 com anos 2012 e 2013.csv")
-#2: endereÃ§o da tabela default do sistema com os valores dos indicadores e dos desvios("tabela_com_todos_os_indicadores_selecionados_e_desvios.csv")
-#3: endereÃ§o da tabela default com os valores das medianas("medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv")
-#4: endereÃ§o com o nome da nova tabela com os novos dados dos indicadores
-#5: endereÃ§o com o nome da nova tabela com as medianas
-#6: endereÃ§o do  bin do perl ("C:/strawberry/perl/bin/perl.exe") 
+#1: endereço da nova tabela a ser adicionadac("INDICADOR_EXEMPLO - tabela com indicador_62 com anos 2012 e 2013.csv")
+#2: endereço da tabela default do sistema com os valores dos indicadores e dos desvios("tabela_com_todos_os_indicadores_selecionados_e_desvios.csv")
+#3: endereço da tabela default com os valores das medianas("medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv")
+#4: endereço com o nome da nova tabela com os novos dados dos indicadores
+#5: endereço com o nome da nova tabela com as medianas
+#6: endereço do  bin do perl ("C:/strawberry/perl/bin/perl.exe") 
 
 #Rscript agrega_novos_dados_nas_tabelas_de_indicadores_e_medianas.R 1.xls saida/1.csv saida/2.csv saida2/1.csv saida2/2.csv C:/strawberry/perl/bin/perl.exe
 
@@ -25,7 +25,7 @@ require(Hmisc)
 
 ####Funcoes para mediana da Paraiba e das meso e micro regioes
 
-#Caclula a mediana com base nos dados e no nome da regi�o desejada
+#Caclula a mediana com base nos dados e no nome da regiÃ£o desejada
 calcMedian = function(data, nome.regiao) {
   nome.coluna = colnames(data)[ncol(data)]
   colnames(data)[ncol(data)] = "INDICADOR"
@@ -82,7 +82,7 @@ processaIndicador <- function(df.indicador, arquivo.principal){
 ########################################################################################################################################################################
 
 
-############Funcoes para os indicadores e os desvios dos indicadores e agregaÃ§Ã£o
+############Funcoes para os indicadores e os desvios dos indicadores e agregação
 
 #Ordena um dataframe pelo nome do municipio depois pelo ano
 ordenaDataFrame = function(data) {
@@ -104,7 +104,7 @@ addTabela = function(tabela.default, tabela.nova) {
 }
 
 
-#Recebe um valor do indicador, as tabelas de media e desvio padrao, e o ano do indicador. Retorna quantos desvios o valor esta da mÃÂ©dia
+#Recebe um valor do indicador, as tabelas de media e desvio padrao, e o ano do indicador. Retorna quantos desvios o valor esta da média
 classifyOutLiers <- function(obValue, tabMean, tabSD, ano){
   if(!is.na(obValue)) {
     if(obValue >= (tabMean[tabMean$Group.1==ano,2] + 3*tabSD[tabSD$Group.1==ano,2])){
@@ -165,10 +165,10 @@ getIndicadorCategoria = function(tabela.nova, tabela.indicador){
 
 ####################################################################################################################
 
-#args <- commandArgs(trailingOnly = TRUE) 
+args <- commandArgs(trailingOnly = TRUE) 
 #indicador (1), tabela de desvios(2), mediana(3), desvios novos(4), mediana nova(5), caminho perl(6)
 
-args = c("INDICADOR_7.xls", "tabela_com_todos_os_indicadores_selecionados_e_desvios.csv", "medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv", "desvio.novo.csv", "mediana.nova.csv","perl")
+#args = c("INDICADOR_EXEMPLO - tabela com indicador_62 com anos 2012 e 2013.csv", "tabela_com_todos_os_indicadores_selecionados_e_desvios.csv", "medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv", "desvio.novo.csv", "mediana.nova.csv","perl")
 
 
 
@@ -184,18 +184,15 @@ tabela.indicador = data.frame(indice = indice.indicador, categoria = indicador.c
 perl.path <- args[6]
 
 #Tabela do indicador novo
-tabela.nova <- read.xls(xls=args[1],perl=args[6],stringsAsFactors=FALSE)
-#tabela.nova <- read.csv(args[1])
+#tabela.nova <- read.xls(xls=args[1],perl=args[6])
+tabela.nova <- read.csv(args[1])
 
 #tabela do indicador antigo
-tabela.default <- read.csv(args[2],stringsAsFactors=FALSE)
+tabela.default <- read.csv(args[2])
 
 #####################################################processamento das medianas
-#completar o df com NOME_UF e COD_UF
-tabela.nova = adjustIndictorData(tabela.nova)
-
 #Tabela default da mediana
-mediana_default <- read.csv(args[3],stringsAsFactors=FALSE)
+mediana_default <- read.csv(args[3])
 
 #realizar processamento da mediana
 dffinal <- processaIndicador(tabela.nova,mediana_default)
