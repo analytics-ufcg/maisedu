@@ -1,14 +1,14 @@
 #script que adiciona novos dados ao sistema, a partir de uma tabela com o indicador a ser atualizado o script atualiza a tabela dos indicadores e dos desvios
 # e a tabela das medianas. O script recebe como entrada da linha de comando 6 argumentos:
 
-#1: endereço da nova tabela a ser adicionadac("INDICADOR_EXEMPLO - tabela com indicador_62 com anos 2012 e 2013.csv")
-#2: endereço da tabela default do sistema com os valores dos indicadores e dos desvios("tabela_com_todos_os_indicadores_selecionados_e_desvios.csv")
-#3: endereço da tabela default com os valores das medianas("medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv")
-#4: endereço com o nome da nova tabela com os novos dados dos indicadores
-#5: endereço com o nome da nova tabela com as medianas
-#6: endereço do  bin do perl ("C:/ProgramFiles/strawberry/perl/bin/perl")
+#1: endereÃ§o da nova tabela a ser adicionadac("INDICADOR_EXEMPLO - tabela com indicador_62 com anos 2012 e 2013.csv")
+#2: endereÃ§o da tabela default do sistema com os valores dos indicadores e dos desvios("tabela_com_todos_os_indicadores_selecionados_e_desvios.csv")
+#3: endereÃ§o da tabela default com os valores das medianas("medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv")
+#4: endereÃ§o com o nome da nova tabela com os novos dados dos indicadores
+#5: endereÃ§o com o nome da nova tabela com as medianas
+#6: endereÃ§o do  bin do perl ("C:/strawberry/perl/bin/perl.exe") 
 
-
+#Rscript agrega_novos_dados_nas_tabelas_de_indicadores_e_medianas.R 1.xls saida/1.csv saida/2.csv saida2/1.csv saida2/2.csv C:/strawberry/perl/bin/perl.exe
 
 ###############
 # bibliotecas #
@@ -28,7 +28,7 @@ require(Hmisc)
 #Calcula a mediana para as regioes agrupados pelos anos recebendo como entrada a regiao que vai ser calculada(micro, meso e estado)
 adjustIndictorData <- function(df){
   df$COD_UF = 25
-  df$NOME_UF =  "Paraíba"
+  df$NOME_UF =  "Paraí­ba"
   return(df)
 }
 
@@ -88,46 +88,29 @@ processaIndicador <- function(df.indicador, arquivo.principal){
 ########################################################################################################################################################################
 
 
-############Funcoes para os indicadores e os desvios dos indicadores e agregação
+############Funcoes para os indicadores e os desvios dos indicadores e agregaÃ§Ã£o
 
 #Ordena um dataframe pelo nome do municipio depois pelo ano
 ordenaDataFrame = function(data) {
+  data$NOME_MUNICIPIO = as.character(data$NOME_MUNICIPIO)
+  data$ANO = as.character(data$ANO)
   data = arrange(data, data$NOME_MUNICIPIO, data$ANO)
   return (data)
 }
 
-
 #junta a tabela nova na tabela default
 addTabela = function(tabela.default, tabela.nova) {
-  #se a tabela original for menor
-  if (length(setdiff(unique(tabela.nova$ANO), unique(tabela.default$ANO)))>0) {
-    tabela.default = merge(tabela.default, tabela.nova, by=colnames(tabela.nova), all=T)
-    return (tabela.default)
-  }
-  else {
-    anoFaltante = setdiff(tabela.default$ANO,tabela.nova$ANO)
-    tabela.complemento = tabela.default[tabela.default$ANO!=c(anoFaltante),]
-    tabela.default = tabela.default[tabela.default$ANO==c(anoFaltante),]
-    
-    
-    
-    tabela.complemento = ordenaDataFrame(tabela.complemento)
-    tabela.nova = ordenaDataFrame(tabela.nova)
-    
-    nome.indicador = colnames(tabela.nova)[10]
-    nome.desvio = colnames(tabela.nova)[11]
-    
-    tabela.complemento[,nome.indicador] = tabela.nova[,nome.indicador]
-    tabela.complemento[,nome.desvio] = tabela.nova[,nome.desvio]
-    
-    tabela.default = rbind(tabela.complemento,tabela.default)
-    
-    return(ordenaDataFrame(tabela.default))
-  }      
+  tabela.default = merge(tabela.default, tabela.nova, by=colnames(tabela.nova), all.y=T)
+  
+  tabela.default$NOME_MUNICIPIO = as.factor(tabela.default$NOME_MUNICIPIO)
+  tabela.default$NOME_UF = as.factor(tabela.default$NOME_UF)
+  tabela.default$NOME_MESO = as.factor(tabela.default$NOME_MESO)
+  tabela.default$NOME_MICRO = as.factor(tabela.default$NOME_MICRO)
+  return (tabela.default)
 }
 
 
-#Recebe um valor do indicador, as tabelas de media e desvio padrao, e o ano do indicador. Retorna quantos desvios o valor esta da mÃ©dia
+#Recebe um valor do indicador, as tabelas de media e desvio padrao, e o ano do indicador. Retorna quantos desvios o valor esta da mÃÂ©dia
 classifyOutLiers <- function(obValue, tabMean, tabSD, ano){
   if(!is.na(obValue)) {
     if(obValue >= (tabMean[tabMean$Group.1==ano,2] + 3*tabSD[tabSD$Group.1==ano,2])){
@@ -191,7 +174,7 @@ getIndicadorCategoria = function(tabela.nova, tabela.indicador){
 args <- commandArgs(trailingOnly = TRUE) 
 #indicador (1), tabela de desvios(2), mediana(3), desvios novos(4), mediana nova(5), caminho perl(6)
 
-#args = c("INDICADOR_EXEMPLO - tabela com indicador_62 com anos 2012 e 2013.csv", "tabela_com_todos_os_indicadores_selecionados_e_desvios.csv", "medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv", "desvio.novo.csv", "mediana.nova.csv","C:/ProgramFiles/strawberry/perl/bin/perl")
+#args = c("INDICADOR_7.xls", "tabela_com_todos_os_indicadores_selecionados_e_desvios.csv", "medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv", "desvio.novo.csv", "mediana.nova.csv","perl")
 
 
 
@@ -207,25 +190,24 @@ tabela.indicador = data.frame(indice = indice.indicador, categoria = indicador.c
 perl.path <- args[6]
 
 #Tabela do indicador novo
-tabela.nova <- read.xls(xls=args[1],perl=perl.path)
+tabela.nova <- read.xls(xls=args[1],perl=args[6],stringsAsFactors=FALSE)
 #tabela.nova <- read.csv(args[1])
 
 #tabela do indicador antigo
-tabela.default <- read.csv(args[2])
+tabela.default <- read.csv(args[2],stringsAsFactors=FALSE)
 
 #####################################################processamento das medianas
 #completar o df com NOME_UF e COD_UF
 tabela.nova = adjustIndictorData(tabela.nova)
 
 #Tabela default da mediana
-mediana_default <- read.csv(args[3])
+mediana_default <- read.csv(args[3],stringsAsFactors=FALSE)
 
 #realizar processamento da mediana
 dffinal <- processaIndicador(tabela.nova,mediana_default)
 
 #salva data frame mediana
-con<-file(args[5],encoding="utf8")
-write.csv(dffinal, con, row.names=F)
+write.csv(dffinal, args[5], row.names=F)
 
 
 ##############################################Processamento dos novos indicadores
@@ -237,5 +219,4 @@ tabela.nova = generateOutlierColumn(tabela.nova, getIndicadorCategoria(tabela.no
 tabela.final = addTabela(tabela.default,tabela.nova)
 
 #salva data frame
-con<-file(args[4],encoding="utf8")
-write.csv(tabela.final, con, row.names=F)
+write.csv(tabela.final, args[4], row.names=F)
