@@ -134,7 +134,12 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 					 .attr("fill","none")
 					 .attr("stroke-width",3)
 					 .attr("opacity", .7)
-					 .attr("stroke", cores[i]);
+					 .attr("stroke", cores[i])
+					 // Nailson's Modification
+					 .on("mouseover", function() { d3.select(this).style("stroke", "red" ); d3.select(this).style("stroke-width", 5 ); d3.select(this).style("opacity", .5 ) })     
+					 .on("mouseout",  function() { d3.select(this).style("stroke", "#BDBDBD" ); d3.select(this).style("stroke-width", 3 ); d3.select(this).style("opacity", .7 ) })
+					 //END
+					 ;
 					 
 					 svg.append("rect")
 					.attr("class","rect")
@@ -142,7 +147,12 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 					.attr("y", i*20)
 					.attr("width", 15)
 					.attr("height", 3)
-					.style("fill", cores[i]);
+					.style("fill", cores[i])
+					// Nailson's Modification
+					.on("mouseover", function() { d3.select(this).style("fill", "red"); d3.select(this).style("fill-opacity", .5); d3.select(this).style("height", 8)  })    
+					.on("mouseout",  function() { d3.select(this).style("fill", "#BDBDBD"); d3.select(this).style("fill-opacity", .7) })
+					//END
+					;
 			}			
 		}
 		
