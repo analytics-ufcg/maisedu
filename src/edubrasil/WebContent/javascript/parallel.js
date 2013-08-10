@@ -147,12 +147,14 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 					.style("fill", cores[i]);
 					
 				/*Inicio - Mouseover mouseout - nailsonboaz@gmail.com 09/08/2013 - */
+			
 				
-				 $('.path_cidade').mouseover(function () { var x = $(this).attr("id").split("-")[1]; $( "#rect-"+x ).css("fill",cores2[x]);  $(this).css("stroke",cores2[x]); $(this).css("stroke-width", 5); });
-				 $('.path_cidade').mouseout(function () { var x = $(this).attr("id").split("-")[1]; $( "#rect-"+x ).css("fill",cores[x]);  $(this).css("stroke",cores[x]); $(this).css("stroke-width", 3 ); });
+				 $('.path_cidade').mouseover(function () {  var x = $(this).attr("id").split("-")[1]; $( "#rect-"+x ).css("fill",cores2[x]); $( "#rect-"+x ).css("stroke",cores2[x]); $(this).css("stroke",cores2[x]); $(this).css("stroke-width", 5); });
+				 $('.path_cidade').mouseout(function () { var x = $(this).attr("id").split("-")[1]; $( "#rect-"+x ).css("fill",cores[x]); $( "#rect-"+x ).css("stroke","none"); $(this).css("stroke",cores[x]); $(this).css("stroke-width", 3 ); });
 				 
-				 $('.cidade_leg').mouseover(function () { var x = $(this).attr("id").split("-")[1]; $( "#path-"+x ).css("stroke",cores2[x]); $( "#path-"+x ).css("stroke-width", 5 );   $(this).css("fill",cores2[x]); });
-				 $('.cidade_leg').mouseout(function () { var x = $(this).attr("id").split("-")[1]; $( "#path-"+x ).css("stroke",cores[x]); $( "#path-"+x ).css("stroke-width", 3 );  $(this).css("fill",cores[x]); });
+				 $('.cidade_leg').mouseover(function () { var x = $(this).attr("id").split("-")[1]; $( "#path-"+x ).css("stroke",cores2[x]); $( "#path-"+x ).css("stroke-width", 5 );   $(this).css("fill",cores2[x]); $(this).css("stroke",cores2[x]);  });
+				 $('.cidade_leg').mouseout(function () { var x = $(this).attr("id").split("-")[1]; $( "#path-"+x ).css("stroke",cores[x]); $( "#path-"+x ).css("stroke-width", 3 );  $(this).css("fill",cores[x]); $(this).css("stroke","none");  });
+				
 				
 				/*Fim - Mouseover mouseout - nailsonboaz@gmail.com 09/08/2013 - */
 			}			
