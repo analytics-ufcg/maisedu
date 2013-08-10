@@ -172,16 +172,6 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 			.attr("dy", ".31em")
 			.text(function(d) { return d; });
 			
-		var tooltip = d3.select("body")
-		  .append("div")
-		  .style("position", "absolute")
-		  .style("height", "60px")
-		  .style("width", "140px")
-		  .style("background-color", "white")
-		  .style("z-index", "100")
-		  .style("visibility", "hidden")
-		  .text("iury");
-
 		  // Add a group element for each dimension.
 		var g = svg.selectAll(".dimension")
 			.data(dimensions)
@@ -195,46 +185,34 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 			.each(function(d) { d3.select(this).call(axis.scale(y[d])); })
 			.append("svg:text")
 			.data(legenda)
+			.attr("id", function(d,i){ return "indicador_titulo_" + i;})
 			.attr("text-anchor", "middle")
 			.attr("y", -9)
-			.text(String)
-			.on("mousemove", function(){
-             var m = d3.mouse(root.node());
-             scr.x = window.scrollX;
-             scr.y = window.scrollY;
-             m[0] += svgpos.x;
-             m[1] += svgpos.y;
-                 tooltip.style("right", "");
-                 tooltip.style("left", "");
-                 tooltip.style("bottom", "");
-                 tooltip.style("top", "");
-             console.log('coordinates: doc/body/scr/svgpos/mouse: ', doc, body, scr, svgpos, m);
-             if (m[0] > scr.x + scr.w / 2) {
-                 tooltip.style("right", (body.w - m[0] + dist.x) + "px");
-             }
-             else {
-                 tooltip.style("left", (m[0] + dist.x) + "px");
-             }
- 
-             if (m[1] > scr.y + scr.h / 2) {
-                 tooltip.style("bottom", (body.h - m[1] + dist.y) + "px");
-             }
-             else {
-                 tooltip.style("top", (m[1] + dist.y) + "px");
-             }
-             tooltip.style("visibility", "visible");
-         })
-   .on("mouseout", function(){
-             tooltip.style("visibility", "hidden");
-         });
-			
-	
+			.text(String);
+		/*Inicio - tooltip indicador - iurygregory@gmail.com 10/08/2013*/
+		$('#indicador_titulo_0')
+		.on("mouseover", function(d) {
+				d3.select("#tooltip").style("left", 100 + "px")
+									 .style("top", 100 + "px")
+									 .text(nome_indicador);
+				d3.select("#tooltip").classed("hidden", false);
+				console.log("entrou");
+		})
+		.on("mouseout",function(d){
+				d3.select("#tooltip").classed("hidden", true);
+				console.log("saiu");
+				
+		});
 		
+		
+		/*Fim - tooltip indicador - iurygregory@gmail.com 10/08/2013*/
+	
 		svg.append("svg:text")
 			.attr("x",685)
 			.attr("y", 460)
 			.style("font-size","10px")
-			.text("*Índice FIRJAN de Desenvolvimento Municipal")
-		
+			.text("*Índice FIRJAN de Desenvolvimento Municipal");
+
+
 });
 }
