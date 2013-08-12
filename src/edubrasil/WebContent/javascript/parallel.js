@@ -192,14 +192,14 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 		/*Inicio - tooltip indicador - iurygregory@gmail.com 10/08/2013*/
 		$('#indicador_titulo_0')
 		.on("mouseover", function(d) {
-				d3.select("#tooltip").style("left", 100 + "px")
+				d3.select("#tooltip_similar").style("left", 100 + "px")
 									 .style("top", 100 + "px")
 									 .text(nome_indicador);
-				d3.select("#tooltip").classed("hidden", false);
+				d3.select("#tooltip_similar").classed("hidden", false);
 				console.log("entrou");
 		})
 		.on("mouseout",function(d){
-				d3.select("#tooltip").classed("hidden", true);
+				d3.select("#tooltip_similar").classed("hidden", true);
 				console.log("saiu");
 				
 		});
