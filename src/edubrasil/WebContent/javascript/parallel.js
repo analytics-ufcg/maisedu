@@ -53,12 +53,9 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 	// }
 	lista_cidades.push(nome_cidade);
 	indicadores_selecionados = indicadores_selecionados.slice(0,3);
-	console.log(indicadores_selecionados);
-	console.log(indicadores_selecionados);
 	
 	if(indicadores_selecionados.length >= 3) {
 		indicadores_selecionados = indicadores_selecionados.slice(0,3);
-		console.log(indicadores_selecionados);
 	}
 	
 	indicadores_selecionados.push(indicador);
