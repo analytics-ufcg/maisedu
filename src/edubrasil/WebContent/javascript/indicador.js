@@ -806,17 +806,17 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 		svg.selectAll("#barra_indicador_altura_240").on("mouseover", function(d) {
 
 			//Get the values for tooltip position
-			//var xPosition = parseFloat(d3.select(this).attr("x1")) + 450;
-			//var yPosition = parseFloat(d3.select(this).attr("y1")) + 150;
+			var xPosition = parseFloat(d3.select(this).attr("x1")) + 450;
+			var yPosition = parseFloat(d3.select(this).attr("y1")) + 150;
 
-			var xPosition = window.event.clientX
-			var yPosition = window.event.clientY
+			//var xPosition = window.event.clientX
+			//var yPosition = window.event.clientY
 
 
 			//Update the tooltip position and value
 			d3.select("#tooltip").style("left", xPosition + "px")
 			.style("top", yPosition + "px")
-			.select("#value").text("Não existem cidades similares para esse ano.");
+			.select("#value").text("O sistema não possui dados para encontrar as cidades mais similares a esta.");
 
 			//Show the tooltip
 			d3.select("#tooltip").classed("hidden", false);

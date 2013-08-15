@@ -48,7 +48,7 @@ calcDistanciaCidadesSemelhantes <- function(nome.cidade, quant.cidades = 10) {
   else {
     outras.cidades <- data[(data$NOME_MUNICIPIO != nome.cidade), ]
     tabela = data.frame(cidade = outras.cidades$NOME_MUNICIPIO, distancia.euclidiana = calcDistanciaEuclidiana(cidade, outras.cidades))
-    tabela = tabela[order(tabela$distancia),]
+    tabela = tabela[order(tabela$distancia.euclidiana),]
     return(tabela[1:quant.cidades,])
  
   }
