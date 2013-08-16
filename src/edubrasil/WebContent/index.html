@@ -11,6 +11,7 @@
 <script type="text/javascript" src="javascript/indicador.js"></script>
 <script type="text/javascript" src="javascript/series.js"></script>
 <script type="text/javascript" src="javascript/parallel.js"></script>
+<script type="text/javascript" src="javascript/video.js"></script>
 
 <link href="css/edubrasil_main.css" rel="stylesheet" type="text/css" />
 <link href="css/cidades_parecidas.css" rel="stylesheet" type="text/css" />
@@ -19,25 +20,11 @@
 <script type="text/javascript" src="javascript/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="javascript/jquery.tooltipster.js"></script>
 <link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
-
 <link rel="stylesheet" href="css/reveal.css">
-
-
-<script>
-	function Video(state) {
-		
-		var div = document.getElementById("idVideo");
-		var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
-		div.style.display = state == 'hide' ? 'none' : '';
-		func = state == 'hide' ? 'pauseVideo' : 'playVideo';
-		iframe.postMessage('{"event":"command","func":"' + func + '","args":""}', '*');
-	}
-</script>
-
 
   
 </head>
-<body onload="loadData();document.getElementById('botao').click();">
+<body onload="loadData();checkCokie('cookie_video');">
 
 	<div id="container">
 
