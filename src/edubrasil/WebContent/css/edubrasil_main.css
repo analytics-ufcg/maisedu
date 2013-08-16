@@ -66,17 +66,14 @@ html,body {
 }
 
 
+#footer a:link, #footer a:visited, #footer a:active { 
+	text-decoration:none;
+	color:#FFFFFF;
+}
 
-
-a:link {text-decoration:none;color:#FFFFFF;} 
-a:visited {text-decoration:none;color:#FFFFFF;} 
-a:active {text-decoration:none;color:#FFFFFF;} 
-a:hover {text-decoration:underline;color:#BBBBBB;}
-
-
-footer a{
-  color:#CCCCCC;
-  text-decoration:none;
+#footer a:hover { 
+	text-decoration:underline;
+	color:#BBBBBB;
 }
 
 
