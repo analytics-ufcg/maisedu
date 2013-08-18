@@ -171,11 +171,18 @@ function plotTitulosGraficos(indicador, ano) {
 	d3.selectAll("h1").remove();
 	d3.selectAll("#botao_similares").remove();
 	//d3.selectAll("input").remove();
-		
+	
+	//Inicio - nailsonboaz@gmail.com 17/08/2013
+	d3.select("#div_nome_cidade")
+	.append("h1")
+	.attr("class", "nome_cidade")
+	.text(cidade + " - " + ano);
+	//Fim - nailsonboaz@gmail.com 17/08/2013
+	
 	d3.select("#div_indicador_titulo")
 	.append("h1")
 	.attr("class", "titulo_grafico")
-	.text(nomeIndicador(indicador) + " - " + ano);
+	.text(nomeIndicador(indicador));
 	
 	d3.select("#div_series_titulo")
 	.append("h1")
