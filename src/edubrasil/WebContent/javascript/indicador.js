@@ -499,9 +499,56 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
           .domain([min,max])
           .range([120, 750]);
 	addLine(svg, x1(min), x1(max), y0,y0,"#E0E0E0");
-	if(referencial == "melhor" | referencial == "neutro"){
+	//Inicio - henriquerzo@gmail.com - 19/08/2013
+	if(indicador == "INDICADOR_201") {
+		/*
+		Escala de Eficiência
+		0 - 54 = fraco/vermelho
+		55 - 66 = razoável/laranja
+		67 - 89 = bom/cinza
+		90 =< = muito bom/verde1
+		100 = excelente/verde2
+		*/
+		console.log(indicador)
+		console.log(media)
+		console.log(min)
+		console.log(max)
+		console.log(desvio)
+		console.log(x1(media - (2*desvio)))
+		console.log(x1(media - (desvio)))
+		console.log(x1)
+		//Vermelho
+		addLine(svg,x1(min),x1(0.5499999),y0,y0,"#DE2D26");
+		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (0.5499999));}), indicador,"#A50F15",min,max,y0);
+		//Laranja
+		addLine(svg,x1(0.55),x1(0.6699999),y0,y0,"#FF6600");
+		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.55) & d[indicador] <= (0.6699999));}), indicador,"#FF6600",min,max,y0);
+		//Cinza
+		//addLine(svg,x1(0.67),x1(0.8999999),y0,y0,"#C0C0C0");
+		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.67) & d[indicador] <= (0.8999999));}), indicador,"#C0C0C0",min,max,y0);
+		
+		if(max == 1){
+			//Verde1
+			addLine(svg,x1(0.90),x1(0.9999999),y0,y0,"#32CD32");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.90) & d[indicador] <= (0.9999999));}), indicador,"#32CD32",min,max,y0);
+			//Verde2
+			addLine(svg,x1(0.9999),x1(1),y0,y0,"#006400");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.9999) & d[indicador] <= (1));}), indicador,"#006400",min,max,y0);
+		}
+		else {
+			//Verde1
+			addLine(svg,x1(0.90),x1(max),y0,y0,"#32CD32");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.90) & d[indicador] <= (0.9999999));}), indicador,"#32CD32",min,max,y0);
+		}
+		
+	}
+	else{
+		//Fim - henriquerzo@gmail.com - 19/08/2013
+		if(referencial == "melhor" | referencial == "neutro"){		
 		//amarelo
 		if((media - (desvio) < max) & (media - (2*desvio) > min)){
+		console.log(x1(media - (2*desvio)))
+		console.log(x1(media - (desvio)))
 			addLine(svg,x1(media - (2*desvio)),x1(media - (desvio)),y0,y0,"#FFCC00");
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media - (desvio)));}), indicador,"#FFCC00",min,max,y0);
 		}else if((media - (desvio) > max) & (media - (2*desvio) > min)){
@@ -578,7 +625,8 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 		}else if((media - (2*desvio) < min) & (media +(desvio) < max)){
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media +(desvio)));}), indicador,"#C0C0C0",min,max,y0);
 		}
-	}
+	}}
+	
 	
 }
 
@@ -755,9 +803,9 @@ function plot_cidades(svg, dados, indicador,cor, min, max, y0){
 }
 
 function plot_similares(svg, similares, indicador, min, max, y0, ano){
-	//Inicio - Henrique - 07/08/2013
+	//Inicio - henriquerzo@gmail.com - 07/08/2013
 	if(ano == 2011) {
-	//Fim - Henrique - 07/08/2013
+	//Fim - henriquerzo@gmail.com - 07/08/2013
 		var x1 = d3.scale.linear()
 		.domain([min,max])
 		.range([120, 750]);
@@ -807,7 +855,7 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 		.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});*/
 		
 	}
-	//Inicio - Henrique - 07/08/2013
+	//Inicio - henriquerzo@gmail.com - 07/08/2013
 	
 	else {
 		svg.selectAll("#barra_indicador_altura_240").on("mouseover", function(d) {
@@ -832,7 +880,7 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 			d3.select("#tooltip").classed("hidden", true);
 		});
 	}
-	//Fim - Henrique - 07/08/2013
+	//Fim - henriquerzo@gmail.com - 07/08/2013
 	
 
 	
