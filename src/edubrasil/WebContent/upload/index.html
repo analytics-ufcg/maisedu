@@ -187,6 +187,48 @@
 	{% } %}
 	</script>
 	
+	<a id="done" data-toggle="modal" href="#donePopup" ></a>
+
+	<!-- Modal -->
+	<div class="modal fade" id="donePopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h2 class="modal-title" style="text-align: center;">Upload Concluído</h2>
+		</div>
+		<div class="modal-body" >
+		  O arquivo foi carregado com sucesso no sistema!
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
+		  <a href="../"><button type="button" class="btn btn-primary">Ir para Mais.Edu</button></a>
+		</div>
+	  </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<a id="fail" data-toggle="modal" href="#failPopup" ></a>
+
+	<!-- Modal -->
+	<div class="modal fade" id="failPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h2 class="modal-title" style="text-align: center;">Falha no Upload</h2>
+		</div>
+		<div class="modal-body" >
+		  O arquivo não foi carregado com sucesso no sistema!
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
+		  <a href="../"><button type="button" class="btn btn-danger Delete">Ir para Mais.Edu</button></a>
+		</div>
+	  </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
 
 <script src="js/jquery.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->

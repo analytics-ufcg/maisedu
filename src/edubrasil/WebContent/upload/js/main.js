@@ -31,6 +31,9 @@ $(function () {
             '/cors/result.html?%s'
         )
     );
+	
+	$('#fileupload').bind('fileuploaddone', function (e, data) {/* ... */ document.getElementById('done').click();})
+					.bind('fileuploadfail', function (e, data) {/* ... */document.getElementById('fail').click();});
 
     if (window.location.hostname === 'blueimp.github.io') {
         // Demo settings:
