@@ -8,7 +8,6 @@ var w = 800;
 var h = 350;
 var mensagemBotaoCinza = "Dados Indisponíveis";
 
-
 //Recebe uma cidade e pinta os botoes
 function getMenuOption(selection) {
 	//limpa containers
@@ -758,6 +757,26 @@ function addLine(svg,x1,x2,y1,y2,cor){
 	}
 }
 
+/*Inicio - Funcao para gerar Mapa (valor_indicador, lista_municipios) - Iury - 19/08/2013*/
+function geraMapa(tabela,indicador){
+	mapa = {}
+	for(var i=0;i<tabela.length;i++){
+		var obj = tabela[i];
+		var id = d3.format(".2f")(obj[indicador]) + "";
+		if(typeof mapa[id] == "undefined"){
+			mapa[id] = new Array(0);
+			mapa[id].push(obj["NOME_MUNICIPIO"]);
+			mapa[id].push(" Outro Municipio"); // remover depois
+		}else{
+			mapa[id].push(obj["NOME_MUNICIPIO"]);
+		}
+	}
+	return mapa
+}
+/*Fim - Funcao para gerar Mapa (valor_indicador, lista_municipios) - Iury - 19/08/2013*/
+
+
+
 function plot_cidades(svg, dados, indicador,cor, min, max, y0){
 	
 	var x1 = d3.scale.linear()
@@ -779,10 +798,23 @@ function plot_cidades(svg, dados, indicador,cor, min, max, y0){
 					.style("stroke",cor)
 					.attr("stroke-width",24);
 	
+	/*Inicio - Variavel do Mapa - Iury - 19/08/2013*/
+	var mapa_municipios = geraMapa(dados,indicador);
+	/*Fim - Variavel do Mapa - Iury - 19/08/2013*/		
+	
+	
 	g.selectAll("line").on("mouseover", function(d) {
 				
-						//Get indicator value and tranform to float
-						var valorIndicador = d.NOME_MUNICIPIO + ": " + d3.format(".2f")(d[indicador]);
+						
+						/*Inicio - Alterar tooltip 1º barra  - Iury - 19/08/2013*/
+						var key_valorIndicador = d3.format(".2f")(d[indicador]);
+						var nomesMunicipios = d.NOME_MUNICIPIO;
+						if(typeof mapa_municipios[key_valorIndicador] == "object"){
+							nomesMunicipios = mapa_municipios[key_valorIndicador].join(", ");
+						}			
+						var valorIndicador = nomesMunicipios + ": " + key_valorIndicador;
+						/*Fim - Alterar tooltip 1º barra  - Iury - 19/08/2013*/
+				
 				
 						//Get the values for tooltip position
 						var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
@@ -824,12 +856,23 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 		.transition().duration(duration)
 		.style("stroke","#C0C0C0")
 		.attr("stroke-width",24);
-
+		
+		/*Inicio - Variavel do Mapa - Iury - 19/08/2013*/
+		var mapa_similares = geraMapa(similares,indicador);
+		/*Fim - Variavel do Mapa - Iury - 19/08/2013*/		
+	
+		
 		g.selectAll("line").on("mouseover", function(d) {
 
-			//Get indicator value and tranform to float
-			var valorIndicador = d.NOME_MUNICIPIO + ": " + d3.format(".2f")(d[indicador]);
-
+			/*Inicio- Alterar tooltip 4º barra  - Iury - 19/08/2013*/
+			var key_valorIndicador = d3.format(".2f")(d[indicador]);
+			var nomesMunicipios = d.NOME_MUNICIPIO;
+			if(typeof mapa_similares[key_valorIndicador] == "object"){
+				nomesMunicipios = mapa_similares[key_valorIndicador].join(", ");
+			}			
+			var valorIndicador = nomesMunicipios + ": " + key_valorIndicador;
+			/*Fim - Alterar tooltip 4º barra  - Iury - 19/08/2013*/
+			
 			//Get the values for tooltip position
 			var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
 			var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
@@ -838,7 +881,7 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 			d3.select("#tooltip").style("left", xPosition + "px")
 			.style("top", yPosition + "px")
 			.select("#value").text(valorIndicador);//cidade + " : " +valorIndicador.toFixed(2));
-
+			
 			//Show the tooltip
 			d3.select("#tooltip").classed("hidden", false);
 		})
@@ -881,8 +924,5 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 		});
 	}
 	//Fim - henriquerzo@gmail.com - 07/08/2013
-	
-
-	
 }
 
