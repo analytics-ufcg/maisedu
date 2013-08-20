@@ -7,6 +7,7 @@ var duration = 1000;
 var w = 800;
 var h = 350;
 var mensagemBotaoCinza = "Dados Indisponíveis";
+var valorR;
 
 //Recebe uma cidade e pinta os botoes
 function getMenuOption(selection) {
@@ -18,7 +19,17 @@ function getMenuOption(selection) {
 	rawdata = dataset.filter(function(i){return i.NOME_MUNICIPIO == cidade;});	
 	
 	dicionario.sort(function (a, b) {
-    			return getDesvio(a.desvio) - getDesvio(b.desvio);
+		//Inicio - henriquerzo@gmail.com 20/08/2013
+		if(a.id == "INDICADOR_201") {
+			return getDesvio(a.id) - getDesvio(b.desvio);
+		}
+		else if(b.id == "INDICADOR_201") {
+			return getDesvio(a.desvio) - getDesvio(b.id);
+		}
+		else {
+			return getDesvio(a.desvio) - getDesvio(b.desvio);
+		}
+		//Fim - henriquerzo@gmail.com 20/08/2013
 	});
 	d3.selectAll(".indicador")
 	.data(dicionario)
@@ -27,7 +38,14 @@ function getMenuOption(selection) {
 		return i * 50;
 	})//.duration(1000)
 	.attr("class", function(d) {
+		//Inicio - henriquerzo@gmail.com 20/08/2013
+		if(d.id == "INDICADOR_201") {
+			return "indicador " + getButtonColorIndicador201(d.id);
+		}
+		else{
           return "indicador " + getButtonColor(d.desvio);
+      	}
+      	//Fim - henriquerzo@gmail.com 20/08/2013
     })
 	.attr("value", function (d){return d.name;})
 	.attr("id", function (d, i){return d.id;});
@@ -64,14 +82,55 @@ Array.prototype.unique = function() {
     return r;
 };
 
+
 //Retorna o valor do desvio
 function getDesvio(colunaDesvio) {
-	valor = getRecentValueIndicadorColuna(colunaDesvio);
-	if (valor == "NA" ) {
-		return 10;
-	}else{
-		return parseFloat(valor);
+	//Inicio - henriquerzo@gmail.com 20/08/2013
+	if(colunaDesvio == "INDICADOR_201") {
+		var valor = getRecentValueIndicadorColuna("INDICADOR_201");
+			if (valor == "NA" ) {
+				return 10;
+			}
+			if(parseFloat(valor) <= 0.54) {
+				return -4;
+			}
+			else if(parseFloat(valor) <= 0.66) {
+				return -3;
+			}
+			else if(parseFloat(valor) <= 0.89) {
+				return 0;
+			}
+			else if(parseFloat(valor) <= 0.99) {
+				return 3;
+			}
+			else if(parseFloat(valor) == 1.0) {
+				return 4;
+			}
+			else {
+				return 4;
+			}
+			/*
+			Escala de Eficiência
+			0 - 54 = fraco/vermelho
+			55 - 66 = razoável/laranja
+			67 - 89 = bom/cinza
+			90 =< = muito bom/verde1
+			100 = excelente/verde2
+			*/
+			
 	}
+	else {
+		var valor = getRecentValueIndicadorColuna(colunaDesvio);
+		if (valor == "NA" ) {
+			return 10;
+		}
+		else {
+			return parseFloat(valor);
+		}
+	}
+	//Fim - henriquerzo@gmail.com 20/08/2013
+
+	
 }
 
 //Carrega arquivo inicial e os botoes
@@ -202,9 +261,10 @@ function getRecentValueIndicadorColuna(colunaDesvio) {
 	}
 }
 
+
 //Retorna a cor do Botao
 function getButtonColor(colunaDesvio) {
-	valor = getRecentValueIndicadorColuna(colunaDesvio);
+	var valor = getRecentValueIndicadorColuna(colunaDesvio);
 	if (valor == "NA" ) {
         return "indicador_cinza";
 	}
@@ -217,13 +277,53 @@ function getButtonColor(colunaDesvio) {
 	else if (parseFloat(valor) <= -4) {
 		return "indicador_vermelho";
 	}
-	else if (parseFloat(valor) >= 3) {
+	else if (parseFloat(valor) <= 3 && parseFloat(valor) >= 2) {
         return "indicador_verde";
+	}
+	else if (parseFloat(valor) >= 3) {
+        return "indicador_verde2";
 	}
 	else {
         return "indicador_branco";
 	}
 }
+
+
+//Inicio - henriquerzo@gmail.com 20/08/2013
+//Retorna a cor do Botao para o indicar "Indice de eficiencia da educacao/INDICADOR_201"
+function getButtonColorIndicador201(atributo) {
+	/*
+		Escala de Eficiência
+		0 - 54 = fraco/vermelho
+		55 - 66 = razoável/laranja
+		67 - 89 = bom/cinza
+		90 =< = muito bom/verde1
+		100 = excelente/verde2
+		*/
+	var valor = getRecentValueIndicadorColuna(atributo);
+	if (valor == "NA" ) {
+        return "indicador_cinza";
+	}
+	else if (parseFloat(valor) <= 0.54) {
+        return "indicador_vermelho";
+	}
+	else if (parseFloat(valor) <= 0.66) {
+		return "indicador_laranja";
+	}
+	else if (parseFloat(valor) <= 0.89) {
+		return "indicador_branco";
+	}
+	else if (parseFloat(valor) <= 0.99) {
+        return "indicador_verde";
+	}
+	else if (parseFloat(valor) == 1.0) {
+        return "indicador_verde2";
+	}
+	else {
+        return "indicador_branco";
+	}
+}
+//Fim - henriquerzo@gmail.com 20/08/2013
 
 //recebe o id do indicador e retorna o nome
 function nomeIndicador(idIndicador) {
@@ -508,36 +608,28 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 		90 =< = muito bom/verde1
 		100 = excelente/verde2
 		*/
-		console.log(indicador)
-		console.log(media)
-		console.log(min)
-		console.log(max)
-		console.log(desvio)
-		console.log(x1(media - (2*desvio)))
-		console.log(x1(media - (desvio)))
-		console.log(x1)
 		//Vermelho
-		addLine(svg,x1(min),x1(0.5499999),y0,y0,"#DE2D26");
-		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (0.5499999));}), indicador,"#A50F15",min,max,y0);
+		addLine(svg,x1(min),x1(0.54999),y0,y0,"#DE2D26");
+		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (0.54999));}), indicador,"#A50F15",min,max,y0);
 		//Laranja
-		addLine(svg,x1(0.55),x1(0.6699999),y0,y0,"#FF6600");
-		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.55) & d[indicador] <= (0.6699999));}), indicador,"#FF6600",min,max,y0);
+		addLine(svg,x1(0.55),x1(0.66999),y0,y0,"#FF6600");
+		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.55) & d[indicador] <= (0.66999));}), indicador,"#FF6600",min,max,y0);
 		//Cinza
 		//addLine(svg,x1(0.67),x1(0.8999999),y0,y0,"#C0C0C0");
-		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.67) & d[indicador] <= (0.8999999));}), indicador,"#C0C0C0",min,max,y0);
+		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.67) & d[indicador] <= (0.89999));}), indicador,"#C0C0C0",min,max,y0);
 		
 		if(max == 1){
 			//Verde1
-			addLine(svg,x1(0.90),x1(0.9999999),y0,y0,"#32CD32");
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.90) & d[indicador] <= (0.9999999));}), indicador,"#32CD32",min,max,y0);
+			addLine(svg,x1(0.90),x1(0.999),y0,y0,"#32CD32");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.90) & d[indicador] <= (0.99999));}), indicador,"#32CD32",min,max,y0);
 			//Verde2
 			addLine(svg,x1(0.9999),x1(1),y0,y0,"#006400");
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.9999) & d[indicador] <= (1));}), indicador,"#006400",min,max,y0);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.99) & d[indicador] <= (1));}), indicador,"#006400",min,max,y0);
 		}
 		else {
 			//Verde1
 			addLine(svg,x1(0.90),x1(max),y0,y0,"#32CD32");
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.90) & d[indicador] <= (0.9999999));}), indicador,"#32CD32",min,max,y0);
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.90) & d[indicador] <= (max));}), indicador,"#32CD32",min,max,y0);
 		}
 		
 	}
@@ -546,8 +638,6 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 		if(referencial == "melhor" | referencial == "neutro"){		
 		//amarelo
 		if((media - (desvio) < max) & (media - (2*desvio) > min)){
-		console.log(x1(media - (2*desvio)))
-		console.log(x1(media - (desvio)))
 			addLine(svg,x1(media - (2*desvio)),x1(media - (desvio)),y0,y0,"#FFCC00");
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media - (desvio)));}), indicador,"#FFCC00",min,max,y0);
 		}else if((media - (desvio) > max) & (media - (2*desvio) > min)){
@@ -766,7 +856,6 @@ function geraMapa(tabela,indicador){
 		if(typeof mapa[id] == "undefined"){
 			mapa[id] = new Array(0);
 			mapa[id].push(obj["NOME_MUNICIPIO"]);
-			mapa[id].push(" Outro Municipio"); // remover depois
 		}else{
 			mapa[id].push(obj["NOME_MUNICIPIO"]);
 		}
