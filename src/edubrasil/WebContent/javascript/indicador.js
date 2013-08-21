@@ -304,16 +304,16 @@ function getButtonColorIndicador201(atributo) {
 	if (valor == "NA" ) {
         return "indicador_cinza";
 	}
-	else if (parseFloat(valor) <= 0.5499999) {
+	else if (parseFloat(valor) <= 0.545) {
         return "indicador_vermelho";
 	}
-	else if (parseFloat(valor) <= 0.6699999) {
+	else if (parseFloat(valor) <= 0.665) {
 		return "indicador_laranja";
 	}
-	else if (parseFloat(valor) <= 0.8999999) {
+	else if (parseFloat(valor) <= 0.895) {
 		return "indicador_branco";
 	}
-	else if (parseFloat(valor) <= 0.9999999) {
+	else if (parseFloat(valor) <= 0.9999) {
         return "indicador_verde";
 	}
 	else if (parseFloat(valor) == 1.0) {
@@ -609,19 +609,19 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 		100 = excelente/verde2
 		*/
 		//Vermelho
-		addLine(svg,x1(min),x1(0.5499999),y0,y0,"#DE2D26");
-		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (0.5499999));}), indicador,"#A50F15",min,max,y0);
+		addLine(svg,x1(min),x1(0.549),y0,y0,"#DE2D26");
+		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (0.549));}), indicador,"#A50F15",min,max,y0);
 		//Laranja
-		addLine(svg,x1(0.55),x1(0.6699999),y0,y0,"#FF6600");
-		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.55) & d[indicador] <= (0.6699999));}), indicador,"#FF6600",min,max,y0);
+		addLine(svg,x1(0.55),x1(0.669),y0,y0,"#FF6600");
+		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.55) & d[indicador] <= (0.669));}), indicador,"#FF6600",min,max,y0);
 		//Cinza
 		//addLine(svg,x1(0.67),x1(0.8999999),y0,y0,"#C0C0C0");
-		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.67) & d[indicador] <= (0.8999999));}), indicador,"#C0C0C0",min,max,y0);
+		plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.67) & d[indicador] <= (0.899));}), indicador,"#C0C0C0",min,max,y0);
 		
 		if(max == 1){
 			//Verde1
-			addLine(svg,x1(0.90),x1(0.9999999),y0,y0,"#32CD32");
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.90) & d[indicador] <= (0.9999999));}), indicador,"#32CD32",min,max,y0);
+			addLine(svg,x1(0.90),x1(0.9999),y0,y0,"#32CD32");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.90) & d[indicador] <= (0.9999));}), indicador,"#32CD32",min,max,y0);
 			//Verde2
 			addLine(svg,x1(0.9999),x1(1),y0,y0,"#006400");
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.99) & d[indicador] <= (1));}), indicador,"#006400",min,max,y0);
