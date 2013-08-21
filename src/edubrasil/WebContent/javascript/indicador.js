@@ -445,6 +445,19 @@ function plotIndicadores(indicador) {
 			.attr("x", 30)
 			.attr("text-anchor", "right")
 			.text("Similares");
+
+			/*Inicio - Marcadores - iurygregory@gmail.com - 21/08/2013*/
+			var meso = estado.filter(function(d){return d.NOME_MESO == currentYearData.NOME_MESO;});
+			var min_meso = (d3.min(meso,function(d){return parseFloat(d[indicador]);}));
+			var max_meso = (d3.max(meso,function(d){return parseFloat(d[indicador]);}));
+			plot_cidades(svg,meso, indicador,"#A5A5A5",min_meso,max_meso,h2); // Descomentar
+			
+			var micro = estado.filter(function(d){return d.NOME_MICRO == currentYearData.NOME_MICRO;});
+			var min_micro = (d3.min(meso,function(d){return parseFloat(d[indicador]);}));
+			var max_micro = (d3.max(meso,function(d){return parseFloat(d[indicador]);}));
+			plot_cidades(svg,micro, indicador,"#A5A5A5",min_micro,max_micro,h3);
+			/*Fim- Marcadores - iurygregory@gmail.com - 21/08/2013*/
+
 			
 			if(currentYearData.ANO == 2011) {
 				svg.append("a")
@@ -532,7 +545,17 @@ function plotIndicadores(indicador) {
 			.attr("text-anchor", "right")
 			.text("Similares");
 			
+			/*Inicio - Marcadores - iurygregory@gmail.com - 21/08/2013*/
+			var meso = estado.filter(function(d){return d.NOME_MESO == currentYearData.NOME_MESO;});
+			var min_meso = (d3.min(meso,function(d){return parseFloat(d[indicador]);}));
+			var max_meso = (d3.max(meso,function(d){return parseFloat(d[indicador]);}));
+			plot_cidades(svg,meso, indicador,"#A5A5A5",min_meso,max_meso,h2);  // Descomentar
 			
+			var micro = estado.filter(function(d){return d.NOME_MICRO == currentYearData.NOME_MICRO;});
+			var min_micro = (d3.min(meso,function(d){return parseFloat(d[indicador]);}));
+			var max_micro = (d3.max(meso,function(d){return parseFloat(d[indicador]);}));
+			plot_cidades(svg,micro, indicador,"#A5A5A5",min_micro,max_micro,h3);
+			/*Fim - Marcadores - iurygregory@gmail.com - 21/08/2013*/
 			
 			if(currentYearData.ANO == 2011) {
 				svg.append("a")
