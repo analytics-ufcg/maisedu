@@ -71,11 +71,13 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 
 	d3.csv("data/numero.matriculas_IFDM_e_receita_agregados.csv", function(cidades) {
 		
-		cidades = cidades.filter(function(d){ return ((lista_cidades.indexOf(d.NOME_MUNICIPIO) > -1) && 
-														d[indicadores_selecionados[0]] != "NA" && 
-														d[indicadores_selecionados[1]] != "NA" &&
-														d[indicadores_selecionados[2]] != "NA" &&
-														d[indicadores_selecionados[3]] != "NA")});
+		/*Inicio - giovanibarbosa@gmail.com 22/08/2013*/
+		// cidades = cidades.filter(function(d){ return ((lista_cidades.indexOf(d.NOME_MUNICIPIO) > -1) && 
+														// d[indicadores_selecionados[0]] != "NA" && 
+														// d[indicadores_selecionados[1]] != "NA" &&
+														// d[indicadores_selecionados[2]] != "NA" &&
+														// d[indicadores_selecionados[3]] != "NA")});
+		/*Fim - giovanibarbosa@gmail.com 22/08/2013*/
 		
 		/*Inicio - Tamanho maximo do nome do indicador- iurygregory@gmail.com 08/08/2013 - */
 		var MAX_LENGTH_INDICADOR = 30;
@@ -97,6 +99,13 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 		  }));
 		//Fim - giovanibarbosa@gmail.com 08/08/2013
 
+		/*Inicio - giovanibarbosa@gmail.com 22/08/2013*/
+		cidades = cidades.filter(function(d){ return ((lista_cidades.indexOf(d.NOME_MUNICIPIO) > -1) && 
+														d[indicadores_selecionados[0]] != "NA" && 
+														d[indicadores_selecionados[1]] != "NA" &&
+														d[indicadores_selecionados[2]] != "NA" &&
+														d[indicadores_selecionados[3]] != "NA")});
+		/*Fim - giovanibarbosa@gmail.com 22/08/2013*/
 
 		lista_cidades = (cidades.map(function(d){return (d.NOME_MUNICIPIO);}));
 		
