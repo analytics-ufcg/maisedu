@@ -117,7 +117,7 @@ calCidadesDiferentes <- function(data, quant.cidades = 10){
 
 ####lista com nome das cidades semelhantes####
 semelhantes_nomes = calcTodasDistanciasCidadesSemelhantes(data,nomes = T)
-write.csv(semelhantes_nomes, "cidades_semelhantes_nomes.csv", row.names = F)
+write.csv(semelhantes_nomes, "tabela_cidades_semelhantes.csv", row.names = F)
 
 ####lista com distancia das cidades semelhantes####
 semelhantes_distancias = calcTodasDistanciasCidadesSemelhantes(data, nomes = F)
