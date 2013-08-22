@@ -2,6 +2,5 @@
 				- Campina Grande com problemas no indicador Taxa de aprovação total - ensino médio (%);
 				- São José de Espinharas, Pipirituba, Pitimbu com problemas no indicador Percentual de docentes temporários(%);
 				- São José de Espinharas com problemas no indicador IDEB - 9º ano do ensino fundamental;
-				- Alhandra com problemas no indicador Ideb 
 - Problema no botão de índice em Riacho dos Cavalos para o indicador Índice eficiência educação básica(%); (Corrigido)
-- Corrigir problemas de guardar cache no navegador;
+- Corrigir problemas de guardar cache no navegador; (Corrigido)
