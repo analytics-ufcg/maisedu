@@ -277,10 +277,10 @@ function getButtonColor(colunaDesvio) {
 	else if (parseFloat(valor) <= -4) {
 		return "indicador_vermelho";
 	}
-	else if (parseFloat(valor) <= 3 && parseFloat(valor) >= 2) {
+	else if (parseFloat(valor) < 4 && parseFloat(valor) >= 3) {
         return "indicador_verde";
 	}
-	else if (parseFloat(valor) >= 3) {
+	else if (parseFloat(valor) >= 4) {
         return "indicador_verde2";
 	}
 	else {
@@ -636,16 +636,16 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 		
 		if(max == 1){
 			//Verde1
-			addLine(svg,x1(0.90),x1(0.9999),y0,y0,"#32CD32");
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.90) & d[indicador] <= (0.9999));}), indicador,"#32CD32",min,max,y0);
+			addLine(svg,x1(0.90),x1(0.9999),y0,y0,"green");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.90) & d[indicador] <= (0.9999));}), indicador,"green",min,max,y0);
 			//Verde2
 			addLine(svg,x1(0.9999),x1(1),y0,y0,"#006400");
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.99) & d[indicador] <= (1));}), indicador,"#006400",min,max,y0);
 		}
 		else {
 			//Verde1
-			addLine(svg,x1(0.90),x1(max),y0,y0,"#32CD32");
-			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.90) & d[indicador] <= (max));}), indicador,"#32CD32",min,max,y0);
+			addLine(svg,x1(0.90),x1(max),y0,y0,"green");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.90) & d[indicador] <= (max));}), indicador,"green",min,max,y0);
 		}
 		
 	}
@@ -684,6 +684,13 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 			addLine(svg,x1(max),x1(media + (2*desvio)),y0,y0,"green");
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (max));}), indicador,"green",min,max,y0);
 		}
+		// Nailson Boaz Costa Leite - nailsonboaz@gmail.com - 21/08/2013
+		//verde2
+		if(media + (3*desvio) < max){
+			addLine(svg,x1(max),x1(media + (3*desvio)),y0,y0,"#006400");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (3*desvio)) & d[indicador] <= (max));}), indicador,"#006400",min,max,y0);
+		}
+		// Fim Nailson Boaz Costa Leite - nailsonboaz@gmail.com - 21/08/2013
 		//cinza
 		if((media - desvio > min) & (media +(2*desvio) < max)){
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - desvio ) & d[indicador] <= (media +(2*desvio)));}), indicador,"#C0C0C0",min,max,y0);
@@ -724,6 +731,13 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 			addLine(svg,x1(media - (2*desvio)),x1(min),y0,y0,"green");
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (2*desvio)));}), indicador,"green",min,max,y0);
 		}
+		// Nailson Boaz Costa Leite - nailsonboaz@gmail.com - 21/08/2013
+		//verde2
+		if((media - (3*desvio) > min)){
+			addLine(svg,x1(media - (3*desvio)),x1(min),y0,y0,"#006400");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (3*desvio)));}), indicador,"#006400",min,max,y0);
+		}
+		// Fim Nailson Boaz Costa Leite - nailsonboaz@gmail.com - 21/08/2013
 		//cinza
 		if((media - (2*desvio) > min) & (media + (desvio) < max)){
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media + (desvio)));}), indicador,"#C0C0C0",min,max,y0);

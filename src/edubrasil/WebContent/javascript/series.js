@@ -25,6 +25,7 @@ function plotSeries(cidade,indicador) {
 				if(d.NOME_MUNICIPIO == cidade & d[indicador] != "NA"){
 					meso = d.NOME_MESO;
 					micro = d.NOME_MICRO;
+					val_y.push(parseFloat(d[indicador]));
 				}else if(d[indicador] != "NA"){
 					val_y.push(parseFloat(d[indicador]));
 				}
