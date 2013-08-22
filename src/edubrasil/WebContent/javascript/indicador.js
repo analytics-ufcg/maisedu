@@ -639,7 +639,7 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 			addLine(svg,x1(0.896),x1(0.995),y0,y0,"green");
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.896) & d[indicador] <= (0.995));}), indicador,"green",min,max,y0);
 			//Verde2
-			addLine(svg,x1(0.9999),x1(1),y0,y0,"#006400");
+			addLine(svg,x1(0.995),x1(1),y0,y0,"#006400");
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (0.996) & d[indicador] <= (1));}), indicador,"#006400",min,max,y0);
 		}
 		else {
