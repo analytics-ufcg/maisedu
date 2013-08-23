@@ -961,8 +961,8 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 		.domain([min,max])
 		.range([120, 750]);
 
-		var g = svg.append("g"); 
 
+		var g = svg.append("g"); 
 		g.selectAll("line").data(similares)
 		.enter()
 		.append("line")
@@ -979,8 +979,8 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 		/*Inicio - Variavel do Mapa - Iury - 19/08/2013*/
 		var mapa_similares = geraMapa(similares,indicador);
 		/*Fim - Variavel do Mapa - Iury - 19/08/2013*/		
-	
-		
+
+
 		g.selectAll("line").on("mouseover", function(d) {
 
 			/*Inicio- Alterar tooltip 4º barra  - Iury - 19/08/2013*/

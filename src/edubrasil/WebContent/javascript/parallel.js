@@ -230,7 +230,31 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 		
 		
 		/*Fim - tooltip indicador - iurygregory@gmail.com 10/08/2013*/
-	
+		/*Inicio - explicacao - iurygregory@gmail.com 23/08/2013*/	
+		var max_similares  = 11;
+		console.log(lista_cidades.length);
+		if (lista_cidades.length <  max_similares) {
+			svg.append("svg:text")
+				.attr("x",685)
+				.attr("y",300)
+				.style("font-size","10px")
+				.style("fill","red")
+				.text("Há menos de 10 cidades similares porque ");	
+			svg.append("svg:text")
+				.attr("x",685)
+				.attr("y",312)
+				.style("fill","red")
+				.style("font-size","10px")
+				.text("estas não apresentam dados para o indicador");	
+			svg.append("svg:text")
+				.attr("x",685)
+				.attr("y",324)
+				.attr("color","red")
+				.style("font-size","10px")
+				.style("fill","red")
+				.text("analisado no ano de "+ ano + "");	
+		};
+		/*Fim - explicacao - iurygregory@gmail.com 23/08/2013*/
 		svg.append("svg:text")
 			.attr("x",685)
 			.attr("y", 460)
