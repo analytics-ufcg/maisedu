@@ -19,7 +19,11 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: 'server/php/'
+        url: 'server/php/',
+		sequentialUploads: true,
+		
+        
+    
     });
 
     // Enable iframe cross-domain access via redirect option:
@@ -32,8 +36,12 @@ $(function () {
         )
     );
 	
-	$('#fileupload').bind('fileuploaddone', function (e, data) {/* ... */ document.getElementById('done').click();})
-					.bind('fileuploadfail', function (e, data) {/* ... */document.getElementById('fail').click();});
+	$('#fileupload').bind('fileuploadprogressall', function (e, data) {/* ... */ 
+														if( data.loaded == data.total ){
+															document.getElementById('done').click();
+														}
+											})
+					//.bind('fileuploadfail', function (e, data) {/* ... */document.getElementById('fail').click();});
 
     if (window.location.hostname === 'blueimp.github.io') {
         // Demo settings:

@@ -92,15 +92,20 @@ ordenaDataFrame = function(data) {
   return (data)
 }
 
+
 #junta a tabela nova na tabela default
 addTabela = function(tabela.default, tabela.nova) {
-  tabela.default = merge(tabela.default, tabela.nova, by=colnames(tabela.nova), all.y=T)
-  
-  tabela.default$NOME_MUNICIPIO = as.factor(tabela.default$NOME_MUNICIPIO)
-  tabela.default$NOME_UF = as.factor(tabela.default$NOME_UF)
-  tabela.default$NOME_MESO = as.factor(tabela.default$NOME_MESO)
-  tabela.default$NOME_MICRO = as.factor(tabela.default$NOME_MICRO)
-  return (tabela.default)
+  ano = setdiff(tabela.nova$ANO, tabela.default$ANO)
+  tabela.nova = ordenaDataFrame(tabela.nova)
+  if(length(ano) != 0) {
+    for (i in ano) {
+      tabela.default = rbind.fill(tabela.default, tabela.nova[tabela.nova$ANO == i,])
+    }
+  }
+  else {
+    tabela.default[,colnames(tabela.nova)[10:11]] = tabela.nova[,10:11]
+  }
+  return (ordenaDataFrame(tabela.default))
 }
 
 
@@ -168,7 +173,7 @@ getIndicadorCategoria = function(tabela.nova, tabela.indicador){
 args <- commandArgs(trailingOnly = TRUE) 
 #indicador (1), tabela de desvios(2), mediana(3), desvios novos(4), mediana nova(5), caminho perl(6)
 
-#args = c("INDICADOR_EXEMPLO - tabela com indicador_62 com anos 2012 e 2013.csv", "tabela_com_todos_os_indicadores_selecionados_e_desvios.csv", "medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv", "desvio.novo.csv", "mediana.nova.csv","perl")
+#args = c("INDICADOR_188_EXEMPLO.csv", "tabela_com_todos_os_indicadores_selecionados_e_desvios.csv", "medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv", "tabela_com_todos_os_indicadores_selecionados_e_desvios.csv", "medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv")
 
 
 
