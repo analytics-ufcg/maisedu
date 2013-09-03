@@ -1,3 +1,4 @@
+require(Hmisc)
 #Script que calcula as 10 cidades mais proximas dada uma cidade de referencia, usando os atributos: FPM IFDM e numero de maticulas
 #É necessario o arquivo "numero.matriculas_IFDM_e_FPM_agregados.csv" que esta na pasta Indicadores Selecionados/5 - Indicadores para Análises de Grupos
 
@@ -131,3 +132,54 @@ write.csv(cidades_distancias,"cidades_semelhantes_distancias.csv",row.names = F)
 ####Quantidade de cidades diferentes####
 #cidades_diferentes = calCidadesDiferentes(data,10)
 #write.csv(cidades_diferentes,"cidades_diferentes_medias.csv",row.names = F)
+
+
+#Inicio - código para limiar media e mediana - iurygregory@gmail.com - 01/09/2013
+dados = read.csv("cidades_semelhantes_distancias.csv",header=T,stringsAsFactors=F,dec = ".")
+dados <- na.omit(dados)
+dados$media = rowMeans(dados[,2:11])
+dados$mediana <- apply(dados[,2:11], MARGIN=1, FUN=median, na.rm=TRUE)
+
+limiar_media = quantile(dados$media,0.94)
+limiar_mediana = quantile(dados$mediana,0.9)
+dados2 = dados
+dados2$Vizinho1[dados2$Vizinho1 <= limiar_media ] = 0 
+dados2$Vizinho2[dados2$Vizinho2 <= limiar_media ] = 0
+dados2$Vizinho3[dados2$Vizinho3 <= limiar_media ] = 0
+dados2$Vizinho4[dados2$Vizinho4 <= limiar_media ] = 0 
+dados2$Vizinho5[dados2$Vizinho5 <= limiar_media ] = 0
+dados2$Vizinho6[dados2$Vizinho6 <= limiar_media ] = 0
+dados2$Vizinho7[dados2$Vizinho7 <= limiar_media ] = 0 
+dados2$Vizinho8[dados2$Vizinho8 <= limiar_media ] = 0
+dados2$Vizinho9[dados2$Vizinho9 <= limiar_media ] = 0
+dados2$Vizinho10[dados2$Vizinho10 <= limiar_media ] = 0 
+dados3 = dados
+dados3$Vizinho1[dados3$Vizinho1 <= limiar_mediana ] = 0 
+dados3$Vizinho2[dados3$Vizinho2 <= limiar_mediana ] = 0
+dados3$Vizinho3[dados3$Vizinho3 <= limiar_mediana ] = 0
+dados3$Vizinho4[dados3$Vizinho4 <= limiar_mediana ] = 0 
+dados3$Vizinho5[dados3$Vizinho5 <= limiar_mediana ] = 0
+dados3$Vizinho6[dados3$Vizinho6 <= limiar_mediana ] = 0
+dados3$Vizinho7[dados3$Vizinho7 <= limiar_mediana ] = 0 
+dados3$Vizinho8[dados3$Vizinho8 <= limiar_mediana ] = 0
+dados3$Vizinho9[dados3$Vizinho9 <= limiar_mediana ] = 0
+dados3$Vizinho10[dados3$Vizinho10 <= limiar_mediana ] = 0 
+
+
+png("Ecdf-Media.png",bg="white",width=700, height=400)
+Ecdf(dados$media,q=(0.94),xlab = "Intervalo entre Submissões",
+ylab="Proporção <= x",label.curves=TRUE,col="blue",las=1, subtitles=FALSE,)
+dev.off()
+
+png("Ecdf-Mediana.png",bg="white",width=700, height=400)
+Ecdf(dados$mediana,q=(0.90),xlab = "Intervalo entre Submissões",
+ylab="Proporção <= x",label.curves=TRUE,col="blue",las=1, subtitles=FALSE,)
+dev.off()
+
+
+write.csv(dados2,"cidades_semelhantes_distancias_usandoMEDIA.csv",row.names = F)
+
+write.csv(dados3,"cidades_semelhantes_distancias_usandoMEDIANA.csv",row.names = F)
+
+
+#Fim - código para limiar media e mediana - iurygregory@gmail.com - 01/09/2013
