@@ -15,7 +15,17 @@ function getMenuOption(selection) {
 	cleanContainers();
 	
     cidade = selection.options[selection.selectedIndex].value;
-	plotSeries(cidade);
+
+	//Inicio - henriquerzo@gmail.com 06/09/2013
+	if(cidade == "") {
+		$("#map_area").show();
+		resetMap(dataset);	
+	}
+	else {
+		$("#map_area").hide();
+	}
+	//Fim - henriquerzo@gmail.com 06/09/2013
+
 	rawdata = dataset.filter(function(i){return i.NOME_MUNICIPIO == cidade;});	
 	
 	dicionario.sort(function (a, b) {
@@ -49,6 +59,7 @@ function getMenuOption(selection) {
     })
 	.attr("value", function (d){return d.name;})
 	.attr("id", function (d, i){return d.id;});
+
 	
 	// D3 code modification made ​​by Nailson ( add tooltip with jquery and the tooltipster's plugin)
 	$('.tooltips').tooltipster('destroy');	
@@ -69,9 +80,13 @@ function getMenuOption(selection) {
 };
 
 function cleanContainers(){
-	d3.selectAll("svg")
+	//Inicio - henriquerzo@gmail.com 06/09/2013
+	d3.select("#div_indicador").select("svg")
     .remove();
-	
+	d3.select("#div_series").select("svg")
+    .remove();
+    //Fim - henriquerzo@gmail.com 06/09/2013
+
 	d3.selectAll("h1").remove();
 }
 
@@ -154,6 +169,9 @@ function loadData() {
 		.attr("value",function(d){return d;})
 		.attr("label",function(d){return d;})
 		.text(function(d){return d;});
+		//Inicio - henriquerzo@gmail.com 06/09/2013
+		resetMap(dataset);
+		//Fim - henriquerzo@gmail.com 06/09/2013
 	
 	});
 	
@@ -162,6 +180,7 @@ function loadData() {
 	
 	
 	loadUpButtons();
+
 
 	
 };
@@ -186,8 +205,15 @@ function loadUpButtons() {
         .attr("class", "indicador indicador_cinza")
 		.on("click", function(d) {
 
+			//Inicio - henriquerzo@gmail.com 06/09/2013
+			if(cidade == ""){
+				$("#map_title")
+				.text(d.name);
+				plotColorMap(d.id, d.desvio, dataset);
+			}
+
 		//limpa tela caso o botao clicado seja cinza(inativo)
-			if(getButtonColor(d.desvio) == "indicador_cinza"){
+			else if(getButtonColor(d.desvio) == "indicador_cinza"){
 				cleanContainers();
 				
 				d3.select("#div_indicador_titulo")
@@ -195,7 +221,10 @@ function loadUpButtons() {
 				.attr("class", "titulo_grafico")
 				.text(mensagemBotaoCinza);
 
-			}else{			
+				//Fim - henriquerzo@gmail.com 06/09/2013
+
+
+			}else{
 				plotIndicadores(d.id);
 				plotSeries(cidade,d.id);
 				
