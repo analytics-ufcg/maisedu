@@ -140,8 +140,8 @@ dados <- na.omit(dados)
 dados$media = rowMeans(dados[,2:11])
 dados$mediana <- apply(dados[,2:11], MARGIN=1, FUN=median, na.rm=TRUE)
 
-limiar_media = quantile(dados$media,0.94)
-limiar_mediana = quantile(dados$mediana,0.9)
+limiar_media = quantile(dados$media,0.8)
+limiar_mediana = quantile(dados$mediana,0.81)
 dados2 = dados
 dados2$Vizinho1[dados2$Vizinho1 > limiar_media ] = NA
 dados2$Vizinho2[dados2$Vizinho2 > limiar_media ] = NA
@@ -167,11 +167,11 @@ dados3$Vizinho10[dados3$Vizinho10 > limiar_mediana ] = NA
 
 
 png("Ecdf-Media.png",bg="white",width=700, height=400)
-Ecdf(dados$media,q=(0.94),xlab = "Media dos Vizinhos",
+Ecdf(dados$media,q=(0.8),xlab = "Media dos Vizinhos",
 ylab="Proporção <= x",label.curves=TRUE,col="blue",las=1, subtitles=FALSE,)
 dev.off()
 png("Ecdf-Mediana.png",bg="white",width=700, height=400)
-Ecdf(dados$mediana,q=(0.90),xlab = "Mediana dos Vizinhos",
+Ecdf(dados$mediana,q=(0.81),xlab = "Mediana dos Vizinhos",
 ylab="Proporção <= x",label.curves=TRUE,col="blue",las=1, subtitles=FALSE,)
 dev.off()
 

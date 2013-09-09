@@ -245,14 +245,14 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 				.attr("y",312)
 				.style("fill","red")
 				.style("font-size","10px")
-				.text("estas não apresentam dados para o indicador");	
+				.text("existe um filtro para mostrar apenas a");	
 			svg.append("svg:text")
 				.attr("x",685)
 				.attr("y",324)
 				.attr("color","red")
 				.style("font-size","10px")
 				.style("fill","red")
-				.text("analisado no ano de "+ ano + "");	
+				.text("quantidade de municipios mais similares");	
 		};
 		/*Fim - explicacao - iurygregory@gmail.com 23/08/2013*/
 		svg.append("svg:text")
