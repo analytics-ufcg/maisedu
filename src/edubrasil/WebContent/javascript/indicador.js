@@ -2,7 +2,9 @@ var dataset = [];
 var rawdata = [];
 var dicionario = [];
 var similares = [];
+var tendencia = [];
 var cidade = "";
+var cidades_tendencia = [];
 var duration = 1000;
 var w = 800;
 var h = 350;
@@ -16,10 +18,12 @@ function getMenuOption(selection) {
 	
     cidade = selection.options[selection.selectedIndex].value;
 
+
 	//Inicio - henriquerzo@gmail.com 06/09/2013
 	if(cidade == "") {
 		$("#map_area").show();
-		resetMap(dataset);	
+		resetMap(dataset);
+		
 	}
 	else {
 		$("#map_area").hide();
@@ -60,6 +64,8 @@ function getMenuOption(selection) {
 	.attr("value", function (d){return d.name;})
 	.attr("id", function (d, i){return d.id;});
 
+
+	cidades_tendencia = getCol(tendencia);
 	
 	// D3 code modification made ​​by Nailson ( add tooltip with jquery and the tooltipster's plugin)
 	$('.tooltips').tooltipster('destroy');	
@@ -68,6 +74,8 @@ function getMenuOption(selection) {
 	.data(dicionario)
 	.attr("title", function (d){return d.big_description+".<a href='dicionario de dados.html?"+d.number+"' target='_blank'><img src='images/plus.png' onmouseover='this.src=&#39;images/plus2.png&#39;' onmouseout='this.src=&#39;images/plus.png&#39;' width='16' height='16'></a>";})
 	
+
+
 	$('.tooltips').tooltipster({ 
 			interactive: true,
 			maxWidth: 300,
@@ -77,7 +85,28 @@ function getMenuOption(selection) {
 			
 		});
 	
+
+	d3.selectAll(".arrows")
+	.data(dicionario)
+	.attr("src", function (d){
+					if (cidade=="") {
+						return "images/arrow0.png";
+					}
+					else
+						return "images/arrow"+tendencia[cidades_tendencia.indexOf(cidade)][d.id]+".png";
+				});
+	//console.log(cidades_tendencia.indexOf(cidade));
+	
 };
+
+function getCol(matrix){
+       var column = [];
+       for(var i=0; i<matrix.length; i++){
+          column.push(matrix[i]["NOME_MUNICIPIO"]);
+          
+       }
+       return column;
+}
 
 function cleanContainers(){
 	//Inicio - henriquerzo@gmail.com 06/09/2013
@@ -177,12 +206,18 @@ function loadData() {
 	
 	d3.csv("data/tabela_cidades_semelhantes.csv", function (data){
 			similares = data;});
+
+	//Nailson 07/09/2013		
+
+	d3.csv("data/serie_temporal.csv" , function (data){
+		tendencia = data;
+	});
+	
+	// END
 	
 	
 	loadUpButtons();
 
-
-	
 };
 
 //Carrega os botoes da parte de cima
@@ -190,6 +225,7 @@ function loadUpButtons() {
 	d3.csv("data/dicionario.csv" , function (data){
 		dicionario = data;
 		var div_buttons = d3.select("#div_indicador_options");	
+
 		
 		div_buttons.selectAll("input")
 		.data(data)
@@ -198,48 +234,59 @@ function loadUpButtons() {
 		.attr("class", "tooltips")
 		.attr("title", function (d){return d.big_description+".<a href='dicionario de dados.html?"+d.number+"' target='_blank'><img src='images/plus.png' onmouseover='this.src=&#39;images/plus2.png&#39;' onmouseout='this.src=&#39;images/plus.png&#39;' width='16' height='16'></a>";})
 		.attr("id", function (d, i){return "span"+d.id;})
-		.append("input")
-		.attr("type","button")
-		.attr("value", function (d){return d.name;})
-		.attr("id", function (d, i){return d.id;})
-        .attr("class", "indicador indicador_cinza")
-		.on("click", function(d) {
 
-			//Inicio - henriquerzo@gmail.com 06/09/2013
-			if(cidade == ""){
-				$("#map_title")
-				.text(d.name);
-				plotColorMap(d.id, d.desvio, dataset);
-			}
+		.each(function(d) {
+			d3.select(this).append("input")
+			.attr("type","button")
+			.attr("value", function (d){return d.name;})
+			.attr("id", function (d, i){return d.id;})
+	        .attr("class", "indicador indicador_cinza")
+			.on("click", function(d) {
 
-		//limpa tela caso o botao clicado seja cinza(inativo)
-			else if(getButtonColor(d.desvio) == "indicador_cinza"){
-				cleanContainers();
-				
-				d3.select("#div_indicador_titulo")
-				.append("h1")
-				.attr("class", "titulo_grafico")
-				.text(mensagemBotaoCinza);
+				//Inicio - henriquerzo@gmail.com 06/09/2013
+				if(cidade == ""){
+					$("#map_title")
+					.text(d.name);
+					plotColorMap(d.id, d.desvio, dataset);
+				}
+
+				//limpa tela caso o botao clicado seja cinza(inativo)
+				else if(getButtonColor(d.desvio) == "indicador_cinza"){
+					cleanContainers();
+					
+					d3.select("#div_indicador_titulo")
+					.append("h1")
+					.attr("class", "titulo_grafico")
+					.text(mensagemBotaoCinza);
 
 				//Fim - henriquerzo@gmail.com 06/09/2013
 
 
-			}else{
-				plotIndicadores(d.id);
-				plotSeries(cidade,d.id);
-				
-				//botão de cidades similares
-				/*d3.select("#div_indicador_titulo")
-				.append("input")
-				.style("text-anchor", "left")
-				.attr("id","botao_similares")
-				.attr("type","button")
-				.attr("value", function (d){return 'Cidades Similares';})
-				.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});*/
-			}
+				}else{
+					plotIndicadores(d.id);
+					plotSeries(cidade,d.id);
+					
+					//botão de cidades similares
+					/*d3.select("#div_indicador_titulo")
+					.append("input")
+					.style("text-anchor", "left")
+					.attr("id","botao_similares")
+					.attr("type","button")
+					.attr("value", function (d){return 'Cidades Similares';})
+					.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});*/
+				}
+			});
+			
+
+			d3.select(this).insert("img","input")
+					.attr("class","arrows")
+					.attr("width", 20)
+					.attr("height", 20)
+					.attr("src", function (d){return "images/arrow0.png";});
+			
 		});
 		
-		// D3 code modification made ​​by Nailson ( add tooltip with jquery and the tooltipster's plugin)
+	// D3 code modification made ​​by Nailson ( add tooltip with jquery and the tooltipster's plugin)
 		$('.tooltips').tooltipster({ 
 			interactive: true,
 			maxWidth: 300,
@@ -249,8 +296,9 @@ function loadUpButtons() {
 			
 		});
 		
-		
 	});
+
+	
 }
 
 //Plota o titulo do indicador
