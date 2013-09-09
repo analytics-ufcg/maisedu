@@ -139,7 +139,7 @@ function plotColorMap(indicador_nome, colunaDesvio, dataset) {
 }
 
 function resetMap(dataset) {
-	$("#map_title").text("Mapa da Paraíba");
+	$("#map_title").text("Escolha uma Cidade ou um Indicador para mais detalhes.");
 	var todas_cidades = dataset.map(function(d){return d.NOME_MUNICIPIO;}).unique().sort(sortComparer);
 	var div_municipios = d3.select("#Municípios");
 

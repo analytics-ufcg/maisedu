@@ -3,7 +3,7 @@ var rawdata = [];
 var dicionario = [];
 var similares = [];
 var tendencia = [];
-var cidade = "";
+var cidade = "Visão Geral";
 var cidades_tendencia = [];
 var duration = 1000;
 var w = 800;
@@ -20,7 +20,7 @@ function getMenuOption(selection) {
 
 
 	//Inicio - henriquerzo@gmail.com 06/09/2013
-	if(cidade == "") {
+	if(cidade == "Visão Geral") {
 		$("#map_area").show();
 		resetMap(dataset);
 		
@@ -89,7 +89,7 @@ function getMenuOption(selection) {
 	d3.selectAll(".arrows")
 	.data(dicionario)
 	.attr("src", function (d){
-					if (cidade=="") {
+					if (cidade=="Visão Geral") {
 						return "images/arrow0.png";
 					}
 					else
@@ -190,7 +190,7 @@ function loadData() {
 		
 		var cities = data.map(function(d){return d.NOME_MUNICIPIO;}).unique().sort(sortComparer);
 		//adiciona um vazio dentro do array
-		cities.unshift("");
+		cities.unshift("Visão Geral");
 		
 		var myList = d3.selectAll("#myList");
 		
@@ -244,7 +244,7 @@ function loadUpButtons() {
 			.on("click", function(d) {
 
 				//Inicio - henriquerzo@gmail.com 06/09/2013
-				if(cidade == ""){
+				if(cidade == "Visão Geral"){
 					$("#map_title")
 					.text(d.name);
 					plotColorMap(d.id, d.desvio, dataset);
