@@ -169,8 +169,11 @@ function getDesvio(colunaDesvio) {
 		if (valor == "NA" ) {
 			return 10;
 		}
-		else {
+		else if(parseFloat(valor) > 0) {
 			return -1 * parseFloat(valor);
+		}
+		else {
+			return parseFloat(valor);
 		}
 	}
 	//Fim - henriquerzo@gmail.com 12/09/2013
@@ -353,26 +356,31 @@ function getRecentValueIndicadorColuna(colunaDesvio) {
 //Retorna a cor do Botao
 function getButtonColor(colunaDesvio) {
 	var valor = getRecentValueIndicadorColuna(colunaDesvio);
-	if(colunaDesvio == "DESVIOS_MELHOR_INDICADOR_62" || colunaDesvio == "DESVIOS_NEUTRO_INDICADOR_7") {
-		valor = "-" + valor;
-	}
-	
-	if (valor == "NA" ) {
+	if (valor == "NA") {
         return "indicador_cinza";
 	}
-	else if (parseFloat(valor) == -2) {
+
+	valor = parseFloat(valor);
+
+	if(colunaDesvio == "DESVIOS_MELHOR_INDICADOR_62" || colunaDesvio == "DESVIOS_NEUTRO_INDICADOR_7") {
+		if(valor > 0){
+			valor = -1 * valor;
+		}
+	}
+	
+	if (valor == -2) {
         return "indicador_amarelo";
 	}
-	else if (parseFloat(valor) == -3) {
+	else if (valor == -3) {
 		return "indicador_laranja";
 	}
-	else if (parseFloat(valor) <= -4) {
+	else if (valor <= -4) {
 		return "indicador_vermelho";
 	}
-	else if (parseFloat(valor) < 4 && parseFloat(valor) >= 3) {
+	else if (valor < 4 && valor >= 3) {
         return "indicador_verde";
 	}
-	else if (parseFloat(valor) >= 4) {
+	else if (valor >= 4) {
         return "indicador_verde2";
 	}
 	else {
