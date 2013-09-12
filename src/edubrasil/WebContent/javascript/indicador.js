@@ -57,7 +57,7 @@ function getMenuOption(selection) {
 			return "indicador " + getButtonColorIndicador201(d.id);
 		}
 		else{
-          return "indicador " + getButtonColor(d.desvio);
+			return "indicador " + getButtonColor(d.desvio);        	
       	}
       	//Fim - henriquerzo@gmail.com 20/08/2013
     })
@@ -163,6 +163,17 @@ function getDesvio(colunaDesvio) {
 			*/
 			
 	}
+	//Inicio - henriquerzo@gmail.com 12/09/2013
+	else if(colunaDesvio == "DESVIOS_MELHOR_INDICADOR_62" || colunaDesvio == "DESVIOS_NEUTRO_INDICADOR_7") {
+		var valor = getRecentValueIndicadorColuna(colunaDesvio);
+		if (valor == "NA" ) {
+			return 10;
+		}
+		else {
+			return -1 * parseFloat(valor);
+		}
+	}
+	//Fim - henriquerzo@gmail.com 12/09/2013
 	else {
 		var valor = getRecentValueIndicadorColuna(colunaDesvio);
 		if (valor == "NA" ) {
@@ -342,6 +353,10 @@ function getRecentValueIndicadorColuna(colunaDesvio) {
 //Retorna a cor do Botao
 function getButtonColor(colunaDesvio) {
 	var valor = getRecentValueIndicadorColuna(colunaDesvio);
+	if(colunaDesvio == "DESVIOS_MELHOR_INDICADOR_62" || colunaDesvio == "DESVIOS_NEUTRO_INDICADOR_7") {
+		valor = "-" + valor;
+	}
+	
 	if (valor == "NA" ) {
         return "indicador_cinza";
 	}
@@ -728,7 +743,9 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 	}
 	else{
 		//Fim - henriquerzo@gmail.com - 19/08/2013
-		if(referencial == "melhor" | referencial == "neutro"){		
+		//Inicio - henriquerzo@gmail.com 12/09/2013
+		if(referencial == "melhor"){
+		//Fim - henriquerzo@gmail.com 12/09/2013
 		//amarelo
 		if((media - (desvio) < max) & (media - (2*desvio) > min)){
 			addLine(svg,x1(media - (2*desvio)),x1(media - (desvio)),y0,y0,"#FFCC00");
@@ -775,7 +792,74 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - desvio ) & d[indicador] <= (max));}), indicador,"#C0C0C0",min,max,y0);
 		}
 		
-	}else{
+	}
+	//Inicio - henriquerzo@gmail.com 12/09/2013
+	else if(referencial == "neutro"){
+		//amarelo
+		if((media - (desvio) < max) & (media - (2*desvio) > min)){
+			addLine(svg,x1(media - (2*desvio)),x1(media - (desvio)),y0,y0,"#FFCC00");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= (media - (desvio)));}), indicador,"#FFCC00",min,max,y0);
+		}else if((media - (desvio) > max) & (media - (2*desvio) > min)){
+			addLine(svg,x1(max),x1(media - (2*desvio)),y0,y0,"#FFCC00");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= max);}), indicador,"#FFCC00",min,max,y0);
+		}else if((media - (desvio) < max) & (media - (2*desvio) < min)){
+			addLine(svg,x1(media - (desvio)),x1(min),y0,y0,"#FFCC00");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= min & d[indicador] <= media - (desvio));}), indicador,"#FFCC00",min,max,y0);
+		}
+		//laranja
+		if((media - (2*desvio) < max) & (media - (3*desvio) > min)){
+			addLine(svg,x1(media - (2*desvio)),x1(media - (3*desvio)),y0,y0,"#FF6600");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (3*desvio)) & d[indicador] <= (media - (2*desvio)));}), indicador,"#FF6600",min,max,y0);
+		}else if((media - (2*desvio) > max) & (media - (3*desvio) > min)){
+			addLine(svg,x1(max),x1(media - (3*desvio)),y0,y0,"#FF6600");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - (2*desvio)) & d[indicador] <= max);}), indicador,"#FF6600",min,max,y0);
+		}else if((media - (3*desvio) < min) & (media - (2*desvio) > min)){
+			addLine(svg,x1(media - (2*desvio)),x1(min),y0,y0,"#FF6600");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (2*desvio)));}), indicador,"#FF6600",min,max,y0);
+		 }
+		//vermelho
+		if((media - (3*desvio) > min) & (media - (2*desvio) > min) & (media - desvio > min)){
+			addLine(svg,x1(media - (3*desvio)),x1(min),y0,y0,"#DE2D26");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media - (3*desvio)));}), indicador,"#A50F15",min,max,y0);
+		}
+		 //vermelho
+		if(media + (3*desvio) < max){
+			addLine(svg,x1(media + (3*desvio)),x1(max),y0,y0,"#DE2D26");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (3*desvio)) & d[indicador] <= (max));}), indicador,"#A50F15",min,max,y0);
+		}
+		//laranja
+		if((media + (3*desvio) < max) & (media + (2*desvio) > min)){
+			addLine(svg,x1(media + (3*desvio)),x1(media + (2*desvio)),y0,y0,"#FF6600");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (media + (3*desvio)));}), indicador,"#FF6600",min,max,y0);
+		}else if((media + (3*desvio) > max) & (media +(2*desvio) > min)){
+			addLine(svg,x1(media + (2*desvio)),x1(max),y0,y0,"#FF6600");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (max));}), indicador,"#FF6600",min,max,y0);
+		}else if((media +(3*desvio) < max) & (media + (2*desvio) < min)){
+			addLine(svg,x1(min),x1(media + (3*desvio)),y0,y0,"#FF6600");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media + (3*desvio)));}), indicador,"#FF6600",min,max,y0);
+		}
+		//amarelo
+		if((media + (2*desvio) < max) & (media + (desvio) > min)){
+			addLine(svg,x1(media + (desvio)),x1(media + (2*desvio)),y0,y0,"#FFCC00");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (desvio)) & d[indicador] <= (media + (2*desvio)));}), indicador,"#FFCC00",min,max,y0);
+		}else if((media + (2*desvio) > max) & (media +(desvio) > min)){
+			addLine(svg,x1(media + (2*desvio)),x1(max),y0,y0,"#FFCC00");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (max));}), indicador,"#FFCC00",min,max,y0);
+		}else if((media +(2*desvio) < max) & (media+(desvio) < min)){
+			addLine(svg,x1(min),x1(media + (2*desvio)),y0,y0,"#FFCC00");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media + (2*desvio)));}), indicador,"#FFCC00",min,max,y0);
+		}
+		//cinza
+		if((media - desvio > min) & (media + desvio < max)){
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - desvio ) & d[indicador] <= (media + desvio));}), indicador,"#C0C0C0",min,max,y0);
+		}else if((media - desvio > min) & (media + desvio > max)) {
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media - desvio ) & d[indicador] <= (max));}), indicador,"#C0C0C0",min,max,y0);
+		}
+
+	}
+	//Fim - henriquerzo@gmail.com 12/09/2013
+
+	else{
 		 //vermelho
 		if(media + (3*desvio) < max){
 			addLine(svg,x1(media + (3*desvio)),x1(max),y0,y0,"#DE2D26");

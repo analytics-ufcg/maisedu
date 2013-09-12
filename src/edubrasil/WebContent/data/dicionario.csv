@@ -1,5 +1,5 @@
 "id","name","desvio","referencial_maior","big_description","number"
-"INDICADOR_62","Part. despesa com pessoal e encargos sociais na função educação(%)","DESVIOS_MELHOR_INDICADOR_62","melhor","Taxa de participação da despesa corrente com pessoal e encargos sociais","0"
+"INDICADOR_62","Part. despesa com pessoal e encargos sociais na função educação(%)","DESVIOS_MELHOR_INDICADOR_62","neutro","Taxa de participação da despesa corrente com pessoal e encargos sociais","0"
 "INDICADOR_199","IDEB - 5º ano do ensino fundamental","DESVIOS_MELHOR_INDICADOR_199","melhor","Produto da média de proficiência em Língua Portuguesa e Matemática (5º ano)","1"
 "INDICADOR_200","IDEB - 9º ano do ensino fundamental","DESVIOS_MELHOR_INDICADOR_200","melhor","Produto da média de proficiência em Língua Portuguesa e Matemática (9º ano)","1"
 "INDICADOR_329","Taxa de analfabetismo(%)","DESVIOS_PIOR_INDICADOR_329","pior","Refere-se ao percentual de pessoas analfabetas com 18 anos de idade ou mais","2"
@@ -12,5 +12,5 @@
 "INDICADOR_290","Percentual de docentes temporários(%)","DESVIOS_PIOR_INDICADOR_290","pior","Percentual de docentes da rede de uma localidade em regime de contratação por contrato temporário/terceirizado","7"
 "INDICADOR_202","Índice precariedade infraestrutura(%)","DESVIOS_PIOR_INDICADOR_202","pior","Taxa média das variáveis que sinalizam a existência de problemas de infraestrutura das escolas no município","8"
 "INDICADOR_184","Razão aluno por docente(Qtd. Alunos por Docente)","DESVIOS_PIOR_INDICADOR_184","pior","Total de alunos da rede de uma localidade dividido pelo total de docentes","9"
-"INDICADOR_7","Despesa educação por aluno(em Reais)","DESVIOS_NEUTRO_INDICADOR_7","melhor","Razão entre a despesa corrente na função educação e o total de alunos matriculados na educação básica","10"
+"INDICADOR_7","Despesa educação por aluno(em Reais)","DESVIOS_NEUTRO_INDICADOR_7","neutro","Razão entre a despesa corrente na função educação e o total de alunos matriculados na educação básica","10"
 "INDICADOR_201","Índice eficiência educação básica(%)","DESVIOS_MELHOR_INDICADOR_201","melhor","Indice de desempenho do gasto público em educação básica","11"
