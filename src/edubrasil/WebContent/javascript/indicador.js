@@ -23,28 +23,33 @@ function getMenuOption(selection) {
 	if(cidade == "Visão Geral") {
 		$("#map_area").show();
 		resetMap(dataset);
+		dicionario.sort(function (a, b) {
+				return a.name.localeCompare(b.name);
+		});
 		
 	}
 	else {
 		$("#map_area").hide();
+		
 	}
 	//Fim - henriquerzo@gmail.com 06/09/2013
 
 	rawdata = dataset.filter(function(i){return i.NOME_MUNICIPIO == cidade;});	
 	
 	dicionario.sort(function (a, b) {
-		//Inicio - henriquerzo@gmail.com 20/08/2013
-		if(a.id == "INDICADOR_201") {
-			return getDesvio(a.id) - getDesvio(b.desvio);
-		}
-		else if(b.id == "INDICADOR_201") {
-			return getDesvio(a.desvio) - getDesvio(b.id);
-		}
-		else {
-			return getDesvio(a.desvio) - getDesvio(b.desvio);
-		}
-		//Fim - henriquerzo@gmail.com 20/08/2013
+			//Inicio - henriquerzo@gmail.com 20/08/2013
+			if(a.id == "INDICADOR_201") {
+				return getDesvio(a.id) - getDesvio(b.desvio);
+			}
+			else if(b.id == "INDICADOR_201") {
+				return getDesvio(a.desvio) - getDesvio(b.id);
+			}
+			else {
+				return getDesvio(a.desvio) - getDesvio(b.desvio);
+			}
+			//Fim - henriquerzo@gmail.com 20/08/2013
 	});
+
 	d3.selectAll(".indicador")
 	.data(dicionario)
 	.transition()
@@ -237,9 +242,15 @@ function loadData() {
 //Carrega os botoes da parte de cima
 function loadUpButtons() {
 	d3.csv("data/dicionario.csv" , function (data){
-		dicionario = data;
-		var div_buttons = d3.select("#div_indicador_options");	
 
+
+		dicionario = data;
+		
+		dicionario.sort(function (a, b) {
+				return a.name.localeCompare(b.name);
+		});
+
+		var div_buttons = d3.select("#div_indicador_options");
 		
 		div_buttons.selectAll("input")
 		.data(data)
