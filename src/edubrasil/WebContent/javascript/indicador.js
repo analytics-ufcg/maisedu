@@ -254,7 +254,7 @@ function loadUpButtons() {
 			.attr("type","button")
 			.attr("value", function (d){return d.name;})
 			.attr("id", function (d, i){return d.id;})
-	        .attr("class", "indicador indicador_cinza")
+	        .attr("class", "indicador indicador_map")
 			.on("click", function(d) {
 
 				//Inicio - henriquerzo@gmail.com 06/09/2013
@@ -356,6 +356,10 @@ function getRecentValueIndicadorColuna(colunaDesvio) {
 //Retorna a cor do Botao
 function getButtonColor(colunaDesvio) {
 	var valor = getRecentValueIndicadorColuna(colunaDesvio);
+	if (valor == "NA" && cidade == "Visão Geral") {
+        return "indicador_map";
+	}
+
 	if (valor == "NA") {
         return "indicador_cinza";
 	}
@@ -401,6 +405,10 @@ function getButtonColorIndicador201(atributo) {
 		100 = excelente/verde2
 		*/
 	var valor = getRecentValueIndicadorColuna(atributo);
+	if (valor == "NA" && cidade == "Visão Geral") {
+        return "indicador_map";
+	}
+	
 	if (valor == "NA" ) {
         return "indicador_cinza";
 	}
