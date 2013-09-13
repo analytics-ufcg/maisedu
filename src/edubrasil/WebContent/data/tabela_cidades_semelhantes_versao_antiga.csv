@@ -23,7 +23,7 @@
 "Barra de São Miguel","Lucena","Cuité","Piancó","Princesa Isabel","Santa Cecília","Lagoa de Dentro","Araruna","Remígio","Teixeira","Jacaraú"
 "Barra de Santa Rosa","Paulista","Sobrado","São Domingos","Maturéia","Montadas","Boa Vista","Teixeira","Baraúna","São Francisco","São Sebastião do Umbuzeiro"
 "Barra de Santana","Triunfo","Riacho dos Cavalos","Santa Teresinha","Caldas Brandão","Pilõezinhos","São José de Caiana","Logradouro","Bom Jesus","Lagoa","Serra Redonda"
-"Bayeux","Queimadas",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Bayeux","Queimadas","Pedras de Fogo","Cajazeiras","Sousa","Alagoa Grande","Sapé","São José do Brejo do Cruz","Aroeiras","Caaporã","Bananeiras"
 "Belém","Santarém","Sumé","São Domingos","Paulista","Teixeira","Barra de Santa Rosa","Mataraca","Santana de Mangueira","Catolé do Rocha","Sobrado"
 "Belém do Brejo do Cruz","Duas Estradas","Olivedos","Camalaú","Livramento","Curral de Cima","Junco do Seridó","Pedra Branca","Jericó","Cacimba de Areia","Capim"
 "Bernardino Batista","São José de Espinharas","Nova Floresta","Jericó","Aguiar","Nazarezinho","Pilar","Igaracy","São Domingos do Cariri","Cacimba de Areia","São José de Princesa"
@@ -38,17 +38,17 @@
 "Brejo dos Santos","Caraúbas","Riachão do Poço","Lastro","Serraria","Serra da Raiz","Santa Cruz","Santa Rita","Riachão do Bacamarte","Coremas","Olho d'Água"
 "Caaporã","Sapé","Aroeiras","Areia","Juazeirinho","Mari","Araçagi","Itapororoca","Mamanguape","Tavares","Alagoa Nova"
 "Cabaceiras","São Francisco","São Sebastião do Umbuzeiro","Assunção","Boa Vista","São José do Sabugi","Pedro Régis","Damião","Maturéia","Riacho de Santo Antônio","Areia de Baraúnas"
-"Cabedelo",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Cabedelo","Patos","Guarabira","Picuí","Conde","Pedra Lavrada","Dona Inês","São João do Rio do Peixe","Santa Luzia","Várzea","Esperança"
 "Cachoeira dos Índios","Poço de José de Moura","Pilõezinhos","Arara","Imaculada","Lagoa","Cacimbas","Riacho dos Cavalos","Olho d'Água","Barra de Santana","Marizópolis"
 "Cacimba de Areia","São José de Princesa","Santo André","Zabelê","Olivedos","Ouro Velho","Vista Serrana","Duas Estradas","Belém do Brejo do Cruz","Jericó","São José de Espinharas"
 "Cacimba de Dentro","Remígio","Alagoa Nova","Boqueirão","Rio Tinto","Pitimbu","Ingá","Bananeiras","Monteiro","São Miguel de Taipu","Lagoa Seca"
 "Cacimbas","Imaculada","Marcação","Pilõezinhos","Cachoeira dos Índios","Arara","Barra de Santana","Triunfo","Poço de José de Moura","Cruz do Espírito Santo","Riacho dos Cavalos"
 "Caiçara","Pocinhos","Pirpirituba","Uiraúna","Casserengue","Taperoá","Alagoinha","Itaporanga","Soledade","São Sebastião de Lagoa de Roça","Cubati"
-"Cajazeiras","Esperança","São José do Brejo do Cruz","Queimadas","Catolé do Rocha","Solânea","Poço Dantas","Alhandra","Sousa","Pombal",NA
+"Cajazeiras","Esperança","São José do Brejo do Cruz","Queimadas","Catolé do Rocha","Solânea","Poço Dantas","Alhandra","Sousa","Pombal","Jacaraú"
 "Cajazeirinhas","Caturité","Nova Palmeira","Frei Martinho","Natuba","Areial","São João do Rio do Peixe","São José da Lagoa Tapada","Santa Luzia","Umbuzeiro","Dona Inês"
 "Caldas Brandão","Logradouro","Bom Jesus","Riacho dos Cavalos","Emas","Lagoa","Catingueira","Barra de Santana","São Bentinho","Santa Teresinha","Triunfo"
 "Camalaú","Junco do Seridó","Duas Estradas","Belém do Brejo do Cruz","Pedra Branca","Olivedos","Livramento","Curral de Cima","Serra Grande","Sossêgo","Algodão de Jandaíra"
-"Campina Grande",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Campina Grande","São João do Tigre","Patos","Cabedelo","Bayeux","Guarabira","Cajazeiras","Queimadas","Esperança","Conde","Picuí"
 "Capim","Pilões","Curral de Cima","Livramento","Juarez Távora","Puxinanã","Água Branca","Juripiranga","Belém do Brejo do Cruz","Jericó","Cuité de Mamanguape"
 "Caraúbas","Brejo dos Santos","Riachão do Poço","Serra da Raiz","Santa Cruz","Santa Rita","Lastro","Serraria","Riachão do Bacamarte","Coxixola","Coremas"
 "Carrapateira","Vieirópolis","Congo","Santa Helena","Mãe d'Água","São Sebastião de Lagoa de Roça","Parari","Malta","Condado","Gurjão","Cuitegi"
@@ -79,7 +79,7 @@
 "Fagundes","Mogeiro","Juarez Távora","Tacima","Seridó","São Miguel de Taipu","Água Branca","Pilões","Bonito de Santa Fé","Capim","Ingá"
 "Frei Martinho","Nova Palmeira","Cajazeirinhas","Areial","São José da Lagoa Tapada","Caturité","Sertãozinho","Natuba","Santana de Mangueira","Mataraca","Sumé"
 "Gado Bravo","Itapororoca","Cruz do Espírito Santo","Araçagi","Marcação","Juazeirinho","Gurinhém","Baía da Traição","Brejo do Cruz","Cacimbas","Imaculada"
-"Guarabira","Conde","Picuí","Esperança",NA,NA,NA,NA,NA,NA,NA
+"Guarabira","Conde","Picuí","Esperança","Patos","Pombal","Dona Inês","Pedra Lavrada","Cajazeiras","São João do Rio do Peixe","Alhandra"
 "Gurinhém","Brejo do Cruz","São Bento","Baía da Traição","Tavares","Massaranduba","Cuité de Mamanguape","Araçagi","Juripiranga","Juazeirinho","Água Branca"
 "Gurjão","São José do Bonfim","São José dos Cordeiros","Malta","Tenório","Algodão de Jandaíra","Sossêgo","Serra Grande","Mãe d'Água","Cuitegi","Pedra Branca"
 "Ibiara","Camalaú","Junco do Seridó","Pedra Branca","Belém do Brejo do Cruz","Duas Estradas","Olivedos","Serra Grande","Sossêgo","Zabelê","Livramento"
@@ -92,7 +92,7 @@
 "Itatuba","Diamante","Nova Olinda","Manaíra","Mulungu","Conceição","Riachão do Poço","Caraúbas","Brejo dos Santos","Coremas","Santa Cruz"
 "Jacaraú","Poço Dantas","Solânea","Araruna","Teixeira","Piancó","Barra de São Miguel","Princesa Isabel","Lucena","Cuité","Belém"
 "Jericó","Bernardino Batista","São José de Espinharas","Nova Floresta","Belém do Brejo do Cruz","Nazarezinho","Aguiar","Olivedos","Pilar","Duas Estradas","Juripiranga"
-"João Pessoa",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"João Pessoa","Campina Grande","São João do Tigre","Cabedelo","Patos","Bayeux","Guarabira","Cajazeiras","Queimadas","Pedras de Fogo","Sousa"
 "Juarez Távora","Capim","Tacima","Curral de Cima","Livramento","Pilões","Bonito de Santa Fé","Água Branca","Fagundes","Puxinanã","Belém do Brejo do Cruz"
 "Juazeirinho","Araçagi","Itapororoca","Areia","Gado Bravo","Gurinhém","Tavares","Cruz do Espírito Santo","São Bento","Brejo do Cruz","Baía da Traição"
 "Junco do Seridó","Pedra Branca","Camalaú","Duas Estradas","Serra Grande","Belém do Brejo do Cruz","Sossêgo","Olivedos","Algodão de Jandaíra","Tenório","Livramento"
@@ -107,7 +107,7 @@
 "Lucena","Barra de São Miguel","Cuité","Piancó","Santa Cecília","Lagoa de Dentro","Princesa Isabel","Uiraúna","Taperoá","Remígio","Araruna"
 "Mãe d'Água","Malta","Cuitegi","São Sebastião de Lagoa de Roça","Vieirópolis","Gurjão","Carrapateira","São José do Bonfim","Algodão de Jandaíra","Tenório","Pirpirituba"
 "Malta","Mãe d'Água","São José do Bonfim","Cuitegi","Gurjão","Algodão de Jandaíra","Tenório","São José dos Cordeiros","Sossêgo","Serra Grande","São Sebastião de Lagoa de Roça"
-"Mamanguape","Sapé","Caaporã","Cruz do Espírito Santo","Itapororoca","Juazeirinho",NA,NA,NA,NA,NA
+"Mamanguape","Sapé","Caaporã","Cruz do Espírito Santo","Itapororoca","Juazeirinho","Araçagi","Gado Bravo","Areia","Marcação","Cacimbas"
 "Manaíra","Mulungu","Diamante","Itatuba","Coremas","Riachão do Poço","Nova Olinda","Marizópolis","Brejo dos Santos","Caraúbas","Serraria"
 "Marcação","Cacimbas","Imaculada","Cruz do Espírito Santo","Gado Bravo","Pilõezinhos","Itapororoca","Juru","Cachoeira dos Índios","Triunfo","Barra de Santana"
 "Mari","Areia","São Miguel de Taipu","Mogeiro","Tavares","Pitimbu","São Bento","Alagoa Nova","Fagundes","Massaranduba","Ingá"
@@ -132,7 +132,7 @@
 "Ouro Velho","Santo André","São José de Princesa","Vista Serrana","Cacimba de Areia","São Domingos do Cariri","Zabelê","Passagem","Pilar","Curral Velho","Aguiar"
 "Parari","Santa Helena","Congo","Carrapateira","Condado","Vieirópolis","Alcantil","Salgado de São Félix","Prata","Santa Inês","São Sebastião de Lagoa de Roça"
 "Passagem","Curral Velho","Mato Grosso","São Domingos do Cariri","Vista Serrana","Pilar","Matinhas","Igaracy","Ouro Velho","Aguiar","São José de Princesa"
-"Patos",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Patos","Guarabira","Cajazeiras","Esperança","Conde","Picuí","Pombal","Bayeux","Alhandra","Catolé do Rocha","Queimadas"
 "Paulista","Barra de Santa Rosa","Sobrado","Teixeira","Maturéia","Boa Vista","São Domingos","Montadas","São Francisco","São Sebastião do Umbuzeiro","Cabaceiras"
 "Pedra Branca","Junco do Seridó","Camalaú","Serra Grande","Sossêgo","Tenório","Algodão de Jandaíra","Duas Estradas","Belém do Brejo do Cruz","Olivedos","São José do Bonfim"
 "Pedra Lavrada","Dona Inês","Santa Luzia","Várzea","Picuí","São João do Rio do Peixe","Caturité","Conde","Natuba","Cajazeirinhas","Nova Palmeira"
@@ -166,9 +166,9 @@
 "São Domingos","Santana de Mangueira","Santarém","Barra de Santa Rosa","Baraúna","Montadas","Paulista","Sertãozinho","Sobrado","Sumé","Belém"
 "São Domingos do Cariri","Pilar","Aguiar","Igaracy","Curral Velho","Vista Serrana","São José de Espinharas","Passagem","São José de Princesa","Santo André","Bernardino Batista"
 "São Francisco","São Sebastião do Umbuzeiro","Cabaceiras","Boa Vista","Assunção","Maturéia","Damião","Sobrado","Pedro Régis","São José do Sabugi","Desterro"
-"São João do Cariri","Salgadinho","Boa Ventura","Santana dos Garrotes","Monte Horebe",NA,NA,NA,NA,NA,NA
+"São João do Cariri","Salgadinho","Boa Ventura","Santana dos Garrotes","Monte Horebe","Conceição","Itatuba","Nova Olinda","Diamante","Coxixola","Manaíra"
 "São João do Rio do Peixe","Dona Inês","Caturité","Santa Luzia","Natuba","Várzea","Cajazeirinhas","Nova Palmeira","Pedra Lavrada","Areial","Frei Martinho"
-"São João do Tigre",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"São João do Tigre","Bayeux","Patos","Queimadas","Cajazeiras","Pedras de Fogo","Guarabira","Sapé","São José do Brejo do Cruz","Sousa","Esperança"
 "São José da Lagoa Tapada","Sertãozinho","Santana de Mangueira","Areial","Frei Martinho","Baraúna","Sumé","São Domingos","Mataraca","Quixabá","Montadas"
 "São José de Caiana","Serra Redonda","Borborema","Santa Teresinha","Triunfo","Aparecida","Juru","Barra de Santana","Matinhas","Catingueira","Riacho dos Cavalos"
 "São José de Espinharas","Bernardino Batista","Aguiar","Pilar","Nova Floresta","Igaracy","Nazarezinho","Jericó","São Domingos do Cariri","São José de Princesa","Vista Serrana"
@@ -183,7 +183,7 @@
 "São Miguel de Taipu","Pitimbu","Ingá","Alagoa Nova","Mari","Fagundes","Mogeiro","Boqueirão","Soledade","Alagoinha","Cacimba de Dentro"
 "São Sebastião de Lagoa de Roça","Vieirópolis","Mãe d'Água","Pirpirituba","Cuitegi","Carrapateira","Congo","Malta","Pocinhos","Santa Helena","Condado"
 "São Sebastião do Umbuzeiro","São Francisco","Cabaceiras","Assunção","Boa Vista","Damião","Pedro Régis","Maturéia","São José do Sabugi","Desterro","Sobrado"
-"Salgadinho","São João do Cariri","Boa Ventura","Santana dos Garrotes",NA,NA,NA,NA,NA,NA,NA
+"Salgadinho","São João do Cariri","Boa Ventura","Santana dos Garrotes","Monte Horebe","Conceição","Itatuba","Nova Olinda","Diamante","Coxixola","Manaíra"
 "Salgado de São Félix","Prata","Pedro Régis","São José de Piranhas","Alcantil","Santa Inês","Assunção","Damião","Desterro","Condado","Areia de Baraúnas"
 "Santa Cecília","Cuité","Lucena","Lagoa de Dentro","Uiraúna","Remígio","Taperoá","Barra de São Miguel","Itabaiana","Alagoinha","Boqueirão"
 "Santa Cruz","Serra da Raiz","Caraúbas","Santa Rita","Brejo dos Santos","Coxixola","Riachão do Poço","Lastro","Serraria","Riachão do Bacamarte","Nova Olinda"
@@ -196,7 +196,7 @@
 "Santana dos Garrotes","Monte Horebe","Conceição","Boa Ventura","Itatuba","Nova Olinda","Diamante","Manaíra","Mulungu","Riachão do Poço","Coxixola"
 "Santarém","Santana de Mangueira","São Domingos","Mataraca","Belém","Sumé","Barra de Santa Rosa","Sertãozinho","Paulista","Umbuzeiro","Baraúna"
 "Santo André","São José de Princesa","Ouro Velho","Vista Serrana","Cacimba de Areia","São Domingos do Cariri","Zabelê","Pilar","Aguiar","São José de Espinharas","Bernardino Batista"
-"Sapé","Mamanguape","Caaporã","Pedras de Fogo","Aroeiras","Juazeirinho",NA,NA,NA,NA,NA
+"Sapé","Mamanguape","Caaporã","Pedras de Fogo","Aroeiras","Juazeirinho","Alagoa Grande","Areia","Araçagi","Itapororoca","Mari"
 "Seridó","Casserengue","Tacima","Bonito de Santa Fé","Itaporanga","Soledade","Alagoinha","Fagundes","Juarez Távora","Caiçara","Pirpirituba"
 "Serra Branca","Desterro","Damião","São José de Piranhas","Cubati","Pedro Régis","Maturéia","São Sebastião do Umbuzeiro","Taperoá","Alcantil","São Francisco"
 "Serra da Raiz","Santa Cruz","Santa Rita","Caraúbas","Brejo dos Santos","Coxixola","Riachão do Poço","Lastro","Serraria","Riachão do Bacamarte","Riachão"
