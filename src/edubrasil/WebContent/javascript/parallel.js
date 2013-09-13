@@ -220,11 +220,9 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 									 .style("top", 100 + "px")
 									 .text(nome_indicador);
 				d3.select("#tooltip_similar").classed("hidden", false);
-				console.log("entrou");
 		})
 		.on("mouseout",function(d){
 				d3.select("#tooltip_similar").classed("hidden", true);
-				console.log("saiu");
 				
 		});
 		
@@ -232,7 +230,6 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 		/*Fim - tooltip indicador - iurygregory@gmail.com 10/08/2013*/
 		/*Inicio - explicacao - iurygregory@gmail.com 23/08/2013*/	
 		var max_similares  = 11;
-		console.log(lista_cidades.length);
 		if (lista_cidades.length <  max_similares) {
 			svg.append("svg:text")
 				.attr("x",685)

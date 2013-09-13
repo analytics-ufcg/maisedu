@@ -17,23 +17,51 @@ function getDesvioIndicador(indicador, colunaDesvio, cidade, dataset) {
 	}
 }
 
-function getClassColor(desvio) {
-	if(desvio == "NA"){
-		return "none";
+function getClassColor(indicadorValor, desvioResult, indicadorNome) {
+	if (desvioResult == "NA" ) {
+			return "none";
 	}
-	else if(desvio == "-4"){
+
+	if(indicadorNome == "INDICADOR_201") {
+		if(parseFloat(indicadorValor) <= 0.545) {
+			return "valor_pessimo";
+		}
+		else if(parseFloat(indicadorValor) <= 0.665) {
+			return "valor_muito_ruim";
+		}
+		else if(parseFloat(indicadorValor) <= 0.895) {
+			return "neutro";
+		}
+		else if(parseFloat(indicadorValor) <= 0.995) {
+			return "valor_bom";
+		}
+		else if(parseFloat(indicadorValor) >= 0.996) {
+			return "valor_muito_bom";
+		}
+		else {
+			return "valor_muito_bom";
+		}
+	}
+
+	if(indicadorNome == "INDICADOR_62" || indicadorNome == "INDICADOR_7") {
+		if(parseFloat(desvioResult) > 0) {
+			desvioResult = "-" + desvioResult;
+		}
+	}
+
+	if(desvioResult == "-4"){
 		return "valor_pessimo";
 	}
-	else if(desvio == "-3"){
+	else if(desvioResult == "-3"){
 		return "valor_muito_ruim";
 	}
-	else if(desvio == "-2"){
+	else if(desvioResult == "-2"){
 		return "valor_ruim";
 	}
-	else if(desvio == "3") {
+	else if(desvioResult == "3") {
 		return "valor_bom";
 	}
-	else if(desvio == "4") {
+	else if(desvioResult == "4") {
 		return "valor_muito_bom";
 	}
 	else{
@@ -60,7 +88,7 @@ function plotColorMap(indicador_nome, colunaDesvio, dataset) {
 		}
 
 		var cidadeID = div_municipios.select("#" + cidade);
-		cidadeID.attr("class", "str2 " + getClassColor(indicador_desvio));
+		cidadeID.attr("class", "str2 " + getClassColor(indicador_valor, indicador_desvio, indicador_nome));
 
 		//mouse over
 		cidadeID.on("mouseover", function(d) {
@@ -104,9 +132,10 @@ function plotColorMap(indicador_nome, colunaDesvio, dataset) {
 			}
 
 			var indicador_result = getDesvioIndicador(indicador_nome, colunaDesvio, cidade, dataset);
+			var indicador_valor = indicador_result[0];
 			var indicador_desvio = indicador_result[1];
 
-			cidadeID.attr("class", "str2 " + getClassColor(indicador_desvio));
+			cidadeID.attr("class", "str2 " + getClassColor(indicador_valor, indicador_desvio, indicador_nome));
 
 			d3.select("#tooltip").classed("hidden", true);
 		});
