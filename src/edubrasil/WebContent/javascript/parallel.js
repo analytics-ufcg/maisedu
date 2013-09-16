@@ -31,7 +31,7 @@ function path(d) {
   return line(dimensions.map(function(p) { return [position(p), y[p](d[p])]; }));
 }
 
-function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indicador){
+function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indicador, total_similares){
 	
 	
 	// if(indicadores_selecionados.length == 3 && (ano == "2011")){
@@ -224,34 +224,58 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 		.on("mouseout",function(d){
 				d3.select("#tooltip_similar").classed("hidden", true);
 				
-		});
-		
-		
+		});		
 		/*Fim - tooltip indicador - iurygregory@gmail.com 10/08/2013*/
-		/*Inicio - explicacao - iurygregory@gmail.com 23/08/2013*/	
-		var max_similares  = 11;
-		if (lista_cidades.length <  max_similares) {
+		//Inicio - henriquerzo@gmail.com - 16/09/2013
+		if(total_similares < 10) {
 			svg.append("svg:text")
 				.attr("x",685)
-				.attr("y",300)
+				.attr("y",290)
 				.style("font-size","10px")
 				.style("fill","red")
-				.text("Há menos de 10 cidades similares porque ");	
+				.text("*Essa cidade possui menos de 10 cidades similares");	
 			svg.append("svg:text")
 				.attr("x",685)
-				.attr("y",312)
+				.attr("y",302)
 				.style("fill","red")
 				.style("font-size","10px")
-				.text("existe um filtro para mostrar apenas a");	
+				.text("porque não há cidades suficientemente similares");	
 			svg.append("svg:text")
 				.attr("x",685)
-				.attr("y",324)
+				.attr("y",314)
 				.attr("color","red")
 				.style("font-size","10px")
 				.style("fill","red")
-				.text("quantidade de municipios mais similares");	
+				.text("a ela.");	
+		};
+
+
+		/*Inicio - explicacao - iurygregory@gmail.com 23/08/2013*/	
+		var max_similares  = total_similares + 1;
+		if (lista_cidades.length < max_similares) {
+			svg.append("svg:text")
+				.attr("x",685)
+				.attr("y",330)
+				.style("font-size","10px")
+				.style("fill","red")
+				.text("*Algumas cidades similares não apresentam dados ");	
+			svg.append("svg:text")
+				.attr("x",685)
+				.attr("y",342)
+				.style("fill","red")
+				.style("font-size","10px")
+				.text("para este indicador no ano analisado. Então elas");	
+			svg.append("svg:text")
+				.attr("x",685)
+				.attr("y",354)
+				.attr("color","red")
+				.style("font-size","10px")
+				.style("fill","red")
+				.text("foram omitidas");	
 		};
 		/*Fim - explicacao - iurygregory@gmail.com 23/08/2013*/
+
+		//Fim - henriquerzo@gmail.com - 16/09/2013
 		svg.append("svg:text")
 			.attr("x",685)
 			.attr("y", 460)

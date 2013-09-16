@@ -10,6 +10,7 @@ var w = 800;
 var h = 350;
 var mensagemBotaoCinza = "Dados Indisponíveis";
 var valorR;
+var vizinhos;
 
 //Recebe uma cidade e pinta os botoes
 function getMenuOption(selection) {
@@ -453,7 +454,7 @@ function getButtonColor(colunaDesvio) {
 
 
 //Inicio - henriquerzo@gmail.com 20/08/2013
-//Retorna a cor do Botao para o indicar "Indice de eficiencia da educacao/INDICADOR_201"
+//Retorna a cor do Botao para o indicador "Indice de eficiencia da educacao basica/INDICADOR_201"
 function getButtonColorIndicador201(atributo) {
 	/*
 		Escala de Eficiência
@@ -515,6 +516,8 @@ function filtraSimilares(ano, dataSimilares, indicador) {
 	var values = Object.keys(vizinhos[0]).map(function (key) {
 	    return vizinhos[0][key];
 	});
+
+
 	
 	values = values.splice(1,values.length);
 	
@@ -523,6 +526,28 @@ function filtraSimilares(ano, dataSimilares, indicador) {
 	
 	return indicadores;	
 }
+
+
+//Inicio - henriquerzo@gmail.com - 16/09/2013
+//Retorna o nome das cidades mais similares a cidade principal
+function getNomesSimilares(cidade) {
+	var vizinhos = similares.filter(function(d){return d.Cidade == cidade;});
+	
+	var values = Object.keys(vizinhos[0]).map(function (key) {
+		if(vizinhos[0][key] != "NA" && vizinhos[0][key] != cidade) {
+			return vizinhos[0][key];
+		}
+		else {
+			return null;
+		}
+	});
+
+	values = $.grep(values, function(d, i){
+		return d != null;
+	})
+	return values;
+}
+//Fim - henriquerzo@gmail.com - 16/09/2013
 
 //Plota grafico
 function plotIndicadores(indicador) {
@@ -550,7 +575,7 @@ function plotIndicadores(indicador) {
 		var line_micro = [{'x' :d3.min(micro,function(d){return parseFloat(d[indicador]);}) , 'y' : h3},
 						  {'x': (d3.max(micro,function(d){return parseFloat(d[indicador]);})), 'y' : h3}];
 		
-		var vizinhos = filtraSimilares(currentYearData.ANO, similares, indicador);
+		vizinhos = filtraSimilares(currentYearData.ANO, similares, indicador);
 		
 		var lista_similares = (vizinhos.map(function(d){return (d.NOME_MUNICIPIO);}));
 		
@@ -622,8 +647,9 @@ function plotIndicadores(indicador) {
 			plot_cidades(svg,micro, indicador,"#A5A5A5",min_estado,max_estado,h3);
 			/*Fim- Marcadores - iurygregory@gmail.com - 21/08/2013*/
 
-			
-			if(currentYearData.ANO == 2011) {
+			//Inicio - henriquerzo@gmail.com - 16/09/2013
+			if(currentYearData.ANO == 2011 && getNomesSimilares(cidade).length != 0 && vizinhos.length != 0) {
+			//Fim - henriquerzo@gmail.com - 16/09/2013
 				svg.append("a")
 				.attr("xlink:href","#")
 				.attr("class","big-link")
@@ -635,7 +661,7 @@ function plotIndicadores(indicador) {
 				.attr("text-anchor", "right")
 				.attr("font-weight", "bold")
 				.text("(Mais Detalhes)")
-				.on("click", parallel_graph(cidade,indicador,lista_similares,currentYearData.ANO,"#container3", nomeIndicador(indicador)));
+				.on("click", parallel_graph(cidade,indicador,lista_similares,currentYearData.ANO,"#container3", nomeIndicador(indicador), getNomesSimilares(cidade).length));
 			}
 			
 				
@@ -716,8 +742,11 @@ function plotIndicadores(indicador) {
 			var max_estado = (d3.max(estado,function(d){return parseFloat(d[indicador]);}));
 			plot_cidades(svg,meso, indicador,"#A5A5A5",min_estado,max_estado,h2); 
 			plot_cidades(svg,micro, indicador,"#A5A5A5",min_estado,max_estado,h3);
-			/*Fim- Marcadores - iurygregory@gmail.com - 21/08/2013*/	
-			if(currentYearData.ANO == 2011) {
+			/*Fim- Marcadores - iurygregory@gmail.com - 21/08/2013*/
+
+			//Inicio - henriquerzo@gmail.com - 16/09/2013
+			if(currentYearData.ANO == 2011 && getNomesSimilares(cidade).length != 0 && vizinhos.length != 0) {
+			//Fim - henriquerzo@gmail.com - 16/09/2013
 				svg.append("a")
 				.attr("xlink:href","#")
 				.attr("class","big-link")
@@ -729,7 +758,7 @@ function plotIndicadores(indicador) {
 				.attr("text-anchor", "right")
 				.attr("font-weight", "bold")
 				.text("(Mais Detalhes)")
-				.on("click", parallel_graph(cidade,indicador,lista_similares,currentYearData.ANO,"#container3", nomeIndicador(indicador)));
+				.on("click", parallel_graph(cidade,indicador,lista_similares,currentYearData.ANO,"#container3", nomeIndicador(indicador),getNomesSimilares(cidade).length));
 			}
 		}
 		
@@ -1192,69 +1221,118 @@ function plot_cidades(svg, dados, indicador,cor, min, max, y0){
 function plot_similares(svg, similares, indicador, min, max, y0, ano){
 	//Inicio - henriquerzo@gmail.com - 07/08/2013
 	if(ano == 2011) {
-	//Fim - henriquerzo@gmail.com - 07/08/2013
-		var x1 = d3.scale.linear()
-		.domain([min,max])
-		.range([120, 750]);
+	
+		//Inicio - henriquerzo@gmail.com - 16/09/2013
+		if (getNomesSimilares(cidade).length == 0){
+			svg.selectAll("#barra_indicador_altura_240").on("mouseover", function(d) {
 
-
-		var g = svg.append("g"); 
-		g.selectAll("line").data(similares)
-		.enter()
-		.append("line")
-		.attr("x1", function(d){return x1(d[indicador]);})
-		.attr("x2", function(d){return x1(d[indicador]) + 2;})
-		.attr("y1",y0)
-		.attr("y2",y0)
-		.attr("class","linha_cidade")
-		.attr("text",function(d){return d.NOME_MUNICIPIO;})
-		.transition().duration(duration)
-		.style("stroke","#C0C0C0")
-		.attr("stroke-width",24);
-		
-		/*Inicio - Variavel do Mapa - Iury - 19/08/2013*/
-		var mapa_similares = geraMapa(similares,indicador);
-		/*Fim - Variavel do Mapa - Iury - 19/08/2013*/		
-
-
-		g.selectAll("line").on("mouseover", function(d) {
-
-			/*Inicio- Alterar tooltip 4º barra  - Iury - 19/08/2013*/
-			var key_valorIndicador = d3.format(".2f")(d[indicador]);
-			var nomesMunicipios = d.NOME_MUNICIPIO;
-			if(typeof mapa_similares[key_valorIndicador] == "object"){
-				nomesMunicipios = mapa_similares[key_valorIndicador].join(", ");
-			}			
-			var valorIndicador = nomesMunicipios + ": " + key_valorIndicador;
-			/*Fim - Alterar tooltip 4º barra  - Iury - 19/08/2013*/
-			
 			//Get the values for tooltip position
-			var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
-			var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
+			var xPosition = parseFloat(d3.select(this).attr("x1")) + 450;
+			var yPosition = parseFloat(d3.select(this).attr("y1")) + 150;
+
+			//var xPosition = window.event.clientX
+			//var yPosition = window.event.clientY
+
 
 			//Update the tooltip position and value
 			d3.select("#tooltip").style("left", xPosition + "px")
 			.style("top", yPosition + "px")
-			.select("#value").text(valorIndicador);//cidade + " : " +valorIndicador.toFixed(2));
-			
+			.select("#value").text("Esta cidade não possui cidades similares");
+
 			//Show the tooltip
 			d3.select("#tooltip").classed("hidden", false);
-		})
-		.on("mouseout", function() {//Hide the tooltip
-			d3.select("#tooltip").classed("hidden", true);
-		});
+			})
+			.on("mouseout", function() {//Hide the tooltip
+				d3.select("#tooltip").classed("hidden", true);
+			});
+		}
+		else if(similares.length == 0){
+			svg.selectAll("#barra_indicador_altura_240").on("mouseover", function(d) {
 
-		
-		/*svg.append("text")
-		.attr("y", h1 + 10)
-		.attr("x", 60 + 50)
-		.attr("font-weight", "bold")
-		.text("Cidades similares")
-		.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});*/
-		
+			//Get the values for tooltip position
+			var xPosition = parseFloat(d3.select(this).attr("x1")) + 450;
+			var yPosition = parseFloat(d3.select(this).attr("y1")) + 150;
+
+			//var xPosition = window.event.clientX
+			//var yPosition = window.event.clientY
+
+
+			//Update the tooltip position and value
+			d3.select("#tooltip").style("left", xPosition + "px")
+			.style("top", yPosition + "px")
+			.select("#value").text("As cidades mais similares a esta não apresentam dados para este indicador neste ano");
+
+			//Show the tooltip
+			d3.select("#tooltip").classed("hidden", false);
+			})
+			.on("mouseout", function() {//Hide the tooltip
+				d3.select("#tooltip").classed("hidden", true);
+			});
+		}
+		else {
+			var x1 = d3.scale.linear()
+			.domain([min,max])
+			.range([120, 750]);
+
+
+			var g = svg.append("g"); 
+			g.selectAll("line").data(similares)
+			.enter()
+			.append("line")
+			.attr("x1", function(d){return x1(d[indicador]);})
+			.attr("x2", function(d){return x1(d[indicador]) + 2;})
+			.attr("y1",y0)
+			.attr("y2",y0)
+			.attr("class","linha_cidade")
+			.attr("text",function(d){return d.NOME_MUNICIPIO;})
+			.transition().duration(duration)
+			.style("stroke","#C0C0C0")
+			.attr("stroke-width",24);
+			
+			/*Inicio - Variavel do Mapa - Iury - 19/08/2013*/
+			var mapa_similares = geraMapa(similares,indicador);
+			/*Fim - Variavel do Mapa - Iury - 19/08/2013*/		
+
+
+			g.selectAll("line").on("mouseover", function(d) {
+
+				/*Inicio- Alterar tooltip 4º barra  - Iury - 19/08/2013*/
+				var key_valorIndicador = d3.format(".2f")(d[indicador]);
+				var nomesMunicipios = d.NOME_MUNICIPIO;
+				if(typeof mapa_similares[key_valorIndicador] == "object"){
+					nomesMunicipios = mapa_similares[key_valorIndicador].join(", ");
+				}			
+				var valorIndicador = nomesMunicipios + ": " + key_valorIndicador;
+				/*Fim - Alterar tooltip 4º barra  - Iury - 19/08/2013*/
+				
+				//Get the values for tooltip position
+				var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
+				var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
+
+				//Update the tooltip position and value
+				d3.select("#tooltip").style("left", xPosition + "px")
+				.style("top", yPosition + "px")
+				.select("#value").text(valorIndicador);//cidade + " : " +valorIndicador.toFixed(2));
+				
+				//Show the tooltip
+				d3.select("#tooltip").classed("hidden", false);
+			})
+			.on("mouseout", function() {//Hide the tooltip
+				d3.select("#tooltip").classed("hidden", true);
+			});
+			console.log(similares.length);
+
+			
+			/*svg.append("text")
+			.attr("y", h1 + 10)
+			.attr("x", 60 + 50)
+			.attr("font-weight", "bold")
+			.text("Cidades similares")
+			.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});*/
+		}
+		//Fim - henriquerzo@gmail.com - 16/09/2013
 	}
-	//Inicio - henriquerzo@gmail.com - 07/08/2013
-	
+	//Inicio - henriquerzo@gmail.com - 07/08/2013	
 	else {
 		svg.selectAll("#barra_indicador_altura_240").on("mouseover", function(d) {
 
@@ -1269,7 +1347,7 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 			//Update the tooltip position and value
 			d3.select("#tooltip").style("left", xPosition + "px")
 			.style("top", yPosition + "px")
-			.select("#value").text("O sistema não possui dados para encontrar as cidades mais similares a esta.");
+			.select("#value").text("O sistema não possui dados neste ano para encontrar as cidades mais similares a esta.");
 
 			//Show the tooltip
 			d3.select("#tooltip").classed("hidden", false);
