@@ -26,10 +26,12 @@ function getMenuOption(selection) {
 		dicionario.sort(function (a, b) {
 				return a.name.localeCompare(b.name);
 		});
+		$("#div_legend_button").hide();
 		
 	}
 	else {
 		$("#map_area").hide();
+		$("#div_legend_button").show();
 		
 	}
 	//Fim - henriquerzo@gmail.com 06/09/2013
@@ -237,7 +239,51 @@ function loadData() {
 	
 	loadUpButtons();
 
+	create_legend();
+
 };
+
+//Cria svg com legendas das cores dentro da div_legend_button utilizando d3.js
+function create_legend() {
+	var legends_aux = [ "Não há dados", "vermelho", "laranja", "amarelo", "branco", "verde", "verde2"];
+	var legends_color = ["#6C7C7C", "#FF0000", "#FF7F00", "#FFFF00", "#FFFFFF", "#92B879", "#006400"];
+
+	var container = d3.select("#div_legend_button");
+
+	container.append("h3")
+		.attr("text","Legenda")
+		.text("Legenda");
+
+	svg = container.append("svg:svg")
+	    .attr("width", 130)
+	    .attr("height", 100)
+	    .attr("id","plotSimilares")
+	    .append("svg:g")	
+	    .attr("transform", "translate(10,15)")
+	    .attr("font-size", "12px");
+
+	svg.selectAll("text")
+        .data(legends_aux)
+        .call(function(d) { d.enter().append("text")})
+        .call(function(d) { d.exit().remove()})
+        .attr("y",function(d,i) { return i+"em"})
+        .attr("x","1em")
+        .text(function(d) { ;return d})
+
+    svg.selectAll("circle")
+        .data(legends_aux)
+        .call(function(d) { d.enter().append("circle")})
+        .call(function(d) { d.exit().remove()})
+        .attr("cy",function(d,i) { return i-0.25+"em"})
+        .attr("cx",0)
+        .attr("r","0.4em")
+        .style("fill",function(d,i) { return legends_color[i]})
+        .style("stroke-width", "1")
+        .style("stroke", "#000000");
+  
+
+}
+
 
 //Carrega os botoes da parte de cima
 function loadUpButtons() {
@@ -273,6 +319,8 @@ function loadUpButtons() {
 					$("#map_title")
 					.text(d.name);
 					plotColorMap(d.id, d.desvio, dataset);
+					$("#div_legend_button").show();
+
 				}
 
 				//limpa tela caso o botao clicado seja cinza(inativo)
