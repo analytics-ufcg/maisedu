@@ -115,13 +115,17 @@ compara.media.pb = function(df1, df2) {
           media.pb.comparada[j] = 0
         }
         else if(df1[j, i] < (df2[1, names(municipios)[i]] - 
-                               df2[1, names(municipios)[i]])) {
+                               df2[2, names(municipios)[i]]) &&
+                  df1[j, i] >= (df2[1, names(municipios)[i]] - 
+                                 2*df2[2, names(municipios)[i]])) {
           media.pb.comparada[j] = 1
         } else if(df1[j, i] < (df2[1, names(municipios)[i]] - 
-                                 2*df2[1, names(municipios)[i]])) {
+                                 2*df2[2, names(municipios)[i]]) &&
+                    df1[j, i] >= (df2[1, names(municipios)[i]] - 
+                                    3*df2[2, names(municipios)[i]])) {
           media.pb.comparada[j] = 2
         } else if(df1[j, i] < (df2[1, names(municipios)[i]] - 
-                                 3*df2[1, names(municipios)[i]])) {
+                                 3*df2[2, names(municipios)[i]])) {
           media.pb.comparada[j] = 3
         } else {
           media.pb.comparada[j] = 0
@@ -132,13 +136,17 @@ compara.media.pb = function(df1, df2) {
           media.pb.comparada[j] = 0
         }
         else if(df1[j, i] > (df2[1, names(municipios)[i]] + 
-                               df2[1, names(municipios)[i]])) {
+                               df2[2, names(municipios)[i]]) &&
+                  df1[j, i] <= (df2[1, names(municipios)[i]] - 
+                                  2*df2[2, names(municipios)[i]])) {
           media.pb.comparada[j] = 1
         } else if(df1[j, i] > (df2[1, names(municipios)[i]] + 
-                    2*df2[1, names(municipios)[i]])) {
+                                2*df2[2, names(municipios)[i]]) &&
+                    df1[j, i] <= (df2[1, names(municipios)[i]] - 
+                                    3*df2[2, names(municipios)[i]])) {
           media.pb.comparada[j] = 2
         } else if(df1[j, i] > (df2[1, names(municipios)[i]] + 
-                    3*df2[1, names(municipios)[i]])) {
+                                 3*df2[2, names(municipios)[i]])) {
           media.pb.comparada[j] = 3
         } else {
           media.pb.comparada[j] = 0
@@ -154,15 +162,16 @@ compara.media.pb = function(df1, df2) {
 
 comparacoes.pb = as.data.frame(compara.media.pb(municipios, pb))
 
-cidades.por.meso.micro = tabela.grande[order(tabela.grande$NOME_MESO, 
-                                       tabela.grande$NOME_MICRO,
-                                       tabela.grande$NOME_MUNICIPIO,
+cidades.por.meso.micro = tabela.grande[order(tabela.grande$NOME_MUNICIPIO,
                                        decreasing = F), ][, c(6, 8, 9)]
 cidades.por.meso.micro = cidades.por.meso.micro[!duplicated(cidades.por.meso.micro), ]
 
 cidades.por.meso.micro = cbind(cidades.por.meso.micro, 
           municipios[which(cidades.por.meso.micro$NOME_MUNICIPIO %in% municipios$NOME_MUNICIPIO), 
                                              2:(ncol(municipios))])
+cidades.por.meso.micro = cidades.por.meso.micro[order(cidades.por.meso.micro$NOME_MESO,
+                                                      cidades.por.meso.micro$NOME_MICRO,
+                                                      cidades.por.meso.micro$NOME_MUNICIPIO), ]
 
 compara.meso.ou.micro = function(df1, df2, df3, micro.or.meso.col) {
   out = c()
@@ -177,9 +186,9 @@ compara.meso.ou.micro = function(df1, df2, df3, micro.or.meso.col) {
         if(is.na(df1[j, i]) || is.na(valor.meso) || is.na(valor.sd)) {
           media.comparada[j] = 0
         }
-        else if(df1[j, i] < (valor.meso - valor.sd)) {
+        else if(df1[j, i] < (valor.meso - valor.sd) && df[j, i] >= (valor.meso - 2*valor.sd)) {
           media.comparada[j] = 1
-        } else if(df1[j, i] < (valor.meso - 2*valor.sd)) {
+        } else if(df1[j, i] < (valor.meso - 2*valor.sd) && df[j, i] >= (valor.meso - 3*valor.sd)) {
           media.comparada[j] = 2
         } else if(df1[j, i] < (valor.meso - 3*valor.sd)) {
           media.comparada[j] = 3
@@ -190,9 +199,9 @@ compara.meso.ou.micro = function(df1, df2, df3, micro.or.meso.col) {
         if(is.na(df1[j, i]) || is.na(valor.meso) || is.na(valor.sd)) {
           media.comparada[j] = 0
         }
-        else if(df1[j, i] > (valor.meso + valor.sd)) {
+        else if(df1[j, i] > (valor.meso + valor.sd) && df[j, i] <= (valor.meso - 2*valor.sd)) {
           media.comparada[j] = 1
-        } else if(df1[j, i] > (valor.meso + 2*valor.sd)) {
+        } else if(df1[j, i] > (valor.meso + 2*valor.sd) && df[j, i]  <= (valor.meso - 3*valor.sd)) {
           media.comparada[j] = 2
         } else if(df1[j, i] > (valor.meso + 3*valor.sd)) {
           media.comparada[j] = 3
