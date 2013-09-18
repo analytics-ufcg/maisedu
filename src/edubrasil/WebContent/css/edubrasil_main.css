@@ -11,6 +11,10 @@ html,body {
     background-color: black;
 }
 
+img{
+
+	border-style:none;
+}
 
 #container {
 	width: 100%;
