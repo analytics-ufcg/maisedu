@@ -109,44 +109,46 @@ compara.media.pb = function(df1, df2) {
   for(i in 2:(ncol(df1))) {
     media.pb.comparada = c()
     for(j in 1:(nrow(df1))) {
+      media.regiao = df2[1, names(municipios)[i]]
+      valor.sd = df2[2, names(municipios)[i]]
+      valor.mun = df1[j, i]
       if(dic[which(dic$id == names(municipios)[i]), 2] == "melhor") {
-        if(is.na(df1[j, i]) || is.na(df2[1, names(municipios)[i]]) ||
-             is.na(df2[2, names(municipios)[i]])) {
+        if(is.na(valor.mun) || is.na(media.regiao) || is.na(valor.sd)) {
           media.pb.comparada[j] = 0
         }
-        else if(df1[j, i] < (df2[1, names(municipios)[i]] - 
-                               df2[2, names(municipios)[i]]) &&
-                  df1[j, i] >= (df2[1, names(municipios)[i]] - 
-                                 2*df2[2, names(municipios)[i]])) {
+        else if(valor.mun < (media.regiao - 2*valor.sd) && valor.mun >= (media.regiao - 3*valor.sd)) {
           media.pb.comparada[j] = 1
-        } else if(df1[j, i] < (df2[1, names(municipios)[i]] - 
-                                 2*df2[2, names(municipios)[i]]) &&
-                    df1[j, i] >= (df2[1, names(municipios)[i]] - 
-                                    3*df2[2, names(municipios)[i]])) {
+        } else if(valor.mun < (media.regiao - 3*valor.sd) && valor.mun >= (media.regiao - 4*valor.sd)) {
           media.pb.comparada[j] = 2
-        } else if(df1[j, i] < (df2[1, names(municipios)[i]] - 
-                                 3*df2[2, names(municipios)[i]])) {
+        } else if(valor.mun < (media.regiao - 4*valor.sd)) {
+          media.pb.comparada[j] = 3
+        } else {
+          media.pb.comparada[j] = 0
+        }  
+      } else if(dic[which(dic$id == names(municipios)[i]), 2] == "neutro") {
+        if(is.na(valor.mun) || is.na(media.regiao) || is.na(valor.sd)) {
+          media.pb.comparada[j] = 0
+        }
+        else if((valor.mun < (media.regiao - 2*valor.sd) && valor.mun >= (media.regiao - 3*valor.sd)) ||
+                  (valor.mun > (media.regiao + 2*valor.sd) && valor.mun <= (media.regiao + 3*valor.sd))) {
+          media.pb.comparada[j] = 1
+        } else if((valor.mun < (media.regiao - 3*valor.sd) && valor.mun >= (media.regiao - 4*valor.sd)) ||
+                    (valor.mun > (media.regiao + 3*valor.sd) && valor.mun <= (media.regiao + 4*valor.sd))) {
+          media.pb.comparada[j] = 2
+        } else if((valor.mun < (media.regiao - 4*valor.sd)) || (valor.mun > (media.regiao + 4*valor.sd))) {
           media.pb.comparada[j] = 3
         } else {
           media.pb.comparada[j] = 0
         }  
       } else {
-        if(is.na(df1[j, i]) || is.na(df2[1, names(municipios)[i]]) ||
-             is.na(df2[2, names(municipios)[i]])) {
+        if(is.na(valor.mun) || is.na(media.regiao) || is.na(valor.sd)) {
           media.pb.comparada[j] = 0
         }
-        else if(df1[j, i] > (df2[1, names(municipios)[i]] + 
-                               df2[2, names(municipios)[i]]) &&
-                  df1[j, i] <= (df2[1, names(municipios)[i]] - 
-                                  2*df2[2, names(municipios)[i]])) {
+        else if(valor.mun > (media.regiao + 2*valor.sd) && valor.mun <= (media.regiao + 3*valor.sd)) {
           media.pb.comparada[j] = 1
-        } else if(df1[j, i] > (df2[1, names(municipios)[i]] + 
-                                2*df2[2, names(municipios)[i]]) &&
-                    df1[j, i] <= (df2[1, names(municipios)[i]] - 
-                                    3*df2[2, names(municipios)[i]])) {
+        } else if(valor.mun > (media.regiao + 3*valor.sd) && valor.mun <= (media.regiao + 4*valor.sd)) {
           media.pb.comparada[j] = 2
-        } else if(df1[j, i] > (df2[1, names(municipios)[i]] + 
-                                 3*df2[2, names(municipios)[i]])) {
+        } else if(valor.mun > (media.regiao + 4*valor.sd)) {
           media.pb.comparada[j] = 3
         } else {
           media.pb.comparada[j] = 0
@@ -163,12 +165,12 @@ compara.media.pb = function(df1, df2) {
 comparacoes.pb = as.data.frame(compara.media.pb(municipios, pb))
 
 cidades.por.meso.micro = tabela.grande[order(tabela.grande$NOME_MUNICIPIO,
-                                       decreasing = F), ][, c(6, 8, 9)]
+                                             decreasing = F), ][, c(6, 8, 9)]
 cidades.por.meso.micro = cidades.por.meso.micro[!duplicated(cidades.por.meso.micro), ]
 
 cidades.por.meso.micro = cbind(cidades.por.meso.micro, 
-          municipios[which(cidades.por.meso.micro$NOME_MUNICIPIO %in% municipios$NOME_MUNICIPIO), 
-                                             2:(ncol(municipios))])
+                               municipios[which(cidades.por.meso.micro$NOME_MUNICIPIO %in% municipios$NOME_MUNICIPIO), 
+                                          2:(ncol(municipios))])
 cidades.por.meso.micro = cidades.por.meso.micro[order(cidades.por.meso.micro$NOME_MESO,
                                                       cidades.por.meso.micro$NOME_MICRO,
                                                       cidades.por.meso.micro$NOME_MUNICIPIO), ]
@@ -178,32 +180,49 @@ compara.meso.ou.micro = function(df1, df2, df3, micro.or.meso.col) {
   for(i in 4:(ncol(df1))) {
     media.comparada = c()
     for(j in 1:(nrow(df1))) {
-      valor.meso = df2[which(df1[j, micro.or.meso.col] %in% df2$output),
+      media.regiao = df2[which(df1[j, micro.or.meso.col] %in% df2$output),
                         names(df1)[i]]
       valor.sd = df3[which(df1[j, micro.or.meso.col] %in% df3$output.sd),
                        names(df1)[i]]
+      valor.mun = df1[j, i]
       if(dic[which(dic$id == names(df1)[i]), 2] == "melhor") {
-        if(is.na(df1[j, i]) || is.na(valor.meso) || is.na(valor.sd)) {
+        if(is.na(valor.mun) || is.na(media.regiao) || is.na(valor.sd)) {
           media.comparada[j] = 0
         }
-        else if(df1[j, i] < (valor.meso - valor.sd) && df[j, i] >= (valor.meso - 2*valor.sd)) {
+        else if((valor.mun < (media.regiao - 2*valor.sd)) && (valor.mun >= (media.regiao - 3*valor.sd))) {
           media.comparada[j] = 1
-        } else if(df1[j, i] < (valor.meso - 2*valor.sd) && df[j, i] >= (valor.meso - 3*valor.sd)) {
+        } else if((valor.mun < (media.regiao - 3*valor.sd)) && (valor.mun >= (media.regiao - 4*valor.sd))) {
           media.comparada[j] = 2
-        } else if(df1[j, i] < (valor.meso - 3*valor.sd)) {
+        } else if(valor.mun < (media.regiao - 4*valor.sd)) {
+          media.comparada[j] = 3
+        } else {
+          media.comparada[j] = 0
+        }
+      } else if(dic[which(dic$id == names(df1)[i]), 2] == "neutro") {
+        if(is.na(valor.mun) || is.na(media.regiao) || is.na(valor.sd)) {
+          media.comparada[j] = 0
+        }
+        else if(((valor.mun < (media.regiao - 2*valor.sd)) && (valor.mun >= (media.regiao - 3*valor.sd))) ||
+                  ((valor.mun < (media.regiao - 2*valor.sd)) && (valor.mun >= (media.regiao - 3*valor.sd)))) {
+          media.comparada[j] = 1
+        } else if(((valor.mun < (media.regiao - 3*valor.sd)) && (valor.mun >= (media.regiao - 4*valor.sd))) ||
+                    ((valor.mun > (media.regiao + 3*valor.sd)) && (valor.mun <= (media.regiao + 4*valor.sd)))) {
+          media.comparada[j] = 2
+        } else if((valor.mun < (media.regiao - 4*valor.sd)) ||
+                    (valor.mun > (media.regiao + 4*valor.sd))) {
           media.comparada[j] = 3
         } else {
           media.comparada[j] = 0
         }
       } else {
-        if(is.na(df1[j, i]) || is.na(valor.meso) || is.na(valor.sd)) {
+        if(is.na(valor.mun) || is.na(media.regiao) || is.na(valor.sd)) {
           media.comparada[j] = 0
         }
-        else if(df1[j, i] > (valor.meso + valor.sd) && df[j, i] <= (valor.meso - 2*valor.sd)) {
+        else if((valor.mun > (media.regiao + 2*valor.sd)) && (valor.mun <= (media.regiao + 3*valor.sd))) {
           media.comparada[j] = 1
-        } else if(df1[j, i] > (valor.meso + 2*valor.sd) && df[j, i]  <= (valor.meso - 3*valor.sd)) {
+        } else if((valor.mun > (media.regiao + 3*valor.sd)) && (valor.mun <= (media.regiao + 4*valor.sd))) {
           media.comparada[j] = 2
-        } else if(df1[j, i] > (valor.meso + 3*valor.sd)) {
+        } else if(valor.mun > (media.regiao + 4*valor.sd)) {
           media.comparada[j] = 3
         } else {
           media.comparada[j] = 0
