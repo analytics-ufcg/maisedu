@@ -69,7 +69,7 @@ function getClassColor(indicadorValor, desvioResult, indicadorNome) {
 	}
 }
 
-function plotColorMap(indicador_nome, colunaDesvio, dataset) {
+function plotColorMap(indicador_nome, colunaDesvio, dataset, dataset_medianas) {
 	var todas_cidades = dataset.map(function(d){return d.NOME_MUNICIPIO;}).unique().sort(sortComparer);
 	var div_municipios = d3.select("#Municípios");
 	var indicador_result;
@@ -158,7 +158,7 @@ function plotColorMap(indicador_nome, colunaDesvio, dataset) {
 			if(indicador_result[0] != "NA") {
 				setTimeout(function(){
 					plotIndicadores(indicador_nome);
-					plotSeries(cidade,indicador_nome);
+					plotSeries(cidade,indicador_nome, dataset, dataset_medianas);
 				},500);
 			}
 

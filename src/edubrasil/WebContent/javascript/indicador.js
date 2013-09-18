@@ -1,4 +1,5 @@
 var dataset = [];
+var dataset_medianas = [];
 var rawdata = [];
 var dicionario = [];
 var similares = [];
@@ -103,7 +104,6 @@ function getMenuOption(selection) {
 					else
 						return "images/arrow"+tendencia[cidades_tendencia.indexOf(cidade)][d.id]+".png";
 				});
-	//console.log(cidades_tendencia.indexOf(cidade));
 	
 };
 
@@ -234,6 +234,12 @@ function loadData() {
 	d3.csv("data/serie_temporal.csv" , function (data){
 		tendencia = data;
 	});
+
+	//Inicio - henriquerzo@gmail.com - 18/09/2013
+	d3.csv("data/medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv", function (data){
+			dataset_medianas = data;
+	});
+	//Fim - henriquerzo@gmail.com - 18/09/2013
 	
 	// END
 	
@@ -319,7 +325,7 @@ function loadUpButtons() {
 				if(cidade == "Visão Geral"){
 					$("#map_title")
 					.text(d.name);
-					plotColorMap(d.id, d.desvio, dataset);
+					plotColorMap(d.id, d.desvio, dataset, dataset_medianas);
 					$("#div_legend_button").show();
 
 				}
@@ -338,7 +344,9 @@ function loadUpButtons() {
 
 				}else{
 					plotIndicadores(d.id);
-					plotSeries(cidade,d.id);
+					//Inicio - henriquerzo@gmail.com - 18/09/2013
+					plotSeries(cidade, d.id, dataset, dataset_medianas);
+					//Fim - henriquerzo@gmail.com - 18/09/2013
 					
 					//botão de cidades similares
 					/*d3.select("#div_indicador_titulo")
@@ -1320,7 +1328,6 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 			.on("mouseout", function() {//Hide the tooltip
 				d3.select("#tooltip").classed("hidden", true);
 			});
-			console.log(similares.length);
 
 			
 			/*svg.append("text")

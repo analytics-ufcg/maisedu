@@ -1,10 +1,11 @@
-var dataset = [];
 var dados_cidade = [];
 
 //variaveis usadas para plotar os dados
 var dados_estado = [];
 var dados_micro = [];
 var dados_meso = [];
+var data_temporaria = [];
+var data_temporaria_mediana = [];
 var val_y;
 var micro = "";
 var meso = "";
@@ -16,37 +17,53 @@ var meso = "";
 
 var parseDate = d3.time.format("%Y").parse;	
 
-function plotSeries(cidade,indicador) {
+//Inicio - henriquerzo@gmail.com - 18/09/2013
+function plotSeries(cidade,indicador, dataset, dataset_medianas) {
+	data_temporaria = dataset;
+	data_temporaria_mediana = dataset_medianas;
+
 	if((cidade != "") && (indicador != null)){
 		val_y = new Array();
-			d3.csv("data/tabela_com_todos_os_indicadores_selecionados_e_desvios.csv" , function (data){
-			data.forEach(function(d){
-				d.ANO = parseDate(d.ANO);
-				if(d.NOME_MUNICIPIO == cidade & d[indicador] != "NA"){
-					meso = d.NOME_MESO;
-					micro = d.NOME_MICRO;
-					val_y.push(parseFloat(d[indicador]));
-				}else if(d[indicador] != "NA"){
-					val_y.push(parseFloat(d[indicador]));
-				}
-			});
-			dados_cidade = data.filter(function(i){return i.NOME_MUNICIPIO == cidade & i[indicador] != "NA";});
+
+		data_temporaria.forEach(function(d){
+			d.ANO = parseDate(d.ANO);
+			if(d.NOME_MUNICIPIO == cidade & d[indicador] != "NA"){
+				meso = d.NOME_MESO;
+				micro = d.NOME_MICRO;
+				val_y.push(parseFloat(d[indicador]));
+			}else if(d[indicador] != "NA"){
+				val_y.push(parseFloat(d[indicador]));
+			}
 		});
+		dados_cidade = data_temporaria.filter(function(i){return i.NOME_MUNICIPIO == cidade & i[indicador] != "NA";});
 		
-		d3.csv("data/medianas_para_todos_os_indicadores_agrupados_por_ano_e_regiao.csv" , function (data){
-			data.forEach(function(d){
-				d.ANO = parseDate(d.ANO);
-				if((d.REGIAO == "Paraíba" | d.REGIAO == micro | d.REGIAO == meso) & d[indicador] != "NA"){
-					val_y.push(parseFloat(d[indicador]));
-				}
-			});
-			dados_estado = data.filter(function(i){return i.REGIAO == "Paraíba" & i[indicador] != "NA";});
-			dados_micro = data.filter(function(i){return i.REGIAO == micro & i[indicador] != "NA";});
-			dados_meso = data.filter(function(i){return i.REGIAO == meso & i[indicador] != "NA";});//
-			
-			plotGraph(indicador);
+
+		data_temporaria_mediana.forEach(function(d){
+			d.ANO = parseDate(d.ANO);
+			if((d.REGIAO == "Paraíba" | d.REGIAO == micro | d.REGIAO == meso) & d[indicador] != "NA"){
+				val_y.push(parseFloat(d[indicador]));
+			}
 		});
+		dados_estado = data_temporaria_mediana.filter(function(i){return i.REGIAO == "Paraíba" & i[indicador] != "NA";});
+		dados_micro = data_temporaria_mediana.filter(function(i){return i.REGIAO == micro & i[indicador] != "NA";});
+		dados_meso = data_temporaria_mediana.filter(function(i){return i.REGIAO == meso & i[indicador] != "NA";});//
+		
+		plotGraph(indicador);
+
+		data_temporaria.forEach(function(d){
+			if(typeof(d.ANO) != "string") {
+				d.ANO = (d.ANO).getFullYear().toString();
+			}
+		});
+		data_temporaria_mediana.forEach(function(d){
+			if(typeof(d.ANO) != "string") {
+				d.ANO = (d.ANO).getFullYear().toString();
+			}			
+		});
+		//Fim - henriquerzo@gmail.com - 18/09/2013
+		
 	};
+
 };
 
 function plotGraph(indicador){//(nome_indicador){
