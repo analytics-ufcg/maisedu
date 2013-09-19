@@ -253,7 +253,7 @@ function loadData() {
 //Cria svg com legendas das cores dentro da div_legend_button utilizando d3.js
 function create_legend() {
 	var legends_aux = [ "Não há dados", "Crítico", "Alerta", "Atenção", "Normal", "Satisfatório", "Ótimo"];
-	var legends_color = ["#6C7C7C", "#FF0000", "#FF7F00", "#FFFF00", "#FFFFFF", "#92B879", "#006400"];
+	var legends_color = ["#6C7C7C", "#FF0000", "#FF7F00", "#FFFF00", "#F0F0F0", "#92B879", "#006400"];
 
 	var container = d3.select("#div_legend_button");
 
