@@ -261,4 +261,4 @@ soma.todas.comparacoes = function() {
 
 comparacoes.finais = soma.todas.comparacoes()
 
-write.csv(file="serie_temporal.csv", comparacoes.finais, row.names=F)
+write.csv(file="serie_temporal.csv", comparacoes.pb, row.names=F)
