@@ -13,6 +13,10 @@ var mensagemBotaoCinza = "Dados Indisponíveis";
 var valorR;
 var vizinhos;
 
+var  ind_percentual = ["Índice eficiência educação básica","Índice precariedade infraestrutura", "Percentual de docentes temporários",
+"Percentual docentes formação superior","Taxa abandono total - fundamental","Taxa aprovação total - fundamental","Taxa de abandono total - ensino médio",
+"Taxa de analfabetismo","Taxa de aprovação total - ensino médio","Taxa de atendimento escolar"]
+
 //Recebe uma cidade e pinta os botoes
 function getMenuOption(selection) {
 	//limpa containers
@@ -70,7 +74,7 @@ function getMenuOption(selection) {
       	}
       	//Fim - henriquerzo@gmail.com 20/08/2013
     })
-	.attr("value", function (d){return d.name;})
+	.attr("value", function (d){return d.name.replace("(%)","").replace("(em Reais)","");}) /*removendo unidades 27/09/2013*/
 	.attr("id", function (d, i){return d.id;});
 
 
@@ -304,7 +308,7 @@ function loadUpButtons() {
 		});
 
 		var div_buttons = d3.select("#div_indicador_options");
-		
+
 		div_buttons.selectAll("input")
 		.data(data)
 		.enter()
@@ -316,7 +320,7 @@ function loadUpButtons() {
 		.each(function(d) {
 			d3.select(this).append("input")
 			.attr("type","button")
-			.attr("value", function (d){return d.name;})
+			.attr("value", function (d){return d.name.replace("(%)","").replace("(em Reais)","");}) /*27/09/2013 - removeendo unidades*/
 			.attr("id", function (d, i){return d.id;})
 	        .attr("class", "indicador indicador_map")
 			.on("click", function(d) {
@@ -324,7 +328,7 @@ function loadUpButtons() {
 				//Inicio - henriquerzo@gmail.com 06/09/2013
 				if(cidade == "Visão Geral"){
 					$("#map_title")
-					.text(d.name);
+					.text(d.name.replace("(%)","").replace("(em Reais)",""));
 					plotColorMap(d.id, d.desvio, dataset, dataset_medianas);
 					$("#div_legend_button").show();
 
@@ -399,7 +403,7 @@ function plotTitulosGraficos(indicador, ano) {
 	d3.select("#div_indicador_titulo")
 	.append("h1")
 	.attr("class", "titulo_grafico")
-	.text(nomeIndicador(indicador));
+	.text(nomeIndicador(indicador).replace("(%)","").replace("(em Reais)","")); /* removendo unidades 27/09/2013*/
 	
 	d3.select("#div_series_titulo")
 	.append("h1")
