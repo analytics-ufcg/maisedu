@@ -408,7 +408,7 @@ function plotTitulosGraficos(indicador, ano) {
 	d3.select("#div_series_titulo")
 	.append("h1")
 	.attr("class", "titulo_grafico")
-	.text(nomeIndicador(indicador) + " nos últimos anos");
+	.text(nomeIndicador(indicador).replace("(%)","").replace("(em Reais)","") + " nos últimos anos");
 }
 
 //Pode retornar NA se não houver nenhum ano disponivel para o Indicador
