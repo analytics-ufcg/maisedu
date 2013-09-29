@@ -9,6 +9,8 @@ var data_temporaria_mediana = [];
 var val_y;
 var micro = "";
 var meso = "";
+var porcentagem = ["INDICADOR_62","INDICADOR_329","INDICADOR_333","INDICADOR_181","INDICADOR_182","INDICADOR_188","INDICADOR_189","INDICADOR_289","INDICADOR_290","INDICADOR_202","INDICADOR_201"]
+var reais = ["INDICADOR_7"]
 
 //function getMenuOption(sel) {
 //    var value = sel.options[sel.selectedIndex].value;
@@ -19,6 +21,7 @@ var parseDate = d3.time.format("%Y").parse;
 
 //Inicio - henriquerzo@gmail.com - 18/09/2013
 function plotSeries(cidade,indicador, dataset, dataset_medianas) {
+
 	data_temporaria = dataset;
 	data_temporaria_mediana = dataset_medianas;
 
@@ -64,6 +67,10 @@ function plotSeries(cidade,indicador, dataset, dataset_medianas) {
 		
 	};
 
+};
+
+Array.prototype.contains = function(element){
+    return this.indexOf(element) > -1;
 };
 
 function plotGraph(indicador){//(nome_indicador){
@@ -143,6 +150,34 @@ function plotGraph(indicador){//(nome_indicador){
 		  .attr("dy", ".90em")
 		  .style("text-anchor", "end");
 
+
+		/*Inicio - unidade no eixo Y - iurygregory@gmail.com 28/09*/
+		if(porcentagem.contains(indicador)){
+			svg.append("text")
+			  .attr("transform","rotate(-90)")
+			  .attr("y",0-margin.left)
+			  .attr("x",0 - (height/2))
+			  .attr("dy","1em")
+			  .attr("text-anchor","middle")
+			  .text("Porcentagem (%)")
+			  .attr("font-size", "12px");
+
+		}else{
+			if(reais.contains(indicador)){
+				svg.append("text")
+				  .attr("transform","rotate(-90)")
+				  .attr("y",0-margin.left)
+				  .attr("x",0 - (height/2))
+				  .attr("dy","1em")
+				  .attr("text-anchor","middle")
+				  .text("Gastos em Reais")
+				  .attr("font-size", "12px");
+			}else{
+				// caso de adicionar novas coisas ao eixo
+			}
+		}
+		/*Fim- unidade no eixo Y - iurygregory@gmail.com 28/09*/
+
 		//plotando as linhas  
 		svg.append("path")
 		  .datum(dados_cidade) //municipio
@@ -187,9 +222,24 @@ function plotGraph(indicador){//(nome_indicador){
 				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
 
 				//Update the tooltip position and value
+				/*Inicio - unidade no tooltip cidade - iurygregory@gmail.com 28/09*/
+				if(porcentagem.contains(indicador)){
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(valorIndicador.toFixed(2));//cidade + " : " +valorIndicador.toFixed(2));
+				.select("#value").text(valorIndicador.toFixed(2)+"%");
+				}else{
+					if(reais.contains(indicador)){
+					d3.select("#tooltip").style("left", xPosition + "px")
+					.style("top", yPosition + "px")
+					.select("#value").text(valorIndicador.toFixed(2)+ " Reais");
+					}else{
+					d3.select("#tooltip").style("left", xPosition + "px")
+					.style("top", yPosition + "px")
+					.select("#value").text(valorIndicador.toFixed(2));
+					}
+				}
+				/*Fim - unidade no tooltip cidade - iurygregory@gmail.com 28/09*/
+//cidade + " : " +valorIndicador.toFixed(2));
 
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);})
@@ -216,10 +266,23 @@ function plotGraph(indicador){//(nome_indicador){
 				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
 				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
 
-				//Update the tooltip position and value
+				if(porcentagem.contains(indicador)){
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(valorIndicador.toFixed(2));//"Estado : " + valorIndicador.toFixed(2));
+				.select("#value").text(valorIndicador.toFixed(2)+"%");
+				}else{
+					if(reais.contains(indicador)){
+					d3.select("#tooltip").style("left", xPosition + "px")
+					.style("top", yPosition + "px")
+					.select("#value").text(valorIndicador.toFixed(2)+ " Reais");
+					}else{
+					d3.select("#tooltip").style("left", xPosition + "px")
+					.style("top", yPosition + "px")
+					.select("#value").text(valorIndicador.toFixed(2));
+					}
+				}
+
+
 
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);})
@@ -247,10 +310,21 @@ function plotGraph(indicador){//(nome_indicador){
 				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450;
 
 				//Update the tooltip position and value
+				if(porcentagem.contains(indicador)){
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(valorIndicador.toFixed(2));//"Microrregião : " + valorIndicador.toFixed(2));
-
+				.select("#value").text(valorIndicador.toFixed(2)+"%");
+				}else{
+					if(reais.contains(indicador)){
+					d3.select("#tooltip").style("left", xPosition + "px")
+					.style("top", yPosition + "px")
+					.select("#value").text(valorIndicador.toFixed(2)+ " Reais");
+					}else{
+					d3.select("#tooltip").style("left", xPosition + "px")
+					.style("top", yPosition + "px")
+					.select("#value").text(valorIndicador.toFixed(2));
+					}
+				}
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);})
 
@@ -275,10 +349,21 @@ function plotGraph(indicador){//(nome_indicador){
 				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
 				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
 
-				//Update the tooltip position and value
+				if(porcentagem.contains(indicador)){
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(valorIndicador.toFixed(2));//"Mesorregião : " + valorIndicador.toFixed(2));
+				.select("#value").text(valorIndicador.toFixed(2)+"%");
+				}else{
+					if(reais.contains(indicador)){
+					d3.select("#tooltip").style("left", xPosition + "px")
+					.style("top", yPosition + "px")
+					.select("#value").text(valorIndicador.toFixed(2)+ " Reais");
+					}else{
+					d3.select("#tooltip").style("left", xPosition + "px")
+					.style("top", yPosition + "px")
+					.select("#value").text(valorIndicador.toFixed(2));
+					}
+				}
 
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);})

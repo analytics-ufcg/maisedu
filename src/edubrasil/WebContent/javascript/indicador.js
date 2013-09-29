@@ -1049,7 +1049,6 @@ function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value){
 		  .attr("height" , 30)
 		  .style("fill", "black");
 	
-
 	svg.append("text")
 		.attr("text-anchor","middle")
 		.attr("x", x1(dados_regiao[0].x) - 2)
