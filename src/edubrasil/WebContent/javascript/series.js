@@ -265,7 +265,7 @@ function plotGraph(indicador){//(nome_indicador){
 				//Get the values for tooltip position
 				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
 				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
-
+				/*Inicio - unidade tooltip - iury - 29/09*/
 				if(porcentagem.contains(indicador)){
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
@@ -281,6 +281,7 @@ function plotGraph(indicador){//(nome_indicador){
 					.select("#value").text(valorIndicador.toFixed(2));
 					}
 				}
+				/*Fim - unidade tooltip - iury - 29/09*/
 
 
 
@@ -310,6 +311,7 @@ function plotGraph(indicador){//(nome_indicador){
 				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450;
 
 				//Update the tooltip position and value
+				/*Inicio - unidade tooltip - iury - 29/09*/
 				if(porcentagem.contains(indicador)){
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
@@ -325,6 +327,7 @@ function plotGraph(indicador){//(nome_indicador){
 					.select("#value").text(valorIndicador.toFixed(2));
 					}
 				}
+				/*Fim - unidade tooltip - iury - 29/09*/
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);})
 
@@ -349,6 +352,7 @@ function plotGraph(indicador){//(nome_indicador){
 				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
 				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
 
+				/*Inicio - unidade tooltip - iury - 29/09*/
 				if(porcentagem.contains(indicador)){
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
@@ -364,6 +368,7 @@ function plotGraph(indicador){//(nome_indicador){
 					.select("#value").text(valorIndicador.toFixed(2));
 					}
 				}
+				/*Fim - unidade tooltip - iury - 29/09*/
 
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);})

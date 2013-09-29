@@ -8,6 +8,10 @@ var cores = ["#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "#BDBDBD", "
 
 var legenda = ["Indicador","Receita","Número Matrículas","IFDM*"];
 	
+
+var porcentagem = ["INDICADOR_62","INDICADOR_329","INDICADOR_333","INDICADOR_181","INDICADOR_182","INDICADOR_188","INDICADOR_189","INDICADOR_289","INDICADOR_290","INDICADOR_202","INDICADOR_201"]
+var reais = ["INDICADOR_7"]
+
 var m = [30, 10, 10, 10],
     w = 960 - m[1] - m[3],
     h = 500 - m[0] - m[2];

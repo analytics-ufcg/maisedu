@@ -13,6 +13,9 @@ var mensagemBotaoCinza = "Dados Indisponíveis";
 var valorR;
 var vizinhos;
 
+var porcentagem = ["INDICADOR_62","INDICADOR_329","INDICADOR_333","INDICADOR_181","INDICADOR_182","INDICADOR_188","INDICADOR_189","INDICADOR_289","INDICADOR_290","INDICADOR_202","INDICADOR_201"]
+var reais = ["INDICADOR_7"]
+
 var  ind_percentual = ["Índice eficiência educação básica","Índice precariedade infraestrutura", "Percentual de docentes temporários",
 "Percentual docentes formação superior","Taxa abandono total - fundamental","Taxa aprovação total - fundamental","Taxa de abandono total - ensino médio",
 "Taxa de analfabetismo","Taxa de aprovação total - ensino médio","Taxa de atendimento escolar"]
@@ -563,6 +566,7 @@ function getNomesSimilares(cidade) {
 
 //Plota grafico
 function plotIndicadores(indicador) {
+	
 	var svg;
 	var h1 = 60;
 	var	h2 = h1 + 60;
@@ -596,18 +600,19 @@ function plotIndicadores(indicador) {
 			svg = d3.select("#div_indicador").append("svg").attr("width", w).attr("height", 300);			
 			
 			//eixo das barras
-			plot_ranges(svg, line_estado, h1);
-			plot_ranges(svg, line_estado, h2);
-			plot_ranges(svg, line_estado, h3);
-			plot_ranges(svg, line_estado, h4);
+			plot_ranges(svg, line_estado, h1,indicador);
+			plot_ranges(svg, line_estado, h2,indicador);
+			plot_ranges(svg, line_estado, h3,indicador);
+			plot_ranges(svg, line_estado, h4,indicador);
 			
 			plot_similares(svg, vizinhos, indicador, (d3.min(estado,function(d){return parseFloat(d[indicador]);})),
 					(d3.max(estado,function(d){return parseFloat(d[indicador]);})), h4, currentYearData.ANO);
 			
 			
 			//barras cinzas equivalentes ao valor das regioes
-			plot_bars(svg , line_estado, line_meso, h2,currentYearData[indicador]);
-			plot_bars(svg , line_estado, line_micro, h3,currentYearData[indicador]);
+			
+			plot_bars(svg , line_estado, line_meso, h2,currentYearData[indicador],indicador);
+			plot_bars(svg , line_estado, line_micro, h3,currentYearData[indicador],indicador);
 			
 			//barra com as cores dos indicadores
 			plot_desvios_barras(svg,estado, indicador,h1, parseFloat(currentYearData[indicador]));
@@ -693,16 +698,16 @@ function plotIndicadores(indicador) {
 				 .remove();
 			
 			//eixo das barras
-			plot_ranges(svg, line_estado, h1);
-			plot_ranges(svg, line_estado, h2);
-			plot_ranges(svg, line_estado, h3);
-			plot_ranges(svg, line_estado, h4);
+			plot_ranges(svg, line_estado, h1,indicador);
+			plot_ranges(svg, line_estado, h2,indicador);
+			plot_ranges(svg, line_estado, h3,indicador);
+			plot_ranges(svg, line_estado, h4,indicador);
 			
 			
 			//barras cinzas equivalentes ao valor das regioes
 			//plot_bars(svg, line_estado, line_estado, 100,currentYearData[indicador]);
-			plot_bars(svg , line_estado, line_meso, h2,currentYearData[indicador]);
-			plot_bars(svg , line_estado, line_micro, h3,currentYearData[indicador]);
+			plot_bars(svg , line_estado, line_meso, h2,currentYearData[indicador],indicador);
+			plot_bars(svg , line_estado, line_micro, h3,currentYearData[indicador],indicador);
 
 			//barra com as cores dos indicadores
 			plot_desvios_barras(svg,estado, indicador,h1,parseFloat(currentYearData[indicador]));			
@@ -807,13 +812,38 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 		  .attr("stroke","black");
 
 	//font-weight: bold
+	/*Inicio - unidade para cidadade em negrito - iury - 29/09*/
+	if(porcentagem.contains(indicador)){
 	svg.append("text")
 		.attr("x", x1(valor_cidade))
 		.attr("y",(y0 - 20))
 		.attr("text-anchor", "middle")
 		.attr("font-weight", "bold")
 		.transition().duration(duration).delay(1000)
-		.text(cidade + ": " + (parseFloat(valor_cidade).toFixed(2)));
+		.text(cidade + ": " + (parseFloat(valor_cidade).toFixed(2))+"%");
+	}else{
+		if(reais.contains(indicador)){
+		svg.append("text")
+			.attr("x", x1(valor_cidade))
+			.attr("y",(y0 - 20))
+			.attr("text-anchor", "middle")
+			.attr("font-weight", "bold")
+			.transition().duration(duration).delay(1000)
+			.text(cidade + ": " + (parseFloat(valor_cidade).toFixed(2))+ " Reais");
+		}else{
+		svg.append("text")
+			.attr("x", x1(valor_cidade))
+			.attr("y",(y0 - 20))
+			.attr("text-anchor", "middle")
+			.attr("font-weight", "bold")
+			.transition().duration(duration).delay(1000)
+			.text(cidade + ": " + (parseFloat(valor_cidade).toFixed(2)));
+		}
+	}
+	/*Fim - unidade para cidadade em negrito - iury - 29/09*/
+
+
+
 }
 
 function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
@@ -1026,7 +1056,8 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 	
 }
 
-function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value){
+function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value,indicador){
+
 	var x1 = d3.scale.linear()
           .domain([dados_estado[0].x, dados_estado[1].x])
           .range([120, 750]);
@@ -1048,21 +1079,55 @@ function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value){
 		  .attr("width", 1)
 		  .attr("height" , 30)
 		  .style("fill", "black");
-	
-	svg.append("text")
+
+	/*Inicio - unidade minino barras 2 e 3 - iury - 29/09*/
+	if(porcentagem.contains(indicador)){
+		svg.append("text")
+		.attr("text-anchor","middle")
+		.attr("x", x1(dados_regiao[0].x) - 2)
+		.attr("y",(y0 + 30))
+		.text((dados_regiao[0].x).toFixed(2)+"%");
+	}else{
+		if(reais.contains(indicador)){
+		svg.append("text")
+		.attr("text-anchor","middle")
+		.attr("x", x1(dados_regiao[0].x) - 2)
+		.attr("y",(y0 + 30))
+		.text((dados_regiao[0].x).toFixed(2)+ " Reais");
+		}else{
+		svg.append("text")
 		.attr("text-anchor","middle")
 		.attr("x", x1(dados_regiao[0].x) - 2)
 		.attr("y",(y0 + 30))
 		.text((dados_regiao[0].x).toFixed(2));
-	svg.append("text")
+		}
+	}
+	/*Fim - unidade minino barras 2 e 3 - iury - 29/09*/
+	/*Inicio - unidade maximo barras 2 e 3 - iury - 29/09*/
+	if(porcentagem.contains(indicador)){
+		svg.append("text")
 		.attr("text-anchor","left")
 		.attr("x", x1(dados_regiao[1].x) - 15)
 		.attr("y",(y0 + 30))
-		.text((dados_regiao[1].x).toFixed(2));
-
+		.text((dados_regiao[1].x).toFixed(2)+"%");
+	}else{
+		if(reais.contains(indicador)){
+		svg.append("text")
+		.attr("text-anchor","left")
+		.attr("x", x1(dados_regiao[1].x) - 15)
+		.attr("y",(y0 + 30))
+		.text((dados_regiao[1].x).toFixed(2)+ " Reais");
+		}else{
+		svg.append("text")
+		.attr("text-anchor","left")
+		.attr("x", x1(dados_regiao[1].x) - 15)
+		.attr("y",(y0 + 30))
+		.text((dados_regiao[1].x).toFixed(2));	}
+	}
+	/*Fim - unidade maximo barras 2 e 3 - iury - 29/09*/
 }
 
-function plot_ranges(svg, dados, y0){
+function plot_ranges(svg, dados, y0,indicador){
 	
 	var valor1 = String(dados[0].x).replace(/\,/g,'');
 	var valor2 = String(dados[1].x).replace(/\,/g,'');
@@ -1094,6 +1159,25 @@ function plot_ranges(svg, dados, y0){
 			.attr("x", x1(dados[1].x) - 10)
 			.attr("y", (y0 + 44))
 			.text("Max");	
+		
+		if(porcentagem.contains(indicador)){
+			console.log(x1(dados[0].x));
+			svg.append("text")
+				.attr("x",x1(dados[0].x) + 30)
+				.attr("y",y0)
+				.text("%");
+		}else{
+			if(reais.contains(indicador)){
+				/*svg.append("text")
+					.attr("x",)
+					.attr("y",)
+					.text(" Reais");*/
+			}else{
+				// nao apresenta unidades
+			}
+		}
+
+
 	}
 
 
@@ -1210,16 +1294,29 @@ function plot_cidades(svg, dados, indicador,cor, min, max, y0){
 						var valorIndicador = nomesMunicipios + ": " + key_valorIndicador;
 						/*Fim - Alterar tooltip 1º barra  - Iury - 19/08/2013*/
 				
-				
+
 						//Get the values for tooltip position
 						var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
 						var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
 				
 						//Update the tooltip position and value
+						/*inicio - tooltip 1º barra unidade - iury - 29/09*/
+						if(porcentagem.contains(indicador)){
 						d3.select("#tooltip").style("left", xPosition + "px")
 						.style("top", yPosition + "px")
-						.select("#value").text(valorIndicador);//cidade + " : " +valorIndicador.toFixed(2));
-				
+						.select("#value").text(valorIndicador+"%");
+						}else{
+							if(reais.contains(indicador)){
+							d3.select("#tooltip").style("left", xPosition + "px")
+							.style("top", yPosition + "px")
+							.select("#value").text(valorIndicador+ " Reais");
+							}else{
+							d3.select("#tooltip").style("left", xPosition + "px")
+							.style("top", yPosition + "px")
+							.select("#value").text(valorIndicador);
+							}
+						}
+						/*Fim - tooltip 1º barra unidade - iury - 29/09*/
 						//Show the tooltip
 						d3.select("#tooltip").classed("hidden", false);
 					})
@@ -1320,11 +1417,26 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 				var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
 				var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
 
-				//Update the tooltip position and value
+
+				/*inicio - tooltip  4º barra unidade - iury - 29/09*/
+				if(porcentagem.contains(indicador)){
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(valorIndicador);//cidade + " : " +valorIndicador.toFixed(2));
-				
+				.select("#value").text(valorIndicador+"%");
+				}else{
+					if(reais.contains(indicador)){
+					d3.select("#tooltip").style("left", xPosition + "px")
+					.style("top", yPosition + "px")
+					.select("#value").text(valorIndicador+ " Reais");
+					}else{
+					d3.select("#tooltip").style("left", xPosition + "px")
+					.style("top", yPosition + "px")
+					.select("#value").text(valorIndicador);
+					}
+				}
+				/*Fim - tooltip 4º barra unidade - iury - 29/09*/
+
+
 				//Show the tooltip
 				d3.select("#tooltip").classed("hidden", false);
 			})
