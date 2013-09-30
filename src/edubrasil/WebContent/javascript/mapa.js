@@ -117,21 +117,29 @@ function plotColorMap(indicador_nome, colunaDesvio, dataset, dataset_medianas) {
 				.select("#value").text(cidade + " não possui dados para este indicador.");
 			}
 			else {
+				/*Inicio - adicao de unidades ao tooltip do mapa - 29/09
+				         - formatacao dos valores dos indicadores - 30/09
+				         Iury
+				*/
 				if(porcentagem.contains(indicador_nome)){
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text(cidade + ": " + d3.format(".2f")(indicador_valor)+" %");
+					.select("#value").text(cidade + ": " + formatNum(d3.format(".2f")(indicador_valor))+" %");
 				}else{
 					if(reais.contains(indicador_nome)){
 						d3.select("#tooltip").style("left", xPosition + "px")
 						.style("top", yPosition + "px")
-						.select("#value").text(cidade + ": " + d3.format(".2f")(indicador_valor) + " Reais");
+						.select("#value").text(cidade + ": " + formatNum(d3.format(".2f")(indicador_valor)) + " Reais");
 					}else{
 						d3.select("#tooltip").style("left", xPosition + "px")
 						.style("top", yPosition + "px")
-						.select("#value").text(cidade + ": " + d3.format(".2f")(indicador_valor));						
+						.select("#value").text(cidade + ": " + formatNum(d3.format(".2f")(indicador_valor)));						
 					}
 				}
+				/*Fim - adicao de unidades ao tooltip do mapa - 29/09
+				         - formatacao dos valores dos indicadores - 30/09
+				         Iury
+				*/
 
 			}
 			d3.select("#tooltip").classed("hidden", false);
@@ -182,6 +190,14 @@ function plotColorMap(indicador_nome, colunaDesvio, dataset, dataset_medianas) {
 		});
 	};
 }
+
+/*Inicio - funcao para formatar os números - iury - 30/09*/
+function formatNum(numero) {
+    var n= numero.toString().split(".");
+    n[0] = n[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return n.join(",");
+}
+/*Fim - funcao para formatar os números - iury - 30/09*/
 
 function resetMap(dataset) {
 	$("#map_title").text("Escolha uma Cidade ou um Indicador para mais detalhes.");

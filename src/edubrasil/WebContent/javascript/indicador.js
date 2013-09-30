@@ -1168,7 +1168,7 @@ function plot_ranges(svg, dados, y0,indicador){
 				.attr("y",(y0+30))
 				.text("%");
 			svg.append("text")
-				.attr("x",x1(dados[1].x) +15)
+				.attr("x",x1(dados[1].x) +17)
 				.attr("y",(y0+30))
 				.text("%");
 		}else{
@@ -1195,6 +1195,15 @@ function plot_ranges(svg, dados, y0,indicador){
 	
 	
 }
+
+/*Inicio - funcao para formatar os números - iury - 30/09*/
+function formatNum(numero) {
+    var n= numero.toString().split(".");
+    n[0] = n[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return n.join(",");
+}
+/*Fim - funcao para formatar os números - iury - 30/09*/
+
 
 function mean(theArray,indicador) {
 	var sum = 0, length = theArray.length; 

@@ -19,6 +19,15 @@ var reais = ["INDICADOR_7"]
 
 var parseDate = d3.time.format("%Y").parse;	
 
+
+/*Inicio - funcao para formatar os números - iury - 30/09*/
+function formatNum(numero) {
+    var n= numero.toString().split(".");
+    n[0] = n[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return n.join(",");
+}
+/*Fim - funcao para formatar os números - iury - 30/09*/
+
 //Inicio - henriquerzo@gmail.com - 18/09/2013
 function plotSeries(cidade,indicador, dataset, dataset_medianas) {
 
