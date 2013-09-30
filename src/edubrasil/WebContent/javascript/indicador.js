@@ -1149,6 +1149,8 @@ function plot_ranges(svg, dados, y0,indicador){
 		  .attr("transform", "translate(0," + (y0+12) + ")")
 		  .transition().duration(duration).delay(500)
 		  .call(xAxis);
+
+
 		
 		svg.append("text")
 			.attr("x", x1(dados[0].x) - 10)
@@ -1161,17 +1163,24 @@ function plot_ranges(svg, dados, y0,indicador){
 			.text("Max");	
 		
 		if(porcentagem.contains(indicador)){
-			console.log(x1(dados[0].x));
 			svg.append("text")
-				.attr("x",x1(dados[0].x) + 30)
-				.attr("y",y0)
+				.attr("x",x1(dados[0].x) +15)
+				.attr("y",(y0+30))
+				.text("%");
+			svg.append("text")
+				.attr("x",x1(dados[1].x) +15)
+				.attr("y",(y0+30))
 				.text("%");
 		}else{
 			if(reais.contains(indicador)){
-				/*svg.append("text")
-					.attr("x",)
-					.attr("y",)
-					.text(" Reais");*/
+				svg.append("text")
+					.attr("x",x1(dados[0].x) +25)
+					.attr("y",(y0+30))
+					.text(" Reais");
+				svg.append("text")
+					.attr("x",x1(dados[1].x) + 25)
+					.attr("y",(y0+30))
+					.text(" Reais");
 			}else{
 				// nao apresenta unidades
 			}

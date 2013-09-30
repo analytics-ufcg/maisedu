@@ -1,3 +1,6 @@
+var porcentagem = ["INDICADOR_62","INDICADOR_329","INDICADOR_333","INDICADOR_181","INDICADOR_182","INDICADOR_188","INDICADOR_189","INDICADOR_289","INDICADOR_290","INDICADOR_202","INDICADOR_201"]
+var reais = ["INDICADOR_7"]
+
 //compara unicode characters
 function sortComparer(a,b){
  return a.localeCompare(b);
@@ -70,12 +73,12 @@ function getClassColor(indicadorValor, desvioResult, indicadorNome) {
 }
 
 function plotColorMap(indicador_nome, colunaDesvio, dataset, dataset_medianas) {
+	
 	var todas_cidades = dataset.map(function(d){return d.NOME_MUNICIPIO;}).unique().sort(sortComparer);
 	var div_municipios = d3.select("#Municípios");
 	var indicador_result;
 	var indicador_valor;
 	var indicador_desvio;
-
 	//laço que itera em todas as cidades do mapa
 	for (var i = 0; i < todas_cidades.length; i++) {
 		indicador_result = getDesvioIndicador(indicador_nome, colunaDesvio, todas_cidades[i], dataset);
@@ -114,9 +117,22 @@ function plotColorMap(indicador_nome, colunaDesvio, dataset, dataset_medianas) {
 				.select("#value").text(cidade + " não possui dados para este indicador.");
 			}
 			else {
-				d3.select("#tooltip").style("left", xPosition + "px")
-				.style("top", yPosition + "px")
-				.select("#value").text(cidade + ": " + d3.format(".2f")(indicador_valor));
+				if(porcentagem.contains(indicador_nome)){
+					d3.select("#tooltip").style("left", xPosition + "px")
+					.style("top", yPosition + "px")
+					.select("#value").text(cidade + ": " + d3.format(".2f")(indicador_valor)+" %");
+				}else{
+					if(reais.contains(indicador_nome)){
+						d3.select("#tooltip").style("left", xPosition + "px")
+						.style("top", yPosition + "px")
+						.select("#value").text(cidade + ": " + d3.format(".2f")(indicador_valor) + " Reais");
+					}else{
+						d3.select("#tooltip").style("left", xPosition + "px")
+						.style("top", yPosition + "px")
+						.select("#value").text(cidade + ": " + d3.format(".2f")(indicador_valor));						
+					}
+				}
+
 			}
 			d3.select("#tooltip").classed("hidden", false);
 		});
