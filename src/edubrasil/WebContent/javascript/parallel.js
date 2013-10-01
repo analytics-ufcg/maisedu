@@ -93,9 +93,27 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 		/*Inicio - Tamanho maximo do nome do indicador- iurygregory@gmail.com 08/08/2013 - */
 		var MAX_LENGTH_INDICADOR = 30;
 		if(nome_indicador.length > MAX_LENGTH_INDICADOR) {
-			legenda = [nome_indicador.substring(0, MAX_LENGTH_INDICADOR).replace("(%)","").replace("(em Reais)","") + " ...","Receita","Número Matrículas","IFDM*"];
+			if(nome_indicador.indexOf("(%)") > -1){
+				var size_unit = MAX_LENGTH_INDICADOR - "(%)".length;
+				legenda = [nome_indicador.substring(0, size_unit).replace("%") + " ... (%)" ,"Receita","Número Matrículas","IFDM*"];
+			}else{
+				if(nome_indicador.indexOf("(em Reais)") > -1){
+					var size_unit = MAX_LENGTH_INDICADOR - "(em Reais)".length;
+					legenda = [nome_indicador.substring(0, size_unit) + "... (em Reais)","Receita","Número Matrículas","IFDM*"];
+				}else{
+					legenda = [nome_indicador.substring(0, MAX_LENGTH_INDICADOR) + "...","Receita","Número Matrículas","IFDM*"];
+				}
+			}
 		} else {
-			legenda = [nome_indicador.replace("(%)","").replace("(em Reais)",""),"Receita","Número Matrículas","IFDM*"];
+			if(nome_indicador.indexOf("(%)") > -1){
+				legenda = [nome_indicador.replace("%") + " (%)" ,"Receita","Número Matrículas","IFDM*"];
+			}else{
+				if(nome_indicador.indexOf("(em Reais)") > -1){
+					legenda = [nome_indicador.replace("(em Reais)") + " (em Reais)","Receita","Número Matrículas","IFDM*"];
+				}else{
+					legenda = [nome_indicador,"Receita","Número Matrículas","IFDM*"];
+				}
+			}			
 		}
 		/*Fim - Tamanho maximo do nome do indicador- iurygregory@gmail.com 08/08/2013 - */
 		
