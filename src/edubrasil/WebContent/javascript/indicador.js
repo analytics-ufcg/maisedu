@@ -1145,9 +1145,9 @@ function plot_ranges(svg, dados, y0,indicador){
 	var xAxis = d3.svg.axis()
 			.scale(x1)
 			.orient("bottom")
-			.tickFormat(d3.format(".2f"))
 			.tickValues([parseFloat(valor1),parseFloat(valor2)])
-			.ticks(6);
+			.ticks(6)
+			.tickFormat(function(d){return formatNum(  (d3.format(".2f")(d)) );});
 	/* formatacao de valores - min e max - iury 30/09*/
 	if(y0 == 60){
 		svg.append("g")
