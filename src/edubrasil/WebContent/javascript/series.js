@@ -151,7 +151,6 @@ function plotGraph(indicador){//(nome_indicador){
 		  .attr("transform", "translate(0," + height + ")")
 		  .call(xAxis);
 
-		console.log(yAxis);//teste
 		svg.append("g")
 		  .attr("class", "y axis")
 		  .call(yAxis)

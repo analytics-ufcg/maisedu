@@ -35,6 +35,14 @@ function path(d) {
   return line(dimensions.map(function(p) { return [position(p), y[p](d[p])]; }));
 }
 
+/*Inicio - funcao para formatar os números - iury - 30/09*/
+function formatNum(numero) {
+    var n= numero.toString().split(".");
+    n[0] = n[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return n.join(",");
+}
+/*Fim - funcao para formatar os números - iury - 30/09*/
+
 function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indicador, total_similares){
 	
 	
@@ -74,7 +82,6 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
     .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
 	d3.csv("data/numero.matriculas_IFDM_e_receita_agregados.csv", function(cidades) {
-		
 		/*Inicio - giovanibarbosa@gmail.com 22/08/2013*/
 		// cidades = cidades.filter(function(d){ return ((lista_cidades.indexOf(d.NOME_MUNICIPIO) > -1) && 
 														// d[indicadores_selecionados[0]] != "NA" && 
@@ -98,7 +105,7 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 		x.domain(dimensions = d3.keys(cidades[0]).filter(function(d) {
 			if(lista_cidades.indexOf("João Pessoa")>-1) {
 				return (indicadores_selecionados.indexOf(d) > -1) && (y[d] = d3.scale.linear()
-				.domain([(d3.min(cidades, function(p) {return (+p[d]); })),((d3.max(cidades, function(p) {return (+p[d]); })))])
+				.domain([(d3.min(cidades, function(p) {return (+(p[d]) ); })),((d3.max(cidades, function(p) {  return (+p[d]);  })))])
 				.range([h, 0]));
  			}
  			else if (lista_cidades.indexOf("Campina Grande")>-1) {
@@ -118,6 +125,7 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 			}
 				
 		  }));
+		
 		//Fim - giovanibarbosa@gmail.com 08/08/2013
 
 		/*Inicio - giovanibarbosa@gmail.com 22/08/2013*/
@@ -128,9 +136,8 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 														d[indicadores_selecionados[2]] != "NA" &&
 														d[indicadores_selecionados[3]] != "NA")});
 		/*Fim - giovanibarbosa@gmail.com 22/08/2013*/
-
 		lista_cidades = (cidades.map(function(d){return (d.NOME_MUNICIPIO);}));
-		
+
 		foreground = svg.append("svg:g")
 			.attr("class", "foreground")
 			.selectAll("path")
@@ -210,7 +217,7 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 		  // Add an axis and title.
 		g.append("svg:g")
 			.attr("class", "axis")
-			.each(function(d) { d3.select(this).call(axis.scale(y[d])); })
+			.each(function(d) { d3.select(this).call(axis.scale(y[d])); }) 
 			.append("svg:text")
 			.data(legenda)
 			.attr("id", function(d,i){ return "indicador_titulo_" + i;})
