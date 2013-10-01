@@ -207,7 +207,7 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 			.attr("dy", ".31em")
 			.text(function(d) { return d; });
 			
-		  // Add a group element for each dimension.
+		// Add a group element for each dimension.
 		var g = svg.selectAll(".dimension")
 			.data(dimensions)
 			.enter().append("svg:g")
@@ -216,9 +216,9 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 
 		  // Add an axis and title.
 		g.append("svg:g")
-			.attr("class", "axis")
-			.each(function(d) { d3.select(this).call(axis.scale(y[d])); }) 
-			.append("svg:text")
+			.attr("class", "axis") /*Inicio - formatacao valores do grafico - iury - 01/10*/
+			.each(function(d) { d3.select(this).call(axis.scale(y[d]).tickFormat(function(a){return formatNum(a); })); }) 
+			.append("svg:text")    /*Fim - formatacao valores do grafico - iury - 01/10*/
 			.data(legenda)
 			.attr("id", function(d,i){ return "indicador_titulo_" + i;})
 			.attr("text-anchor", "middle")
