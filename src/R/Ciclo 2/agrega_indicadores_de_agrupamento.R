@@ -4,20 +4,23 @@
 require("gdata")
 
 #Caminho do interpretedor perl(arquivos xls precisam dessa lib(gdata))
-perl.path = "C:/ProgramFiles/strawberry/perl/bin/perl"
+perl.path = "C:/Perl64/bin/perl"
 
 
-data = read.csv("tabela_com_todos_os_indicadores_selecionados_e_desvios.csv")
+data = read.csv("tabela_com_todos_os_indicadores_selecionados_e_desvios.csv",
+                stringsAsFactors=F, encoding="UTF-8")
 
 #Inicio - henriquerzo@gmail.com - 14/08/2013
 
 #Carrega arquivos necessártios
-total.matriculas = read.xls("INDICADOR_219 - Total Matrículas.xls", perl=perl.path)
+total.matriculas = read.xls("INDICADOR_219 - Total Matr�culas.xls", perl=perl.path,
+                            stringsAsFactors=F)
 
-IFDM = read.xls("IFDM_2010_Paraiba.xls",perl=perl.path)[,]
+IFDM = read.xls("IFDM_2010_Paraiba.xls", perl=perl.path,
+                stringsAsFactors=F)
 
 
-receita = read.xls("Receita.xls", perl = perl.path)
+receita = read.xls("Receita.xls", perl = perl.path, stringsAsFactors=F)
 receita = receita[1:(nrow(receita)-1), ]
 receita$Valor = gsub(",","",receita$Valor)
 
@@ -28,9 +31,9 @@ total.matriculas = total.matriculas[with(total.matriculas,order(NOME_MUNICIPIO))
 
 #ordenando os indicadores
 data = data[data$ANO == 2011, ]
-data = data[order(data$NOME_MUNICIPIO), ]
-IFDM = IFDM[order(IFDM$Cidade),]
-receita = receita[order(receita$Muninipio), ]
+data = data[order(as.character(data$NOME_MUNICIPIO)), ]
+IFDM = IFDM[order(as.character(IFDM$Cidade)),]
+receita = receita[as.character(order(receita$Muninipio)), ]
 
 data = cbind(data,receita$Valor,total.matriculas$INDICADOR_219,IFDM$IFDM)
 
@@ -59,7 +62,8 @@ colnames(data)[40:42] = c("receita","numero.matriculas","IFDM")
 #}
 
 #Salvando informações agregadas
-write.csv(data,"numero.matriculas_IFDM_e_receita_agregados.csv",row.names=F, dec = ".")
+write.csv(data,"numero.matriculas_IFDM_e_receita_agregados.csv",row.names=F, dec = ".",
+          fileEncoding="UTF-8")
 
 #Fim - henriquerzo@gmail.com - 14/08/2013
 

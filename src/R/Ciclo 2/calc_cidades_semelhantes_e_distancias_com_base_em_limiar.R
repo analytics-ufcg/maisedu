@@ -3,7 +3,7 @@ require(Hmisc)
 #É necessario o arquivo "numero.matriculas_IFDM_e_FPM_agregados.csv" que esta na pasta Indicadores Selecionados/5 - Indicadores para Análises de Grupos
 
 #Carrega os dados e remove linhas com NA
-data.real <- read.csv("numero.matriculas_IFDM_e_receita_agregados.csv", head = T, stringsAsFactors=F,dec = ".")
+data.real <- read.csv("numero.matriculas_IFDM_e_receita_agregados.csv", head = T, encoding="UTF-8", dec = ".")
 
 data.real = data.real[,c(1:9,40,41,42)]
 
@@ -129,7 +129,7 @@ tabela.distancias = getDistanciasSimilares(tabela.filtrada)
 
 ##################################################Salvando dados#################################################################
 
-write.csv(tabela.cidades, "tabela_cidades_semelhantes.csv", row.names = F)
+write.csv(tabela.cidades, "tabela_cidades_semelhantes.csv", row.names = F, fileEncoding="UTF-8")
 
 write.csv(tabela.distancias,"cidades_semelhantes_distancias.csv",row.names = F)
 
