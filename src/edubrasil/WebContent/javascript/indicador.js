@@ -20,6 +20,23 @@ var  ind_percentual = ["Índice eficiência educação básica","Índice precari
 "Percentual docentes formação superior","Taxa abandono total - fundamental","Taxa aprovação total - fundamental","Taxa de abandono total - ensino médio",
 "Taxa de analfabetismo","Taxa de aprovação total - ensino médio","Taxa de atendimento escolar"]
 
+
+function getAlarme(valor){
+	if(valor.indexOf("1") > -1){
+		return "atenção";
+	}else{
+		if(valor.indexOf("2") > -1){
+			return "alerta";
+		}else{
+			if(valor.indexOf("3") > -1){
+				return "crítico";
+			}else{
+				return "";
+			}
+		}
+	}
+}
+
 //Recebe uma cidade e pinta os botoes
 function getMenuOption(selection) {
 	//limpa containers
@@ -102,12 +119,14 @@ function getMenuOption(selection) {
 		});
 	
 	var array_setas = Array(15);
+	var cont = 0;
 	d3.selectAll(".arrows")
 	.data(dicionario)
 	.attr("src", function (d){
-					var cont = 0;
+					
 					if (cidade=="Visão Geral") {
 						array_setas[cont] = "0";
+						cont = cont + 1;
 						return "images/arrow0.png";
 					}
 					else
@@ -117,15 +136,18 @@ function getMenuOption(selection) {
 				})
 	.attr("id", function(d,i){ return "arrow_indicador_" + i;});
 
-
+	console.log(array_setas);
 	/*Inicio - tooltips setas - iury - 01/10*/
 	$('#arrow_indicador_0')
 	.on("mouseover", function(d) {
-			d3.select("#tooltip").style("left", 30+ "px")
-								 .style("top", 110 + "px")
-								 .text("toltip");
+		console.log("arrow_indicador_0 "+getAlarme(array_setas[0]));
+
+			d3.select("#tooltip").style("left", 100+ "px")
+								 .style("top", 100 + "px")
+								 .text("A análise da série temporal índica um alarme de nível ");
 			if(array_setas[0].indexOf("0") > -1){
-				d3.select("#tooltip").classed("hidden", false);
+				//d3.select("#tooltip").classed("hidden", false);
+				console.log("O.o");
 			}else{
 				d3.select("#tooltip").classed("hidden", true);	
 			}			
@@ -133,15 +155,17 @@ function getMenuOption(selection) {
 	.on("mouseout",function(d){
 			d3.select("#tooltip").classed("hidden", true);	
 	});
-
+	
 	$('#arrow_indicador_1')
 	.on("mouseover", function(d) {
-			d3.select("#tooltip").style("left", 30+ "px")
+			console.log(array_setas[1].indexOf("0") > -1);
+			d3.select("#tooltip").style("left", 100+ "px")
 								 .style("top", 110 + "px")
-								 .text("toltip");
+								 .text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[1]));
 			if(array_setas[1].indexOf("0") > -1){
 				d3.select("#tooltip").classed("hidden", false);
 			}else{
+
 				d3.select("#tooltip").classed("hidden", true);	
 			}
 	})
@@ -153,7 +177,7 @@ function getMenuOption(selection) {
 	.on("mouseover", function(d) {
 			d3.select("#tooltip").style("left", 30+ "px")
 								 .style("top", 110 + "px")
-								 .text("toltip");
+								 .text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[2]));
 			if(array_setas[2].indexOf("0") > -1){
 				d3.select("#tooltip").classed("hidden", false);
 			}else{
@@ -165,9 +189,10 @@ function getMenuOption(selection) {
 	});		
 
 	$('#arrow_indicador_3')
+	.on("mouseover", function(d) {
 			d3.select("#tooltip").style("left", 30+ "px")
 								 .style("top", 110 + "px")
-								 .text("toltip");
+								 .text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[3]));
 			if(array_setas[3].indexOf("0") > -1){
 				d3.select("#tooltip").classed("hidden", false);
 			}else{
@@ -180,12 +205,13 @@ function getMenuOption(selection) {
 
 	$('#arrow_indicador_4')
 	.on("mouseover", function(d) {
-			d3.select("#tooltip").style("left", 30+ "px")
+				d3.select("#tooltip").style("left", 30+ "px")
 								 .style("top", 110 + "px")
-								 .text("toltip");
+								 .text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[4]));
 			if(array_setas[4].indexOf("0") > -1){
 				d3.select("#tooltip").classed("hidden", false);
 			}else{
+
 				d3.select("#tooltip").classed("hidden", true);	
 			}
 	})
@@ -197,7 +223,7 @@ function getMenuOption(selection) {
 	.on("mouseover", function(d) {
 			d3.select("#tooltip").style("left", 30+ "px")
 								 .style("top", 110 + "px")
-								 .text("toltip");
+								 .text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[5]));
 			if(array_setas[5].indexOf("0") > -1){
 				d3.select("#tooltip").classed("hidden", false);
 			}else{
@@ -212,10 +238,11 @@ function getMenuOption(selection) {
 	.on("mouseover", function(d) {
 			d3.select("#tooltip").style("left", 30+ "px")
 								 .style("top", 110 + "px")
-								 .text("toltip");
+								 .text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[6]));
 			if(array_setas[6].indexOf("0") > -1){
 				d3.select("#tooltip").classed("hidden", false);
 			}else{
+
 				d3.select("#tooltip").classed("hidden", true);	
 			}
 	})
@@ -225,12 +252,13 @@ function getMenuOption(selection) {
 
 	$('#arrow_indicador_7')
 	.on("mouseover", function(d) {
-			d3.select("#tooltip").style("left", 30+ "px")
+				d3.select("#tooltip").style("left", 30+ "px")
 								 .style("top", 110 + "px")
-								 .text("toltip");
+								 .text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[7]));
 			if(array_setas[7].indexOf("0") > -1){
 				d3.select("#tooltip").classed("hidden", false);
 			}else{
+
 				d3.select("#tooltip").classed("hidden", true);	
 			}
 	})
@@ -240,12 +268,13 @@ function getMenuOption(selection) {
 
 	$('#arrow_indicador_8')
 	.on("mouseover", function(d) {
-			d3.select("#tooltip").style("left", 30+ "px")
+				d3.select("#tooltip").style("left", 30+ "px")
 								 .style("top", 110 + "px")
-								 .text("toltip");
+								 .text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[8]));
 			if(array_setas[8].indexOf("0") > -1){
 				d3.select("#tooltip").classed("hidden", false);
 			}else{
+
 				d3.select("#tooltip").classed("hidden", true);	
 			}
 	})
@@ -255,13 +284,14 @@ function getMenuOption(selection) {
 
 	$('#arrow_indicador_9')
 	.on("mouseover", function(d) {
-			d3.select("#tooltip").style("left", 30+ "px")
+					d3.select("#tooltip").style("left", 30+ "px")
 								 .style("top", 110 + "px")
-								 .text("toltip");
+								 .text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[9]));
 			if(array_setas[9].indexOf("0") > -1){
 				d3.select("#tooltip").classed("hidden", false);
 			}else{
-				d3.select("#tooltip").classed("hidden", true);	
+
+					d3.select("#tooltip").classed("hidden", true);	
 			}
 	})
 	.on("mouseout",function(d){
@@ -270,13 +300,13 @@ function getMenuOption(selection) {
 
 	$('#arrow_indicador_10')
 	.on("mouseover", function(d) {
-			d3.select("#tooltip").style("left", 30+ "px")
-								 .style("top", 110 + "px")
-								 .text("toltip");
+				d3.select("#tooltip").style("left", 30+ "px")
+							 .style("top", 110 + "px")
+							 .text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[10]));
 			if(array_setas[10].indexOf("0") > -1){
 				d3.select("#tooltip").classed("hidden", false);
 			}else{
-				d3.select("#tooltip").classed("hidden", true);	
+					d3.select("#tooltip").classed("hidden", true);	
 			}
 	})
 	.on("mouseout",function(d){
@@ -285,12 +315,13 @@ function getMenuOption(selection) {
 
 	$('#arrow_indicador_11')
 	.on("mouseover", function(d) {
-			d3.select("#tooltip").style("left", 30+ "px")
+				d3.select("#tooltip").style("left", 30+ "px")
 								 .style("top", 110 + "px")
-								 .text("toltip");
+								 .text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[11]));
 			if(array_setas[11].indexOf("0") > -1){
 				d3.select("#tooltip").classed("hidden", false);
 			}else{
+
 				d3.select("#tooltip").classed("hidden", true);	
 			}
 	})
@@ -300,12 +331,13 @@ function getMenuOption(selection) {
 
 	$('#arrow_indicador_12')
 	.on("mouseover", function(d) {
-			d3.select("#tooltip").style("left", 30+ "px")
-								 .style("top", 110 + "px")
-								 .text("toltip");
+				d3.select("#tooltip").style("left", 30+ "px")
+							 .style("top", 110 + "px")
+							 .text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[12]));
 			if(array_setas[12].indexOf("0") > -1){
 				d3.select("#tooltip").classed("hidden", false);
 			}else{
+
 				d3.select("#tooltip").classed("hidden", true);	
 			}
 	})
@@ -315,12 +347,13 @@ function getMenuOption(selection) {
 
 	$('#arrow_indicador_13')
 	.on("mouseover", function(d) {
-			d3.select("#tooltip").style("left", 30+ "px")
+				d3.select("#tooltip").style("left", 30+ "px")
 								 .style("top", 110 + "px")
-								 .text("toltip");
+								 .text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[13]));
 			if(array_setas[13].indexOf("0") > -1){
 				d3.select("#tooltip").classed("hidden", false);
 			}else{
+
 				d3.select("#tooltip").classed("hidden", true);	
 			}
 	})
@@ -330,12 +363,13 @@ function getMenuOption(selection) {
 
 	$('#arrow_indicador_14')
 	.on("mouseover", function(d) {
-			d3.select("#tooltip").style("left", 30+ "px")
+				d3.select("#tooltip").style("left", 30+ "px")
 								 .style("top", 110 + "px")
-								 .text("toltip");
+								 .text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[14]));
 			if(array_setas[14].indexOf("0") > -1){
 				d3.select("#tooltip").classed("hidden", false);
 			}else{
+
 				d3.select("#tooltip").classed("hidden", true);	
 			}
 	})
