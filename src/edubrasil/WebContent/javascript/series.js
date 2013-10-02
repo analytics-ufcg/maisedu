@@ -9,7 +9,7 @@ var data_temporaria_mediana = [];
 var val_y;
 var micro = "";
 var meso = "";
-var porcentagem = ["INDICADOR_62","INDICADOR_329","INDICADOR_333","INDICADOR_181","INDICADOR_182","INDICADOR_188","INDICADOR_189","INDICADOR_289","INDICADOR_290","INDICADOR_202","INDICADOR_201"]
+var porcentagem = ["INDICADOR_62","INDICADOR_329","INDICADOR_333","INDICADOR_181","INDICADOR_182","INDICADOR_188","INDICADOR_189","INDICADOR_289","INDICADOR_290","INDICADOR_202"]
 var reais = ["INDICADOR_7"]
 
 //function getMenuOption(sel) {
