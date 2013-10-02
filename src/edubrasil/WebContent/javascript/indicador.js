@@ -101,17 +101,249 @@ function getMenuOption(selection) {
 			
 		});
 	
-
+	var array_setas = Array(15);
 	d3.selectAll(".arrows")
 	.data(dicionario)
 	.attr("src", function (d){
+					var cont = 0;
 					if (cidade=="Visão Geral") {
+						array_setas[cont] = "0";
 						return "images/arrow0.png";
 					}
 					else
+						array_setas[cont] = tendencia[cidades_tendencia.indexOf(cidade)][d.id]+"";
+						cont = cont + 1;
 						return "images/arrow"+tendencia[cidades_tendencia.indexOf(cidade)][d.id]+".png";
-				});
-	
+				})
+	.attr("id", function(d,i){ return "arrow_indicador_" + i;});
+
+
+	/*Inicio - tooltips setas - iury - 01/10*/
+	$('#arrow_indicador_0')
+	.on("mouseover", function(d) {
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[0].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}			
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});
+
+	$('#arrow_indicador_1')
+	.on("mouseover", function(d) {
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[1].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});
+
+	$('#arrow_indicador_2')
+	.on("mouseover", function(d) {
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[2].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});		
+
+	$('#arrow_indicador_3')
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[3].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});
+
+	$('#arrow_indicador_4')
+	.on("mouseover", function(d) {
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[4].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});
+
+	$('#arrow_indicador_5')
+	.on("mouseover", function(d) {
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[5].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});		
+
+	$('#arrow_indicador_6')
+	.on("mouseover", function(d) {
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[6].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});
+
+	$('#arrow_indicador_7')
+	.on("mouseover", function(d) {
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[7].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});
+
+	$('#arrow_indicador_8')
+	.on("mouseover", function(d) {
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[8].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});		
+
+	$('#arrow_indicador_9')
+	.on("mouseover", function(d) {
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[9].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});
+
+	$('#arrow_indicador_10')
+	.on("mouseover", function(d) {
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[10].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});
+
+	$('#arrow_indicador_11')
+	.on("mouseover", function(d) {
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[11].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});		
+
+	$('#arrow_indicador_12')
+	.on("mouseover", function(d) {
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[12].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});		
+
+	$('#arrow_indicador_13')
+	.on("mouseover", function(d) {
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[13].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});		
+
+	$('#arrow_indicador_14')
+	.on("mouseover", function(d) {
+			d3.select("#tooltip").style("left", 30+ "px")
+								 .style("top", 110 + "px")
+								 .text("toltip");
+			if(array_setas[14].indexOf("0") > -1){
+				d3.select("#tooltip").classed("hidden", false);
+			}else{
+				d3.select("#tooltip").classed("hidden", true);	
+			}
+	})
+	.on("mouseout",function(d){
+			d3.select("#tooltip").classed("hidden", true);	
+	});		
+	/*Fim - tooltips setas - iury - 01/10*/
+
 };
 
 function getCol(matrix){
