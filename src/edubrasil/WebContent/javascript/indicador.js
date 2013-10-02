@@ -146,7 +146,7 @@ function getMenuOption(selection) {
 								 // .style("top", 100 + "px")
 								 // .text("A análise da série temporal índica um alarme de nível ");
 			// if(array_setas[0].indexOf("0") > -1){
-				d3.select("#tooltip").classed("hidden", false);
+				//d3.select("#tooltip").classed("hidden", false);
 				// console.log("O.o");
 			// }else{
 				// d3.select("#tooltip").classed("hidden", true);	
