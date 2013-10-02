@@ -57,6 +57,8 @@ function getMenuOption(selection) {
 	}
 	else {
 		$("#map_area").hide();
+		$("#image_minus").hide();
+		$("#image_plus").hide();
 		$("#div_legend_button").show();
 		
 	}

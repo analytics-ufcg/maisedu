@@ -111,6 +111,26 @@ function plotColorMap(indicador_nome, colunaDesvio, dataset, dataset_medianas) {
 			var indicador_valor = indicador_result[0];
 			var indicador_desvio = indicador_result[1];
 
+			if(indicador_nome == "INDICADOR_62" || indicador_nome == "INDICADOR_7") {
+				if(indicador_desvio < -1) {
+					console.log(indicador_desvio)
+					$("#image_minus").show();
+					$("#image_plus").hide();
+				}
+				else if (indicador_desvio > 1){
+					$("#image_plus").show();
+					$("#image_minus").hide();
+				}
+				else{
+					$("#image_minus").hide();
+					$("#image_plus").hide();
+				}
+			}
+			else {
+				$("#image_minus").hide();
+				$("#image_plus").hide();
+			}
+
 			if(indicador_valor == "NA") {
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
@@ -203,6 +223,10 @@ function resetMap(dataset) {
 	$("#map_title").text("Escolha uma Cidade ou um Indicador para mais detalhes.");
 	var todas_cidades = dataset.map(function(d){return d.NOME_MUNICIPIO;}).unique().sort(sortComparer);
 	var div_municipios = d3.select("#Municípios");
+
+	//Esconde os icones
+	$("#image_minus").hide();
+	$("#image_plus").hide();
 
 
 	//laço que itera em todas as cidades do mapa
