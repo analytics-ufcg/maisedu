@@ -233,7 +233,7 @@ function getMenuOption(selection) {
 	 	$('.tooltips').tooltipster('disable');
 			 d3.select("#tooltip").style("left", 10+ "px")
 								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[5]));
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[5]));
 			 if(array_setas[5].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -250,7 +250,7 @@ function getMenuOption(selection) {
 	 	$('.tooltips').tooltipster('disable');
 			 d3.select("#tooltip").style("left", 10+ "px")
 								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[6]));
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[6]));
 			 if(array_setas[6].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -268,7 +268,7 @@ function getMenuOption(selection) {
 	 	$('.tooltips').tooltipster('disable');
 				 d3.select("#tooltip").style("left", 10+ "px")
 								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[7]));
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[7]));
 			 if(array_setas[7].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -286,7 +286,7 @@ function getMenuOption(selection) {
 	 	$('.tooltips').tooltipster('disable');
 				 d3.select("#tooltip").style("left", 10+ "px")
 								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[8]));
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[8]));
 			 if(array_setas[8].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -304,7 +304,7 @@ function getMenuOption(selection) {
 	 	$('.tooltips').tooltipster('disable');
 					 d3.select("#tooltip").style("left", 10+ "px")
 								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[9]));
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[9]));
 			 if(array_setas[9].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -322,7 +322,7 @@ function getMenuOption(selection) {
 	 	$('.tooltips').tooltipster('disable');
 				 d3.select("#tooltip").style("left", 10+ "px")
 							  .style("top", 10 + "px")
-							  .select("#value").text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[10]));
+							  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[10]));
 			 if(array_setas[10].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -339,7 +339,7 @@ function getMenuOption(selection) {
 	 	$('.tooltips').tooltipster('disable');
 				 d3.select("#tooltip").style("left", 10+ "px")
 								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[11]));
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[11]));
 			 if(array_setas[11].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -356,7 +356,7 @@ function getMenuOption(selection) {
 	 	$('.tooltips').tooltipster('disable');
 				 d3.select("#tooltip").style("left", 10+ "px")
 							  .style("top", 10 + "px")
-							  .select("#value").text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[12]));
+							  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[12]));
 			 if(array_setas[12].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -374,7 +374,7 @@ function getMenuOption(selection) {
 	 	$('.tooltips').tooltipster('disable');
 				 d3.select("#tooltip").style("left", 10+ "px")
 								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[13]));
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[13]));
 			 if(array_setas[13].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -392,7 +392,7 @@ function getMenuOption(selection) {
 	 	$('.tooltips').tooltipster('disable');
 				 d3.select("#tooltip").style("left", 10+ "px")
 								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível"+getAlarme(array_setas[14]));
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[14]));
 			 if(array_setas[14].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
