@@ -161,7 +161,6 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_1')
 	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
-			 console.log(array_setas[1].indexOf("0") == -1);
 			 d3.select("#tooltip").style("left", 1+ "px")
 								  .style("top", 10 + "px")
 								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[1]));
