@@ -1307,6 +1307,25 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (3*desvio)) & d[indicador] <= (max));}), indicador,"#A50F15",min,max,y0);
 		}
 		//laranja
+		if(media + (3*desvio) < max) {
+			addLine(svg,x1(media + (2*desvio)),x1(media + (3*desvio)),y0,y0,"#FF6600");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (media + (3*desvio)));}), indicador,"#FF6600",min,max,y0);
+		}
+		else if(media + (2*desvio) < max) {
+			addLine(svg,x1(media + (2*desvio)),x1(max),y0,y0,"#FF6600");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= max);}), indicador,"#FF6600",min,max,y0);
+		}
+		//amarelo
+		if(media + (2*desvio) < max) {
+			addLine(svg,x1(media + (desvio)),x1(media + (2*desvio)),y0,y0,"#FFCC00");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (desvio)) & d[indicador] <= (media + (2*desvio)));}), indicador,"#FFCC00",min,max,y0);
+		}
+		else if(media + (desvio) < max) {
+			addLine(svg,x1(media + (desvio)),x1(max),y0,y0,"#FFCC00");
+			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (desvio)) & d[indicador] <= (max));}), indicador,"#FFCC00",min,max,y0);
+		}
+		/*
+		//laranja
 		if((media + (3*desvio) < max) & (media + (2*desvio) > min)){
 			addLine(svg,x1(media + (3*desvio)),x1(media + (2*desvio)),y0,y0,"#FF6600");
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (media + (2*desvio)) & d[indicador] <= (media + (3*desvio)));}), indicador,"#FF6600",min,max,y0);
@@ -1328,6 +1347,7 @@ function desvios(svg,desvio,media, y0,min, max, referencial,estado,indicador){
 			addLine(svg,x1(min),x1(media + (2*desvio)),y0,y0,"#FFCC00");
 			plot_cidades(svg, estado.filter(function(d){return( d[indicador] >= (min) & d[indicador] <= (media + (2*desvio)));}), indicador,"#FFCC00",min,max,y0);
 		}
+		*/
 		//verde
 		if((media - (2*desvio) > min)){
 			addLine(svg,x1(media - (2*desvio)),x1(min),y0,y0,"green");
