@@ -52,7 +52,7 @@
 }
 	
 .title:after {
-	background: url("../images/bs-docs-masthead-pattern.png") repeat scroll center center transparent;
+	background: url("../img/bs-docs-masthead-pattern.png") repeat scroll center center transparent;
 	bottom: 0;
 	content: "";
 	display: block;
