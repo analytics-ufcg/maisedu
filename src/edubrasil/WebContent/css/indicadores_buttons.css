@@ -12,9 +12,16 @@
     font-weight:normal;
     padding:5px 5px;
     text-decoration:none;
-    width:90%
+    width:90%;
+    
 
 }
+
+
+input[type="button"]{
+    width:90%;
+}
+
 .indicador:active{
     position:relative;
     top:1px;
@@ -214,7 +221,7 @@
     background-color:#ffffff;
 
     color:#666666;
-    border:1px solid #dcdcdc;
+    border:1px solid #c3c3c3;
     
     text-shadow:0px 1px 0px #ffffff;
     

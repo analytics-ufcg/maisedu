@@ -11,6 +11,14 @@
 
 <title>MAIS.edu</title>
 
+<title>Mais.Edu Dominio do problema</title>
+<link rel="icon" type="image/png" href="images/favicon.png" />
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="css/header.css">
+
+
 <script type="text/javascript" src="javascript/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="javascript/jquery.reveal.js"></script>
 
@@ -29,27 +37,82 @@
 <script type="text/javascript" src="javascript/jquery.tooltipster.js"></script>
 <link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
 <link rel="stylesheet" href="css/reveal.css">
+<script type="text/javascript" src="javascript/bootstrap-select.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bootstrap-select.css">
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<script>
+	$(function() {
+		var offset = $("#div_options").offset();
+		var topPadding = 40;
+		$(window).scroll(function() {
+			if( parseInt($(window).scrollTop()) < 400){
+				if ($(window).scrollTop() > offset.top) {
+					$("#div_options").stop().animate({marginTop: $(window).scrollTop() - offset.top + topPadding});
+				} else {
+					$("#div_options").stop().animate({marginTop: 0,});
+				}
+			};
+			console.log();
+		});
+
+	});
+</script>
 
   
 </head>
 <body onload="loadData();checkCokie('cookie_video');">
 
-	<div id="container">
+	
 
-		<div id="title_header">MAIS.edu</div>
-
-		<div id="menu">
-			Selecione sua cidade: <select id="myList"
-				onchange="getMenuOption(this)">
-			</select>
-
+		<div class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="navbar-inner">
+	        <div class="container">
+	          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </a>
+	          <div class="nav-collapse collapse">
+	            <ul class="nav">
+	              <li class="active"><a href="index.html">Pagina Inicial</a></li>
+	              <li><a href="upload/">Inserção de Dados</a></li>
+	              <li><a href="#" id="botao" class="big-link" onClick= "Video();"  data-reveal-id="idVideo" data-animation="fade" data-closeonbackgroundclick="false">Tutorial do Sistema</a></li>
+	              <li><a href="#" class="big-link" data-reveal-id="container2" data-animation="fade">Mais Informações</a></li>
+	              <li><a href="dominio do problema.html">Como funciona o financiamento da educação na PB</a></li>
+	              <li><a href="documents/US01.pdf"  target="_blank" >Se você gosta de estatística...</a></li>
+	              
+	            </ul>
+	          </div><!--/.nav-collapse -->
+	        </div>
+	      </div>
+	    </div>
+		
+		<div class="title head">
+			<h1 >Mais.Edu</h1>
+			<p>Máquina de Análise de Indicadores Sociais</p>
 		</div>
 
-		<div id="main_content">
-			<div id="plot_area">
+		<div id="menu">			
+			
+			<a id="button_back_map" href="#"><img  style="float:left;margin-left:20px;margin-right:20px;"  onmouseout="this.src='images/pb2.png'" onmouseover="this.src='images/pb.jpg'" src="images/pb2.png"  width="60" height="80" ></img></a>
+						
+			<text >Selecione uma Cidade:</text> 
+			<select id="myList" class="selectpicker show-tick"  data-size="auto" data-live-search="true" onchange="getMenuOption(this)">
+			</select>
+		</div>
+
+		<div class="container-fluid">
+
+
+		<div id="main_content" class="row-fluid">
+
+			<div id="plot_area" class="span9">
+
 				<div id="map_area" class="single_plot">
 					<h2 id="map_title" class="titulo_grafico"> Mapa da Paraíba </h2>
-					<svg id="mapa_paraiba" xmlns="http://www.w3.org/2000/svg" xmlns:odm="http://product.corel.com/CGS/11/cddns/" xml:space="preserve" width="284mm" height="172mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd" viewBox="0 0 284000 172000">
+					<svg id="mapa_paraiba" xmlns="http://www.w3.org/2000/svg" xmlns:odm="http://product.corel.com/CGS/11/cddns/" xml:space="preserve" width="284mm" height="172mm" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd;max-width: 1000px;" viewBox="0 0 284000 172000">
 						 <defs>
 						  <style type="text/css">
 						   <![CDATA[
@@ -846,43 +909,22 @@
 				<div id="div_series_titulo" class="single_plot"></div>
 				<div id="div_series" class="single_plot"></div>
 			</div>
-			<div id="div_options">
+			<div id="div_options" class="span3">
+				
 				<div id="div_indicador_options"></div>
 				<div id="div_legend_button"></div>
 			</div>
 			
 		</div>
-
-		<div id="footer">
-
-			<a href="#" class="big-link"
-				data-reveal-id="container2" data-animation="fade">
-				Mais informações
-			</a>
-			&nbsp;|&nbsp;
-			<a href="#" id="botao" class="big-link" onClick= "Video();"  data-reveal-id="idVideo" data-animation="fade" data-closeonbackgroundclick="false" >
-				Tutorial do Sistema Mais.Edu
-			</a>
-			&nbsp;|&nbsp;
-			<a href="dominio do problema.html"  target="_blank" >
-				Como funciona o financiamento da educação na PB
-			<a>
-			&nbsp;|&nbsp;
-			<a href="documents/US01.pdf"  target="_blank" >
-				Se você gosta de estatística...
-			<a>
-			&nbsp;|&nbsp; 
-			<a href="upload/"  >
-				Inserção de novos dados
-			<a>
-			&nbsp;|&nbsp; 
-			<a href="https://sites.google.com/a/computacao.ufcg.edu.br/analytics/"  target="_blank">
-				Analytics UFCG
-			<a>
-			
-			
 		</div>
-	</div>
+		<hr/>
+		<div id="footer">
+			<p>Analytics - UFCG (2013)</p>
+			<p>TCE-PB</p>
+
+		</div>
+		
+
 	<div id="tooltip" class="hidden">
 		<p>
 			<span id="value"></span>
@@ -892,12 +934,12 @@
 	</div>
 
 
-	<div id="container2" style="color: #000000;" class="reveal-modal">
+	<div id="container2" style="color: #000000;top:30px;" class="reveal-modal">
 
 		<div id="title_header2"
 			style="font-size: 3.75em; background-color: black; color: #FFFFFF;">MAIS.edu</div>
 
-		<div id="main_content2" style="text-align: left;">
+		<div id="main_content2" style="text-align: justify;padding:10px;">
 
 			<strong>Quais os objetivos do projeto MAIS?</strong>
 			<p>O MAIS educação veio para facilitar e agilizar o trabalho dos auditores 
@@ -968,7 +1010,7 @@
 	</div>
 	
 	
-	<div id="idVideo" class="reveal-modal" style="color:black;"  style="height:auto;display:none" >
+	<div id="idVideo" class="reveal-modal" style="color:black;height:auto;display:none;top:50px" >
 			<h1 >MAIS.edu</h1>
 	
 			<iframe width="800" height="600" src="http://www.youtube.com/embed/1PQKpGFiS-I?rel=0&vq=hd1080" frameborder="0" allowfullscreen></iframe>

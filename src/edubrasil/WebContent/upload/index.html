@@ -5,13 +5,16 @@
 <head>
 
 	<meta charset="utf-8">
-	<title>Mais.Edu upload</title>
+	<title>Mais.Edu</title>
+	<link rel="icon" type="image/png" href="img/favicon.png" />
+
 
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 
 	<script src="js/jquery.min.js">
 	</script>
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/header.css">
 
 	<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 	<!-- Bootstrap CSS fixes for IE6 -->
@@ -51,14 +54,34 @@
 </head>
 
 <body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="navbar-inner">
+	        <div class="container">
+	          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </a>
+	          <div class="nav-collapse collapse">
+	            <ul class="nav">
+	              <li ><a href="../index.html">Pagina Inicial</a></li>
+	              <li class="active"><a href="">Inserção de Dados</a></li>
+	              <li><a href="../dominio do problema.html">Como funciona o financiamento da educação na PB</a></li>
+	              <li><a href="../documents/US01.pdf"  target="_blank" >Se você gosta de estatística...</a></li>
+	              
+	            </ul>
+	          </div><!--/.nav-collapse -->
+	        </div>
+	      </div>
+	    </div>
 	
-	<div class="title head" onclick="window.location.href='../';">
+	<div class="title head">
 		<h1 >Mais.Edu</h1>
 		<p>Inserir dados no sistema Mais.Edu</p>
 	</div>
 	
-
-	<div style="width:960px;margin-left:auto; margin-right:auto">
+	<div class="geral">
+	<div style="width:960px;margin-left:auto; margin-right:auto; margin-top:20px;">
 			<ul class="nav nav-tabs" >
 				<li  id="uploadTab" class="active"><a  href="#"><h2 class="lead">Upload de arquivos</h2></a></li>
 				<li id="downloadTab" ><a href="#"><h2 class="lead">Controle de versão</h2></a></li>
@@ -107,7 +130,7 @@
 			</table>
 			
 			<div class="row fileupload-buttonbar">
-				<div class="span7" style="width:100%;text-align:right;">
+				<div class="span7" style="width:100%;text-align:right;margin-left:10px;">
 					<!-- The fileinput-button span is used to style the file input field as button -->
 					<button type="submit" style="font-size:large;" class="btn btn-primary start">
 						<i class="icon-upload icon-white" ></i>
@@ -187,32 +210,36 @@
 		</tr>
 	{% } %}
 	</script>
-	
-	<a id="done" data-toggle="modal" href="#donePopup" ></a>
+	<hr/>
+		<div id="footer">
+			<p>Analytics - UFCG (2013)</p>
+			<p>TCE-PB</p>
 
-	<!-- Modal -->
-	<div class="modal fade" id="donePopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		  <h2 class="modal-title" style="text-align: center;">Upload Concluído</h2>
 		</div>
-		<div class="modal-body" >
-		  O arquivo foi carregado com sucesso no sistema!
-		</div>
-		<div class="modal-footer">
-		  <button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
-		  <a href="../"><button type="button" class="btn btn-primary">Ir para Mais.Edu</button></a>
-		</div>
-	  </div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
+	<a id="done" data-toggle="modal" href="#donePopup" ></a>
+		<!-- Modal -->
+	<div class="modal fade" id="donePopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  style="display:none;">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			  <h2 class="modal-title" style="text-align: center;">Upload Concluído</h2>
+			</div>
+			<div class="modal-body" >
+			  O arquivo foi carregado com sucesso no sistema!
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
+			  <a href="../"><button type="button" class="btn btn-primary">Ir para Mais.Edu</button></a>
+			</div>
+		  </div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 	
 	<a id="fail" data-toggle="modal" href="#failPopup" ></a>
 
 	<!-- Modal -->
-	<div class="modal fade" id="failPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="failPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
 	<div class="modal-dialog">
 	  <div class="modal-content">
 		<div class="modal-header">
@@ -229,6 +256,7 @@
 	  </div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
+
 
 
 <script src="js/jquery.min.js"></script>
@@ -268,4 +296,6 @@
 <script src="js/cors/jquery.xdr-transport.js"></script>
 <![endif]-->
 </body> 
+
+
 </html>

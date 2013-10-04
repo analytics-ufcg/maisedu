@@ -1,0 +1,147 @@
+
+.nav li {
+  line-height:10px;
+  font-size: 12px;
+  font-family: sans-serif;
+}
+.navbar-inner {
+    min-height: 4px;
+}
+
+.head {
+	color:#FFFFFF;
+	margin-bottom:0;
+	font-weight:bold;
+	line-height:2px;
+	margin:0px 0;
+	text-rendering:optimizelegibility;
+}
+
+.head p {
+	color:#FFFFFF;
+	font-size:40px;
+	font-weight:200;
+	line-height:1.25;
+}
+.head h1 {
+	font-size:120px;
+	letter-spacing:-2px;
+	line-height:1;
+}
+
+
+.title {
+	-webkit-box-shadow:rgba(0, 0, 0, 0.2) 0 3px 7px inset, rgba(0, 0, 0, 0.2) 0 -3px 7px inset;
+	background-image:linear-gradient(45deg, #000011 0%, #003F87 100%);
+	background-position:initial initial;
+	background-repeat:initial initial;
+	box-shadow:rgba(0, 0, 0, 0.2) 0 3px 7px inset, rgba(0, 0, 0, 0.2) 0 -3px 7px inset;
+	color:#FFFFFF;
+	padding:20px 0;
+	position:relative;
+	text-align:center;
+	text-shadow:rgba(0, 0, 0, 0.4) 0 1px 3px, rgba(0, 0, 0, 0.0745098) 0 0 30px;
+
+ 
+}
+
+.lead {
+  font-size:16px;
+  line-height:10px;
+  margin-bottom:30px;
+}
+	
+.title:after {
+	background: url("../images/bs-docs-masthead-pattern.png") repeat scroll center center transparent;
+	bottom: 0;
+	content: "";
+	display: block;
+	left: 0;
+	opacity: 0.6;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+  display:block;
+}
+
+
+.title h1 {
+	font-size: 60px;
+	font-weight: bold;
+	letter-spacing: -6px;
+	line-height: 1;
+	text-shadow: 8px 15px 3px rgba(0,0,0,.4), 0 0 300px rgba(0,0,0,.055), 1px 0 black, 0 -1px black;
+	font-family:'Florence', 'cursive';
+	margin-top: 40px;
+	text-align:center;
+}
+.title p {
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 1.25;
+	margin-bottom: 30px;
+	text-align:center;
+}
+
+.navbar-fixed-top, .navbar-fixed-bottom {
+    position: fixed;
+
+}
+
+
+hr {-moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #EEEEEE -moz-use-text-color #AAAAAA;
+    border-image: none;
+    border-left: 0 none;
+    border-right: 0 none;
+    border-style: solid none;
+    border-width: 1px 0;
+    margin: 20px 0 20px;
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+}
+
+footer p {
+    margin: 0 0 100px 0px;
+    margin-bottom: 10000px;
+    text-align: center;
+	display:block;
+
+
+}
+
+#footer{
+
+	font-size:16px;
+
+	
+	padding: 0 60px;
+	margin: 0px;
+	color: #444444;
+	font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
+	
+	height: 70px;
+    bottom:0;
+
+	text-align:center;
+}
+
+#footer a:link, #footer a:visited, #footer a:active { 
+	text-decoration:none;
+	color:#FFFFFF;
+}
+
+#footer a:hover { 
+	text-decoration:underline;
+	color:#BBBBBB;
+}

@@ -1,13 +1,4 @@
 
-body {
-	padding: 0 0;
-	font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size:14px;
-	line-height:20px;
-	margin:0;
-	padding:0;	
-}
-
 p {
 	text-align: justify;
 	margin:10px auto;			
@@ -23,47 +14,22 @@ p {
 	text-align: justify;
 }
 
-.title {
-	position: relative;
-	padding: 10px 0;
+@charset "UTF-8";
 
-	color: #fff;
-	text-align: center;
-	text-shadow:  1px 0 black, 0 1px black, 0 -1px black, -1px 0 black;
 
-	background: #f5f6f6; /* Old browsers */
-	background: -moz-linear-gradient(top,  #f5f6f6 0%, #dbdce2 21%, #b8bac6 49%, #dddfe3 80%, #ffffff 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(21%,#dbdce2), color-stop(49%,#b8bac6), color-stop(80%,#dddfe3), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#ffffff 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#ffffff 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#ffffff 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f6f6', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
-}
-.title h1 {
-  font-size: 80px;
-  font-weight: bold;
-  letter-spacing: -6px;
-  line-height: 1;
-  text-shadow: 8px 15px 3px rgba(0,0,0,.4), 0 0 300px rgba(0,0,0,.055), 1px 0 black, 0 -1px black;
-  font-family:'Florence', 'cursive'
-}
-.title p {
-	text-align: center;
-	font-size: 24px;
-	font-weight: 300;
-	line-height: 1.25;
-	margin-bottom: 30px;
+.ng-cloak {
+  display: none;
 }
 
-.head {
-  color:#FFFFFF;
-  margin-bottom:0;
-  font-weight:bold;
-  line-height:2px;
-  margin:0px 0;
-  text-rendering:optimizelegibility;
+body {
+	padding: 0 0;
+	font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size:14px;
+	line-height:20px;
+	margin:0;
+	padding:0;	
 }
+
 
 .list{
 	width: 980px;
@@ -83,17 +49,28 @@ p {
 	margin:0 auto;
 
 }
-ul {
+.list ul {
 	list-style-type:none;
 	 
 }
-ol {
+.list ol {
 	list-style-type:none;
 }
-ol .ol-2{
+.list ol .ol-2{
 	list-style-type:upper-roman;
 }
 
-ol .ol-3{
+.list ol .ol-3{
 	list-style-type:lower-roman;
+}
+
+
+.top-1 h1{
+	font-size:30px;
+}
+.top-1 h2{
+	font-size:25px;
+}
+.top-1 h3{
+	font-size:20px;
 }

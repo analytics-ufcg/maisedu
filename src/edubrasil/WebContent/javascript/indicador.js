@@ -425,7 +425,7 @@ function cleanContainers(){
     .remove();
     //Fim - henriquerzo@gmail.com 06/09/2013
 
-	d3.selectAll("h1").remove();
+	d3.select("#plot_area").selectAll("h1").remove();
 }
 
 Array.prototype.unique = function() {
@@ -520,10 +520,21 @@ function loadData() {
 		myList.selectAll("option").data(cities).enter().append("option")
 		.attr("value",function(d){return d;})
 		.attr("label",function(d){return d;})
+		.attr("data-icon", "icon-map-marker")
 		.text(function(d){return d;});
+		
+		$('.selectpicker').selectpicker({'selectedText': 'cat'});
 		//Inicio - henriquerzo@gmail.com 06/09/2013
 		resetMap(dataset);
 		//Fim - henriquerzo@gmail.com 06/09/2013
+		$("#button_back_map").click(function() { 
+			
+			var selection = $("#myList").val("Visão Geral");
+
+			selection.change();
+		});
+		
+		
 	
 	});
 	
@@ -686,7 +697,8 @@ function loadUpButtons() {
 
 //Plota o titulo do indicador
 function plotTitulosGraficos(indicador, ano) {
-	d3.selectAll("h1").remove();
+
+	d3.select("#plot_area").selectAll("h1").remove();
 	d3.selectAll("#botao_similares").remove();
 	//d3.selectAll("input").remove();
 	
