@@ -113,6 +113,7 @@ function plotColorMap(indicador_nome, colunaDesvio, dataset, dataset_medianas) {
 
 			if(indicador_nome == "INDICADOR_62" || indicador_nome == "INDICADOR_7") {
 				if(indicador_desvio < -1) {
+					console.log(indicador_desvio)
 					$("#image_minus").show();
 					$("#image_plus").hide();
 				}

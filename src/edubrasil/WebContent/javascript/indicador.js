@@ -1457,11 +1457,11 @@ function plot_ranges(svg, dados, y0,indicador){
 		}else{
 			if(reais.contains(indicador)){
 				svg.append("text")
-					.attr("x",x1(dados[0].x) -35)
+					.attr("x",x1(dados[0].x) -25)
 					.attr("y",(y0+30))
 					.text("R$ ");
 				svg.append("text")
-					.attr("x",x1(dados[1].x) - 35)
+					.attr("x",x1(dados[1].x) - 25)
 					.attr("y",(y0+30))
 					.text("R$ ");
 			}else{
@@ -1592,31 +1592,30 @@ function plot_cidades(svg, dados, indicador,cor, min, max, y0){
 						if(typeof mapa_municipios[key_valorIndicador] == "object"){
 							nomesMunicipios = mapa_municipios[key_valorIndicador].join(", ");
 						}			
-						var valorIndicador = nomesMunicipios + ": R$ " + formatNum(key_valorIndicador);
+						var valorIndicador = nomesMunicipios + ": " + key_valorIndicador;
 						/*Fim - Alterar tooltip 1º barra  - Iury - 19/08/2013*/
 				
 
 						//Get the values for tooltip position
-						/*inicio - tooltip barra 1 - iury - 04/10*/
-						var xPosition = $(this).offset().left;
-						var yPosition = $(this).offset().top - 50;
-						/*fim - tooltip barra 1 - iury - 04/10*/
+						var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
+						var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
+				
 						//Update the tooltip position and value
 						/*inicio - tooltip 1º barra unidade - iury - 29/09*/
 						/*       - tooltip 1º barra formatacao valores - 30/09 */
 						if(porcentagem.contains(indicador)){
 						d3.select("#tooltip").style("left", xPosition + "px")
 						.style("top", yPosition + "px")
-						.select("#value").text(valorIndicador.replace("R$","")+"%");
+						.select("#value").text(formatNum(valorIndicador)+"%");
 						}else{
 							if(reais.contains(indicador)){
 							d3.select("#tooltip").style("left", xPosition + "px")
 							.style("top", yPosition + "px")
-							.select("#value").text(valorIndicador);
+							.select("#value").text("R$ "+formatNum(valorIndicador));
 							}else{
 							d3.select("#tooltip").style("left", xPosition + "px")
 							.style("top", yPosition + "px")
-							.select("#value").text(valorIndicador.replace("R$",""));
+							.select("#value").text(formatNum(valorIndicador));
 							}
 						}
 						/*Fim - tooltip 1º barra unidade - iury - 29/09*/
@@ -1639,10 +1638,9 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 			svg.selectAll("#barra_indicador_altura_240").on("mouseover", function(d) {
 
 			//Get the values for tooltip position
-			/*Inicio - posicao tooltip  barra - iury - 04/10*/
-						var xPosition = $(this).offset().left;
-						var yPosition = $(this).offset().top - 50;
-			/*Fim - posicao tooltip  barra - iury - 04/10*/
+			var xPosition = parseFloat(d3.select(this).attr("x1")) + 450;
+			var yPosition = parseFloat(d3.select(this).attr("y1")) + 150;
+
 			//var xPosition = window.event.clientX
 			//var yPosition = window.event.clientY
 
@@ -1663,10 +1661,8 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 			svg.selectAll("#barra_indicador_altura_240").on("mouseover", function(d) {
 
 			//Get the values for tooltip position
-			/*Inicio - posicao tooltip  barra - iury - 04/10*/
-						var xPosition = $(this).offset().left;
-						var yPosition = $(this).offset().top - 50;
-			/*Fim - posicao tooltip  barra - iury - 04/10*/
+			var xPosition = parseFloat(d3.select(this).attr("x1")) + 450;
+			var yPosition = parseFloat(d3.select(this).attr("y1")) + 150;
 
 			//var xPosition = window.event.clientX
 			//var yPosition = window.event.clientY
@@ -1717,14 +1713,12 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 				if(typeof mapa_similares[key_valorIndicador] == "object"){
 					nomesMunicipios = mapa_similares[key_valorIndicador].join(", ");
 				}			
-				var valorIndicador = nomesMunicipios + ": R$ " + formatNum(key_valorIndicador);
+				var valorIndicador = nomesMunicipios + ": " + key_valorIndicador;
 				/*Fim - Alterar tooltip 4º barra  - Iury - 19/08/2013*/
 				
 				//Get the values for tooltip position
-			/*Inicio - posicao tooltip  barra - iury - 04/10*/
-						var xPosition = $(this).offset().left;
-						var yPosition = $(this).offset().top - 50;
-			/*Fim - posicao tooltip  barra - iury - 04/10*/
+				var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
+				var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
 
 
 				/*inicio - tooltip  4º barra unidade - iury - 29/09*/
@@ -1732,16 +1726,16 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 				if(porcentagem.contains(indicador)){
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(valorIndicador.replace("R$","")+"%");
+				.select("#value").text(formatNum(valorIndicador)+"%");
 				}else{
 					if(reais.contains(indicador)){
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text(valorIndicador);
+					.select("#value").text("R$ "+formatNum(valorIndicador));
 					}else{
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text(valorIndicador.replace("R$",""));
+					.select("#value").text(formatNum(valorIndicador));
 					}
 				}
 				/*Fim - tooltip 4º barra unidade - iury - 29/09*/
@@ -1770,10 +1764,8 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 		svg.selectAll("#barra_indicador_altura_240").on("mouseover", function(d) {
 
 			//Get the values for tooltip position
-			/*Inicio - posicao tooltip  barra - iury - 04/10*/
-						var xPosition = $(this).offset().left;
-						var yPosition = $(this).offset().top - 50;
-			/*Fim - posicao tooltip barra - iury - 04/10*/
+			var xPosition = parseFloat(d3.select(this).attr("x1")) + 450;
+			var yPosition = parseFloat(d3.select(this).attr("y1")) + 150;
 
 			//var xPosition = window.event.clientX
 			//var yPosition = window.event.clientY
