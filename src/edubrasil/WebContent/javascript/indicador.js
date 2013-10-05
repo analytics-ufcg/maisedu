@@ -124,8 +124,8 @@ function getMenuOption(selection) {
 	var cont = 0;
 	d3.selectAll(".arrows")
 	.data(dicionario)
-	.attr("class","tip")
 	.attr("src", function (d){
+					
 					if (cidade=="Visão Geral") {
 						array_setas[cont] = "0";
 						cont = cont + 1;
@@ -136,224 +136,273 @@ function getMenuOption(selection) {
 						cont = cont + 1;
 						return "images/arrow"+tendencia[cidades_tendencia.indexOf(cidade)][d.id]+".png";
 				})
-	.attr("id", function(d,i){ return "arrow_indicador_" + i;})
-	.attr("rel","tooltip")
-	.attr("data-placement","left")
-	.attr("title",function(d){return "A análise da série temporal índica um alarme de nível "+getAlarme(tendencia[cidades_tendencia.indexOf(cidade)][d.id])});
+	.attr("id", function(d,i){ return "arrow_indicador_" + i;});
 
-
+	//var xPosition_ = parseFloat(d3.select(this).attr("x1")) + 50;
+	//var yPosition_ =  ;
 	/*Inicio - tooltips setas - iury - 01/10*/
 	 $('#arrow_indicador_0')
 	 .on("mouseover", function(d) {
 			$('.tooltips').tooltipster('disable');
-			if(array_setas[0].indexOf("0") == -1){
-				 $(this).tooltip('show');
+			 d3.select("#tooltip").style("left", 1  + "px")
+								 .style("top", 10+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[0]));
+			 if(array_setas[0].indexOf("0") == -1){
+				d3.select("#tooltip").classed("hidden", false);
 			 }else{
-				 $(this).tooltip('hide');
-			 }
-		
+				 d3.select("#tooltip").classed("hidden", true);	
+			 }			
 	 })
 	 .on("mouseout",function(d){
 	 		$('.tooltips').tooltipster('enable');
-			$(this).tooltip('hide');
+			 d3.select("#tooltip").classed("hidden", true);	
 	});
 	
-	$('#arrow_indicador_1')
-	.on("mouseover", function(d) {
+	 $('#arrow_indicador_1')
+	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
+			 d3.select("#tooltip").style("left", 1+ "px")
+								  .style("top", 10 + "px")
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[1]));
 			 if(array_setas[1].indexOf("0") == -1){
-				 $(this).tooltip('show');
+				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
-				 $(this).tooltip('hide');
+
+				 d3.select("#tooltip").classed("hidden", true);	
 			 }
 	 })
 	 .on("mouseout",function(d){
 	 		$('.tooltips').tooltipster('enable');
-			$(this).tooltip('hide');
+			 d3.select("#tooltip").classed("hidden", true);	
 	});
 
 	 $('#arrow_indicador_2')
 	 .on("mouseover", function(d) {
 	 		$('.tooltips').tooltipster('disable');
+			 d3.select("#tooltip").style("left", 10+ "px")
+								  .style("top", 10 + "px")
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[2]));
 			 if(array_setas[2].indexOf("0") == -1){
-				$(this).tooltip('show');
+				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
-				 $(this).tooltip('hide');	
+				 d3.select("#tooltip").classed("hidden", true);	
 			 }
 	 })
 	 .on("mouseout",function(d){
 	 		$('.tooltips').tooltipster('enable');
-			$(this).tooltip('hide');
+			 d3.select("#tooltip").classed("hidden", true);	
 	});		
 
 	 $('#arrow_indicador_3')
 	 .on("mouseover", function(d) {
 	 		$('.tooltips').tooltipster('disable');
+			 d3.select("#tooltip").style("left", 10+ "px")
+								  .style("top", 10 + "px")
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[3]));
 			 if(array_setas[3].indexOf("0") == -1){
-				$(this).tooltip('show');
+				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
-				 $(this).tooltip('hide');	
+				 d3.select("#tooltip").classed("hidden", true);	
 			 }
 	 })
 	 .on("mouseout",function(d){
 	 		$('.tooltips').tooltipster('enable');
-			 $(this).tooltip('hide');	
+			 d3.select("#tooltip").classed("hidden", true);	
 	});
 
 	 $('#arrow_indicador_4')
 	 .on("mouseover", function(d) {
-	 		$('.tooltips').tooltipster('disable');
- 			 if(array_setas[4].indexOf("0") == -1){
-				$(this).tooltip('show');
+	 	$('.tooltips').tooltipster('disable');
+ 		d3.select("#tooltip").style("left", 10+ "px")
+							 .style("top", 10 + "px")
+							 .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[4]));
+			 if(array_setas[4].indexOf("0") == -1){
+				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
 
-				 $(this).tooltip('hide');	
+				 d3.select("#tooltip").classed("hidden", true);	
 			 }
 	 })
 	 .on("mouseout",function(d){
 	 		$('.tooltips').tooltipster('enable');
-			 $(this).tooltip('hide');	
+			 d3.select("#tooltip").classed("hidden", true);	
 	});
 
 	 $('#arrow_indicador_5')
 	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
+			 d3.select("#tooltip").style("left", 10+ "px")
+								  .style("top", 10 + "px")
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[5]));
 			 if(array_setas[5].indexOf("0") == -1){
-				$(this).tooltip('show');
+				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
-				 $(this).tooltip('hide');	
+				 d3.select("#tooltip").classed("hidden", true);	
 			 }
 	 })
 	 .on("mouseout",function(d){
 	 		$('.tooltips').tooltipster('enable');
-			 $(this).tooltip('hide');	
+			 d3.select("#tooltip").classed("hidden", true);	
 	});		
 
 	 $('#arrow_indicador_6')
 	 .on("mouseover", function(d) {
-	 		$('.tooltips').tooltipster('disable');
-			if(array_setas[6].indexOf("0") == -1){
-				$(this).tooltip('show');
+	 	$('.tooltips').tooltipster('disable');
+			 d3.select("#tooltip").style("left", 10+ "px")
+								  .style("top", 10 + "px")
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[6]));
+			 if(array_setas[6].indexOf("0") == -1){
+				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
 
-				 $(this).tooltip('hide');	
+				 d3.select("#tooltip").classed("hidden", true);	
 			 }
 	 })
 	 .on("mouseout",function(d){
 	 		$('.tooltips').tooltipster('enable');
-			 $(this).tooltip('hide');	
+			 d3.select("#tooltip").classed("hidden", true);	
 	});
 
 	 $('#arrow_indicador_7')
 	 .on("mouseover", function(d) {
-	 		$('.tooltips').tooltipster('disable');
+	 	$('.tooltips').tooltipster('disable');
+				 d3.select("#tooltip").style("left", 10+ "px")
+								  .style("top", 10 + "px")
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[7]));
 			 if(array_setas[7].indexOf("0") == -1){
-				$(this).tooltip('show');
+				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
-				 $(this).tooltip('hide');	
+
+				 d3.select("#tooltip").classed("hidden", true);	
 			 }
 	 })
 	 .on("mouseout",function(d){
 	 		$('.tooltips').tooltipster('enable');
-			 $(this).tooltip('hide');	
+			 d3.select("#tooltip").classed("hidden", true);	
 	});
 
 	 $('#arrow_indicador_8')
 	 .on("mouseover", function(d) {
-		 	$('.tooltips').tooltipster('disable');
+	 	$('.tooltips').tooltipster('disable');
+				 d3.select("#tooltip").style("left", 10+ "px")
+								  .style("top", 10 + "px")
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[8]));
 			 if(array_setas[8].indexOf("0") == -1){
-				$(this).tooltip('show');
+				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
-				 $(this).tooltip('hide');	
+
+				 d3.select("#tooltip").classed("hidden", true);	
 			 }
 	 })
 	 .on("mouseout",function(d){
 	 		$('.tooltips').tooltipster('enable');
-			 $(this).tooltip('hide');	
+			 d3.select("#tooltip").classed("hidden", true);	
 	});		
 
 	 $('#arrow_indicador_9')
 	 .on("mouseover", function(d) {
-		 	$('.tooltips').tooltipster('disable');
+	 	$('.tooltips').tooltipster('disable');
+					 d3.select("#tooltip").style("left", 10+ "px")
+								  .style("top", 10 + "px")
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[9]));
 			 if(array_setas[9].indexOf("0") == -1){
-				$(this).tooltip('show');
+				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
-				 $(this).tooltip('hide');	
+
+					 d3.select("#tooltip").classed("hidden", true);	
 			 }
 	 })
 	 .on("mouseout",function(d){
 	 		$('.tooltips').tooltipster('enable');
-			 $(this).tooltip('hide');	
+			 d3.select("#tooltip").classed("hidden", true);	
 	});
 
 	 $('#arrow_indicador_10')
 	 .on("mouseover", function(d) {
-		 	$('.tooltips').tooltipster('disable');
+	 	$('.tooltips').tooltipster('disable');
+				 d3.select("#tooltip").style("left", 10+ "px")
+							  .style("top", 10 + "px")
+							  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[10]));
 			 if(array_setas[10].indexOf("0") == -1){
-				$(this).tooltip('show');
+				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
-				$(this).tooltip('hide');	
+					 d3.select("#tooltip").classed("hidden", true);	
 			 }
 	 })
 	 .on("mouseout",function(d){
 	 		$('.tooltips').tooltipster('enable');
-			$(this).tooltip('hide');
+			 d3.select("#tooltip").classed("hidden", true);	
 	});
 
 	 $('#arrow_indicador_11')
 	 .on("mouseover", function(d) {
-		 	$('.tooltips').tooltipster('disable');
+	 	$('.tooltips').tooltipster('disable');
+				 d3.select("#tooltip").style("left", 10+ "px")
+								  .style("top", 10 + "px")
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[11]));
 			 if(array_setas[11].indexOf("0") == -1){
-			 	$(this).tooltip('show');
+				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
-				$(this).tooltip('hide');	
+				 d3.select("#tooltip").classed("hidden", true);	
 			 }
 	 })
 	 .on("mouseout",function(d){
 	 		$('.tooltips').tooltipster('enable');
-			$(this).tooltip('hide');
+			 d3.select("#tooltip").classed("hidden", true);	
 	});		
 
 	 $('#arrow_indicador_12')
 	 .on("mouseover", function(d) {
-		 	$('.tooltips').tooltipster('disable');
+	 	$('.tooltips').tooltipster('disable');
+				 d3.select("#tooltip").style("left", 10+ "px")
+							  .style("top", 10 + "px")
+							  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[12]));
 			 if(array_setas[12].indexOf("0") == -1){
-				$(this).tooltip('show');
+				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
-				$(this).tooltip('hide');
+
+				 d3.select("#tooltip").classed("hidden", true);	
 			 }
 	 })
 	 .on("mouseout",function(d){
-			$('.tooltips').tooltipster('enable');
-			$(this).tooltip('hide');
+	 		$('.tooltips').tooltipster('enable');
+			 d3.select("#tooltip").classed("hidden", true);	
 	});		
 
 	 $('#arrow_indicador_13')
 	 .on("mouseover", function(d) {
-		 	$('.tooltips').tooltipster('disable');
+	 	$('.tooltips').tooltipster('disable');
+				 d3.select("#tooltip").style("left", 10+ "px")
+								  .style("top", 10 + "px")
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[13]));
 			 if(array_setas[13].indexOf("0") == -1){
-			 	$(this).tooltip('show');
+				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
-				$(this).tooltip('hide');
+
+				 d3.select("#tooltip").classed("hidden", true);	
 			 }
 	 })
 	 .on("mouseout",function(d){
 	 		$('.tooltips').tooltipster('enable');
-			$(this).tooltip('hide');
+			 d3.select("#tooltip").classed("hidden", true);	
 	});		
 
 	 $('#arrow_indicador_14')
 	 .on("mouseover", function(d) {
-	 		$('.tooltips').tooltipster('disable');
+	 	$('.tooltips').tooltipster('disable');
+				 d3.select("#tooltip").style("left", 10+ "px")
+								  .style("top", 10 + "px")
+								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[14]));
 			 if(array_setas[14].indexOf("0") == -1){
-				 $(this).tooltip('show');
+				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
-				$(this).tooltip('hide');
+
+				 d3.select("#tooltip").classed("hidden", true);	
 			 }
 	 })
 	 .on("mouseout",function(d){
 	 		$('.tooltips').tooltipster('enable');
-			$(this).tooltip('hide');
+			 d3.select("#tooltip").classed("hidden", true);	
 	});		
 	/*Fim - tooltips setas - iury - 01/10*/
 
@@ -1087,7 +1136,7 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 			.attr("text-anchor", "middle")
 			.attr("font-weight", "bold")
 			.transition().duration(duration).delay(1000)
-			.text(cidade + ": " + ("R$ "+formatNum(parseFloat(valor_cidade).toFixed(2))));
+			.text(cidade + ": " + (formatNum(parseFloat(valor_cidade).toFixed(2)))+ " Reais");
 		}else{
 		svg.append("text")
 			.attr("x", x1(valor_cidade))
@@ -1372,7 +1421,7 @@ function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value,indicador)
 		.attr("text-anchor","middle")
 		.attr("x", x1(dados_regiao[0].x) - 2)
 		.attr("y",(y0 + 30))
-		.text("R$ "+formatNum((dados_regiao[0].x).toFixed(2)));
+		.text(formatNum((dados_regiao[0].x).toFixed(2))+ " Reais");
 		}else{
 		svg.append("text")
 		.attr("text-anchor","middle")
@@ -1398,7 +1447,7 @@ function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value,indicador)
 		.attr("text-anchor","left")
 		.attr("x", x1(dados_regiao[1].x) - 15)
 		.attr("y",(y0 + 30))
-		.text("R$ "+formatNum((dados_regiao[1].x).toFixed(2)));
+		.text(formatNum((dados_regiao[1].x).toFixed(2))+ " Reais");
 		}else{
 		svg.append("text")
 		.attr("text-anchor","left")
@@ -1436,12 +1485,12 @@ function plot_ranges(svg, dados, y0,indicador){
 
 		
 		svg.append("text")
-			.attr("x", x1(dados[0].x) - 20)
+			.attr("x", x1(dados[0].x) - 10)
 			.attr("y", (y0 + 44))
 			.text("Min");
 			
 		svg.append("text")
-			.attr("x", x1(dados[1].x) - 20)
+			.attr("x", x1(dados[1].x) - 10)
 			.attr("y", (y0 + 44))
 			.text("Max");	
 		
@@ -1457,13 +1506,13 @@ function plot_ranges(svg, dados, y0,indicador){
 		}else{
 			if(reais.contains(indicador)){
 				svg.append("text")
-					.attr("x",x1(dados[0].x) -25)
+					.attr("x",x1(dados[0].x) +25)
 					.attr("y",(y0+30))
-					.text("R$ ");
+					.text(" Reais");
 				svg.append("text")
-					.attr("x",x1(dados[1].x) - 25)
+					.attr("x",x1(dados[1].x) + 25)
 					.attr("y",(y0+30))
-					.text("R$ ");
+					.text(" Reais");
 			}else{
 				// nao apresenta unidades
 			}
@@ -1611,7 +1660,7 @@ function plot_cidades(svg, dados, indicador,cor, min, max, y0){
 							if(reais.contains(indicador)){
 							d3.select("#tooltip").style("left", xPosition + "px")
 							.style("top", yPosition + "px")
-							.select("#value").text("R$ "+formatNum(valorIndicador));
+							.select("#value").text(formatNum(valorIndicador)+ " Reais");
 							}else{
 							d3.select("#tooltip").style("left", xPosition + "px")
 							.style("top", yPosition + "px")
@@ -1731,7 +1780,7 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 					if(reais.contains(indicador)){
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text("R$ "+formatNum(valorIndicador));
+					.select("#value").text(formatNum(valorIndicador)+ " Reais");
 					}else{
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")

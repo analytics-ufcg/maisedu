@@ -262,20 +262,20 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 				.attr("y",290)
 				.style("font-size","10px")
 				.style("fill","red")
-				.text("*Essa cidade possui menos de 10 cidades");	
+				.text("*Essa cidade possui menos de 10 cidades similares");	
 			svg.append("svg:text")
 				.attr("x",685)
 				.attr("y",302)
 				.style("fill","red")
 				.style("font-size","10px")
-				.text("similares porque não há cidades suficientemente");	
+				.text("porque não há cidades suficientemente similares");	
 			svg.append("svg:text")
 				.attr("x",685)
 				.attr("y",314)
 				.attr("color","red")
 				.style("font-size","10px")
 				.style("fill","red")
-				.text("similares a ela.");	
+				.text("a ela.");	
 		};
 
 
@@ -287,20 +287,20 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
 				.attr("y",330)
 				.style("font-size","10px")
 				.style("fill","red")
-				.text("*Algumas cidades similares não apresentam");	
+				.text("*Algumas cidades similares não apresentam dados ");	
 			svg.append("svg:text")
 				.attr("x",685)
 				.attr("y",342)
 				.style("fill","red")
 				.style("font-size","10px")
-				.text("dados para este indicador no ano analisado.");	
+				.text("para este indicador no ano analisado. Então elas");	
 			svg.append("svg:text")
 				.attr("x",685)
 				.attr("y",354)
 				.attr("color","red")
 				.style("font-size","10px")
 				.style("fill","red")
-				.text("Então elas foram omitidas");	
+				.text("foram omitidas");	
 		};
 		/*Fim - explicacao - iurygregory@gmail.com 23/08/2013*/
 

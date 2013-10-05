@@ -242,7 +242,7 @@ function plotGraph(indicador){//(nome_indicador){
 					if(reais.contains(indicador)){
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text("R$ "+formatNum(valorIndicador.toFixed(2)));
+					.select("#value").text(formatNum(valorIndicador.toFixed(2))+ " Reais");
 					}else{
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
@@ -286,7 +286,7 @@ function plotGraph(indicador){//(nome_indicador){
 					if(reais.contains(indicador)){
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text("R$ "+formatNum(valorIndicador.toFixed(2)));
+					.select("#value").text(formatNum(valorIndicador.toFixed(2))+ " Reais");
 					}else{
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
@@ -333,7 +333,7 @@ function plotGraph(indicador){//(nome_indicador){
 					if(reais.contains(indicador)){
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text("R$ "+formatNum(valorIndicador.toFixed(2)));
+					.select("#value").text(formatNum(valorIndicador.toFixed(2))+ " Reais");
 					}else{
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
@@ -376,7 +376,7 @@ function plotGraph(indicador){//(nome_indicador){
 					if(reais.contains(indicador)){
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text("R$ "+formatNum(valorIndicador.toFixed(2)));
+					.select("#value").text(formatNum(valorIndicador.toFixed(2))+ " Reais");
 					}else{
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
