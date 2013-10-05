@@ -53,9 +53,10 @@ function plotSeries(cidade,indicador, dataset, dataset_medianas) {
 		data_temporaria_mediana.forEach(function(d){
 			d.ANO = parseDate(d.ANO);
 			if((d.REGIAO == "Paraíba" | d.REGIAO == micro | d.REGIAO == meso) & d[indicador] != "NA"){
-				val_y.push(formatNum(parseFloat(d[indicador])));//mudei aqui
+				val_y.push(formatNum(parseFloat(d[indicador])));
 			}
 		});
+
 		dados_estado = data_temporaria_mediana.filter(function(i){return i.REGIAO == "Paraíba" & i[indicador] != "NA";});
 		dados_micro = data_temporaria_mediana.filter(function(i){return i.REGIAO == micro & i[indicador] != "NA";});
 		dados_meso = data_temporaria_mediana.filter(function(i){return i.REGIAO == meso & i[indicador] != "NA";});//
@@ -130,6 +131,7 @@ function plotGraph(indicador){//(nome_indicador){
 			.orient("left")
 			.tickFormat(function(d){return formatNum(d);});
 
+
 		var line = d3.svg.line()
 			.x(function(d) { return x(d.ANO); })
 			.y(function(d) { return y(parseFloat(d[indicador]));});
@@ -166,7 +168,7 @@ function plotGraph(indicador){//(nome_indicador){
 			svg.append("text")
 			  .attr("transform","rotate(-90)")
 			  .attr("y",0-margin.left)
-			  .attr("x",0 - (height/2))
+			  .attr("x",0 - (height/2)+10)
 			  .attr("dy","1em")
 			  .attr("text-anchor","middle")
 			  .text("Porcentagem (%)")
@@ -177,7 +179,7 @@ function plotGraph(indicador){//(nome_indicador){
 				svg.append("text")
 				  .attr("transform","rotate(-90)")
 				  .attr("y",0-margin.left)
-				  .attr("x",0 - (height/2))
+				  .attr("x",0 - (height/2)+10)
 				  .attr("dy","1em")
 				  .attr("text-anchor","middle")
 				  .text("Gastos em Reais")
