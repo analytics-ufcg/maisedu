@@ -166,7 +166,7 @@ function plotGraph(indicador){//(nome_indicador){
 			svg.append("text")
 			  .attr("transform","rotate(-90)")
 			  .attr("y",0-margin.left)
-			  .attr("x",0 - (height/2))
+			  .attr("x",0 - (height/2)+10)
 			  .attr("dy","1em")
 			  .attr("text-anchor","middle")
 			  .text("Porcentagem (%)")
@@ -177,7 +177,7 @@ function plotGraph(indicador){//(nome_indicador){
 				svg.append("text")
 				  .attr("transform","rotate(-90)")
 				  .attr("y",0-margin.left)
-				  .attr("x",0 - (height/2))
+				  .attr("x",0 - (height/2)+10)
 				  .attr("dy","1em")
 				  .attr("text-anchor","middle")
 				  .text("Gastos em Reais")
@@ -242,7 +242,7 @@ function plotGraph(indicador){//(nome_indicador){
 					if(reais.contains(indicador)){
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text(formatNum(valorIndicador.toFixed(2))+ " Reais");
+					.select("#value").text("R$ "+formatNum(valorIndicador.toFixed(2)));
 					}else{
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
@@ -286,7 +286,7 @@ function plotGraph(indicador){//(nome_indicador){
 					if(reais.contains(indicador)){
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text(formatNum(valorIndicador.toFixed(2))+ " Reais");
+					.select("#value").text("R$ "+formatNum(valorIndicador.toFixed(2)));
 					}else{
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
@@ -333,7 +333,7 @@ function plotGraph(indicador){//(nome_indicador){
 					if(reais.contains(indicador)){
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text(formatNum(valorIndicador.toFixed(2))+ " Reais");
+					.select("#value").text("R$ "+formatNum(valorIndicador.toFixed(2));
 					}else{
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
@@ -376,7 +376,7 @@ function plotGraph(indicador){//(nome_indicador){
 					if(reais.contains(indicador)){
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text(formatNum(valorIndicador.toFixed(2))+ " Reais");
+					.select("#value").text("R$ "+formatNum(valorIndicador.toFixed(2)));
 					}else{
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")

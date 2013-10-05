@@ -149,7 +149,7 @@ function plotColorMap(indicador_nome, colunaDesvio, dataset, dataset_medianas) {
 					if(reais.contains(indicador_nome)){
 						d3.select("#tooltip").style("left", xPosition + "px")
 						.style("top", yPosition + "px")
-						.select("#value").text(cidade + ": " + formatNum(d3.format(".2f")(indicador_valor)) + " Reais");
+						.select("#value").text(cidade + ": R$ " + formatNum(d3.format(".2f")(indicador_valor)));
 					}else{
 						d3.select("#tooltip").style("left", xPosition + "px")
 						.style("top", yPosition + "px")

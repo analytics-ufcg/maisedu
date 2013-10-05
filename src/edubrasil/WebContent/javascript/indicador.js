@@ -144,8 +144,10 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_0')
 	 .on("mouseover", function(d) {
 			$('.tooltips').tooltipster('disable');
-			 d3.select("#tooltip").style("left", 1  + "px")
-								 .style("top", 10+ "px")
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
 								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[0]));
 			 if(array_setas[0].indexOf("0") == -1){
 				d3.select("#tooltip").classed("hidden", false);
@@ -161,9 +163,11 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_1')
 	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
-			 d3.select("#tooltip").style("left", 1+ "px")
-								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[1]));
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[1]));
 			 if(array_setas[1].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -179,9 +183,11 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_2')
 	 .on("mouseover", function(d) {
 	 		$('.tooltips').tooltipster('disable');
-			 d3.select("#tooltip").style("left", 10+ "px")
-								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[2]));
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[2]));
 			 if(array_setas[2].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -196,9 +202,11 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_3')
 	 .on("mouseover", function(d) {
 	 		$('.tooltips').tooltipster('disable');
-			 d3.select("#tooltip").style("left", 10+ "px")
-								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[3]));
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[3]));
 			 if(array_setas[3].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -213,9 +221,11 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_4')
 	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
- 		d3.select("#tooltip").style("left", 10+ "px")
-							 .style("top", 10 + "px")
-							 .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[4]));
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[4]));
 			 if(array_setas[4].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -231,9 +241,11 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_5')
 	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
-			 d3.select("#tooltip").style("left", 10+ "px")
-								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[5]));
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[5]));
 			 if(array_setas[5].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -248,9 +260,11 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_6')
 	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
-			 d3.select("#tooltip").style("left", 10+ "px")
-								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[6]));
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[6]));
 			 if(array_setas[6].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -266,9 +280,11 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_7')
 	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
-				 d3.select("#tooltip").style("left", 10+ "px")
-								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[7]));
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[7]));
 			 if(array_setas[7].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -284,9 +300,11 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_8')
 	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
-				 d3.select("#tooltip").style("left", 10+ "px")
-								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[8]));
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[8]));
 			 if(array_setas[8].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -302,9 +320,11 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_9')
 	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
-					 d3.select("#tooltip").style("left", 10+ "px")
-								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[9]));
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[9]));
 			 if(array_setas[9].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -320,9 +340,11 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_10')
 	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
-				 d3.select("#tooltip").style("left", 10+ "px")
-							  .style("top", 10 + "px")
-							  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[10]));
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[10]));
 			 if(array_setas[10].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -337,9 +359,11 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_11')
 	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
-				 d3.select("#tooltip").style("left", 10+ "px")
-								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[11]));
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[11]));
 			 if(array_setas[11].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -354,9 +378,11 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_12')
 	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
-				 d3.select("#tooltip").style("left", 10+ "px")
-							  .style("top", 10 + "px")
-							  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[12]));
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[12]));
 			 if(array_setas[12].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -372,9 +398,11 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_13')
 	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
-				 d3.select("#tooltip").style("left", 10+ "px")
-								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[13]));
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[13]));
 			 if(array_setas[13].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -390,9 +418,12 @@ function getMenuOption(selection) {
 	 $('#arrow_indicador_14')
 	 .on("mouseover", function(d) {
 	 	$('.tooltips').tooltipster('disable');
-				 d3.select("#tooltip").style("left", 10+ "px")
-								  .style("top", 10 + "px")
-								  .select("#value").text("A análise da série temporal índica um alarme de nível "+getAlarme(array_setas[14]));
+			var xPosition = $(this).offset().left + 20;
+			var yPosition = $(this).offset().top ;
+			 d3.select("#tooltip").style("left", xPosition  + "px")
+								 .style("top", yPosition+ "px")
+								 .select("#value").text("A análise da série temporal índica um alarme de nível " + getAlarme(array_setas[14]));
+
 			 if(array_setas[14].indexOf("0") == -1){
 				 d3.select("#tooltip").classed("hidden", false);
 			 }else{
@@ -1136,7 +1167,7 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 			.attr("text-anchor", "middle")
 			.attr("font-weight", "bold")
 			.transition().duration(duration).delay(1000)
-			.text(cidade + ": " + (formatNum(parseFloat(valor_cidade).toFixed(2)))+ " Reais");
+			.text(cidade + ": R$ " + (formatNum(parseFloat(valor_cidade).toFixed(2))));
 		}else{
 		svg.append("text")
 			.attr("x", x1(valor_cidade))
@@ -1421,7 +1452,7 @@ function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value,indicador)
 		.attr("text-anchor","middle")
 		.attr("x", x1(dados_regiao[0].x) - 2)
 		.attr("y",(y0 + 30))
-		.text(formatNum((dados_regiao[0].x).toFixed(2))+ " Reais");
+		.text("R$ "+formatNum((dados_regiao[0].x).toFixed(2)));
 		}else{
 		svg.append("text")
 		.attr("text-anchor","middle")
@@ -1447,7 +1478,7 @@ function plot_bars(svg,dados_estado,dados_regiao, y0, indicador_value,indicador)
 		.attr("text-anchor","left")
 		.attr("x", x1(dados_regiao[1].x) - 15)
 		.attr("y",(y0 + 30))
-		.text(formatNum((dados_regiao[1].x).toFixed(2))+ " Reais");
+		.text("R$ "+formatNum((dados_regiao[1].x).toFixed(2)));
 		}else{
 		svg.append("text")
 		.attr("text-anchor","left")
@@ -1506,13 +1537,13 @@ function plot_ranges(svg, dados, y0,indicador){
 		}else{
 			if(reais.contains(indicador)){
 				svg.append("text")
-					.attr("x",x1(dados[0].x) +25)
+					.attr("x",x1(dados[0].x) -35)
 					.attr("y",(y0+30))
-					.text(" Reais");
+					.text("R$ ");
 				svg.append("text")
-					.attr("x",x1(dados[1].x) + 25)
+					.attr("x",x1(dados[1].x) -35)
 					.attr("y",(y0+30))
-					.text(" Reais");
+					.text("R$ ");
 			}else{
 				// nao apresenta unidades
 			}
@@ -1641,13 +1672,13 @@ function plot_cidades(svg, dados, indicador,cor, min, max, y0){
 						if(typeof mapa_municipios[key_valorIndicador] == "object"){
 							nomesMunicipios = mapa_municipios[key_valorIndicador].join(", ");
 						}			
-						var valorIndicador = nomesMunicipios + ": " + key_valorIndicador;
+						var valorIndicador = nomesMunicipios + ": R$ " + formatNum(key_valorIndicador);
 						/*Fim - Alterar tooltip 1º barra  - Iury - 19/08/2013*/
 				
 
 						//Get the values for tooltip position
-						var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
-						var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
+						var xPosition = $(this).offset().left;
+						var yPosition = $(this).offset().top - 50;
 				
 						//Update the tooltip position and value
 						/*inicio - tooltip 1º barra unidade - iury - 29/09*/
@@ -1655,16 +1686,16 @@ function plot_cidades(svg, dados, indicador,cor, min, max, y0){
 						if(porcentagem.contains(indicador)){
 						d3.select("#tooltip").style("left", xPosition + "px")
 						.style("top", yPosition + "px")
-						.select("#value").text(formatNum(valorIndicador)+"%");
+						.select("#value").text(valorIndicador.replace("R$","")+"%");
 						}else{
 							if(reais.contains(indicador)){
 							d3.select("#tooltip").style("left", xPosition + "px")
 							.style("top", yPosition + "px")
-							.select("#value").text(formatNum(valorIndicador)+ " Reais");
+							.select("#value").text(valorIndicador);
 							}else{
 							d3.select("#tooltip").style("left", xPosition + "px")
 							.style("top", yPosition + "px")
-							.select("#value").text(formatNum(valorIndicador));
+							.select("#value").text(valorIndicador.replace("R$",""));
 							}
 						}
 						/*Fim - tooltip 1º barra unidade - iury - 29/09*/
@@ -1687,8 +1718,8 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 			svg.selectAll("#barra_indicador_altura_240").on("mouseover", function(d) {
 
 			//Get the values for tooltip position
-			var xPosition = parseFloat(d3.select(this).attr("x1")) + 450;
-			var yPosition = parseFloat(d3.select(this).attr("y1")) + 150;
+						var xPosition = $(this).offset().left;
+						var yPosition = $(this).offset().top - 50;
 
 			//var xPosition = window.event.clientX
 			//var yPosition = window.event.clientY
@@ -1710,8 +1741,8 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 			svg.selectAll("#barra_indicador_altura_240").on("mouseover", function(d) {
 
 			//Get the values for tooltip position
-			var xPosition = parseFloat(d3.select(this).attr("x1")) + 450;
-			var yPosition = parseFloat(d3.select(this).attr("y1")) + 150;
+						var xPosition = $(this).offset().left;
+						var yPosition = $(this).offset().top - 50;
 
 			//var xPosition = window.event.clientX
 			//var yPosition = window.event.clientY
@@ -1762,12 +1793,12 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 				if(typeof mapa_similares[key_valorIndicador] == "object"){
 					nomesMunicipios = mapa_similares[key_valorIndicador].join(", ");
 				}			
-				var valorIndicador = nomesMunicipios + ": " + key_valorIndicador;
+				var valorIndicador = nomesMunicipios + ": R$ " + formatNum(key_valorIndicador);
 				/*Fim - Alterar tooltip 4º barra  - Iury - 19/08/2013*/
 				
 				//Get the values for tooltip position
-				var xPosition = parseFloat(d3.select(this).attr("x1")) + 200;
-				var yPosition = parseFloat(d3.select(this).attr("y1")) + 50;
+						var xPosition = $(this).offset().left;
+						var yPosition = $(this).offset().top - 50;
 
 
 				/*inicio - tooltip  4º barra unidade - iury - 29/09*/
@@ -1775,16 +1806,16 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 				if(porcentagem.contains(indicador)){
 				d3.select("#tooltip").style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-				.select("#value").text(formatNum(valorIndicador)+"%");
+				.select("#value").text(valorIndicador.replace("R$","")+"%");
 				}else{
 					if(reais.contains(indicador)){
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text(formatNum(valorIndicador)+ " Reais");
+					.select("#value").text(valorIndicador);
 					}else{
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text(formatNum(valorIndicador));
+					.select("#value").text(valorIndicador.replace("R$",""));
 					}
 				}
 				/*Fim - tooltip 4º barra unidade - iury - 29/09*/
@@ -1813,8 +1844,8 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 		svg.selectAll("#barra_indicador_altura_240").on("mouseover", function(d) {
 
 			//Get the values for tooltip position
-			var xPosition = parseFloat(d3.select(this).attr("x1")) + 450;
-			var yPosition = parseFloat(d3.select(this).attr("y1")) + 150;
+						var xPosition = $(this).offset().left;
+						var yPosition = $(this).offset().top - 50;
 
 			//var xPosition = window.event.clientX
 			//var yPosition = window.event.clientY
