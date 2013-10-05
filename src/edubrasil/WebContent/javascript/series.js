@@ -333,7 +333,7 @@ function plotGraph(indicador){//(nome_indicador){
 					if(reais.contains(indicador)){
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")
-					.select("#value").text("R$ "+formatNum(valorIndicador.toFixed(2));
+					.select("#value").text("R$ "+formatNum(valorIndicador.toFixed(2)));
 					}else{
 					d3.select("#tooltip").style("left", xPosition + "px")
 					.style("top", yPosition + "px")

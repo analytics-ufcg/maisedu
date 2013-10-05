@@ -1158,7 +1158,7 @@ function plot_desvios_barras(svg,dados_estado, indicador, y0, valor_cidade){
 		.attr("text-anchor", "middle")
 		.attr("font-weight", "bold")
 		.transition().duration(duration).delay(1000)
-		.text(cidade + ": " + formatNum(parseFloat(valor_cidade).toFixed(2))+"%");//mudar aki
+		.text(cidade + ": " + formatNum(parseFloat(valor_cidade).toFixed(2))+"%");
 	}else{
 		if(reais.contains(indicador)){
 		svg.append("text")
