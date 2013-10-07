@@ -42,9 +42,9 @@ function plotSeries(cidade,indicador, dataset, dataset_medianas) {
 			if(d.NOME_MUNICIPIO == cidade & d[indicador] != "NA"){
 				meso = d.NOME_MESO;
 				micro = d.NOME_MICRO;
-				val_y.push(parseFloat(d[indicador]));
+				val_y.push(parseFloat(formatNum(d[indicador])));
 			}else if(d[indicador] != "NA"){
-				val_y.push(parseFloat(d[indicador]));
+				val_y.push(parseFloat(formatNum(d[indicador])));
 			}
 		});
 		dados_cidade = data_temporaria.filter(function(i){return i.NOME_MUNICIPIO == cidade & i[indicador] != "NA";});
@@ -228,9 +228,10 @@ function plotGraph(indicador){//(nome_indicador){
 				var valorIndicador = parseFloat(d[indicador]);
 				
 				//Get the values for tooltip position
-				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
-				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
-
+				//var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
+				//var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
+				var xPosition = $(this).offset().left - 100;
+				var yPosition = $(this).offset().top + 20;
 				//Update the tooltip position and value
 				/*Inicio - unidade no tooltip cidade - iurygregory@gmail.com 28/09*/
 				/* - formatacao de valores no tooltip cidade - 30/09 */
@@ -274,8 +275,10 @@ function plotGraph(indicador){//(nome_indicador){
 				var valorIndicador = parseFloat(d[indicador]);
 
 				//Get the values for tooltip position
-				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
-				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
+				//var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
+				//var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
+				var xPosition = $(this).offset().left - 100;
+				var yPosition = $(this).offset().top + 20;
 				/*Inicio - unidade tooltip - iury - 29/09*/
 				/* - formatacao de valores no tooltip  - 30/09 */
 				if(porcentagem.contains(indicador)){
@@ -319,9 +322,10 @@ function plotGraph(indicador){//(nome_indicador){
 				var valorIndicador = parseFloat(d[indicador]);
 
 				//Get the values for tooltip position
-				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
-				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450;
-
+				//var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
+				//var yPosition = parseFloat(d3.select(this).attr("cy")) + 450;
+			var xPosition = $(this).offset().left - 100;
+			var yPosition = $(this).offset().top + 20;
 				//Update the tooltip position and value
 				/*Inicio - unidade tooltip - iury - 29/09*/
 				/* - formatacao de valores no tooltip - 30/09 */
@@ -363,9 +367,10 @@ function plotGraph(indicador){//(nome_indicador){
 				var valorIndicador = parseFloat(d[indicador]);
 
 				//Get the values for tooltip position
-				var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
-				var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
-
+				//var xPosition = parseFloat(d3.select(this).attr("cx")) + 100;
+				//var yPosition = parseFloat(d3.select(this).attr("cy")) + 450 ;
+			var xPosition = $(this).offset().left - 100;
+			var yPosition = $(this).offset().top + 20;
 				/*Inicio - unidade tooltip - iury - 29/09*/
 				/* - formatacao de valores no tooltip- 30/09 */
 				if(porcentagem.contains(indicador)){
