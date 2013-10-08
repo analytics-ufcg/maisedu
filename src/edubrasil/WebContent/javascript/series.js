@@ -30,7 +30,7 @@ function formatNum(numero) {
 
 //Inicio - henriquerzo@gmail.com - 18/09/2013
 function plotSeries(cidade,indicador, dataset, dataset_medianas) {
-
+console.log(indicador);
 	data_temporaria = dataset;
 	data_temporaria_mediana = dataset_medianas;
 
@@ -39,12 +39,22 @@ function plotSeries(cidade,indicador, dataset, dataset_medianas) {
 
 		data_temporaria.forEach(function(d){
 			d.ANO = parseDate(d.ANO);
+			if(indicador == "INDICADOR_289"){
 			if(d.NOME_MUNICIPIO == cidade & d[indicador] != "NA"){
 				meso = d.NOME_MESO;
 				micro = d.NOME_MICRO;
 				val_y.push(parseFloat(formatNum(d[indicador])));
 			}else if(d[indicador] != "NA"){
 				val_y.push(parseFloat(formatNum(d[indicador])));
+			}
+			}else{
+			if(d.NOME_MUNICIPIO == cidade & d[indicador] != "NA"){
+				meso = d.NOME_MESO;
+				micro = d.NOME_MICRO;
+				val_y.push(parseFloat(d[indicador]));
+			}else if(d[indicador] != "NA"){
+				val_y.push(parseFloat(d[indicador]));
+			}
 			}
 		});
 		dados_cidade = data_temporaria.filter(function(i){return i.NOME_MUNICIPIO == cidade & i[indicador] != "NA";});
