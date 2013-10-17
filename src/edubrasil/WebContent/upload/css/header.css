@@ -76,14 +76,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, nav, sectio
 	text-shadow: 8px 15px 3px rgba(0,0,0,.4), 0 0 300px rgba(0,0,0,.055), 1px 0 black, 0 -1px black;
 	font-family:'Florence', 'cursive';
 	margin-top: 40px;
-	text-align:center;
+	text-align:left;
 }
 .title p {
 	font-size: 20px;
 	font-weight: 300;
 	line-height: 1.25;
 	margin-bottom: 30px;
-	text-align:center;
+	text-align:left;
+}
+
+
+#edu{
+	width:60%;
+	text-align: center;
+	margin: auto;
+	max-width: 1500px;
 }
 
 .navbar-fixed-top, .navbar-fixed-bottom {
