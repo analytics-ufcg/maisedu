@@ -61,7 +61,6 @@
             // The limit of files to be uploaded:
             maxNumberOfFiles: 10,
             */
-			maxNumberOfFiles: 20,
 			acceptFileTypes: /(\.|\/)(xls|xlsx|csv)$/i,
 
             // Function returning the current number of files,
