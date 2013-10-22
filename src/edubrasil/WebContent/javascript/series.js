@@ -30,7 +30,6 @@ function formatNum(numero) {
 
 //Inicio - henriquerzo@gmail.com - 18/09/2013
 function plotSeries(cidade,indicador, dataset, dataset_medianas) {
-console.log(indicador);
 	data_temporaria = dataset;
 	data_temporaria_mediana = dataset_medianas;
 

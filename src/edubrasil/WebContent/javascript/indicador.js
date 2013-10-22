@@ -918,6 +918,14 @@ function plotIndicadores(indicador) {
 		var estado = dataset.filter(function(d){return d[indicador] != "NA" & d.ANO == currentYearData.ANO;});
 		var meso = dataset.filter(function(d){return d[indicador] != "NA" & d.NOME_MESO == currentYearData.NOME_MESO & d.ANO == currentYearData.ANO;});
 		var micro = dataset.filter(function(d){return d[indicador] != "NA" & d.NOME_MICRO == currentYearData.NOME_MICRO & d.ANO == currentYearData.ANO;});
+
+		var estadoCompleto = jQuery.grep(dataset, function(d) {
+			return (d.ANO == currentYearData.ANO);
+		})
+
+		estadoCompleto.sort(function (a, b) {
+				return a.NOME_MUNICIPIO.localeCompare(b.NOME_MUNICIPIO);
+		});
 		
 		var line_estado = [{'x' : d3.min(estado,function(d){return parseFloat(d[indicador]);}) , 'y' : h1},
 						   {'x':(d3.max(estado,function(d){return parseFloat(d[indicador]);})), 'y' : h1}];
@@ -1001,9 +1009,11 @@ function plotIndicadores(indicador) {
 			plot_cidades(svg,micro, indicador,"#A5A5A5",min_estado,max_estado,h3);
 			/*Fim- Marcadores - iurygregory@gmail.com - 21/08/2013*/
 
+			//Inicio - henriquerzo@gmail.com - 22/10/2013
 			//Inicio - henriquerzo@gmail.com - 16/09/2013
-			if(currentYearData.ANO == 2011 && getNomesSimilares(cidade).length != 0 && vizinhos.length != 0) {
+			if(getNomesSimilares(cidade).length != 0 && vizinhos.length != 0) {
 			//Fim - henriquerzo@gmail.com - 16/09/2013
+			//vetor de alocação
 				svg.append("a")
 				.attr("xlink:href","#")
 				.attr("class","big-link")
@@ -1015,8 +1025,10 @@ function plotIndicadores(indicador) {
 				.attr("text-anchor", "right")
 				.attr("font-weight", "bold")
 				.text("(Mais Detalhes)")
-				.on("click", parallel_graph(cidade,indicador,lista_similares,currentYearData.ANO,"#container3", nomeIndicador(indicador), getNomesSimilares(cidade).length));
+				.on("click", parallel_graph(cidade,indicador,lista_similares,currentYearData.ANO,"#container3", nomeIndicador(indicador), getNomesSimilares(cidade).length, estadoCompleto));
+				
 			}
+			//Fim - henriquerzo@gmail.com - 22/10/2013
 			
 				
 	
@@ -1098,8 +1110,9 @@ function plotIndicadores(indicador) {
 			plot_cidades(svg,micro, indicador,"#A5A5A5",min_estado,max_estado,h3);
 			/*Fim- Marcadores - iurygregory@gmail.com - 21/08/2013*/
 
+			//Inicio - henriquerzo@gmail.com - 22/10/2013
 			//Inicio - henriquerzo@gmail.com - 16/09/2013
-			if(currentYearData.ANO == 2011 && getNomesSimilares(cidade).length != 0 && vizinhos.length != 0) {
+			if(getNomesSimilares(cidade).length != 0 && vizinhos.length != 0) {
 			//Fim - henriquerzo@gmail.com - 16/09/2013
 				svg.append("a")
 				.attr("xlink:href","#")
@@ -1112,8 +1125,9 @@ function plotIndicadores(indicador) {
 				.attr("text-anchor", "right")
 				.attr("font-weight", "bold")
 				.text("(Mais Detalhes)")
-				.on("click", parallel_graph(cidade,indicador,lista_similares,currentYearData.ANO,"#container3", nomeIndicador(indicador),getNomesSimilares(cidade).length));
+				.on("click", parallel_graph(cidade,indicador,lista_similares,currentYearData.ANO,"#container3", nomeIndicador(indicador), getNomesSimilares(cidade).length, estadoCompleto));
 			}
+			//Fim - henriquerzo@gmail.com - 22/10/2013
 		}
 		
 	}else{
@@ -1710,9 +1724,8 @@ function plot_cidades(svg, dados, indicador,cor, min, max, y0){
 }
 
 function plot_similares(svg, similares, indicador, min, max, y0, ano){
-	//Inicio - henriquerzo@gmail.com - 07/08/2013
-	if(ano == 2011) {
-	
+	//Inicio - henriquerzo@gmail.com - 22/10/2013
+	//Inicio - henriquerzo@gmail.com - 07/08/2013	
 		//Inicio - henriquerzo@gmail.com - 16/09/2013
 		if (getNomesSimilares(cidade).length == 0){
 			svg.selectAll("#barra_indicador_altura_240").on("mouseover", function(d) {
@@ -1838,31 +1851,7 @@ function plot_similares(svg, similares, indicador, min, max, y0, ano){
 			.on("click", function(d) { windowObjectReference = window.open ('cidades_parecidas.html','_blank', 'menubar=1 ,resizable=1 ,width=900 ,height=700')});*/
 		}
 		//Fim - henriquerzo@gmail.com - 16/09/2013
-	}
-	//Inicio - henriquerzo@gmail.com - 07/08/2013	
-	else {
-		svg.selectAll("#barra_indicador_altura_240").on("mouseover", function(d) {
-
-			//Get the values for tooltip position
-						var xPosition = $(this).offset().left;
-						var yPosition = $(this).offset().top - 50;
-
-			//var xPosition = window.event.clientX
-			//var yPosition = window.event.clientY
-
-
-			//Update the tooltip position and value
-			d3.select("#tooltip").style("left", xPosition + "px")
-			.style("top", yPosition + "px")
-			.select("#value").text("O sistema não possui dados neste ano para encontrar as cidades mais similares a esta.");
-
-			//Show the tooltip
-			d3.select("#tooltip").classed("hidden", false);
-		})
-		.on("mouseout", function() {//Hide the tooltip
-			d3.select("#tooltip").classed("hidden", true);
-		});
-	}
 	//Fim - henriquerzo@gmail.com - 07/08/2013
+	//Fim - henriquerzo@gmail.com - 22/10/2013
 }
 

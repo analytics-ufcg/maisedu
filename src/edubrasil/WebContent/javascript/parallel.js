@@ -42,10 +42,10 @@ function formatNum(numero) {
     return n.join(",");
 }
 /*Fim - funcao para formatar os números - iury - 30/09*/
+//Inicio - henriquerzo@gmail.com - 22/10/2013
+function parallel_graph(nome_cidade, indicador, lista_cidades, ano, div, nome_indicador, total_similares, estado_completo){	
 
-function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indicador, total_similares){
-	
-	
+//Fim - henriquerzo@gmail.com - 22/10/2013
 	// if(indicadores_selecionados.length == 3 && (ano == "2011")){
 		// indicadores_selecionados = indicadores_selecionados.slice(0,3);
 		// if((ano == "2011")){
@@ -82,6 +82,12 @@ function parallel_graph(nome_cidade,indicador,lista_cidades,ano, div, nome_indic
     .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
 	d3.csv("data/numero.matriculas_IFDM_e_receita_agregados.csv", function(cidades) {
+		//Inicio - henriquerzo@gmail.com - 22/10/2013
+		for(var i = 0; i < cidades.length; i++){
+			cidades[i][indicador] = estado_completo[i][indicador];
+			cidades[i].ANO = estado_completo[i].ANO;
+		}
+		//Fim - henriquerzo@gmail.com - 22/10/2013
 		/*Inicio - giovanibarbosa@gmail.com 22/08/2013*/
 		// cidades = cidades.filter(function(d){ return ((lista_cidades.indexOf(d.NOME_MUNICIPIO) > -1) && 
 														// d[indicadores_selecionados[0]] != "NA" && 
