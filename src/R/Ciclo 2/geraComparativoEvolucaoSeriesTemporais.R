@@ -61,7 +61,7 @@ indicadores = names(medianas.anuais.pb[, 2:(ncol(medianas.anuais.pb))])
 diff.mean.pb = function(df) {
   valores = c()
   for(i in 2:(ncol(df))) {
-    valores[i - 1] = mean.diff(df[, i])
+    valores[i - 1] = mean(df[, i])
   }
   valores = t(valores)
   colnames(valores) = indicadores
@@ -71,16 +71,12 @@ diff.mean.pb = function(df) {
 diff.sd.pb = function(df) {
   valores = c()
   for(i in 2:(ncol(df))) {
-    valores[i - 1] = sd.diff(df[, i])
+    valores[i - 1] = sd(df[, i])
   }
   valores = t(valores)
   colnames(valores) = indicadores
   return(as.data.frame(valores))
 }
-
-pb = diff.mean.pb(df=medianas.anuais.pb)
-pb = rbind(pb, diff.sd.pb(medianas.anuais.pb))
-rownames(pb) = c("media", "sd")
 
 meso = output[which(output$output %in% levels(tabela.grande$NOME_MESO)), ]
 micro = output[which(!(output$output %in% levels(tabela.grande$NOME_MESO))), ]
@@ -102,6 +98,10 @@ agrega.por.cidade = function(df) {
 
 municipios = agrega.por.cidade(tabela.grande)
 
+pb = diff.mean.pb(df=municipios)
+pb = rbind(pb, diff.sd.pb(municipios))
+rownames(pb) = c("media", "sd")
+
 dic = read.csv("dicionario.csv")[, c(1, 4)]
 
 compara.media.pb = function(df1, df2) {
@@ -116,11 +116,11 @@ compara.media.pb = function(df1, df2) {
         if(is.na(valor.mun) || is.na(media.regiao) || is.na(valor.sd)) {
           media.pb.comparada[j] = 0
         }
-        else if(valor.mun < (media.regiao - 2*valor.sd) && valor.mun >= (media.regiao - 3*valor.sd)) {
+        else if(valor.mun < (media.regiao - 1*valor.sd) && valor.mun >= (media.regiao - 3*valor.sd)) {
           media.pb.comparada[j] = 1
-        } else if(valor.mun < (media.regiao - 3*valor.sd) && valor.mun >= (media.regiao - 4*valor.sd)) {
+        } else if(valor.mun < (media.regiao - 2*valor.sd) && valor.mun >= (media.regiao - 4*valor.sd)) {
           media.pb.comparada[j] = 2
-        } else if(valor.mun < (media.regiao - 4*valor.sd)) {
+        } else if(valor.mun < (media.regiao - 3*valor.sd)) {
           media.pb.comparada[j] = 3
         } else {
           media.pb.comparada[j] = 0
@@ -129,13 +129,13 @@ compara.media.pb = function(df1, df2) {
         if(is.na(valor.mun) || is.na(media.regiao) || is.na(valor.sd)) {
           media.pb.comparada[j] = 0
         }
-        else if((valor.mun < (media.regiao - 2*valor.sd) && valor.mun >= (media.regiao - 3*valor.sd)) ||
-                  (valor.mun > (media.regiao + 2*valor.sd) && valor.mun <= (media.regiao + 3*valor.sd))) {
+        else if((valor.mun < (media.regiao - 1*valor.sd) && valor.mun >= (media.regiao - 2*valor.sd)) ||
+                  (valor.mun > (media.regiao + 1*valor.sd) && valor.mun <= (media.regiao + 2*valor.sd))) {
           media.pb.comparada[j] = 1
-        } else if((valor.mun < (media.regiao - 3*valor.sd) && valor.mun >= (media.regiao - 4*valor.sd)) ||
-                    (valor.mun > (media.regiao + 3*valor.sd) && valor.mun <= (media.regiao + 4*valor.sd))) {
+        } else if((valor.mun < (media.regiao - 2*valor.sd) && valor.mun >= (media.regiao - 3*valor.sd)) ||
+                    (valor.mun > (media.regiao + 2*valor.sd) && valor.mun <= (media.regiao + 3*valor.sd))) {
           media.pb.comparada[j] = 2
-        } else if((valor.mun < (media.regiao - 4*valor.sd)) || (valor.mun > (media.regiao + 4*valor.sd))) {
+        } else if((valor.mun < (media.regiao - 3*valor.sd)) || (valor.mun > (media.regiao + 3*valor.sd))) {
           media.pb.comparada[j] = 3
         } else {
           media.pb.comparada[j] = 0
@@ -144,11 +144,11 @@ compara.media.pb = function(df1, df2) {
         if(is.na(valor.mun) || is.na(media.regiao) || is.na(valor.sd)) {
           media.pb.comparada[j] = 0
         }
-        else if(valor.mun > (media.regiao + 2*valor.sd) && valor.mun <= (media.regiao + 3*valor.sd)) {
+        else if(valor.mun > (media.regiao + 1*valor.sd) && valor.mun <= (media.regiao + 2*valor.sd)) {
           media.pb.comparada[j] = 1
-        } else if(valor.mun > (media.regiao + 3*valor.sd) && valor.mun <= (media.regiao + 4*valor.sd)) {
+        } else if(valor.mun > (media.regiao + 2*valor.sd) && valor.mun <= (media.regiao + 3*valor.sd)) {
           media.pb.comparada[j] = 2
-        } else if(valor.mun > (media.regiao + 4*valor.sd)) {
+        } else if(valor.mun > (media.regiao + 3*valor.sd)) {
           media.pb.comparada[j] = 3
         } else {
           media.pb.comparada[j] = 0
