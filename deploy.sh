@@ -1,18 +1,24 @@
 #!/bin/bash
 
-
+echo "FRH - Analytics"
 echo "Script de deploy - $(date)"
-Folder=$1
-serverName=$2
-serverUser=$3
+folder=$1
+serverName=$3
+serverUser=$2
+
+mkdir $folder
+#substituir src/...blah
+cp -r src/edubrasil/WebContent/* $folder/
 
 #zip da pagina
-rm $Folder.zip
-zip -r $Folder.zip maisedu
+rm $folder.zip
+zip -r $folder.zip maisedu
 
 #transferindo dados pro servidor
 #fazendo no lab, substituir futuramento pelo serverName e serverUser utilizado no servidor
-scp $Folder.zip $serverUser@$serverName:/tmp/
-ssh $serverUser@${serverName} "rm -r /var/www/$Folder/*; unzip /tmp/$Folder.zip -d /var/www/"
-rm -rf $remoteRepos.zip
+scp $folder.zip $serverUser@$serverName:/tmp/
+ssh $serverUser@${serverName} "rm -r /var/www/$folder/*; unzip /tmp/$folder.zip -d /var/www/"
+
+rm -rf $folder.zip
+rm -rf maisedu
 
