@@ -5,7 +5,7 @@
 
 <meta charset="utf-8" />
 <meta charset="utf-8" />
-<title>Mais.Edu Dominio do problema</title>
+<title>IDGPB-Auditor</title>
 <link rel="icon" type="image/png" href="images/favicon.png" />
 
 
@@ -32,14 +32,15 @@
 	});
 </script>
 <script>
+	
 	$(document).ready(function() {
 		var num = window.location.href.split("?")[1];
 		$( '#accordion' ).accordion( "option", "active", parseInt(num));
 		$('html, body').animate({
 			scrollTop: $("#ui-accordion-accordion-header-"+num).offset().top
 		}, 1500);
-		
 	});
+
 </script>
 </head>
 <body >
@@ -65,8 +66,8 @@
 	
 	<div class="title head">
 		<div id="edu">
-			<h1 >Mais.Edu</h1>
-			<p>Dicionário de indicadores do sistema Mais.Edu</p>
+			<h1>IDGPB-Auditor</h1>
+			<p>Dicionário de indicadores do sistema IDGPB-Auditor</p>
 		</div>
 	</div>
 
@@ -126,7 +127,7 @@
 		</p>
 	  </div>
 	  
-	  <h3><b>Taxa abandono(%)</b></h3>
+	  <h3><b>Taxa de abandono(%)</b></h3>
 	  <div>
 		<p>
 			Refere-se à taxa de participação dos alunos matriculados em determinada fase de 
@@ -134,19 +135,24 @@
 			estudos pelo total de alunos matriculados nessa mesma fase e região no ano t. Esse 
 			indicador está disponível para as seguintes fases de ensino: ensino fundamental I (1º 
 			ao 5º ano), ensino fundamental II (6º ao 9º ano), ensino fundamental (1º ao 9º ano) e 
-			ensino médio.
+			ensino médio.<br/>
+			<i>*De acordo com os dados coletados, algumas escolas do ensino médio estão cadastradas como escolas municipais.</i>
 			<br/><br/>
 			<i>Fonte: Censo Escolar – Instituto Nacional de Pesquisas Educacionais Anísio Teixeira(INEP).</i>
+			
 		</p>
 	  </div>
 	 
-	  <h3><b>Taxa aprovação total(%)</b></h3>
+	  <h3><b>Taxa de aprovação total(%)</b></h3>
 	  <div>
 		<p>
 			Refere-se ao total de docentes da rede j da localidade i que possuem formação 
-			de nível superior pelo total de docentes da rede j da localidade i no período t.
+			de nível superior pelo total de docentes da rede j da localidade i no período t.<br/>
+			<i>*De acordo com os dados coletados, algumas escolas do ensino médio estão cadastradas como escolas municipais.</i>
+
 			<br/><br/>
 			<i>Fonte: Censo Escolar – Instituto Nacional de Pesquisas Educacionais Anísio Teixeira(INEP).</i>
+			
 		</p>
 	  </div>
 	  
@@ -173,7 +179,7 @@
 		</p>
 	  </div>
 	  
-	  <h3><b>Índice precariedade infraestrutura(%)</b></h3>
+	  <h3><b>Índice de precariedade na infraestrutura(%)</b></h3>
 	  <div>
 		<p>
 			Refere-se à taxa média das variáveis que sinalizam a existência de problemas de infraestrutura das escolas no município/microrregião/mesorregião i da rede de ensino j no ano t. As variáveis consideradas foram: se a escola funciona em prédio compartilhado, se tem localização precária (galpão etc), se não tem água filtrada, se não tem abastecimento d'água, se não possui esgoto, se não 
