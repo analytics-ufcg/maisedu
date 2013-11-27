@@ -93,7 +93,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, nav, sectio
 
 #edu{
 	width:60%;
-	text-align: center;
+	text-align: left;
 	margin: auto;
 	max-width: 1500px;
 }
@@ -150,4 +150,10 @@ footer p {
 #footer a:hover { 
 	text-decoration:underline;
 	color:#BBBBBB;
+}
+
+.IDGPB{
+	height:130px;
+	width:468px;
+	margin:30px;
 }
